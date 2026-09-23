@@ -1,0 +1,56 @@
+Subject: [PATCH] libcamera: v4l2: preserve state safely across reopen
+
+Clear deleted notifier pointers and reset the event subscription state on
+close, including when a subsequent open fails before replacing a notifier.
+Reuse ControlId objects by numeric ID so reopening does not invalidate
+pointers retained by the pipeline or append duplicate control definitions.
+
+---
+diff --git a/src/libcamera/v4l2_device.cpp b/src/libcamera/v4l2_device.cpp
+--- a/src/libcamera/v4l2_device.cpp
++++ b/src/libcamera/v4l2_device.cpp
+@@ -143,6 +143,8 @@
+ 		return;
+ 
+ 	delete fdEventNotifier_;
++	fdEventNotifier_ = nullptr;
++	frameStartEnabled_ = false;
+ 
+ 	fd_.reset();
+ }
+@@ -699,9 +701,12 @@
+ 		LOG(V4L2, Debug) << "Control: " << ctrl.name
+ 				 << " (" << utils::hex(ctrl.id) << ")";
+ 
+-		controlIds_.emplace_back(v4l2ControlId(ctrl));
+-		controlIdMap_[ctrl.id] = controlIds_.back().get();
+-		controlInfo_.emplace(ctrl.id, ctrl);
++		/* Keep ControlId addresses stable when reopening the same node. */
++		if (controlIdMap_.find(ctrl.id) == controlIdMap_.end()) {
++			controlIds_.emplace_back(v4l2ControlId(ctrl));
++			controlIdMap_[ctrl.id] = controlIds_.back().get();
++		}
++		controlInfo_.insert_or_assign(ctrl.id, ctrl);
+ 
+ 		std::optional<ControlInfo> info = v4l2ControlInfo(ctrl);
+ 
+@@ -713,7 +718,7 @@
+ 			continue;
+ 		}
+ 
+-		ctrls.emplace(controlIds_.back().get(), *info);
++		ctrls.emplace(controlIdMap_.at(ctrl.id), *info);
+ 	}
+ 
+ 	controls_ = ControlInfoMap(std::move(ctrls), controlIdMap_);
+diff --git a/src/libcamera/v4l2_videodevice.cpp b/src/libcamera/v4l2_videodevice.cpp
+--- a/src/libcamera/v4l2_videodevice.cpp
++++ b/src/libcamera/v4l2_videodevice.cpp
+@@ -759,6 +759,7 @@
+ 
+ 	releaseBuffers();
+ 	delete fdBufferNotifier_;
++	fdBufferNotifier_ = nullptr;
+ 
+ 	formatInfo_ = nullptr;
+ 

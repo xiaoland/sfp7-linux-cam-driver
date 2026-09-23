@@ -1,0 +1,79 @@
+From 6a48f382e05f94da7dc087400d6fa3f842471fa8 Mon Sep 17 00:00:00 2001
+From: Milan Zamazal <mzamazal@redhat.com>
+Date: Mon, 29 Sep 2025 22:19:20 +0200
+Subject: [PATCH] libcamera: software_isp: Pass correct y-coordinate to stats
+
+The window set by SwStatsCpu::setWindow is relative to the processed
+image area.  But debayering passes the processed line y-coordinate to
+the stats relative to the whole image area.  This can result in
+gathering stats from a wrong image area or in not gathering stats at
+all.
+
+Let's pass the correct y-coordinate to the stats processing methods.
+
+Bug: https://bugs.libcamera.org/show_bug.cgi?id=280
+Signed-off-by: Maciej S. Szmigiero <mail@maciej.szmigiero.name>
+Signed-off-by: Milan Zamazal <mzamazal@redhat.com>
+Reviewed-by: Hans de Goede <hansg@kernel.org>
+Tested-by: Hans de Goede <hansg@kernel.org>
+Reviewed-by: Barnabás Pőcze <barnabas.pocze@ideasonboard.com>
+Signed-off-by: Kieran Bingham <kieran.bingham@ideasonboard.com>
+
+[ Backport to v0.4.0: adjust the hunks for the pre-frame-aware
+  process2()/process4() signatures. ]
+---
+ src/libcamera/software_isp/debayer_cpu.cpp | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/src/libcamera/software_isp/debayer_cpu.cpp b/src/libcamera/software_isp/debayer_cpu.cpp
+index 31ab96ab..8b128e67 100644
+--- a/src/libcamera/software_isp/debayer_cpu.cpp
++++ b/src/libcamera/software_isp/debayer_cpu.cpp
+@@ -619,7 +619,7 @@ void DebayerCpu::memcpyNextLine(const uint8_t *linePointers[])
+ 
+ void DebayerCpu::process2(const uint8_t *src, uint8_t *dst)
+ {
+-	unsigned int yEnd = window_.y + window_.height;
++	unsigned int yEnd = window_.height;
+ 	/* Holds [0] previous- [1] current- [2] next-line */
+ 	const uint8_t *linePointers[3];
+ 
+@@ -634,13 +634,16 @@ void DebayerCpu::process2(const uint8_t *src, uint8_t *dst)
+ 		/* window_.y == 0, use the next line as prev line */
+ 		linePointers[1] = src + inputConfig_.stride;
+ 		linePointers[2] = src;
+-		/* Last 2 lines also need special handling */
++		/*
++		 * Last 2 lines also need special handling.
++		 * (And configure() ensures that yEnd >= 2.)
++		 */
+ 		yEnd -= 2;
+ 	}
+ 
+ 	setupInputMemcpy(linePointers);
+ 
+-	for (unsigned int y = window_.y; y < yEnd; y += 2) {
++	for (unsigned int y = 0; y < yEnd; y += 2) {
+ 		shiftLinePointers(linePointers, src);
+ 		memcpyNextLine(linePointers);
+ 		stats_->processLine0(y, linePointers);
+@@ -674,7 +677,6 @@ void DebayerCpu::process2(const uint8_t *src, uint8_t *dst)
+ 
+ void DebayerCpu::process4(const uint8_t *src, uint8_t *dst)
+ {
+-	const unsigned int yEnd = window_.y + window_.height;
+ 	/*
+ 	 * This holds pointers to [0] 2-lines-up [1] 1-line-up [2] current-line
+ 	 * [3] 1-line-down [4] 2-lines-down.
+@@ -692,7 +694,7 @@ void DebayerCpu::process4(const uint8_t *src, uint8_t *dst)
+ 
+ 	setupInputMemcpy(linePointers);
+ 
+-	for (unsigned int y = window_.y; y < yEnd; y += 4) {
++	for (unsigned int y = 0; y < window_.height; y += 4) {
+ 		shiftLinePointers(linePointers, src);
+ 		memcpyNextLine(linePointers);
+ 		stats_->processLine0(y, linePointers);
+-- 
+2.50.1
+

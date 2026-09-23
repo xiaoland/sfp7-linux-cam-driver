@@ -1,0 +1,46 @@
+Date: Tue, 22 Sep 2026 17:22:00 +0800
+Subject: [PATCH] aperture: let VP8 select a resolution-aware bitrate
+
+GstVP8Enc defaults target-bitrate to 256000 bits per second.  That is far
+too low for Snapshot's 1920x1080 capture and produces visible macroblocks.
+
+Set the encoder property to zero so GstVP8Enc derives the bitrate from the
+negotiated resolution, frame rate and its bits-per-pixel setting.  Keep the
+existing realtime preset and container profile.
+---
+ aperture/Cargo.toml        | 2 +-
+ aperture/src/viewfinder.rs | 5 +++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/aperture/Cargo.toml b/aperture/Cargo.toml
+index 11642c2..c68b483 100644
+--- a/aperture/Cargo.toml
++++ b/aperture/Cargo.toml
+@@ -15,7 +15,7 @@
+ futures-channel = { workspace = true }
+ gst = { workspace = true }
+ gst-base = { package = "gstreamer-base", version = "0.23" }
+-gst-pbutils = { package = "gstreamer-pbutils", version = "0.23" }
++gst-pbutils = { package = "gstreamer-pbutils", version = "0.23", features = ["v1_20"] }
+ gst-video = { package = "gstreamer-video", version = "0.23" }
+ gtk = { workspace = true }
+ log = { workspace = true }
+
+diff --git a/aperture/src/viewfinder.rs b/aperture/src/viewfinder.rs
+index b1884e3..05f1ab7 100644
+--- a/aperture/src/viewfinder.rs
++++ b/aperture/src/viewfinder.rs
+@@ -847,6 +847,11 @@ impl Viewfinder {
+         let video_profile =
+             gst_pbutils::EncodingVideoProfile::builder(&gst::Caps::builder("video/x-vp8").build())
+                 .preset("Profile Realtime")
++                .element_properties(
++                    gst_pbutils::ElementProperties::builder_general()
++                        .field("target-bitrate", 0i32)
++                        .build(),
++                )
+                 .variable_framerate(true)
+                 .build();
+         container_profile = container_profile.add_profile(video_profile);
+-- 
+2.51.0

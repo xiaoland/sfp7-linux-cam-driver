@@ -1,0 +1,47 @@
+Subject: [PATCH] libcamera: simple: restore IPU4 links after external use
+
+An independent CameraManager can change the shared media graph while the
+persistent desktop CameraManager is idle. setupLinks() currently skips
+ioctls based on its local flags. After native rear capture, desktop front
+startup left both CSI inputs enabled on the same BE sink and failed with
+EPIPE before opening a firmware stream.
+
+For the existing intel-ipu6/ipu4p idle-device path, program mutable links
+according to the requested pipeline even when cached enabled flags agree.
+MediaLink::setEnabled() issues the ioctl and updates its flags only after
+success; the kernel handles already matching state. Preserve immutable
+links, routing boundaries, error propagation and other devices' behavior.
+No retry, delay, device reset or public ABI change is introduced.
+
+---
+diff --git a/src/libcamera/pipeline/simple/simple.cpp b/src/libcamera/pipeline/simple/simple.cpp
+--- a/src/libcamera/pipeline/simple/simple.cpp
++++ b/src/libcamera/pipeline/simple/simple.cpp
+@@ -705,6 +705,8 @@
+ int SimpleCameraData::setupLinks()
+ {
+ 	int ret;
++	/* Another CameraManager can change links while our camera is idle. */
++	const bool restoreLinks = pipe()->releaseIdleVideo();
+ 
+ 	/*
+ 	 * Configure all links along the pipeline. Some entities may not allow
+@@ -739,7 +741,7 @@
+ 				if (link == sinkLink)
+ 					continue;
+ 
+-				if ((link->flags() & MEDIA_LNK_FL_ENABLED) &&
++				if ((restoreLinks || (link->flags() & MEDIA_LNK_FL_ENABLED)) &&
+ 				    !(link->flags() & MEDIA_LNK_FL_IMMUTABLE)) {
+ 					ret = link->setEnabled(false);
+ 					if (ret < 0)
+@@ -748,7 +750,8 @@
+ 			}
+ 		}
+ 
+-		if (!(sinkLink->flags() & MEDIA_LNK_FL_ENABLED)) {
++		if ((restoreLinks && !(sinkLink->flags() & MEDIA_LNK_FL_IMMUTABLE)) ||
++		    !(sinkLink->flags() & MEDIA_LNK_FL_ENABLED)) {
+ 			ret = sinkLink->setEnabled(true);
+ 			if (ret < 0)
+ 				return ret;

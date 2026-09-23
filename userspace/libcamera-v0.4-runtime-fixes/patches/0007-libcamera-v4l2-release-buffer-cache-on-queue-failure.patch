@@ -1,0 +1,53 @@
+Date: Wed, 12 Aug 2026 14:30:00 +0800
+Subject: [PATCH] libcamera: v4l2: release buffer cache on queue failure
+
+V4L2VideoDevice::queueBuffer() reserves an entry in V4L2BufferCache before
+validating the FrameBuffer and before issuing VIDIOC_QBUF.  Every validation
+failure and a failed QBUF then leave that entry marked busy even though the
+buffer was never queued.  A later streamOff() cannot find the entry in
+queuedBuffers_ and aborts on the cache_->isEmpty() assertion.
+
+The Surface IPU4P fail-closed stream path exposed the QBUF case: the kernel
+returned EIO for follow-up buffers after STREAMON failed, and PipeWire then
+hit the assertion while stopping the libcamera stream.
+
+Validate the buffer before reserving a cache entry, and release the entry if
+VIDIOC_QBUF fails.  This preserves the successful queue path while ensuring
+that every post-reservation failure has an explicit rollback.
+
+---
+ src/libcamera/v4l2_videodevice.cpp | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/src/libcamera/v4l2_videodevice.cpp b/src/libcamera/v4l2_videodevice.cpp
+--- a/src/libcamera/v4l2_videodevice.cpp
++++ b/src/libcamera/v4l2_videodevice.cpp
+@@ -1639,11 +1639,6 @@ int V4L2VideoDevice::queueBuffer(FrameBuffer *buffer)
+ 		return -ENOENT;
+ 	}
+ 
+-	ret = cache_->get(*buffer);
+-	if (ret < 0)
+-		return ret;
+-
+-	buf.index = ret;
+ 	buf.type = bufferType_;
+ 	buf.memory = memoryType_;
+ 	buf.field = V4L2_FIELD_NONE;
+@@ -1747,10 +1742,16 @@ int V4L2VideoDevice::queueBuffer(FrameBuffer *buffer)
+ 		buf.timestamp.tv_usec = (metadata.timestamp / 1000) % 1000000;
+ 	}
+ 
++	ret = cache_->get(*buffer);
++	if (ret < 0)
++		return ret;
++
++	buf.index = ret;
+ 	LOG(V4L2, Debug) << "Queueing buffer " << buf.index;
+ 
+ 	ret = ioctl(VIDIOC_QBUF, &buf);
+ 	if (ret < 0) {
++		cache_->put(buf.index);
+ 		LOG(V4L2, Error)
+ 			<< "Failed to queue buffer " << buf.index << ": "
+ 			<< strerror(-ret);

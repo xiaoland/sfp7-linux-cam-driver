@@ -1,0 +1,162 @@
+Subject: [PATCH] ipa: simple: stabilize continuous contrast focus
+
+The first contrast-focus candidate can rescan every few seconds after a
+scene-level contrast or exposure change. Its reference only rises, so it
+cannot learn the lower stable baseline after a rescan.
+
+Filter the focus metric, adapt the reference slowly in both directions, and
+require a long cooldown plus a stable recovery period before another rescan
+can be armed. Stop coarse and fine scans after a strong post-peak decline,
+and shorten the initial wait and lens-settle intervals. This reduces visible
+startup hunting while retaining later refocus after a stable interval.
+
+---
+diff --git a/src/ipa/simple/algorithms/af.cpp b/src/ipa/simple/algorithms/af.cpp
+index 97afa7c..d356350 100644
+--- a/src/ipa/simple/algorithms/af.cpp
++++ b/src/ipa/simple/algorithms/af.cpp
+@@ -21,12 +21,15 @@ namespace ipa::soft::algorithms {
+ 
+ namespace {
+ 
+-constexpr unsigned int kStartupDelayFrames = 15;
+-constexpr unsigned int kSettleFrames = 2;
++constexpr unsigned int kStartupDelayFrames = 8;
++constexpr unsigned int kSettleFrames = 1;
+ constexpr unsigned int kMeasureFrames = 2;
+-constexpr unsigned int kReferenceFrames = 4;
+-constexpr unsigned int kRescanCooldownFrames = 90;
+-constexpr unsigned int kFocusLossFrames = 15;
++constexpr unsigned int kReferenceFrames = 8;
++constexpr unsigned int kRescanCooldownFrames = 300;
++constexpr unsigned int kFocusLossFrames = 30;
++constexpr unsigned int kRescanRecoveryFrames = 150;
++constexpr unsigned int kScanStopRatioNumerator = 3;
++constexpr unsigned int kScanStopRatioDenominator = 4;
+ 
+ } /* namespace */
+ 
+@@ -55,9 +58,12 @@ int Af::configure([[maybe_unused]] IPAContext &context,
+ 	bestPosition_ = currentPosition_;
+ 	bestMetric_ = 0;
+ 	referenceMetric_ = 0;
++	filteredMetric_ = 0;
+ 	delayFrames_ = kStartupDelayFrames;
+ 	lossFrames_ = 0;
++	recoveryFrames_ = 0;
+ 	focusedFrames_ = 0;
++	rescanArmed_ = true;
+ 	stage_ = Stage::Delay;
+ 
+ 	LOG(IPASoftAf, Info)
+@@ -79,12 +85,16 @@ void Af::moveLens(IPAFrameContext &frameContext, int32_t position)
+ 
+ void Af::startScan(IPAFrameContext &frameContext)
+ {
++	if (stage_ == Stage::Focused)
++		rescanArmed_ = false;
++
+ 	fineScan_ = false;
+ 	scanStep_ = coarseStep_;
+ 	scanEnd_ = maxPosition_;
+ 	bestPosition_ = minPosition_;
+ 	bestMetric_ = 0;
+ 	lossFrames_ = 0;
++	recoveryFrames_ = 0;
+ 	focusedFrames_ = 0;
+ 	moveLens(frameContext, minPosition_);
+ 
+@@ -98,7 +108,11 @@ void Af::finishCandidate(IPAFrameContext &frameContext, uint64_t metric)
+ 		bestPosition_ = currentPosition_;
+ 	}
+ 
+-	if (currentPosition_ < scanEnd_) {
++	const bool passedPeak = currentPosition_ > bestPosition_ &&
++		metric * kScanStopRatioDenominator <
++			bestMetric_ * kScanStopRatioNumerator;
++
++	if (currentPosition_ < scanEnd_ && !passedPeak) {
+ 		int32_t next = std::min(scanEnd_, currentPosition_ + scanStep_);
+ 		moveLens(frameContext, next);
+ 		return;
+@@ -176,24 +190,54 @@ void Af::process([[maybe_unused]] IPAContext &context,
+ 		metricSum_ += metric;
+ 		if (++metricSamples_ == kReferenceFrames) {
+ 			referenceMetric_ = metricSum_ / metricSamples_;
++			filteredMetric_ = referenceMetric_;
++			lossFrames_ = 0;
++			recoveryFrames_ = 0;
++			focusedFrames_ = 0;
+ 			stage_ = Stage::Focused;
+ 		}
+ 		break;
+ 	case Stage::Focused:
+ 		++focusedFrames_;
+-		if (metric > referenceMetric_)
+-			referenceMetric_ = (referenceMetric_ * 7 + metric) / 8;
++		filteredMetric_ = filteredMetric_
++				  ? (filteredMetric_ * 7 + metric) / 8
++				  : metric;
+ 
+-		if (referenceMetric_ && metric < referenceMetric_ * 3 / 5)
++		if (referenceMetric_ &&
++		    filteredMetric_ < referenceMetric_ / 2)
+ 			++lossFrames_;
+ 		else
+ 			lossFrames_ = 0;
+ 
+-		if (focusedFrames_ >= kRescanCooldownFrames &&
++		if (!rescanArmed_) {
++			if (referenceMetric_ &&
++			    filteredMetric_ >= referenceMetric_ * 3 / 4 &&
++			    filteredMetric_ <= referenceMetric_ * 5 / 4)
++				++recoveryFrames_;
++			else
++				recoveryFrames_ = 0;
++
++			if (focusedFrames_ >= kRescanCooldownFrames &&
++			    recoveryFrames_ >= kRescanRecoveryFrames) {
++				rescanArmed_ = true;
++				lossFrames_ = 0;
++				LOG(IPASoftAf, Debug)
++					<< "Continuous autofocus rearmed at contrast "
++					<< filteredMetric_;
++			}
++		}
++
++		if (metric > referenceMetric_)
++			referenceMetric_ = (referenceMetric_ * 15 + metric) / 16;
++		else if (referenceMetric_)
++			referenceMetric_ = (referenceMetric_ * 255 + metric) / 256;
++
++		if (rescanArmed_ &&
++		    focusedFrames_ >= kRescanCooldownFrames &&
+ 		    lossFrames_ >= kFocusLossFrames) {
+-			LOG(IPASoftAf, Debug)
++			LOG(IPASoftAf, Info)
+ 				<< "Focus contrast dropped from " << referenceMetric_
+-				<< " to " << metric << ", rescanning";
++				<< " to " << filteredMetric_ << ", rescanning";
+ 			startScan(frameContext);
+ 		}
+ 		break;
+diff --git a/src/ipa/simple/algorithms/af.h b/src/ipa/simple/algorithms/af.h
+index b20f4a4..d532252 100644
+--- a/src/ipa/simple/algorithms/af.h
++++ b/src/ipa/simple/algorithms/af.h
+@@ -53,12 +53,15 @@ private:
+ 	uint64_t bestMetric_ = 0;
+ 	uint64_t metricSum_ = 0;
+ 	uint64_t referenceMetric_ = 0;
++	uint64_t filteredMetric_ = 0;
+ 	unsigned int delayFrames_ = 0;
+ 	unsigned int settleFrames_ = 0;
+ 	unsigned int metricSamples_ = 0;
+ 	unsigned int lossFrames_ = 0;
++	unsigned int recoveryFrames_ = 0;
+ 	unsigned int focusedFrames_ = 0;
+ 	bool fineScan_ = false;
++	bool rescanArmed_ = true;
+ };
+ 
+ } /* namespace ipa::soft::algorithms */

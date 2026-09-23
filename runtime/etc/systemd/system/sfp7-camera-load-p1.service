@@ -1,0 +1,16 @@
+[Unit]
+Description=Load the Surface Pro 7 P1 camera stack once
+Documentation=file:/usr/local/share/doc/sfp7-camera/README.md
+ConditionKernelVersion==6.19.8-sfp7cam.p1.fc42.x86_64
+Wants=systemd-udev-settle.service
+After=local-fs.target systemd-modules-load.service systemd-udev-settle.service
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sfp7-camera-load-p1
+RemainAfterExit=yes
+TimeoutStartSec=90s
+
+[Install]
+WantedBy=graphical.target

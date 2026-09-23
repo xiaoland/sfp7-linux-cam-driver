@@ -1,0 +1,39 @@
+diff --git a/snapshot.spec b/snapshot.spec
+--- a/snapshot.spec
++++ b/snapshot.spec
+@@ -1,16 +1,12 @@
+ %bcond_without check
+ 
+-%if 0%{?rhel}
+ %global bundled_rust_deps 1
+-%else
+-%global bundled_rust_deps 0
+-%endif
+ 
+ %global tarball_version %%(echo %{version} | tr '~' '.')
+ 
+ Name:           snapshot
+ Version:        48.0.1
+-Release:        %autorelease
++Release:        1.sfp7.1%{?dist}
+ Summary:        Take pictures and videos
+ 
+ # snapshot: GPL-3.0-or-later
+@@ -49,14 +45,11 @@
+ 
+ # Downstream patch to disable linting as part of self tests
+ Patch:          0001-Disable-cargo-clippy-test.patch
++Patch1:         0001-aperture-let-vp8-select-resolution-aware-bitrate.patch
+ 
+ # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
+ ExcludeArch:    %{ix86}
+ 
+-%if 0%{?rhel}
+-BuildRequires:  rust-toolset
+-%else
+ BuildRequires:  cargo-rpm-macros
+-%endif
+ BuildRequires:  meson
+ BuildRequires:  pkgconfig(glib-2.0)
+ BuildRequires:  pkgconfig(gstreamer-1.0)
+

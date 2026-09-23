@@ -1,0 +1,36 @@
+diff --git a/libcamera.spec b/libcamera.spec
+--- a/libcamera.spec
++++ b/libcamera.spec
+@@ -1,6 +1,6 @@
+ Name:    libcamera
+ Version: 0.4.0
+-Release: 4%{?dist}
++Release: 4.sfp7.11%{?dist}
+ Summary: A library to support complex camera ISPs
+ # see .reuse/dep5 and COPYING for details
+ License: LGPL-2.1-or-later
+@@ -20,6 +20,24 @@
+ Patch1: 0001-libcamera-missing-include.patch
+ Patch2: 0002-libcamera-gcc15-templates.patch
+ Patch3: 0003-libcamera-gcc15-gtest-workaround.patch
++Patch4: 0001-ipa-simple-blc-use-safe-starting-black-level.patch
++Patch5: 0002-ipa-simple-blc-prevent-empty-histogram-division.patch
++Patch6: 0003-libcamera-software-isp-pass-correct-y-coordinate-to-stats.patch
++Patch7: 0004-ipa-simple-awb-avoid-incorrect-arithmetic.patch
++Patch8: 0005-ipa-simple-awb-use-correct-type-in-accumulate.patch
++Patch9: 0006-ipa-software-isp-fix-again-min-initialization.patch
++Patch10: 0007-libcamera-v4l2-release-buffer-cache-on-queue-failure.patch
++Patch11: 0008-libcamera-simple-propagate-initial-buffer-queue-failures.patch
++Patch12: 0009-ipa-simple-blc-defer-unknown-black-level.patch
++Patch13: 0010-libcamera-v4l2-preserve-state-safely-across-reopen.patch
++Patch14: 0011-libcamera-simple-release-idle-ipu4-video-devices.patch
++Patch15: 0012-libcamera-simple-restore-ipu4-links-after-external-use.patch
++Patch16: 0013-ipa-simple-bound-startup-exposure-acceleration.patch
++Patch17: 0014-libcamera-software-isp-carry-lens-controls.patch
++Patch18: 0015-libcamera-software-isp-measure-central-focus-contrast.patch
++Patch19: 0016-ipa-simple-add-automatic-contrast-focus.patch
++Patch20: 0017-ipa-simple-stabilize-continuous-contrast-focus.patch
++Patch21: 0018-ipa-simple-converge-startup-exposure-by-measured-deficit.patch
+ 
+ # libcamera does not currently build on these architectures
+ ExcludeArch: s390x ppc64le

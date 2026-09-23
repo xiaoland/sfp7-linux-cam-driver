@@ -1,0 +1,164 @@
+diff --git a/libcamera.spec b/libcamera.spec
+--- a/libcamera.spec
++++ b/libcamera.spec
+@@ -40,34 +40,19 @@
+ # libcamera does not currently build on these architectures
+ ExcludeArch: s390x ppc64le
+ 
+-BuildRequires: doxygen
+ BuildRequires: gcc-c++
+ BuildRequires: gtest-devel
+-BuildRequires: desktop-file-utils
+ BuildRequires: meson
+ BuildRequires: openssl
++BuildRequires: openssl-devel
+ BuildRequires: ninja-build
+-BuildRequires: pkgconfig(glib-2.0)
+-BuildRequires: gnutls-devel
+-BuildRequires: pkgconfig(gstreamer-video-1.0)
+-BuildRequires: pkgconfig(gstreamer-allocators-1.0)
+ BuildRequires: libatomic
+ BuildRequires: libevent-devel
+ BuildRequires: libtiff-devel
+ BuildRequires: libyaml-devel
+-BuildRequires: lttng-ust-devel
+-BuildRequires: pkgconfig(Qt6Core)
+-BuildRequires: pkgconfig(Qt6Gui)
+-BuildRequires: pkgconfig(Qt6OpenGL)
+-BuildRequires: pkgconfig(Qt6OpenGLWidgets)
+-BuildRequires: pkgconfig(Qt6Widgets)
+-BuildRequires: pybind11-devel
+-BuildRequires: python3-devel
+ BuildRequires: python3-jinja2
+ BuildRequires: python3-ply
+ BuildRequires: python3-pyyaml
+-BuildRequires: python3-sphinx
+-BuildRequires: SDL2-devel
+ BuildRequires: systemd-devel
+ # libcamera is not really usable without its IPA plugins
+ Recommends: %{name}-ipa%{?_isa}
+@@ -88,13 +73,6 @@
+ %description devel
+ Files for development with %{name}.
+ 
+-%package     doc
+-Summary:     Documentation for %{name}
+-License:     LGPL-2.1-or-later AND CC-BY-4.0
+-
+-%description doc
+-HTML based documentation for %{name} including getting started and API.
+-
+ %package     ipa
+ Summary:     ISP Image Processing Algorithm Plugins for %{name}
+ License:     LGPL-2.1-or-later AND BSD-2-Clause
+@@ -111,35 +89,6 @@
+ 
+ %description tools
+ Command line tools for %{name}
+-
+-%package     qcam
+-Summary:     Graphical QCam application for %{name}
+-License:     GPL-2.0-or-later AND MIT
+-Requires:    %{name}%{?_isa} = %{version}-%{release}
+-
+-%description qcam
+-Graphical QCam application for %{name}
+-
+-%package     gstreamer
+-Summary:     GSTreamer plugin for %{name}
+-Requires:    %{name}%{?_isa} = %{version}-%{release}
+-
+-%description gstreamer
+-GSTreamer plugins for %{name}
+-
+-%package     v4l2
+-Summary:     V4L2 compatibility layer for %{name}
+-Requires:    %{name}%{?_isa} = %{version}-%{release}
+-
+-%description v4l2
+-V4L2 compatibility layer for %{name}
+-
+-%package     -n python3-%{name}
+-Summary:     Python bindings for %{name}
+-Requires:    %{name}%{?_isa} = %{version}-%{release}
+-
+-%description -n python3-%{name}
+-Python bindings for %{name}
+ 
+ %prep
+ %autosetup -p1
+@@ -150,7 +99,16 @@
+ export CFLAGS="%{optflags} -Wno-deprecated-declarations"
+ export CXXFLAGS="%{optflags} -Wno-deprecated-declarations"
+ 
+-%meson -Dv4l2=true
++%meson \
++    -Dcam=enabled \
++    -Ddocumentation=disabled \
++    -Dgstreamer=disabled \
++    -Dlc-compliance=enabled \
++    -Dpycamera=disabled \
++    -Dqcam=disabled \
++    -Dtracing=disabled \
++    -Dudev=enabled \
++    -Dv4l2=false
+ %meson_build
+ 
+ # Stripping requires the re-signing of IPA libraries, manually
+@@ -165,21 +123,9 @@
+ %install
+ %meson_install
+ 
+-# Install Desktop Entry file
+-desktop-file-install --dir=%{buildroot}%{_datadir}/applications \
+-                     %SOURCE1
+-
+-# Install AppStream metainfo file
+-mkdir -p %{buildroot}/%{_metainfodir}/
+-cp -a %SOURCE2 %{buildroot}/%{_metainfodir}/
+-
+ # Install udev rules
+ mkdir -p %{buildroot}/%{_udevrulesdir}/
+ install -D -m 644 %SOURCE3 %{buildroot}/%{_udevrulesdir}/
+-
+-# Remove the Sphinx build leftovers
+-rm -rf ${RPM_BUILD_ROOT}/%{_docdir}/%{name}-*/html/.buildinfo
+-rm -rf ${RPM_BUILD_ROOT}/%{_docdir}/%{name}-*/html/.doctrees
+ 
+ %files
+ %license COPYING.rst LICENSES/LGPL-2.1-or-later.txt
+@@ -194,34 +140,15 @@
+ %{_libdir}/pkgconfig/libcamera-base.pc
+ %{_libdir}/pkgconfig/libcamera.pc
+ 
+-%files doc
+-%doc %{_docdir}/%{name}-*/
+-
+ %files ipa
+ %{_datadir}/libcamera/
+ %{_libdir}/libcamera/
+ %{_libexecdir}/libcamera/
+-%exclude %{_libexecdir}/libcamera/v4l2-compat.so
+-
+-%files gstreamer
+-%{_libdir}/gstreamer-1.0/libgstlibcamera.so
+-
+-%files qcam
+-%{_bindir}/qcam
+-%{_datadir}/applications/qcam.desktop
+-%{_metainfodir}/qcam.metainfo.xml
+ 
+ %files tools
+ %license LICENSES/GPL-2.0-only.txt
+ %{_bindir}/cam
+ %{_bindir}/lc-compliance
+-
+-%files v4l2
+-%{_bindir}/libcamerify
+-%{_libexecdir}/libcamera/v4l2-compat.so
+-
+-%files -n python3-%{name}
+-%{python3_sitearch}/*
+ 
+ %changelog
+ * Thu Jan 23 2025 Milan Zamazal <mzamazal@redhat.com> - 0.4.0-4

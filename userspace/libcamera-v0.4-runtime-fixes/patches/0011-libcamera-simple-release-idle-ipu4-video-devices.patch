@@ -1,0 +1,336 @@
+Subject: [PATCH] libcamera: simple: release idle IPU4 video devices
+
+The legacy IPU4 ISYS driver holds a power reference for each open video
+node. Keeping that node open across stop/start leaves the rear sensor
+unable to restart. Release idle video nodes after enumeration and scoped
+configuration, buffer export and capture leases. Restore links and the
+complete configured format before capture, preserve shared entity ownership
+and quarantine failed STREAMOFF state. Cache RAW validation layout while
+enumerating so application-thread validation needs no closed-device ioctl.
+
+Limit this lifecycle to media driver intel-ipu6 with model ipu4p. Other
+Simple pipelines retain their existing device lifetime and validation.
+The unscoped prototype passed two full-resolution 55-frame rear captures
+with one configuration and no external wait; scoped package validation is
+a separate required step. No public ABI changes.
+
+---
+diff --git a/src/libcamera/pipeline/simple/simple.cpp b/src/libcamera/pipeline/simple/simple.cpp
+--- a/src/libcamera/pipeline/simple/simple.cpp
++++ b/src/libcamera/pipeline/simple/simple.cpp
+@@ -197,6 +197,16 @@
+ };
+ 
+ namespace {
++
++/*
++ * This legacy IPU4 driver holds its ISYS power reference while a video node
++ * is open. The intel-ipu6 driver name is shared with other hardware, so both
++ * media-device identifiers are required for the idle-FD lifecycle.
++ */
++static bool requiresIdleVideoRelease(const MediaDevice *media)
++{
++	return media->driver() == "intel-ipu6" && media->model() == "ipu4p";
++}
+ 
+ static const SimplePipelineInfo supportedDevices[] = {
+ 	{ "dcmipp", {}, false },
+@@ -264,6 +274,7 @@
+ 		Size sensorSize;
+ 		PixelFormat captureFormat;
+ 		Size captureSize;
++		V4L2DeviceFormat captureDeviceFormat;
+ 		std::vector<PixelFormat> outputFormats;
+ 		SizeRange outputSizes;
+ 	};
+@@ -277,6 +288,10 @@
+ 	std::list<Entity> entities_;
+ 	std::unique_ptr<CameraSensor> sensor_;
+ 	V4L2VideoDevice *video_;
++	V4L2DeviceFormat captureFormat_;
++	V4L2SubdeviceFormat pipelineFormat_;
++	Transform pipelineTransform_;
++	bool captureFormatValid_ = false;
+ 
+ 	std::vector<Configuration> configs_;
+ 	std::map<PixelFormat, std::vector<const Configuration *>> formats_;
+@@ -355,6 +370,7 @@
+ 	V4L2Subdevice *subdev(const MediaEntity *entity);
+ 	MediaDevice *converter() { return converter_; }
+ 	bool swIspEnabled() const { return swIspEnabled_; }
++	bool releaseIdleVideo() const { return releaseIdleVideo_; }
+ 
+ protected:
+ 	int queueRequestDevice(Camera *camera, Request *request) override;
+@@ -366,6 +382,7 @@
+ 		std::unique_ptr<V4L2VideoDevice> video;
+ 		std::unique_ptr<V4L2Subdevice> subdev;
+ 		std::map<const MediaPad *, SimpleCameraData *> owners;
++		bool videoFailed = false;
+ 	};
+ 
+ 	SimpleCameraData *cameraData(Camera *camera)
+@@ -376,6 +393,11 @@
+ 	std::vector<MediaEntity *> locateSensors(MediaDevice *media);
+ 	static int resetRoutingTable(V4L2Subdevice *subdev);
+ 
++	int configureDevice(Camera *camera, CameraConfiguration *config);
++	void closeIdleVideos();
++	int openVideo(SimpleCameraData *data);
++	int restoreCapture(SimpleCameraData *data);
++
+ 	const MediaPad *acquirePipeline(SimpleCameraData *data);
+ 	void releasePipeline(SimpleCameraData *data);
+ 
+@@ -383,6 +405,7 @@
+ 
+ 	MediaDevice *converter_;
+ 	bool swIspEnabled_;
++	bool releaseIdleVideo_ = false;
+ };
+ 
+ /* -----------------------------------------------------------------------------
+@@ -648,6 +671,17 @@
+ 		config.captureFormat = pixelFormat;
+ 		config.captureSize = format.size;
+ 
++		if (pipe()->releaseIdleVideo()) {
++			/* Cache RAW layout while enumeration owns the open device. */
++			V4L2PixelFormat fourcc = video_->toV4L2PixelFormat(pixelFormat);
++			config.captureDeviceFormat.fourcc = fourcc;
++			config.captureDeviceFormat.size = format.size;
++			ret = video_->tryFormat(&config.captureDeviceFormat);
++			if (ret < 0 || config.captureDeviceFormat.fourcc != fourcc ||
++			    config.captureDeviceFormat.size != format.size)
++				continue;
++		}
++
+ 		if (converter_) {
+ 			config.outputFormats = converter_->formats(pixelFormat);
+ 			config.outputSizes = converter_->sizes(format.size);
+@@ -1139,12 +1173,17 @@
+ 				return Invalid;
+ 		} else {
+ 			V4L2DeviceFormat format;
+-			format.fourcc = data_->video_->toV4L2PixelFormat(cfg.pixelFormat);
+-			format.size = cfg.size;
+-
+-			int ret = data_->video_->tryFormat(&format);
+-			if (ret < 0)
+-				return Invalid;
++			if (data_->pipe()->releaseIdleVideo()) {
++				/* validate() may run on an application thread. */
++				format = pipeConfig_->captureDeviceFormat;
++			} else {
++				format.fourcc = data_->video_->toV4L2PixelFormat(cfg.pixelFormat);
++				format.size = cfg.size;
++
++				int ret = data_->video_->tryFormat(&format);
++				if (ret < 0)
++					return Invalid;
++			}
+ 
+ 			cfg.stride = format.planes[0].bpl;
+ 			cfg.frameSize = format.planes[0].size;
+@@ -1223,7 +1262,25 @@
+ 	return config;
+ }
+ 
+-int SimplePipelineHandler::configure(Camera *camera, CameraConfiguration *c)
++int SimplePipelineHandler::configure(Camera *camera, CameraConfiguration *config)
++{
++	if (!releaseIdleVideo_)
++		return configureDevice(camera, config);
++
++	SimpleCameraData *data = cameraData(camera);
++	if (acquirePipeline(data))
++		return -EBUSY;
++
++	data->captureFormatValid_ = false;
++	int ret = openVideo(data);
++	if (!ret)
++		ret = configureDevice(camera, config);
++	data->captureFormatValid_ = !ret;
++	releasePipeline(data);
++	return ret;
++}
++
++int SimplePipelineHandler::configureDevice(Camera *camera, CameraConfiguration *c)
+ {
+ 	SimpleCameraConfiguration *config =
+ 		static_cast<SimpleCameraConfiguration *>(c);
+@@ -1273,6 +1330,14 @@
+ 			<< pipeConfig->captureSize << "-" << videoFormat
+ 			<< " (got " << captureFormat << ")";
+ 		return -EINVAL;
++	}
++
++	if (releaseIdleVideo_) {
++		data->captureFormat_ = captureFormat;
++		data->pipelineFormat_ = {};
++		data->pipelineFormat_.code = pipeConfig->code;
++		data->pipelineFormat_.size = pipeConfig->sensorSize;
++		data->pipelineTransform_ = config->combinedTransform();
+ 	}
+ 
+ 	/* Configure the converter if needed. */
+@@ -1331,8 +1396,20 @@
+ 		return data->converter_
+ 			       ? data->converter_->exportBuffers(stream, count, buffers)
+ 			       : data->swIsp_->exportBuffers(stream, count, buffers);
+-	else
++
++	if (!releaseIdleVideo_)
+ 		return data->video_->exportBuffers(count, buffers);
++
++	if (acquirePipeline(data))
++		return -EBUSY;
++
++	int ret = openVideo(data);
++	if (!ret)
++		ret = restoreCapture(data);
++	if (!ret)
++		ret = data->video_->exportBuffers(count, buffers);
++	releasePipeline(data);
++	return ret;
+ }
+ 
+ int SimplePipelineHandler::start(Camera *camera, [[maybe_unused]] const ControlList *controls)
+@@ -1347,6 +1424,16 @@
+ 			<< "Failed to acquire pipeline, entity "
+ 			<< pad->entity()->name() << " in use";
+ 		return -EBUSY;
++	}
++
++	if (releaseIdleVideo_) {
++		ret = openVideo(data);
++		if (!ret)
++			ret = restoreCapture(data);
++		if (ret < 0) {
++			releasePipeline(data);
++			return ret;
++		}
+ 	}
+ 
+ 	if (data->useConversion_) {
+@@ -1412,7 +1499,11 @@
+ 			data->swIsp_->stop();
+ 	}
+ 
+-	video->streamOff();
++	int ret = video->streamOff();
++	if (releaseIdleVideo_ && ret < 0) {
++		/* Do not reuse a device with unresolved V4L2 queue state. */
++		entities_.at(data->entities_.back().entity).videoFailed = true;
++	}
+ 	video->releaseBuffers();
+ 
+ 	video->bufferReady.disconnect(data, &SimpleCameraData::imageBufferReady);
+@@ -1568,6 +1659,8 @@
+ 
+ 	if (!media)
+ 		return false;
++
++	releaseIdleVideo_ = requiresIdleVideoRelease(media);
+ 
+ 	for (const auto &[name, streams] : info->converters) {
+ 		DeviceMatch converterMatch(name);
+@@ -1694,6 +1787,9 @@
+ 		registered = true;
+ 	}
+ 
++	/* Enumeration must not keep idle capture nodes powered indefinitely. */
++	closeIdleVideos();
++
+ 	return registered;
+ }
+ 
+@@ -1713,6 +1809,63 @@
+ 		return nullptr;
+ 
+ 	return iter->second.subdev.get();
++}
++
++void SimplePipelineHandler::closeIdleVideos()
++{
++	if (!releaseIdleVideo_)
++		return;
++
++	for (auto &[entity, data] : entities_) {
++		if (data.video && data.owners.empty())
++			data.video->close();
++	}
++}
++
++int SimplePipelineHandler::openVideo(SimpleCameraData *data)
++{
++	EntityData &entity = entities_.at(data->entities_.back().entity);
++	if (entity.videoFailed)
++		return -EIO;
++	if (data->video_->isOpen())
++		return 0;
++
++	int ret = data->video_->open();
++	if (ret < 0)
++		data->video_->close();
++	return ret;
++}
++
++int SimplePipelineHandler::restoreCapture(SimpleCameraData *data)
++{
++	if (!data->captureFormatValid_)
++		return -EINVAL;
++
++	int ret = data->setupLinks();
++	if (ret < 0)
++		return ret;
++
++	V4L2SubdeviceFormat pipelineFormat = data->pipelineFormat_;
++	ret = data->setupFormats(&pipelineFormat, V4L2Subdevice::ActiveFormat,
++				 data->pipelineTransform_);
++	if (ret < 0)
++		return ret;
++
++	const V4L2DeviceFormat &expected = data->captureFormat_;
++	V4L2DeviceFormat actual = expected;
++	ret = data->video_->setFormat(&actual);
++	if (ret < 0)
++		return ret;
++	if (actual.fourcc != expected.fourcc || actual.size != expected.size ||
++	    actual.colorSpace != expected.colorSpace ||
++	    actual.planesCount != expected.planesCount)
++		return -EINVAL;
++	for (unsigned int i = 0; i < actual.planesCount; ++i) {
++		if (actual.planes[i].bpl != expected.planes[i].bpl ||
++		    actual.planes[i].size != expected.planes[i].size)
++			return -EINVAL;
++	}
++	return 0;
+ }
+ 
+ /**
+@@ -1724,6 +1877,14 @@
+ 	for (const SimpleCameraData::Entity &entity : data->entities_) {
+ 		const EntityData &edata = entities_[entity.entity];
+ 
++		/* setupLinks() changes all links on entities without routing. */
++		if (releaseIdleVideo_ && !entity.supportsRouting) {
++			for (const auto &[pad, owner] : edata.owners) {
++				if (owner != data)
++					return pad;
++			}
++		}
++
+ 		if (entity.sink) {
+ 			auto iter = edata.owners.find(entity.sink);
+ 			if (iter != edata.owners.end() && iter->second != data)
+@@ -1765,6 +1926,9 @@
+ 			ASSERT(iter->second == data);
+ 			edata.owners.erase(iter);
+ 		}
++
++		if (releaseIdleVideo_ && edata.video && edata.owners.empty())
++			edata.video->close();
+ 	}
+ }
+ 

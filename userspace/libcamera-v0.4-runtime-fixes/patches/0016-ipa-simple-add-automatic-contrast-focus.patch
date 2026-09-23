@@ -1,0 +1,344 @@
+Subject: [PATCH] ipa: simple: add automatic contrast focus
+
+Enable a coarse-to-fine contrast autofocus scan when the Simple pipeline
+reports V4L2_CID_FOCUS_ABSOLUTE. Leave fixed-focus cameras unchanged. Hold
+the selected position and rescan after a sustained contrast loss following
+a cooldown period.
+
+---
+diff --git a/src/ipa/simple/algorithms/af.cpp b/src/ipa/simple/algorithms/af.cpp
+new file mode 100644
+index 0000000..1d7f2d5
+--- /dev/null
++++ b/src/ipa/simple/algorithms/af.cpp
+@@ -0,0 +1,207 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/*
++ * Copyright (C) 2026 OpenAI
++ *
++ * Contrast autofocus for the simple Software ISP
++ */
++
++#include "af.h"
++
++#include <algorithm>
++
++#include <linux/v4l2-controls.h>
++
++#include <libcamera/base/log.h>
++
++namespace libcamera {
++
++LOG_DEFINE_CATEGORY(IPASoftAf)
++
++namespace ipa::soft::algorithms {
++
++namespace {
++
++constexpr unsigned int kStartupDelayFrames = 15;
++constexpr unsigned int kSettleFrames = 2;
++constexpr unsigned int kMeasureFrames = 2;
++constexpr unsigned int kReferenceFrames = 4;
++constexpr unsigned int kRescanCooldownFrames = 90;
++constexpr unsigned int kFocusLossFrames = 15;
++
++} /* namespace */
++
++int Af::configure([[maybe_unused]] IPAContext &context,
++		  const IPAConfigInfo &configInfo)
++{
++	auto info = configInfo.lensControls.find(V4L2_CID_FOCUS_ABSOLUTE);
++	if (info == configInfo.lensControls.end()) {
++		stage_ = Stage::Disabled;
++		return 0;
++	}
++
++	minPosition_ = info->second.min().get<int32_t>();
++	maxPosition_ = info->second.max().get<int32_t>();
++	if (minPosition_ >= maxPosition_) {
++		LOG(IPASoftAf, Warning)
++			<< "Invalid lens range " << minPosition_ << "-"
++			<< maxPosition_;
++		stage_ = Stage::Disabled;
++		return 0;
++	}
++
++	currentPosition_ = info->second.def().get<int32_t>();
++	currentPosition_ = std::clamp(currentPosition_, minPosition_, maxPosition_);
++	coarseStep_ = std::max<int32_t>(1, (maxPosition_ - minPosition_ + 3) / 4);
++	bestPosition_ = currentPosition_;
++	bestMetric_ = 0;
++	referenceMetric_ = 0;
++	delayFrames_ = kStartupDelayFrames;
++	lossFrames_ = 0;
++	focusedFrames_ = 0;
++	stage_ = Stage::Delay;
++
++	LOG(IPASoftAf, Info)
++		<< "Autofocus enabled for lens range " << minPosition_ << "-"
++		<< maxPosition_ << ", coarse step " << coarseStep_;
++
++	return 0;
++}
++
++void Af::moveLens(IPAFrameContext &frameContext, int32_t position)
++{
++	currentPosition_ = std::clamp(position, minPosition_, maxPosition_);
++	frameContext.lens.focusPosition = currentPosition_;
++	settleFrames_ = kSettleFrames;
++	metricSum_ = 0;
++	metricSamples_ = 0;
++	stage_ = Stage::Settle;
++}
++
++void Af::startScan(IPAFrameContext &frameContext)
++{
++	fineScan_ = false;
++	scanStep_ = coarseStep_;
++	scanEnd_ = maxPosition_;
++	bestPosition_ = minPosition_;
++	bestMetric_ = 0;
++	lossFrames_ = 0;
++	focusedFrames_ = 0;
++	moveLens(frameContext, minPosition_);
++
++	LOG(IPASoftAf, Debug) << "Starting autofocus scan";
++}
++
++void Af::finishCandidate(IPAFrameContext &frameContext, uint64_t metric)
++{
++	if (metric > bestMetric_) {
++		bestMetric_ = metric;
++		bestPosition_ = currentPosition_;
++	}
++
++	if (currentPosition_ < scanEnd_) {
++		int32_t next = std::min(scanEnd_, currentPosition_ + scanStep_);
++		moveLens(frameContext, next);
++		return;
++	}
++
++	if (!fineScan_) {
++		int32_t coarseBest = bestPosition_;
++
++		fineScan_ = true;
++		scanStep_ = std::max<int32_t>(1, coarseStep_ / 4);
++		currentPosition_ = std::max(minPosition_, coarseBest - coarseStep_);
++		scanEnd_ = std::min(maxPosition_, coarseBest + coarseStep_);
++		bestMetric_ = 0;
++		bestPosition_ = currentPosition_;
++
++		LOG(IPASoftAf, Debug)
++			<< "Coarse autofocus best " << coarseBest
++			<< ", refining " << currentPosition_ << "-" << scanEnd_;
++		moveLens(frameContext, currentPosition_);
++		return;
++	}
++
++	frameContext.lens.focusPosition = bestPosition_;
++	currentPosition_ = bestPosition_;
++	settleFrames_ = kSettleFrames;
++	metricSum_ = 0;
++	metricSamples_ = 0;
++	stage_ = Stage::FinalSettle;
++
++	LOG(IPASoftAf, Info)
++		<< "Autofocus selected position " << bestPosition_
++		<< " with contrast " << bestMetric_;
++}
++
++void Af::process([[maybe_unused]] IPAContext &context,
++		 [[maybe_unused]] const uint32_t frame,
++		 IPAFrameContext &frameContext, const SwIspStats *stats,
++		 [[maybe_unused]] ControlList &metadata)
++{
++	if (stage_ == Stage::Disabled)
++		return;
++
++	const uint64_t metric = stats->focusContrast;
++
++	switch (stage_) {
++	case Stage::Disabled:
++		break;
++	case Stage::Delay:
++		if (delayFrames_)
++			--delayFrames_;
++		if (!delayFrames_)
++			startScan(frameContext);
++		break;
++	case Stage::Settle:
++		if (settleFrames_)
++			--settleFrames_;
++		if (!settleFrames_)
++			stage_ = Stage::Measure;
++		break;
++	case Stage::Measure:
++		metricSum_ += metric;
++		if (++metricSamples_ == kMeasureFrames)
++			finishCandidate(frameContext, metricSum_ / metricSamples_);
++		break;
++	case Stage::FinalSettle:
++		if (settleFrames_)
++			--settleFrames_;
++		if (!settleFrames_) {
++			metricSum_ = 0;
++			metricSamples_ = 0;
++			stage_ = Stage::Reference;
++		}
++		break;
++	case Stage::Reference:
++		metricSum_ += metric;
++		if (++metricSamples_ == kReferenceFrames) {
++			referenceMetric_ = metricSum_ / metricSamples_;
++			stage_ = Stage::Focused;
++		}
++		break;
++	case Stage::Focused:
++		++focusedFrames_;
++		if (metric > referenceMetric_)
++			referenceMetric_ = (referenceMetric_ * 7 + metric) / 8;
++
++		if (referenceMetric_ && metric < referenceMetric_ * 3 / 5)
++			++lossFrames_;
++		else
++			lossFrames_ = 0;
++
++		if (focusedFrames_ >= kRescanCooldownFrames &&
++		    lossFrames_ >= kFocusLossFrames) {
++			LOG(IPASoftAf, Debug)
++				<< "Focus contrast dropped from " << referenceMetric_
++				<< " to " << metric << ", rescanning";
++			startScan(frameContext);
++		}
++		break;
++	}
++}
++
++REGISTER_IPA_ALGORITHM(Af, "Af")
++
++} /* namespace ipa::soft::algorithms */
++
++} /* namespace libcamera */
+diff --git a/src/ipa/simple/algorithms/af.h b/src/ipa/simple/algorithms/af.h
+new file mode 100644
+index 0000000..b20f4a4
+--- /dev/null
++++ b/src/ipa/simple/algorithms/af.h
+@@ -0,0 +1,66 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/*
++ * Copyright (C) 2026 OpenAI
++ *
++ * Contrast autofocus for the simple Software ISP
++ */
++
++#pragma once
++
++#include <stdint.h>
++
++#include "algorithm.h"
++
++namespace libcamera {
++
++namespace ipa::soft::algorithms {
++
++class Af : public Algorithm
++{
++public:
++	Af() = default;
++	~Af() = default;
++
++	int configure(IPAContext &context,
++		      const IPAConfigInfo &configInfo) override;
++	void process(IPAContext &context, const uint32_t frame,
++		     IPAFrameContext &frameContext, const SwIspStats *stats,
++		     ControlList &metadata) override;
++
++private:
++	enum class Stage {
++		Disabled,
++		Delay,
++		Settle,
++		Measure,
++		FinalSettle,
++		Reference,
++		Focused,
++	};
++
++	void startScan(IPAFrameContext &frameContext);
++	void moveLens(IPAFrameContext &frameContext, int32_t position);
++	void finishCandidate(IPAFrameContext &frameContext, uint64_t metric);
++
++	Stage stage_ = Stage::Disabled;
++	int32_t minPosition_ = 0;
++	int32_t maxPosition_ = 0;
++	int32_t currentPosition_ = 0;
++	int32_t bestPosition_ = 0;
++	int32_t scanEnd_ = 0;
++	int32_t scanStep_ = 1;
++	int32_t coarseStep_ = 1;
++	uint64_t bestMetric_ = 0;
++	uint64_t metricSum_ = 0;
++	uint64_t referenceMetric_ = 0;
++	unsigned int delayFrames_ = 0;
++	unsigned int settleFrames_ = 0;
++	unsigned int metricSamples_ = 0;
++	unsigned int lossFrames_ = 0;
++	unsigned int focusedFrames_ = 0;
++	bool fineScan_ = false;
++};
++
++} /* namespace ipa::soft::algorithms */
++
++} /* namespace libcamera */
+diff --git a/src/ipa/simple/algorithms/meson.build b/src/ipa/simple/algorithms/meson.build
+index 37a2eb5..ccbac31 100644
+--- a/src/ipa/simple/algorithms/meson.build
++++ b/src/ipa/simple/algorithms/meson.build
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: CC0-1.0
+ 
+ soft_simple_ipa_algorithms = files([
++    'af.cpp',
+     'awb.cpp',
+     'agc.cpp',
+     'blc.cpp',
+diff --git a/src/ipa/simple/data/uncalibrated.yaml b/src/ipa/simple/data/uncalibrated.yaml
+index 3f14711..f614bf1 100644
+--- a/src/ipa/simple/data/uncalibrated.yaml
++++ b/src/ipa/simple/data/uncalibrated.yaml
+@@ -7,4 +7,5 @@ algorithms:
+   - Awb:
+   - Lut:
+   - Agc:
++  - Af:
+ ...
+diff --git a/src/ipa/simple/ipa_context.h b/src/ipa/simple/ipa_context.h
+index 4af5130..65a022e 100644
+--- a/src/ipa/simple/ipa_context.h
++++ b/src/ipa/simple/ipa_context.h
+@@ -58,6 +58,10 @@ struct IPAFrameContext : public FrameContext {
+ 		int32_t exposure;
+ 		double gain;
+ 	} sensor;
++
++	struct {
++		std::optional<int32_t> focusPosition;
++	} lens;
+ };
+ 
+ struct IPAContext {
+diff --git a/src/ipa/simple/soft_simple.cpp b/src/ipa/simple/soft_simple.cpp
+index 1eb9af6..3cebb0b 100644
+--- a/src/ipa/simple/soft_simple.cpp
++++ b/src/ipa/simple/soft_simple.cpp
+@@ -324,6 +324,9 @@ void IPASoftSimple::processStats(const uint32_t frame,
+ 		  static_cast<int32_t>(camHelper_ ? camHelper_->gainCode(againNew) : againNew));
+ 
+ 	ControlList lensCtrls(lensInfoMap_);
++	if (frameContext.lens.focusPosition)
++		lensCtrls.set(V4L2_CID_FOCUS_ABSOLUTE,
++			      *frameContext.lens.focusPosition);
+ 	setSensorControls.emit(ctrls, lensCtrls);
+ }
+ 

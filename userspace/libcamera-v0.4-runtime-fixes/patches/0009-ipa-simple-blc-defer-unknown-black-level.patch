@@ -1,0 +1,111 @@
+Subject: [PATCH] ipa: simple: blc: Apply only known black levels at startup
+
+Keep 16 as the upper bound of automatic black-level estimation, but do not
+apply that bound as if it were calibrated sensor data. With no sensor-helper
+or tuning level, the first IPA LUT currently subtracts 16 before any histogram
+has been processed. On the SFP7 rear sensor a captured startup frame contains
+nonzero raw values 14..26 (8-bit debayer indices 3..6), yet this LUT maps every
+RGB component to zero. Replaying the captured raw pixels with the captured
+LUT reproduces every output byte.
+
+Apply zero while the estimate is unknown. Only a histogram threshold found
+below the estimation bound makes an estimate valid; empty histograms and
+bright histograms without such a threshold must leave the applied level at
+zero. Once valid, retain the existing only-decrease and exposure/gain-change
+rules. Require at least one sample to meet the histogram threshold, including
+when two percent of a small histogram rounds down to zero. Fixed helper and
+tuning values are unchanged.
+
+Reset the estimator and control history on every configure, and never skip
+an unknown estimate merely because its control history matches. This also
+avoids reading the previously uninitialized exposure/gain history.
+
+The unknown/known distinction restores the behavior of the pre-refactor
+SoftwareISP BlackLevel::get(), while retaining the safer estimation bound
+from patch 0001. This is a local fix, not an upstream commit backport.
+
+Reference: https://lists.libcamera.org/pipermail/libcamera-devel/2024-August/044182.html
+Reference: https://lists.libcamera.org/pipermail/libcamera-devel/2025-March/049241.html
+---
+diff --git a/src/ipa/simple/algorithms/blc.cpp b/src/ipa/simple/algorithms/blc.cpp
+--- a/src/ipa/simple/algorithms/blc.cpp
++++ b/src/ipa/simple/algorithms/blc.cpp
+@@ -7,6 +7,7 @@
+ 
+ #include "blc.h"
+ 
++#include <algorithm>
+ #include <numeric>
+ 
+ #include <libcamera/base/log.h>
+@@ -18,6 +19,7 @@
+ LOG_DEFINE_CATEGORY(IPASoftBL)
+ 
+ BlackLevel::BlackLevel()
++	: exposure_(0), gain_(0.0), estimatedLevel_(16), estimated_(false)
+ {
+ }
+ 
+@@ -38,10 +40,16 @@
+ int BlackLevel::configure(IPAContext &context,
+ 			  [[maybe_unused]] const IPAConfigInfo &configInfo)
+ {
++	exposure_ = 0;
++	gain_ = 0.0;
++	estimatedLevel_ = 16;
++	estimated_ = false;
++
+ 	if (definedLevel_.has_value())
+ 		context.configuration.black.level = definedLevel_;
++	/* The estimation bound is not a measured black level. */
+ 	context.activeState.blc.level =
+-		context.configuration.black.level.value_or(16);
++		context.configuration.black.level.value_or(0);
+ 	return 0;
+ }
+ 
+@@ -54,7 +62,7 @@
+ 	if (context.configuration.black.level.has_value())
+ 		return;
+ 
+-	if (frameContext.sensor.exposure == exposure_ &&
++	if (estimated_ && frameContext.sensor.exposure == exposure_ &&
+ 	    frameContext.sensor.gain == gain_) {
+ 		return;
+ 	}
+@@ -73,17 +81,20 @@
+ 		return;
+ 	}
+ 
+-	const unsigned int pixelThreshold = ignoredPercentage * total;
++	const unsigned int pixelThreshold =
++		std::max(1U, static_cast<unsigned int>(ignoredPercentage * total));
+ 	const unsigned int histogramRatio = 256 / SwIspStats::kYHistogramSize;
+ 	const unsigned int currentBlackIdx =
+-		context.activeState.blc.level / histogramRatio;
++		estimatedLevel_ / histogramRatio;
+ 
+ 	for (unsigned int i = 0, seen = 0;
+ 	     i < currentBlackIdx && i < SwIspStats::kYHistogramSize;
+ 	     i++) {
+ 		seen += histogram[i];
+ 		if (seen >= pixelThreshold) {
+-			context.activeState.blc.level = i * histogramRatio;
++			estimatedLevel_ = i * histogramRatio;
++			estimated_ = true;
++			context.activeState.blc.level = estimatedLevel_;
+ 			exposure_ = frameContext.sensor.exposure;
+ 			gain_ = frameContext.sensor.gain;
+ 			LOG(IPASoftBL, Debug)
+diff --git a/src/ipa/simple/algorithms/blc.h b/src/ipa/simple/algorithms/blc.h
+--- a/src/ipa/simple/algorithms/blc.h
++++ b/src/ipa/simple/algorithms/blc.h
+@@ -32,6 +32,8 @@
+ private:
+ 	int32_t exposure_;
+ 	double gain_;
++	uint8_t estimatedLevel_;
++	bool estimated_;
+ 	std::optional<uint8_t> definedLevel_;
+ };
+ 

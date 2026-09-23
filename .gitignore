@@ -1,0 +1,14 @@
+.DS_Store
+*.rpm
+*.src.rpm
+*.bin
+*.msi
+*.raw
+*.dng
+*.jpg
+*.jpeg
+*.png
+*.webm
+*.mp4
+build/
+evidence/
