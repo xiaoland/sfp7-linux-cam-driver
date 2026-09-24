@@ -1,6 +1,6 @@
 # Surface Pro 7 Linux camera stack
 
-Experimental source and reproducibility material for the **Surface Pro 7 (2019, IPU4P PCI ID `8086:8a19`)** front and rear cameras on Linux. This repository combines a pinned kernel source composition, libcamera Software ISP changes, a GNOME Snapshot video fix, and runtime configuration. It is not a driver for Surface Pro 7+ or other Surface models.
+Experimental source and reproducibility material for the **Surface Pro 7 (2019, IPU4P PCI ID `8086:8a19`)** front and rear cameras on Linux. This repository combines a pinned kernel source composition, libcamera Software ISP changes, a GNOME Snapshot video fix, and runtime configuration. It is not a driver for Surface Pro 7+ or other Surface models. Browse the [C/C++/Rust source snapshot](source/) directly, or use the ordered patches to reconstruct complete source trees.
 
 **Status (2026-09-23):** On one Surface Pro 7 running Fedora 42, the package-managed `6.19.8-sfp7cam.p1.fc42.x86_64` kernel booted twice. Both cameras captured RAW and libcamera frames; Snapshot took front/rear/front 1920×1080 photos, recorded decodable video from both cameras, and reopened successfully. The second boot loaded the camera stack automatically. The P1 kernel has **not** been tested after suspend/resume, and the exact P1 video quality has not been subjectively accepted. There is no independently tested second device or complete signed installer. See [validation and limits](docs/STATUS.md).
 
@@ -10,6 +10,7 @@ This is a **source publication**, not an installable release. The tested Fedora 
 
 | Path | Purpose |
 | --- | --- |
+| [`source/`](source/) | Directly browsable IPU4P kernel C code, libcamera C++ and Snapshot Rust source from the tested versions |
 | [`kernel/`](kernel/) | Linux 6.19.8 → IPU4P → Surface Pro 7 → final tested kernel tree; [composition guide](docs/BUILDING.md) |
 | [`userspace/libcamera-v0.4-runtime-fixes/`](userspace/libcamera-v0.4-runtime-fixes/) | Ordered libcamera 0.4.0 backports and local fixes, plus Fedora 42 spec overlays |
 | [`userspace/snapshot-48-runtime-fixes/`](userspace/snapshot-48-runtime-fixes/) | Snapshot 48.0.1 VP8 bitrate fix and Fedora 42 spec overlay |
