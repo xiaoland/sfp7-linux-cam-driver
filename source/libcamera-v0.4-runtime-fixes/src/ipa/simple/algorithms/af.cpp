@@ -149,6 +149,63 @@ void Af::finishCandidate(IPAFrameContext &frameContext, uint64_t metric)
 		<< " with contrast " << bestMetric_;
 }
 
+/* Update callback age, filtered contrast and consecutive low-contrast count. */
+void Af::updateFocusLoss(uint64_t metric)
+{
+	++focusedCallbacks_;
+	filteredMetric_ = filteredMetric_
+			  ? (filteredMetric_ * 7 + metric) / 8
+			  : metric;
+
+	if (referenceMetric_ &&
+	    filteredMetric_ < referenceMetric_ / 2)
+		++lowContrastCallbacks_;
+	else
+		lowContrastCallbacks_ = 0;
+}
+
+void Af::updateRescanReadiness()
+{
+	if (!rescanArmed_) {
+		if (referenceMetric_ &&
+		    filteredMetric_ >= referenceMetric_ * 3 / 4 &&
+		    filteredMetric_ <= referenceMetric_ * 5 / 4)
+			++recoveryCallbacks_;
+		else
+			recoveryCallbacks_ = 0;
+
+		if (focusedCallbacks_ >= kRescanCooldownCallbacks &&
+		    recoveryCallbacks_ >= kRescanRecoveryCallbacks) {
+			rescanArmed_ = true;
+			lowContrastCallbacks_ = 0;
+			LOG(IPASoftAf, Debug)
+				<< "Continuous autofocus rearmed at contrast "
+				<< filteredMetric_;
+		}
+	}
+}
+
+void Af::monitorFocus(IPAFrameContext &frameContext, uint64_t metric)
+{
+	updateFocusLoss(metric);
+	/* Rearming compares against the old reference, before it adapts below. */
+	updateRescanReadiness();
+
+	if (metric > referenceMetric_)
+		referenceMetric_ = (referenceMetric_ * 15 + metric) / 16;
+	else if (referenceMetric_)
+		referenceMetric_ = (referenceMetric_ * 255 + metric) / 256;
+
+	if (rescanArmed_ &&
+	    focusedCallbacks_ >= kRescanCooldownCallbacks &&
+	    lowContrastCallbacks_ >= kFocusLossCallbacks) {
+		LOG(IPASoftAf, Info)
+			<< "Focus contrast dropped from " << referenceMetric_
+			<< " to " << filteredMetric_ << ", rescanning";
+		startScan(frameContext);
+	}
+}
+
 void Af::process([[maybe_unused]] IPAContext &context,
 		 [[maybe_unused]] const uint32_t frame,
 		 IPAFrameContext &frameContext, const SwIspStats *stats,
@@ -200,48 +257,7 @@ void Af::process([[maybe_unused]] IPAContext &context,
 		}
 		break;
 	case Stage::Focused:
-		++focusedCallbacks_;
-		filteredMetric_ = filteredMetric_
-				  ? (filteredMetric_ * 7 + metric) / 8
-				  : metric;
-
-		if (referenceMetric_ &&
-		    filteredMetric_ < referenceMetric_ / 2)
-			++lowContrastCallbacks_;
-		else
-			lowContrastCallbacks_ = 0;
-
-		if (!rescanArmed_) {
-			if (referenceMetric_ &&
-			    filteredMetric_ >= referenceMetric_ * 3 / 4 &&
-			    filteredMetric_ <= referenceMetric_ * 5 / 4)
-				++recoveryCallbacks_;
-			else
-				recoveryCallbacks_ = 0;
-
-			if (focusedCallbacks_ >= kRescanCooldownCallbacks &&
-			    recoveryCallbacks_ >= kRescanRecoveryCallbacks) {
-				rescanArmed_ = true;
-				lowContrastCallbacks_ = 0;
-				LOG(IPASoftAf, Debug)
-					<< "Continuous autofocus rearmed at contrast "
-					<< filteredMetric_;
-			}
-		}
-
-		if (metric > referenceMetric_)
-			referenceMetric_ = (referenceMetric_ * 15 + metric) / 16;
-		else if (referenceMetric_)
-			referenceMetric_ = (referenceMetric_ * 255 + metric) / 256;
-
-		if (rescanArmed_ &&
-		    focusedCallbacks_ >= kRescanCooldownCallbacks &&
-		    lowContrastCallbacks_ >= kFocusLossCallbacks) {
-			LOG(IPASoftAf, Info)
-				<< "Focus contrast dropped from " << referenceMetric_
-				<< " to " << filteredMetric_ << ", rescanning";
-			startScan(frameContext);
-		}
+		monitorFocus(frameContext, metric);
 		break;
 	}
 }

@@ -41,6 +41,9 @@ private:
 	void startScan(IPAFrameContext &frameContext);
 	void requestLensPosition(IPAFrameContext &frameContext, int32_t position);
 	void finishCandidate(IPAFrameContext &frameContext, uint64_t metric);
+	void updateFocusLoss(uint64_t metric);
+	void updateRescanReadiness();
+	void monitorFocus(IPAFrameContext &frameContext, uint64_t metric);
 
 	Stage stage_ = Stage::Disabled;
 	int32_t minPosition_ = 0;
