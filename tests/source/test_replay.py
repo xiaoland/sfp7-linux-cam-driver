@@ -10,6 +10,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch as patch_environment
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
 from sourcekit.inputs import SourceError, load_inputs, relative_path
@@ -159,6 +160,52 @@ class SourceReplayTest(unittest.TestCase):
         for path in ['../outside', '/absolute', 'a/../../outside', '.git/config', '']:
             with self.subTest(path=path), self.assertRaises(SourceError):
                 relative_path(path)
+
+    def test_git_environment_cannot_redirect_replay_or_cleanup(self):
+        existing = self.root / 'existing'
+        import_base(existing, self.base, self.archive, self.root / 'cache', None)
+        commit = git(existing, 'rev-parse', 'HEAD').decode().strip()
+        (existing / 'keep').write_text('uncommitted tracked work')
+        (existing / 'untracked').write_text('uncommitted new work')
+        before = file_records(existing)
+        env = {'GIT_DIR': str(existing / '.git'), 'GIT_WORK_TREE': str(existing),
+               'GIT_INDEX_FILE': str(existing / '.git/index'), 'GIT_CONFIG_COUNT': '1',
+               'GIT_CONFIG_KEY_0': 'core.bare', 'GIT_CONFIG_VALUE_0': 'true'}
+        tree = self.root / 'isolated'
+        data = {'base': {'kind': 'git', 'commit': commit, 'url': 'unused'}, 'licenses': []}
+        with patch_environment.dict(os.environ, env):
+            replay(tree, self.root, data, [], None, self.root / 'cache', existing)
+            prepare(tree, self.root / 'prepared', {'tree': tree_id(tree)})
+        self.assertEqual(file_records(existing), before)
+        self.assertEqual((self.root / 'prepared/keep').read_text(), 'original\n')
+
+    def test_snapshot_and_manifest_hidden_edits_are_preserved(self):
+        repo = self.root / 'repo'
+        repo.mkdir()
+        git(repo, 'init', '--quiet')
+        destination = repo / 'source/test'
+        destination.mkdir(parents=True)
+        code = destination / 'code'
+        manifest = repo / 'source/test.manifest.json'
+        code.write_text('committed code')
+        manifest.write_text('committed manifest')
+        git(repo, 'add', '--all')
+        record_commit(repo, 'initial')
+        generated = self.root / 'generated'
+        generated.mkdir()
+        (generated / 'code').write_text('replacement')
+        for flag in ('assume-unchanged', 'skip-worktree'):
+            for target in (code, manifest):
+                with self.subTest(flag=flag, target=target.name):
+                    original = target.read_bytes()
+                    git(repo, 'update-index', '--' + flag, str(target))
+                    target.write_text('hidden user edit')
+                    self.assertEqual(git(repo, 'status', '--porcelain'), b'')
+                    with self.assertRaisesRegex(SourceError, 'local edits'):
+                        publish(repo, generated, destination, {'component': 'test'})
+                    self.assertEqual(target.read_text(), 'hidden user edit')
+                    target.write_bytes(original)
+                    git(repo, 'update-index', '--no-' + flag, str(target))
 
 
 if __name__ == '__main__':

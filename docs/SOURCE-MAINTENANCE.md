@@ -27,7 +27,10 @@ layer and file. Fix the input, then retry with a new output directory.
 
 `snapshot` independently replays the pinned inputs, rather than trusting a local
 prepared tree. It refuses to replace local edits in the browsing directory or its
-manifest: commit or preserve those edits first. `check` independently rebuilds and
+manifest: commit or preserve those edits first. This includes content/mode changes
+hidden by Git's assume-unchanged, skip-worktree or filemode settings. Git subprocesses
+discard inherited `GIT_*` variables so an external repository/index cannot redirect
+replay or cleanup. `check` independently rebuilds and
 rejects missing, extra, changed or differently typed/mode files, as well as a stale
 manifest. Traditional patches, renames, deletions and paths changed then restored
 are handled by Git tree transitions. Source equality is not a hardware test.

@@ -12,7 +12,11 @@ from .inputs import SourceError, relative_path, source_archive
 
 
 def git(tree, *args, input=None):
-    env = dict(os.environ, GIT_CONFIG_NOSYSTEM='1')
+    # -C does not override GIT_DIR, GIT_WORK_TREE or GIT_INDEX_FILE. Clear all
+    # Git-specific environment (including injected config) before any command:
+    # prepare's reset/clean must only act on our disposable repository.
+    env = {key: value for key, value in os.environ.items() if not key.startswith('GIT_')}
+    env['GIT_CONFIG_NOSYSTEM'] = '1'
     # Isolate replay from signing, hooks and line-ending filters in global config.
     env['GIT_CONFIG_GLOBAL'] = os.devnull
     result = subprocess.run(['git', '-C', str(tree), *args], input=input,
