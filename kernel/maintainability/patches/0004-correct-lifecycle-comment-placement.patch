@@ -1,0 +1,65 @@
+From ed74a067d8f0ad6c2f52b7fe3613f8fdbd45dd0a Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 13:00:38 +0800
+Subject: [PATCH] media: place lifecycle comments at the correct stages
+
+---
+ drivers/media/pci/intel/ipu-isys-video.c | 4 ++--
+ drivers/media/pci/intel/ipu4/ipu4-isys.c | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/media/pci/intel/ipu-isys-video.c b/drivers/media/pci/intel/ipu-isys-video.c
+index 8d2e7ac..0bf748d 100644
+--- a/drivers/media/pci/intel/ipu-isys-video.c
++++ b/drivers/media/pci/intel/ipu-isys-video.c
+@@ -1608,7 +1608,6 @@ static unsigned int get_comp_format(u32 code)
+ 
+ static void close_streaming_firmware(struct ipu_isys_video *av);
+ 
+-/* Create stream and start it using the CSS FW ABI. */
+ /* Fill the input description without acquiring message or stream ownership. */
+ static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
+ 				     struct device *dev,
+@@ -1652,6 +1651,7 @@ static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
+ 
+ }
+ 
++/* Create stream and start it using the CSS FW ABI. */
+ static int start_stream_firmware(struct ipu_isys_video *av,
+ 				 struct ipu_isys_buffer_list *bl)
+ {
+@@ -2235,7 +2235,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
+ 
+ 	mutex_unlock(&mdev->graph_mutex);
+ 
+-	/* Sensor start failed after firmware streaming began */
++	/* Complete receiver conditioning before starting firmware and the sensor. */
+ 	if (state) {
+ 		if (ip->csi2)
+ 			dev_dbg(dev,
+diff --git a/drivers/media/pci/intel/ipu4/ipu4-isys.c b/drivers/media/pci/intel/ipu4/ipu4-isys.c
+index eee4091..607c160 100644
+--- a/drivers/media/pci/intel/ipu4/ipu4-isys.c
++++ b/drivers/media/pci/intel/ipu4/ipu4-isys.c
+@@ -351,8 +351,8 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
+ 		 * receiver SOF status. This is done in order to avoid
+ 		 * the case where events arrive to the event queue and
+ 		 * one of them is a SOF event which then could be
+-		 * handled before the SOF interrupt. This would pose
+-		 * historically affected CSI-based sequence numbering. Preserve
++		 * handled before the SOF interrupt. This historically affected
++		 * CSI-based sequence numbering. Preserve
+ 		 * this IRQ order; current sequence numbers advance from FW SOF,
+ 		 * including frames discarded before a capture buffer is available.
+ 		 */
+@@ -434,8 +434,8 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
+ 		 * receiver SOF status. This is done in order to avoid
+ 		 * the case where events arrive to the event queue and
+ 		 * one of them is a SOF event which then could be
+-		 * handled before the SOF interrupt. This would pose
+-		 * historically affected CSI-based sequence numbering. Preserve
++		 * handled before the SOF interrupt. This historically affected
++		 * CSI-based sequence numbering. Preserve
+ 		 * this IRQ order; current sequence numbers advance from FW SOF,
+ 		 * including frames discarded before a capture buffer is available.
+ 		 */

@@ -351,8 +351,8 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
 		 * receiver SOF status. This is done in order to avoid
 		 * the case where events arrive to the event queue and
 		 * one of them is a SOF event which then could be
-		 * handled before the SOF interrupt. This would pose
-		 * historically affected CSI-based sequence numbering. Preserve
+		 * handled before the SOF interrupt. This historically affected
+		 * CSI-based sequence numbering. Preserve
 		 * this IRQ order; current sequence numbers advance from FW SOF,
 		 * including frames discarded before a capture buffer is available.
 		 */
@@ -434,8 +434,8 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
 		 * receiver SOF status. This is done in order to avoid
 		 * the case where events arrive to the event queue and
 		 * one of them is a SOF event which then could be
-		 * handled before the SOF interrupt. This would pose
-		 * historically affected CSI-based sequence numbering. Preserve
+		 * handled before the SOF interrupt. This historically affected
+		 * CSI-based sequence numbering. Preserve
 		 * this IRQ order; current sequence numbers advance from FW SOF,
 		 * including frames discarded before a capture buffer is available.
 		 */

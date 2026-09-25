@@ -29,9 +29,9 @@ The tested P1 build used Fedora 42 x86_64, `LOCALVERSION=-sfp7cam.p1.fc42.x86_64
 ```sh
 mkdir -p build-p1
 cp kernel/p1-fedora42.config build-p1/.config
-make -C linux-sfp7 O="$PWD/build-p1" ARCH=x86_64 \
+make -C ../linux-sfp7 O="$PWD/build-p1" ARCH=x86_64 \
   LOCALVERSION=-sfp7cam.p1.fc42.x86_64 olddefconfig
-make -C linux-sfp7 O="$PWD/build-p1" ARCH=x86_64 \
+make -C ../linux-sfp7 O="$PWD/build-p1" ARCH=x86_64 \
   LOCALVERSION=-sfp7cam.p1.fc42.x86_64 -j"$(nproc)" bzImage modules
 ```
 

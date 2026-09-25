@@ -1608,7 +1608,6 @@ static unsigned int get_comp_format(u32 code)
 
 static void close_streaming_firmware(struct ipu_isys_video *av);
 
-/* Create stream and start it using the CSS FW ABI. */
 /* Fill the input description without acquiring message or stream ownership. */
 static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
 				     struct device *dev,
@@ -1652,6 +1651,7 @@ static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
 
 }
 
+/* Create stream and start it using the CSS FW ABI. */
 static int start_stream_firmware(struct ipu_isys_video *av,
 				 struct ipu_isys_buffer_list *bl)
 {
@@ -2235,7 +2235,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
 
 	mutex_unlock(&mdev->graph_mutex);
 
-	/* Sensor start failed after firmware streaming began */
+	/* Complete receiver conditioning before starting firmware and the sensor. */
 	if (state) {
 		if (ip->csi2)
 			dev_dbg(dev,
