@@ -1,0 +1,395 @@
+From 9a0b7df793ce52642e83fc4af455044509bf3fbb Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:12:59 +0800
+Subject: [PATCH] test: compile real Simple IPA autofocus and exposure
+ algorithms
+
+---
+ test/ipa/meson.build           |   4 +
+ test/ipa/simple/af.cpp         | 171 +++++++++++++++++++++++++++++++++
+ test/ipa/simple/agc.cpp        | 112 +++++++++++++++++++++
+ test/ipa/simple/meson.build    |  12 +++
+ test/ipa/simple/test_support.h |  43 +++++++++
+ 5 files changed, 342 insertions(+)
+ create mode 100644 test/ipa/simple/af.cpp
+ create mode 100644 test/ipa/simple/agc.cpp
+ create mode 100644 test/ipa/simple/meson.build
+ create mode 100644 test/ipa/simple/test_support.h
+
+diff --git a/test/ipa/meson.build b/test/ipa/meson.build
+index ceed15b..38a22c9 100644
+--- a/test/ipa/meson.build
++++ b/test/ipa/meson.build
+@@ -15,3 +15,7 @@ foreach test : ipa_test
+ 
+     test(test['name'], exe, suite : 'ipa')
+ endforeach
++
++if 'simple' in pipelines
++    subdir('simple')
++endif
+diff --git a/test/ipa/simple/af.cpp b/test/ipa/simple/af.cpp
+new file mode 100644
+index 0000000..1d035f0
+--- /dev/null
++++ b/test/ipa/simple/af.cpp
+@@ -0,0 +1,171 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/* Exercise the real AF class through configure/process and lens requests. */
++
++#include <optional>
++#include <vector>
++
++#include <linux/v4l2-controls.h>
++
++#include "ipa/simple/algorithms/af.h"
++#include "test_support.h"
++
++using namespace libcamera;
++using namespace libcamera::ipa::soft;
++using namespace libcamera::ipa::soft::test;
++
++namespace {
++
++const ControlId focusId(V4L2_CID_FOCUS_ABSOLUTE, "FocusAbsolute", "v4l2",
++			ControlTypeInteger32, ControlId::Direction::In);
++const ControlIdMap focusIds{ { V4L2_CID_FOCUS_ABSOLUTE, &focusId } };
++
++IPAConfigInfo lensConfiguration(int32_t minimum, int32_t maximum, int32_t initial)
++{
++	IPAConfigInfo config;
++	config.lensControls = ControlInfoMap({ { &focusId,
++		ControlInfo(minimum, maximum, initial) } }, focusIds);
++	return config;
++}
++
++class Fixture
++{
++public:
++	Fixture(const std::string &name, const IPAConfigInfo &config, unsigned int frameStep = 1)
++		: name_(name), context_(16), frameStep_(frameStep)
++	{
++		configure(config);
++	}
++
++	void configure(const IPAConfigInfo &config)
++	{
++		resetContext(context_);
++		require(af_.configure(context_, config) == 0, name_ + ": configure");
++	}
++
++	std::optional<int32_t> process(uint64_t contrast)
++	{
++		frameNumber_ += frameStep_;
++		auto &frame = context_.frameContexts.alloc(frameNumber_);
++		SwIspStats stats{};
++		stats.focusContrast = contrast;
++		ControlList metadata;
++		af_.process(context_, frameNumber_, frame, &stats, metadata);
++		trace(name_, callback_++, frame);
++		return frame.lens.focusPosition;
++	}
++
++private:
++	std::string name_;
++	IPAContext context_;
++	algorithms::Af af_;
++	unsigned int frameStep_;
++	unsigned int frameNumber_ = 0;
++	unsigned int callback_ = 0;
++};
++
++void disabledAndStartup()
++{
++	for (const auto &config : { IPAConfigInfo{}, lensConfiguration(4, 4, 4),
++				    lensConfiguration(5, 4, 4) }) {
++		Fixture fixture("disabled", config);
++		for (unsigned int i = 0; i < 16; ++i)
++			require(!fixture.process(1000), "disabled must not request focus");
++		fixture.configure(lensConfiguration(0, 4, 99));
++		for (unsigned int i = 0; i < 7; ++i)
++			require(!fixture.process(1000), "startup waits seven callbacks");
++		require(fixture.process(1000) == 0, "eighth callback requests zero");
++		require(!fixture.process(1000), "settle callback does not measure");
++		require(!fixture.process(1000), "first measure does not move");
++		require(fixture.process(1000) == 1, "second measure advances candidate");
++	}
++}
++
++void scanShapes()
++{
++	for (unsigned int shape = 0; shape < 4; ++shape) {
++		Fixture fixture("scan-" + std::to_string(shape), lensConfiguration(0, 16, 8));
++		int32_t position = 8;
++		for (unsigned int i = 0; i < 300; ++i) {
++			uint64_t contrast = shape == 0 ? 0 : shape == 1 ? 1000 :
++				shape == 2 ? 100 + position * 50 : 1000 - std::abs(position - 8) * 100;
++			auto request = fixture.process(contrast);
++			if (request) {
++				require(*request >= 0 && *request <= 16, "scan stays in lens range");
++				position = *request;
++			}
++		}
++		require(position == (shape < 2 ? 0 : shape == 2 ? 16 : 8), "scan selects expected peak/tie");
++	}
++}
++
++void reconfigureAndFrameGaps()
++{
++	const auto config = lensConfiguration(0, 4, 2);
++	for (unsigned int cut : { 9, 17, 31, 100 }) {
++		Fixture interrupted("reconfigure-" + std::to_string(cut), config);
++		for (unsigned int i = 0; i < cut; ++i)
++			interrupted.process(1000);
++		interrupted.configure(config);
++		Fixture fresh("fresh-" + std::to_string(cut), config);
++		for (unsigned int i = 0; i < 500; ++i)
++			require(interrupted.process(1000) == fresh.process(1000), "configure resets scan");
++		interrupted.configure({});
++		require(!interrupted.process(1000), "disable interrupts focus");
++	}
++	Fixture dense("dense", config), sparse("sparse", config, 7);
++	for (unsigned int i = 0; i < 900; ++i) {
++		uint64_t contrast = i < 400 ? 1000 : 10;
++		require(dense.process(contrast) == sparse.process(contrast), "count callbacks, not frame gaps");
++	}
++}
++
++void callbackBoundaries()
++{
++	for (unsigned int dropAt : { 200, 400 }) {
++		Fixture fixture("loss-boundary-" + std::to_string(dropAt), lensConfiguration(0, 4, 2));
++		std::optional<unsigned int> firstRescan;
++		for (unsigned int i = 0; i < 480; ++i) {
++			auto request = fixture.process(i < dropAt ? 1000 : 10);
++			if (i >= dropAt && request && !firstRescan)
++				firstRescan = i;
++		}
++		// Flat 0..4 scan establishes its reference on callback 38. Sustained
++		// loss before cooldown waits to callback 338; after cooldown, the
++		// filtered threshold plus 30 low samples triggers callback 435.
++		require(firstRescan == (dropAt == 200 ? 337u : 434u), "cooldown/loss callback boundary");
++	}
++
++	for (unsigned int recoveryLength = 165; recoveryLength <= 180; ++recoveryLength) {
++		Fixture fixture("recovery-" + std::to_string(recoveryLength), lensConfiguration(0, 4, 2));
++		for (unsigned int i = 0; i < 1700; ++i) {
++			uint64_t metric = i < 400 ? 1000 : i < 500 ? 10 : i < 1000 ? 0 :
++				i < 1000 + recoveryLength ? 1000 : 10;
++			fixture.process(metric);
++		}
++	}
++}
++
++void continuousFocus()
++{
++	Fixture fixture("continuous", lensConfiguration(0, 4, 2));
++	for (unsigned int i = 0; i < 3000; ++i) {
++		// Hold, brief loss, sustained loss, recovery, then another loss. A fixed
++		// tape makes every callback comparable across independent source trees.
++		uint64_t metric = 1000;
++		if (i == 340 || (i >= 400 && i < 1000) || i >= 2200)
++			metric = 10;
++		fixture.process(metric);
++	}
++}
++
++} /* namespace */
++
++int main()
++{
++	disabledAndStartup();
++	scanShapes();
++	reconfigureAndFrameGaps();
++	callbackBoundaries();
++	continuousFocus();
++	return EXIT_SUCCESS;
++}
+diff --git a/test/ipa/simple/agc.cpp b/test/ipa/simple/agc.cpp
+new file mode 100644
+index 0000000..a775113
+--- /dev/null
++++ b/test/ipa/simple/agc.cpp
+@@ -0,0 +1,112 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/* Real histogram inputs and sensor feedback; no calls to private methods. */
++
++#include <array>
++#include <utility>
++
++#include "ipa/simple/algorithms/agc.h"
++#include "test_support.h"
++
++using namespace libcamera;
++using namespace libcamera::ipa::soft;
++using namespace libcamera::ipa::soft::test;
++
++namespace {
++
++SwIspStats histogram(unsigned int bin, unsigned int samples = 100)
++{
++	SwIspStats stats{};
++	stats.yHistogram[bin] = samples;
++	return stats;
++}
++
++class Fixture
++{
++public:
++	Fixture(const std::string &name, int32_t exposureMax = 10000,
++		double gainMax = 8.0, double gainStep = 0.1)
++		: name_(name), context_(16)
++	{
++		resetContext(context_);
++		context_.configuration.agc = { 1, exposureMax, 1.0, gainMax, gainStep };
++		configure();
++	}
++
++	void configure()
++	{
++		context_.frameContexts.clear();
++		require(agc_.configure(context_, {}) == 0, "AGC configure");
++	}
++
++	std::pair<int32_t, double> process(const SwIspStats &stats, int32_t exposure = 632,
++					 double gain = 1.0)
++	{
++		auto &frame = context_.frameContexts.alloc(++frameNumber_);
++		frame.sensor.exposure = exposure;
++		frame.sensor.gain = gain;
++		ControlList metadata;
++		agc_.process(context_, frameNumber_, frame, &stats, metadata);
++		trace(name_, frameNumber_, frame);
++		return { frame.sensor.exposure, frame.sensor.gain };
++	}
++
++private:
++	std::string name_;
++	IPAContext context_;
++	algorithms::Agc agc_;
++	unsigned int frameNumber_ = 0;
++};
++
++void budgetAndFeedback()
++{
++	Fixture fixture("budget");
++	for (unsigned int callback = 1; callback <= 100; ++callback) {
++		require(fixture.process({}) == std::make_pair(632, 1.0), "empty histogram is inert");
++		auto output = fixture.process(histogram(0));
++		require(output.first == (callback <= 96 ? 1264 : 695), "96th valid callback still boosts");
++		require(output.second == 1.0, "exposure first; repeated feedback is not compounded");
++	}
++	fixture.configure();
++	require(fixture.process(histogram(0)).first == 1264, "configure renews startup budget");
++}
++
++void thresholdAndSteadyState()
++{
++	for (unsigned int lowSamples : { 68, 69, 70, 71, 72 }) {
++		Fixture fixture("threshold-" + std::to_string(lowSamples));
++		auto stats = histogram(13, lowSamples);
++		stats.yHistogram[26] = 100 - lowSamples;
++		fixture.process(stats);
++		// Persistently bright and then dark input checks one-way startup exit.
++		fixture.process(histogram(63));
++		require(fixture.process(histogram(0)).first == 695, "startup stays off after bright input");
++		for (unsigned int i = 0; i < 400; ++i)
++			fixture.process(histogram(i % 64), 1 + i * 19, 1.0 + (i % 7));
++	}
++}
++
++void limitsAndMinimumSteps()
++{
++	Fixture nearLimit("near-limit", 1000);
++	require(nearLimit.process(histogram(0), 999) == std::make_pair(1000, 1.0), "one startup actuator");
++	require(nearLimit.process(histogram(0), 1000) == std::make_pair(1000, 2.0), "gain after exposure limit");
++	Fixture saturated("saturated", 1000, 2.0);
++	require(saturated.process(histogram(0), 1000, 2.0) == std::make_pair(1000, 2.0), "both limits clamp");
++	require(saturated.process(histogram(0), 632).first == 695, "saturation ends acceleration");
++	Fixture minimumStep("minimum-step", 1, 8.0, 0.5);
++	for (unsigned int i = 0; i < 130; ++i)
++		minimumStep.process(histogram(13), 1, 1.0);
++	Fixture tiny("tiny-exposure");
++	for (unsigned int i = 0; i < 130; ++i)
++		tiny.process(histogram(13), 1, 1.0);
++}
++
++} /* namespace */
++
++int main()
++{
++	budgetAndFeedback();
++	thresholdAndSteadyState();
++	limitsAndMinimumSteps();
++	return EXIT_SUCCESS;
++}
+diff --git a/test/ipa/simple/meson.build b/test/ipa/simple/meson.build
+new file mode 100644
+index 0000000..3aa0514
+--- /dev/null
++++ b/test/ipa/simple/meson.build
+@@ -0,0 +1,12 @@
++# SPDX-License-Identifier: CC0-1.0
++
++foreach algorithm : ['af', 'agc']
++    exe = executable('simple-' + algorithm,
++                     [algorithm + '.cpp',
++                      '../../../src/ipa/simple/algorithms/' + algorithm + '.cpp'],
++                     dependencies : [libcamera_private, libipa_dep],
++                     implicit_include_directories : false,
++                     include_directories : [test_includes_internal,
++                                            '../../../src/', '../../../src/ipa/simple/', '.'])
++    test('simple-' + algorithm, exe, suite : 'ipa-simple')
++endforeach
+diff --git a/test/ipa/simple/test_support.h b/test/ipa/simple/test_support.h
+new file mode 100644
+index 0000000..60499b6
+--- /dev/null
++++ b/test/ipa/simple/test_support.h
+@@ -0,0 +1,43 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/* Deterministic inputs at the real Simple IPA boundary; no copied algorithm state. */
++#pragma once
++
++#include <cstdlib>
++#include <iostream>
++#include <string>
++
++#include <libcamera/controls.h>
++
++#include "ipa/simple/module.h"
++
++namespace libcamera::ipa::soft::test {
++
++inline void require(bool condition, const std::string &message)
++{
++	if (!condition) {
++		std::cerr << message << std::endl;
++		std::exit(EXIT_FAILURE);
++	}
++}
++
++inline void resetContext(IPAContext &context)
++{
++	context.configuration = {};
++	context.activeState = {};
++	context.frameContexts.clear();
++}
++
++/* Trace values are public requests, with gain in exact hexadecimal notation. */
++inline void trace(const std::string &scenario, unsigned int callback,
++		  const IPAFrameContext &frame)
++{
++	std::cout << scenario << ':' << callback << ':';
++	if (frame.lens.focusPosition)
++		std::cout << *frame.lens.focusPosition;
++	else
++		std::cout << '-';
++	std::cout << ':' << frame.sensor.exposure << ':' << std::hexfloat
++		  << frame.sensor.gain << std::defaultfloat << '\n';
++}
++
++} /* namespace libcamera::ipa::soft::test */
+-- 
+2.50.1 (Apple Git-155)
+

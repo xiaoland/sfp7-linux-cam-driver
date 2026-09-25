@@ -8,9 +8,22 @@
   },
   "profiles": {
     "runtime-browse": [
-      "runtime"
+      "runtime",
+      "native-tests",
+      "maintenance"
     ],
     "fedora42": [
+      "fedora-base",
+      "runtime",
+      "native-tests",
+      "maintenance"
+    ],
+    "fedora42-baseline": [
+      "fedora-base",
+      "runtime",
+      "native-tests"
+    ],
+    "fedora42-runtime": [
       "fedora-base",
       "runtime"
     ]
@@ -48,6 +61,16 @@
         "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/base-patches/0003-libcamera-gcc15-gtest-workaround.patch": "a9720ac8bdd9593403123c4dbb83ce0adfd28018265b59014709ee350337deb4"
       },
       "ignore_empty_git_headers": true
+    },
+    "native-tests": {
+      "series": "userspace/libcamera-v0.4-maintainability/tests.series",
+      "sha256": {
+        "userspace/libcamera-v0.4-maintainability/patches/0001-test-simple-compile-real-af-agc.patch": "8fa51cec1ac1eec36cd775ba5086f341e70e0d91797da8e7cc3b5f075d6648cc"
+      }
+    },
+    "maintenance": {
+      "series": "userspace/libcamera-v0.4-maintainability/series",
+      "sha256": {}
     }
   },
   "licenses": [

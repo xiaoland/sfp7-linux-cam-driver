@@ -140,10 +140,30 @@
     "src/libcamera/v4l2_videodevice.cpp": {
       "mode": "100644",
       "sha256": "59e3b6b0180361e8de653372a9cdd094deab6968b33e3a2cdbf09b1fbb64be02"
+    },
+    "test/ipa/meson.build": {
+      "mode": "100644",
+      "sha256": "f2b56a1ad452167d97dc109fcc8047d3ff36fc233761dac0c6a02eeb39ef8caf"
+    },
+    "test/ipa/simple/af.cpp": {
+      "mode": "100644",
+      "sha256": "dbd8fc37460893c015cc3a203ddb78e0b1d6120e2130fd33543ce0a1ee931b07"
+    },
+    "test/ipa/simple/agc.cpp": {
+      "mode": "100644",
+      "sha256": "d3a0b4068d09501b790492bdab47190f76c729ab8d19e3dc1430b8d420e1bfd7"
+    },
+    "test/ipa/simple/meson.build": {
+      "mode": "100644",
+      "sha256": "e2ecfd2c261d4ddcb92c657d471765bacc78b3358b2436d14b830b4cb85aa284"
+    },
+    "test/ipa/simple/test_support.h": {
+      "mode": "100644",
+      "sha256": "0ba2cd4fc331ea92c518ad5909b02f196a3ed20ddac1416caa3887393f89a78c"
     }
   },
-  "inputs_sha256": "27a50b2efb65c4a95a55dded2be29e90d29352f84a549a768c4c713bdaf523fd",
+  "inputs_sha256": "221214176ebae23f5cf21b9d599010fb92a28d21f55152bd962f86df77e8fffc",
   "profile": "runtime-browse",
   "schema": 1,
-  "tree": "5c5d20bd12a5ae41e1f0bb93bc0e1ca7ba6a0513"
+  "tree": "6ec760347f51127bee2cbb7311fde9564cebf520"
 }
