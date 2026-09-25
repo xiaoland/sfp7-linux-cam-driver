@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* 执行真实启动和 refeed 函数；仅模拟固件、VB2 与锁，不证明 IRQ/PM 行为。 */
 #include <assert.h>
 #include <stdbool.h>

@@ -1,5 +1,11 @@
 # Validation status and artifact identities
 
+The maintenance series is a development candidate. The device results and package
+hashes below describe the original runtime release, **not** the refactored source.
+The kernel/runtime patches and installed artifact identities have been preserved;
+new source-level test results are documented separately in [tests](../tests/README.md).
+
+
 Tested on **one** Surface Pro 7 (IPU4P `8086:8a19`) running Fedora 42 x86_64. The P1 kernel `6.19.8-sfp7cam.p1.fc42.x86_64` was installed as a separate package and booted twice. On the first boot, front and rear sensors each yielded three distinct RAW frames; libcamera delivered 120 frames from each camera; Snapshot captured three distinct 1920×1080 photos in front/rear/front order and about 17 seconds of decodable 1920×1080 VP8 video from each camera. On the second boot, the one-shot service loaded the modules without a manual command, rear libcamera captured 300 frames, and Snapshot reopened three times with both cameras available.
 
 The P1 videos were decodable but had low total bitrates (about 332 and 321 kbit/s); their subjective quality still needs review. The P1 kernel has **not** repeated a suspend/resume test. A predecessor kernel on the same device did pass one s2idle/resume and front/rear/front photos afterward; that result does not transfer to P1. No second Surface Pro 7 has been tested.

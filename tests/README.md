@@ -40,3 +40,9 @@ The short start/stop wrapper is reviewed separately: it does not reconfigure the
 algorithms. Tests do not load that wrapper or model lens mechanics, control-delay
 queues, image quality, IPA threading or hardware. NaN/negative MSV defense belongs
 to the historical white-box test; normal histogram inputs cannot reach it.
+
+`tests/Containerfile` pins the Fedora base image used for this work. Build it with
+`docker build -f tests/Containerfile -t sfp7-camera-tests .` and copy prepared trees
+into a container, or mount them when Docker runs on the same host. No camera
+devices are needed. Package repository updates can still change the toolchain;
+retain the comparison logs and exact source identities when reporting results.

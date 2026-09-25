@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* 执行真实 OPEN/START/STOP/CLOSE 与媒体图启动调用者；硬件和完成通知为受控桩。 */
 #include <assert.h>
 #include <stdbool.h>

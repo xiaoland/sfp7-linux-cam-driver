@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* 用同步回调模拟“用户帧已完成后下一笔投递失败”，不依赖睡眠或真实 IRQ。 */
 #include <assert.h>
 #include <stdbool.h>

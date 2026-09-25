@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* 只验证真实 __buf_queue 的资源移交；不证明被模拟的启动函数或 IRQ 行为。 */
 #include <assert.h>
 #include <stdbool.h>
