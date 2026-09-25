@@ -4,6 +4,7 @@
 import json
 import os
 import re
+import shlex
 from pathlib import Path
 import subprocess
 import tempfile
@@ -27,7 +28,8 @@ if name=='uname':
 elif name=='sha256sum':
     relative='/'+str(pathlib.Path(args[0]).relative_to(root))
     sha=data['firmware_sha256'] if relative.endswith('/ipu4p_cpd.bin') else next(r['sha256'] for r in modules.values() if r['path']==relative)
-    print(('0'*64 if mode=='digest' else sha)+'  '+args[0])
+    wrong = mode=='digest' or (mode=='module-digest' and not relative.endswith('/ipu4p_cpd.bin'))
+    print(('0'*64 if wrong else sha)+'  '+args[0])
 elif name=='modinfo':
     entry=modules[args[-1]]
     if args[0]=='-n': print(root/('wrong-path' if mode=='path' else entry['path'].lstrip('/')))
@@ -103,7 +105,7 @@ class LoaderTest(unittest.TestCase):
         self.assertEqual(len((self.root / 'loads').read_text().splitlines()), 7)
 
     def test_identity_failures_never_load_or_create_attempt(self):
-        for failure in ('release', 'digest', 'path', 'vermagic', 'signer'):
+        for failure in ('release', 'digest', 'module-digest', 'path', 'vermagic', 'signer'):
             with self.subTest(failure=failure):
                 result = self.run_loader(failure)
                 self.assertEqual(result.returncode, 2, result.stderr)
@@ -123,6 +125,18 @@ class LoaderTest(unittest.TestCase):
         self.assertIn('ConditionKernelVersion==' + IDENTITIES['release'], service)
         self.assertTrue(all('/' + IDENTITIES['release'] + '/' in r['path']
                             for r in IDENTITIES['modules']))
+
+    def test_candidate_checks_every_original_module_identity(self):
+        source = (REPOSITORY / 'runtime/sfp7-camera-load-p1').read_text()
+        table = re.search(r'(?ms)^readonly -a IPU_MODULE_IDENTITIES=\(\n(.*?)^\)', source)
+        self.assertIsNotNone(table, 'candidate must declare the P1 module records')
+        actual = []
+        for row in shlex.split(table.group(1), comments=True):
+            module, relative, sha = row.split('|')
+            actual.append({'module': module,
+                           'path': '/lib/modules/' + IDENTITIES['release'] + '/' + relative,
+                           'sha256': sha})
+        self.assertEqual(actual, IDENTITIES['modules'])
 
 
 if __name__ == '__main__':
