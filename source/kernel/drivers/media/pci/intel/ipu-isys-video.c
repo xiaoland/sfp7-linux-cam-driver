@@ -2142,6 +2142,8 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
 				 unsigned int state,
 				 struct ipu_isys_buffer_list *bl)
 {
+	const unsigned int front_powered_dwell_ms = 900;
+	const unsigned int front_receiver_dwell_ms = 20;
 	struct device *dev = &av->isys->adev->dev;
 	struct media_device *mdev = av->vdev.entity.graph_obj.mdev;
 	struct media_entity_enum entities;
@@ -2258,7 +2260,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
 			}
 			dev_info(dev,
 				 "sfp7-front-powered-age: event=begin sensor_streaming=0 firmware=0\n");
-			msleep(900);
+			msleep(front_powered_dwell_ms);
 			dev_info(dev,
 				 "sfp7-front-powered-age: event=complete sensor_streaming=0 firmware=0\n");
 			pm_runtime_mark_last_busy(esd->dev);
@@ -2283,7 +2285,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
 				goto out_media_entity_stop_streaming;
 			dev_info(dev,
 				 "sfp7-front-rx-dwell: event=begin receiver_enabled=1 sensor_streaming=0 firmware=0\n");
-			msleep(20);
+			msleep(front_receiver_dwell_ms);
 			dev_info(dev,
 				 "sfp7-front-rx-dwell: event=complete receiver_enabled=1 sensor_streaming=0 firmware=0\n");
 		}

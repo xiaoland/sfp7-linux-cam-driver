@@ -1,2 +1,3 @@
 patches/0001-distinguish-verification-control-and-diagnostics.patch
 patches/0002-separate-stream-input-configuration.patch
+patches/0003-document-pool-and-receiver-ownership.patch

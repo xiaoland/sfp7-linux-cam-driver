@@ -679,6 +679,11 @@ static int ov5693_sw_reset(struct ov5693_device *ov5693)
 	return ret;
 }
 
+/*
+ * SP7 startup depends on the analog/MIPI retention value from global settings.
+ * Check the full readback before mode setup; a masked test could hide other
+ * unexpected low-power bits and would weaken this startup check.
+ */
 static int ov5693_validate_mipi_analog_retention(struct ov5693_device *ov5693)
 {
 	u64 low_power;

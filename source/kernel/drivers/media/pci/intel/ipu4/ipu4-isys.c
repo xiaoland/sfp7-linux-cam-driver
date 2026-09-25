@@ -191,36 +191,37 @@ static void ipu4p_isys_bb_cfg_one(struct ipu_isys *isys, unsigned int bb,
 
 void ipu4p_isys_reapply_front_phy(struct ipu_isys *isys)
 {
+	const unsigned int front_bb = 10;
 	void __iomem *isp_base = isys->adev->isp->base;
 	u32 afe, cphy_dll, cphy_rx, dphy_cfg, dphy_dll;
 
-	ipu4p_isys_bb_cfg_one(isys, 10, 13, 32, 0x15);
+	ipu4p_isys_bb_cfg_one(isys, front_bb, 13, 32, 0x15);
 
-	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
+	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
 	cphy_rx |= BIT(31);
-	writel(cphy_rx, isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
+	writel(cphy_rx, isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
 
-	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
+	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
 	dphy_cfg |= BIT(25) | BIT(26);
-	writel(dphy_cfg, isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
+	writel(dphy_cfg, isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
 
-	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
+	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
 	writel(cphy_dll & ~BIT(0),
-	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
+	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
 	writel(cphy_dll | BIT(0),
-	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
+	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
 
-	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
+	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
 	writel(dphy_dll & ~BIT(0),
-	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
+	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
 	writel(dphy_dll | BIT(0),
-	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
+	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
 
-	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
-	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
-	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
-	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
-	afe = readl(isp_base + BUTTRESS_REG_BBX_AFE_CONFIG(10));
+	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
+	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
+	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
+	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
+	afe = readl(isp_base + BUTTRESS_REG_BBX_AFE_CONFIG(front_bb));
 	dev_info(&isys->adev->dev,
 		 "front BB10 JSL: cphy=0x%x rx=0x%x cfg=0x%x dphy=0x%x afe=0x%x\n",
 		 cphy_dll, cphy_rx, dphy_cfg, dphy_dll, afe);

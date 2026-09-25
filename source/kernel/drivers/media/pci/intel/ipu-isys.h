@@ -158,6 +158,7 @@ struct ipu_isys {
 	struct v4l2_async_notifier notifier;
 };
 
+/* Driver-owned coherent message pool entry, including its FW ABI payload. */
 struct isys_fw_msgs {
 	union {
 		u64 dummy;
@@ -172,6 +173,7 @@ struct isys_fw_msgs {
 #define to_stream_cfg_msg_buf(a) (&(a)->fw_msg.stream)
 #define to_dma_addr(a) ((a)->dma_addr)
 
+/* Borrow/return driver pool entries; CSS has a separate payload lifecycle. */
 struct isys_fw_msgs *ipu_get_fw_msg_buf(struct ipu_isys_pipeline *ip);
 void ipu_put_fw_mgs_buffer(struct ipu_isys *isys, u64 data);
 void ipu_cleanup_fw_msg_bufs(struct ipu_isys *isys);
@@ -180,6 +182,7 @@ extern const struct v4l2_ioctl_ops ipu_isys_ioctl_ops;
 
 void isys_setup_hw(struct ipu_isys *isys);
 #ifdef CONFIG_VIDEO_INTEL_IPU4P
+/* Restore the SP7 front BB10 setup without reinitializing shared ISYS state. */
 void ipu4p_isys_reapply_front_phy(struct ipu_isys *isys);
 #endif
 int isys_isr_one(struct ipu_bus_device *adev);

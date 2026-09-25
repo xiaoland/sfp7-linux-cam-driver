@@ -359,7 +359,7 @@ int ipu_isys_csi2_rearm_receiver(struct ipu_isys_csi2 *csi2)
 	struct ipu_isys_csi2_timing timing;
 	int rval;
 
-	/* Preserve the stream-count ownership of the normal graph teardown. */
+	/* Reuse the graph's single stream reference; do not acquire another. */
 	if (csi2->stream_count != 1 || !csi2->nlanes)
 		return -EBUSY;
 
@@ -1012,6 +1012,7 @@ void ipu_isys_csi2_wait_last_eof(struct ipu_isys_csi2 *csi2)
 	}
 }
 
+/* Serialize software frame-state reset with CSI event updates under isys->lock. */
 void ipu_isys_csi2_reset_frame_state(struct ipu_isys_csi2 *csi2)
 {
 	unsigned long flags;

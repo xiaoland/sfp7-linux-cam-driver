@@ -1,0 +1,227 @@
+From ace895f855e44789e1cb5ee551ba7f15503895f9 Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:51:55 +0800
+Subject: [PATCH] media: document pool and receiver ownership and name front
+ setup values
+
+---
+ drivers/media/i2c/ov5693.c               |  5 ++++
+ drivers/media/pci/intel/ipu-buttress.c   |  6 ++---
+ drivers/media/pci/intel/ipu-isys-csi2.c  |  3 ++-
+ drivers/media/pci/intel/ipu-isys-csi2.h  |  3 +++
+ drivers/media/pci/intel/ipu-isys-video.c |  6 +++--
+ drivers/media/pci/intel/ipu-isys.c       |  5 ++++
+ drivers/media/pci/intel/ipu-isys.h       |  3 +++
+ drivers/media/pci/intel/ipu4/ipu4-isys.c | 33 ++++++++++++------------
+ 8 files changed, 42 insertions(+), 22 deletions(-)
+
+diff --git a/drivers/media/i2c/ov5693.c b/drivers/media/i2c/ov5693.c
+index b49c597..c8c5230 100644
+--- a/drivers/media/i2c/ov5693.c
++++ b/drivers/media/i2c/ov5693.c
+@@ -679,6 +679,11 @@ static int ov5693_sw_reset(struct ov5693_device *ov5693)
+ 	return ret;
+ }
+ 
++/*
++ * SP7 startup depends on the analog/MIPI retention value from global settings.
++ * Check the full readback before mode setup; a masked test could hide other
++ * unexpected low-power bits and would weaken this startup check.
++ */
+ static int ov5693_validate_mipi_analog_retention(struct ov5693_device *ov5693)
+ {
+ 	u64 low_power;
+diff --git a/drivers/media/pci/intel/ipu-buttress.c b/drivers/media/pci/intel/ipu-buttress.c
+index cf83564..c155f3c 100644
+--- a/drivers/media/pci/intel/ipu-buttress.c
++++ b/drivers/media/pci/intel/ipu-buttress.c
+@@ -869,9 +869,9 @@ int ipu_buttress_authenticate(struct ipu_device *isp)
+ 				  BUTTRESS_CSE_BOOTLOAD_TIMEOUT);
+ 	if (rval) {
+ 		/*
+-		 * An all-ones key with an all-ones window means the psys
+-		 * register window is not readable; an all-ones key with a
+-		 * plausible window means the bootloader never ran.
++		 * Compare the key with nearby registers to investigate whether
++		 * the PSYS window is readable or the bootloader failed to run.
++		 * All-ones values alone do not establish either cause.
+ 		 */
+ 		dev_err(&isp->pdev->dev,
+ 			"Expect magic number timeout 0x%x (window 0x%x 0x%x)\n",
+diff --git a/drivers/media/pci/intel/ipu-isys-csi2.c b/drivers/media/pci/intel/ipu-isys-csi2.c
+index 1438c94..ad881f0 100644
+--- a/drivers/media/pci/intel/ipu-isys-csi2.c
++++ b/drivers/media/pci/intel/ipu-isys-csi2.c
+@@ -359,7 +359,7 @@ int ipu_isys_csi2_rearm_receiver(struct ipu_isys_csi2 *csi2)
+ 	struct ipu_isys_csi2_timing timing;
+ 	int rval;
+ 
+-	/* Preserve the stream-count ownership of the normal graph teardown. */
++	/* Reuse the graph's single stream reference; do not acquire another. */
+ 	if (csi2->stream_count != 1 || !csi2->nlanes)
+ 		return -EBUSY;
+ 
+@@ -1012,6 +1012,7 @@ void ipu_isys_csi2_wait_last_eof(struct ipu_isys_csi2 *csi2)
+ 	}
+ }
+ 
++/* Serialize software frame-state reset with CSI event updates under isys->lock. */
+ void ipu_isys_csi2_reset_frame_state(struct ipu_isys_csi2 *csi2)
+ {
+ 	unsigned long flags;
+diff --git a/drivers/media/pci/intel/ipu-isys-csi2.h b/drivers/media/pci/intel/ipu-isys-csi2.h
+index 3a0ad19..e2773f2 100644
+--- a/drivers/media/pci/intel/ipu-isys-csi2.h
++++ b/drivers/media/pci/intel/ipu-isys-csi2.h
+@@ -163,6 +163,7 @@ ipu_isys_csi2_get_short_packet_buffer(struct ipu_isys_pipeline *ip);
+ void ipu_isys_csi2_sof_event(struct ipu_isys_csi2 *csi2, unsigned int vc);
+ void ipu_isys_csi2_eof_event(struct ipu_isys_csi2 *csi2, unsigned int vc);
+ void ipu_isys_csi2_wait_last_eof(struct ipu_isys_csi2 *csi2);
++/* Clear software SOF/EOF state; this does not reset the receiver hardware. */
+ void ipu_isys_csi2_reset_frame_state(struct ipu_isys_csi2 *csi2);
+ #ifdef CONFIG_VIDEO_INTEL_IPU4P
+ struct ipu4p_isys_csi2_rx_state {
+@@ -171,8 +172,10 @@ struct ipu4p_isys_csi2_rx_state {
+ 	u32 dlanes_lp;
+ };
+ 
++/* Sample receiver registers without changing stream ownership. */
+ void ipu4p_isys_csi2_get_rx_state(struct ipu_isys_csi2 *csi2,
+ 				  struct ipu4p_isys_csi2_rx_state *state);
++/* Reprogram the receiver between retries, retaining the graph stream reference. */
+ int ipu_isys_csi2_rearm_receiver(struct ipu_isys_csi2 *csi2);
+ #endif
+ 
+diff --git a/drivers/media/pci/intel/ipu-isys-video.c b/drivers/media/pci/intel/ipu-isys-video.c
+index 8caf2ba..8d2e7ac 100644
+--- a/drivers/media/pci/intel/ipu-isys-video.c
++++ b/drivers/media/pci/intel/ipu-isys-video.c
+@@ -2142,6 +2142,8 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
+ 				 unsigned int state,
+ 				 struct ipu_isys_buffer_list *bl)
+ {
++	const unsigned int front_powered_dwell_ms = 900;
++	const unsigned int front_receiver_dwell_ms = 20;
+ 	struct device *dev = &av->isys->adev->dev;
+ 	struct media_device *mdev = av->vdev.entity.graph_obj.mdev;
+ 	struct media_entity_enum entities;
+@@ -2258,7 +2260,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
+ 			}
+ 			dev_info(dev,
+ 				 "sfp7-front-powered-age: event=begin sensor_streaming=0 firmware=0\n");
+-			msleep(900);
++			msleep(front_powered_dwell_ms);
+ 			dev_info(dev,
+ 				 "sfp7-front-powered-age: event=complete sensor_streaming=0 firmware=0\n");
+ 			pm_runtime_mark_last_busy(esd->dev);
+@@ -2283,7 +2285,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
+ 				goto out_media_entity_stop_streaming;
+ 			dev_info(dev,
+ 				 "sfp7-front-rx-dwell: event=begin receiver_enabled=1 sensor_streaming=0 firmware=0\n");
+-			msleep(20);
++			msleep(front_receiver_dwell_ms);
+ 			dev_info(dev,
+ 				 "sfp7-front-rx-dwell: event=complete receiver_enabled=1 sensor_streaming=0 firmware=0\n");
+ 		}
+diff --git a/drivers/media/pci/intel/ipu-isys.c b/drivers/media/pci/intel/ipu-isys.c
+index 6d78da8..6d6518b 100644
+--- a/drivers/media/pci/intel/ipu-isys.c
++++ b/drivers/media/pci/intel/ipu-isys.c
+@@ -854,6 +854,11 @@ static int alloc_fw_msg_buffers(struct ipu_isys *isys, int amount)
+ 	return -ENOMEM;
+ }
+ 
++/*
++ * Move one driver pool entry to the in-flight list. CSS command submission
++ * performs its own ABI payload conversion; that lifetime is separate from
++ * this list ownership and the eventual response buf_id return.
++ */
+ struct isys_fw_msgs *ipu_get_fw_msg_buf(struct ipu_isys_pipeline *ip)
+ {
+ 	struct ipu_isys_video *pipe_av =
+diff --git a/drivers/media/pci/intel/ipu-isys.h b/drivers/media/pci/intel/ipu-isys.h
+index 55fa388..bdc9530 100644
+--- a/drivers/media/pci/intel/ipu-isys.h
++++ b/drivers/media/pci/intel/ipu-isys.h
+@@ -158,6 +158,7 @@ struct ipu_isys {
+ 	struct v4l2_async_notifier notifier;
+ };
+ 
++/* Driver-owned coherent message pool entry, including its FW ABI payload. */
+ struct isys_fw_msgs {
+ 	union {
+ 		u64 dummy;
+@@ -172,6 +173,7 @@ struct isys_fw_msgs {
+ #define to_stream_cfg_msg_buf(a) (&(a)->fw_msg.stream)
+ #define to_dma_addr(a) ((a)->dma_addr)
+ 
++/* Borrow/return driver pool entries; CSS has a separate payload lifecycle. */
+ struct isys_fw_msgs *ipu_get_fw_msg_buf(struct ipu_isys_pipeline *ip);
+ void ipu_put_fw_mgs_buffer(struct ipu_isys *isys, u64 data);
+ void ipu_cleanup_fw_msg_bufs(struct ipu_isys *isys);
+@@ -180,6 +182,7 @@ extern const struct v4l2_ioctl_ops ipu_isys_ioctl_ops;
+ 
+ void isys_setup_hw(struct ipu_isys *isys);
+ #ifdef CONFIG_VIDEO_INTEL_IPU4P
++/* Restore the SP7 front BB10 setup without reinitializing shared ISYS state. */
+ void ipu4p_isys_reapply_front_phy(struct ipu_isys *isys);
+ #endif
+ int isys_isr_one(struct ipu_bus_device *adev);
+diff --git a/drivers/media/pci/intel/ipu4/ipu4-isys.c b/drivers/media/pci/intel/ipu4/ipu4-isys.c
+index b5886de..eee4091 100644
+--- a/drivers/media/pci/intel/ipu4/ipu4-isys.c
++++ b/drivers/media/pci/intel/ipu4/ipu4-isys.c
+@@ -191,36 +191,37 @@ static void ipu4p_isys_bb_cfg_one(struct ipu_isys *isys, unsigned int bb,
+ 
+ void ipu4p_isys_reapply_front_phy(struct ipu_isys *isys)
+ {
++	const unsigned int front_bb = 10;
+ 	void __iomem *isp_base = isys->adev->isp->base;
+ 	u32 afe, cphy_dll, cphy_rx, dphy_cfg, dphy_dll;
+ 
+-	ipu4p_isys_bb_cfg_one(isys, 10, 13, 32, 0x15);
++	ipu4p_isys_bb_cfg_one(isys, front_bb, 13, 32, 0x15);
+ 
+-	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
++	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
+ 	cphy_rx |= BIT(31);
+-	writel(cphy_rx, isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
++	writel(cphy_rx, isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
+ 
+-	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
++	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
+ 	dphy_cfg |= BIT(25) | BIT(26);
+-	writel(dphy_cfg, isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
++	writel(dphy_cfg, isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
+ 
+-	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
++	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
+ 	writel(cphy_dll & ~BIT(0),
+-	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
++	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
+ 	writel(cphy_dll | BIT(0),
+-	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
++	       isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
+ 
+-	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
++	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
+ 	writel(dphy_dll & ~BIT(0),
+-	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
++	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
+ 	writel(dphy_dll | BIT(0),
+-	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
++	       isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
+ 
+-	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(10));
+-	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(10));
+-	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10) - 4);
+-	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(10));
+-	afe = readl(isp_base + BUTTRESS_REG_BBX_AFE_CONFIG(10));
++	cphy_dll = readl(isp_base + BUTTRESS_REG_CPHYX_DLL_OVRD(front_bb));
++	cphy_rx = readl(isp_base + BUTTRESS_REG_CPHYX_RX_CONTROL1(front_bb));
++	dphy_cfg = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb) - 4);
++	dphy_dll = readl(isp_base + BUTTRESS_REG_DPHYX_DLL_OVRD(front_bb));
++	afe = readl(isp_base + BUTTRESS_REG_BBX_AFE_CONFIG(front_bb));
+ 	dev_info(&isys->adev->dev,
+ 		 "front BB10 JSL: cphy=0x%x rx=0x%x cfg=0x%x dphy=0x%x afe=0x%x\n",
+ 		 cphy_dll, cphy_rx, dphy_cfg, dphy_dll, afe);

@@ -113,7 +113,8 @@
       "series": "kernel/maintainability/series",
       "sha256": {
         "kernel/maintainability/patches/0001-distinguish-verification-control-and-diagnostics.patch": "0c28d623981107eab207fd74542d0d81b4ea3f847030f8d8b57662c57e1b1649",
-        "kernel/maintainability/patches/0002-separate-stream-input-configuration.patch": "5449a8da3fe5c649315815d0755cd9d3188018af11825fa171a90b6b701cac8b"
+        "kernel/maintainability/patches/0002-separate-stream-input-configuration.patch": "5449a8da3fe5c649315815d0755cd9d3188018af11825fa171a90b6b701cac8b",
+        "kernel/maintainability/patches/0003-document-pool-and-receiver-ownership.patch": "a372d50240a01c0aabc815bfd0aace50d198989c3ec51ca2c9d4eb929ac15c40"
       }
     }
   },

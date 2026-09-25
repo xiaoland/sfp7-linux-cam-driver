@@ -854,6 +854,11 @@ static int alloc_fw_msg_buffers(struct ipu_isys *isys, int amount)
 	return -ENOMEM;
 }
 
+/*
+ * Move one driver pool entry to the in-flight list. CSS command submission
+ * performs its own ABI payload conversion; that lifetime is separate from
+ * this list ownership and the eventual response buf_id return.
+ */
 struct isys_fw_msgs *ipu_get_fw_msg_buf(struct ipu_isys_pipeline *ip)
 {
 	struct ipu_isys_video *pipe_av =

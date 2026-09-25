@@ -163,6 +163,7 @@ ipu_isys_csi2_get_short_packet_buffer(struct ipu_isys_pipeline *ip);
 void ipu_isys_csi2_sof_event(struct ipu_isys_csi2 *csi2, unsigned int vc);
 void ipu_isys_csi2_eof_event(struct ipu_isys_csi2 *csi2, unsigned int vc);
 void ipu_isys_csi2_wait_last_eof(struct ipu_isys_csi2 *csi2);
+/* Clear software SOF/EOF state; this does not reset the receiver hardware. */
 void ipu_isys_csi2_reset_frame_state(struct ipu_isys_csi2 *csi2);
 #ifdef CONFIG_VIDEO_INTEL_IPU4P
 struct ipu4p_isys_csi2_rx_state {
@@ -171,8 +172,10 @@ struct ipu4p_isys_csi2_rx_state {
 	u32 dlanes_lp;
 };
 
+/* Sample receiver registers without changing stream ownership. */
 void ipu4p_isys_csi2_get_rx_state(struct ipu_isys_csi2 *csi2,
 				  struct ipu4p_isys_csi2_rx_state *state);
+/* Reprogram the receiver between retries, retaining the graph stream reference. */
 int ipu_isys_csi2_rearm_receiver(struct ipu_isys_csi2 *csi2);
 #endif
 

@@ -869,9 +869,9 @@ int ipu_buttress_authenticate(struct ipu_device *isp)
 				  BUTTRESS_CSE_BOOTLOAD_TIMEOUT);
 	if (rval) {
 		/*
-		 * An all-ones key with an all-ones window means the psys
-		 * register window is not readable; an all-ones key with a
-		 * plausible window means the bootloader never ran.
+		 * Compare the key with nearby registers to investigate whether
+		 * the PSYS window is readable or the bootloader failed to run.
+		 * All-ones values alone do not establish either cause.
 		 */
 		dev_err(&isp->pdev->dev,
 			"Expect magic number timeout 0x%x (window 0x%x 0x%x)\n",
