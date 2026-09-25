@@ -8,6 +8,10 @@
   },
   "profiles": {
     "runtime-browse": [
+      "runtime",
+      "maintenance"
+    ],
+    "runtime": [
       "runtime"
     ]
   },
@@ -16,6 +20,12 @@
       "series": "userspace/snapshot-48-runtime-fixes/series",
       "sha256": {
         "userspace/snapshot-48-runtime-fixes/patches/0001-aperture-let-vp8-select-resolution-aware-bitrate.patch": "07dc9e3996d476f04756f8257a380e535faf59c7f79d24ea3757d2a79709fbc1"
+      }
+    },
+    "maintenance": {
+      "series": "userspace/snapshot-48-maintainability/series",
+      "sha256": {
+        "userspace/snapshot-48-maintainability/patches/0001-explain-resolution-dependent-vp8-bitrate.patch": "46bf8350569d9b9385e11d81de70640a255b76eb63e07718cdfa012ed442a030"
       }
     }
   },

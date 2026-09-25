@@ -15,11 +15,11 @@
     },
     "aperture/src/viewfinder.rs": {
       "mode": "100644",
-      "sha256": "61e0e8787c60ca1e8790a417300ef0e6fc0565d1fe0e7c2a5a1deafb25ad880e"
+      "sha256": "14ab3778ad3783646e97adf328096fe9cb87292cc0317e713e5121a0e9be9bae"
     }
   },
-  "inputs_sha256": "297fcf7a12a6e0d2015a2ad6d68a9bfb772ca1b8e51cf5fd54b5e3c70c6dd3f5",
+  "inputs_sha256": "4be4e901b356f9e5a4d0b0e8df2495396d683772c77f894e26148ffb797209a4",
   "profile": "runtime-browse",
   "schema": 1,
-  "tree": "6df2199009697a7462eeefb1271d2321fb0c10aa"
+  "tree": "43e2c123f4428d644996303d067a3cdb37eab1c3"
 }

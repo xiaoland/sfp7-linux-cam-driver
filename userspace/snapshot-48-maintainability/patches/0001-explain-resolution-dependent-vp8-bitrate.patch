@@ -1,0 +1,21 @@
+From 1e13efbc51a72416236694afdcaa51f1458d7067 Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:52:19 +0800
+Subject: [PATCH] aperture: explain resolution-dependent VP8 bitrate
+
+---
+ aperture/src/viewfinder.rs | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/aperture/src/viewfinder.rs b/aperture/src/viewfinder.rs
+index 76a00f3..fbe4aec 100644
+--- a/aperture/src/viewfinder.rs
++++ b/aperture/src/viewfinder.rs
+@@ -849,6 +849,7 @@ impl Viewfinder {
+                 .preset("Profile Realtime")
+                 .element_properties(
+                     gst_pbutils::ElementProperties::builder_general()
++                        // VP8 uses a resolution-dependent bitrate when this is zero.
+                         .field("target-bitrate", 0i32)
+                         .build(),
+                 )

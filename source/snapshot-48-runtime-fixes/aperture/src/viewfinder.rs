@@ -849,6 +849,7 @@ impl Viewfinder {
                 .preset("Profile Realtime")
                 .element_properties(
                     gst_pbutils::ElementProperties::builder_general()
+                        // VP8 uses a resolution-dependent bitrate when this is zero.
                         .field("target-bitrate", 0i32)
                         .build(),
                 )
