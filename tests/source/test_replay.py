@@ -179,6 +179,17 @@ class SourceReplayTest(unittest.TestCase):
         self.assertEqual(file_records(existing), before)
         self.assertEqual((self.root / 'prepared/keep').read_text(), 'original\n')
 
+    def test_relative_repository_is_resolved_from_invocation_directory(self):
+        upstream = self.root / 'upstream'
+        import_base(upstream, self.base, self.archive, self.root / 'cache', None)
+        commit = git(upstream, 'rev-parse', 'HEAD').decode().strip()
+        relative = Path(os.path.relpath(upstream))
+        tree = self.root / 'nested/scratch'
+        tree.parent.mkdir()
+        import_base(tree, {'kind': 'git', 'commit': commit, 'url': 'unused'},
+                    None, self.root / 'cache', relative)
+        self.assertEqual(tree_id(tree), tree_id(upstream))
+
     def test_snapshot_and_manifest_hidden_edits_are_preserved(self):
         repo = self.root / 'repo'
         repo.mkdir()

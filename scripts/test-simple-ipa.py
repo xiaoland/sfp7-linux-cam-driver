@@ -11,6 +11,9 @@ from pathlib import Path
 import subprocess
 import sys
 
+from sourcekit.inputs import SourceError
+from sourcekit.trees import git
+
 OPTIONS = [
     '--wrap-mode=nofallback', '-Dpipelines=simple', '-Dipas=simple', '-Dtest=true',
     '-Dcam=disabled', '-Dqcam=disabled', '-Dgstreamer=disabled',
@@ -26,10 +29,16 @@ def sha(path):
 
 
 def source_identity(source):
-    dirty = subprocess.check_output(['git', '-C', str(source), 'status', '--porcelain'])
+    # Hidden index flags make status insufficient to bind compiled files to HEAD.
+    entries = git(source, 'ls-files', '-v', '-z').split(b'\0')
+    hidden = [entry[2:].decode() for entry in entries
+              if entry and (entry[:1].islower() or entry[:1] == b'S')]
+    if hidden:
+        raise ValueError(f'clear assume-unchanged/skip-worktree flags before comparing: {hidden}')
+    dirty = git(source, 'status', '--porcelain')
     if dirty:
         raise ValueError(f'commit/export source edits before comparing: {source}')
-    tree = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD^{tree}'], text=True).strip()
+    tree = git(source, 'rev-parse', 'HEAD^{tree}').decode().strip()
     return {'tree': tree, 'tests': {path: sha(source / path) for path in TEST_FILES}}
 
 
@@ -59,7 +68,10 @@ def main():
         parser.error('use a new output directory and positive --jobs')
     args.output = args.output.resolve()
     sources = {'baseline': args.baseline.resolve(), 'candidate': args.candidate.resolve()}
-    identities = {name: source_identity(path) for name, path in sources.items()}
+    try:
+        identities = {name: source_identity(path) for name, path in sources.items()}
+    except (SourceError, OSError, ValueError) as error:
+        parser.error(str(error))
     if identities['baseline']['tests'] != identities['candidate']['tests']:
         parser.error('both trees must compile identical test inputs')
     args.output.mkdir(parents=True)

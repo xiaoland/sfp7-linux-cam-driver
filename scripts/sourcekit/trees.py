@@ -60,7 +60,7 @@ def import_base(tree, base, archive, cache, repository):
     else:
         # Fetch copies objects: prepared trees do not depend on a local alternate.
         git(tree, 'fetch', '--quiet', '--depth=1', '--no-tags',
-            str(repository or base['url']), base['commit'])
+            str(repository.resolve() if repository else base['url']), base['commit'])
         git(tree, 'reset', '--soft', 'FETCH_HEAD')
         git(tree, 'read-tree', 'HEAD')
     if base.get('tree') and tree_id(tree) != base['tree']:
