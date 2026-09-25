@@ -1,4 +1,4 @@
-# Reconstructing the tested kernel source
+# Reconstructing original and maintenance kernel sources
 
 The tested composition is pinned to [linux-surface/kernel](https://github.com/linux-surface/kernel) commit `57d61aff0b53b089227f5a794363fec829114fc5`, whose ancestor is Linux stable `v6.19.8` (`86818b2e7d9c22225b15f2ae91d3f35c4a07dfd9`). Its starting Git tree is `2ae739c646562a36792549305c19360383e5d82d`. The following source layers are applied in order:
 
@@ -16,7 +16,7 @@ Prepare a new complete checkout on a case-sensitive filesystem (Python 3.12+ and
 The output directory must not exist. The compatibility script now delegates to
 `source.py`; it no longer stages patches in an existing checkout. For a local
 upstream mirror, use `python3 scripts/source.py prepare --component kernel
---repository /path/to/mirror.git --output ../linux-sfp7` instead.
+--profile p1-runtime --repository /path/to/mirror.git --output ../linux-sfp7` instead.
 Each original layer is checked against the tree identities above. A failure
 removes only the tool's disposable replay directory. The final runtime patch is a
 flattened net result of 128 experimental entries and still needs logical,
@@ -38,3 +38,13 @@ make -C linux-sfp7 O="$PWD/build-p1" ARCH=x86_64 \
 The [P1 RPM spec](../kernel/packaging/kernel.spec) records the native package recipe with a local `%post` change to preserve the previous GRUB default. Its changelog email was changed to the public GitHub noreply address; the tested spec's SHA-256 was `8fe36028bf79bd114f67be79c681bc85a48ce2673702ba57e3a8c6bb93d5b405`, while this copy is `06b6848b109ba34f440975fcaa7fe273096bfe5441a3f5f800f8c65b5cc6debb`. The package source RPM and signed distribution channel are not hosted here. Bit-for-bit binary reproducibility has not been established. See [status](STATUS.md) for the distinction between source equivalence and runtime validation.
 
 The libcamera series is listed in [`userspace/libcamera-v0.4-runtime-fixes/series`](../userspace/libcamera-v0.4-runtime-fixes/series) and applies to libcamera tag `v0.4.0` in order. Patches 0001–0006 are attributed upstream backports; 0003 adapts hunk context for v0.4.0. The Snapshot patch targets version 48.0.1. Fedora 42 spec overlays record the local package deltas. These are pinned source inputs, not a claim of compatibility with current libcamera or Snapshot releases.
+
+## Maintenance kernel candidate
+
+The browsing snapshot includes the additional `kernel/maintainability/series`.
+Use `python3 scripts/source.py prepare --component kernel --output ../linux-maint`
+for that candidate. `--profile p1-runtime` and `prepare-kernel.sh` retain the exact
+original tested P1 tree. Build a maintenance candidate with its own LOCALVERSION
+(for this work, `-sfp7cam.maint.fc42.x86_64`), not the P1 installed identity.
+The original runtime loader deliberately continues to accept only its fixed P1
+module hashes. Full build results do not transfer device acceptance to a new tree.

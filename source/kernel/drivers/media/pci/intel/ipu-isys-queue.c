@@ -611,7 +611,8 @@ static void trace_front_rx_state(struct ipu_isys_pipeline *ip,
 }
 #endif
 
-static void start_verification_trace_round(struct ipu_isys_pipeline *ip,
+/* Acceptance counters and diagnostic identity start together; not just tracing. */
+static void begin_verification_round(struct ipu_isys_pipeline *ip,
 					   unsigned int attempt,
 					   unsigned int round)
 {
@@ -624,7 +625,8 @@ static void start_verification_trace_round(struct ipu_isys_pipeline *ip,
 	atomic_set(&ip->verify_fw_events, 0);
 }
 
-static void stop_verification_trace(struct ipu_isys_pipeline *ip)
+/* The caller clears verify_active before resetting this round bookkeeping. */
+static void clear_verification_round_state(struct ipu_isys_pipeline *ip)
 {
 	atomic_set(&ip->verify_attempt, 0);
 	atomic_set(&ip->verify_round, 0);
@@ -746,7 +748,7 @@ static int verify_stream_start(struct ipu_isys_pipeline *ip)
 					 attempt, round, csi_error_bits);
 			}
 
-			start_verification_trace_round(ip, attempt, round + 1);
+			begin_verification_round(ip, attempt, round + 1);
 			rval = stream_capture_refeed(ip);
 			if (trace_front_verification(ip))
 				dev_info(dev,
@@ -838,7 +840,7 @@ static int verify_stream_start(struct ipu_isys_pipeline *ip)
 #endif
 		msleep(20);
 		clean_rounds = 0;
-		start_verification_trace_round(ip, attempt + 1, 1);
+		begin_verification_round(ip, attempt + 1, 1);
 		trace_front_rx_state(ip, "retry-sensor-on-pre");
 		if (trace_front_verification(ip))
 			dev_info(dev,
@@ -887,7 +889,7 @@ verified:
 			 atomic_read(&ip->verify_attempt),
 			 atomic_read(&ip->verify_round), clean_rounds);
 	atomic_set(&ip->verify_active, 0);
-	stop_verification_trace(ip);
+	clear_verification_round_state(ip);
 	rval = stream_capture_refeed(ip);
 	if (rval) {
 		struct ipu_isys_queue *aq;
@@ -918,7 +920,7 @@ static int ipu_isys_stream_start(struct ipu_isys_pipeline *ip,
 	int rval;
 
 	verify = ip->csi2 && ip->external && !ip->interlaced;
-	start_verification_trace_round(ip, verify ? 1 : 0, verify ? 1 : 0);
+	begin_verification_round(ip, verify ? 1 : 0, verify ? 1 : 0);
 	atomic_set(&ip->verify_active, verify);
 	if (verify && trace_front_verification(ip))
 		dev_info(&pipe_av->isys->adev->dev,
@@ -930,7 +932,7 @@ static int ipu_isys_stream_start(struct ipu_isys_pipeline *ip,
 	rval = ipu_isys_video_set_streaming(pipe_av, 1, bl);
 	if (rval) {
 		atomic_set(&ip->verify_active, 0);
-		stop_verification_trace(ip);
+		clear_verification_round_state(ip);
 		mutex_unlock(&pipe_av->isys->stream_mutex);
 		goto out_requeue;
 	}
@@ -989,7 +991,7 @@ out_stop_stream_locked:
 	mutex_unlock(&pipe_av->isys->stream_mutex);
 	ip->streaming = 0;
 	atomic_set(&ip->verify_active, 0);
-	stop_verification_trace(ip);
+	clear_verification_round_state(ip);
 
 out_requeue:
 	if (bl && bl->nbufs)

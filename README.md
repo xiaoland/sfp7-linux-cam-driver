@@ -10,7 +10,7 @@ This is a **source publication**, not an installable release. The tested Fedora 
 
 | Path | Purpose |
 | --- | --- |
-| [`source/`](source/) | Directly browsable IPU4P kernel C code, libcamera C++ and Snapshot Rust source from the tested versions |
+| [`source/`](source/) | Directly browsable IPU4P kernel C code, libcamera C++ and Snapshot Rust source from pinned runtime versions plus maintenance candidates |
 | [`kernel/`](kernel/) | Linux 6.19.8 → IPU4P → Surface Pro 7 → final tested kernel tree; [composition guide](docs/BUILDING.md) |
 | [`userspace/libcamera-v0.4-runtime-fixes/`](userspace/libcamera-v0.4-runtime-fixes/) | Ordered libcamera 0.4.0 backports and local fixes, plus Fedora 42 spec overlays |
 | [`userspace/snapshot-48-runtime-fixes/`](userspace/snapshot-48-runtime-fixes/) | Snapshot 48.0.1 VP8 bitrate fix and Fedora 42 spec overlay |
@@ -26,3 +26,7 @@ The kernel composition starts from a pinned [linux-surface `v6.19.8`-based commi
 This work used AI coding assistance. Human review, proper authorship, and valid Developer Certificate of Origin sign-off are still required for upstream submissions.
 
 [简体中文说明](README.zh-CN.md)
+
+For development, start with [source maintenance](docs/SOURCE-MAINTENANCE.md) and
+[tests](tests/README.md). The original runtime inputs remain available; browsing
+snapshots include maintenance candidates and do not inherit device acceptance.

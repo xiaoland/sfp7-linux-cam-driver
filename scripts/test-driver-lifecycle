@@ -13,7 +13,7 @@ import tempfile
 
 SUITES = {
     "firmware-lifecycle": ("ipu-isys-video.c", [
-        "get_stream_opened", "put_stream_opened", "get_stream_handle",
+        "fill_stream_input_config", "get_stream_opened", "put_stream_opened", "get_stream_handle",
         "put_stream_handle", "close_streaming_firmware", "start_stream_firmware",
         "stop_streaming_firmware", "ipu_isys_video_set_streaming",
     ]),

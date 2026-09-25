@@ -61,13 +61,13 @@ static bool wait_verification_round(struct ipu_isys_pipeline *ip)
     return true;
 }
 
-static void start_verification_trace_round(struct ipu_isys_pipeline *ip, int attempt, int round)
+static void begin_verification_round(struct ipu_isys_pipeline *ip, int attempt, int round)
 {
     ip->verify_attempt = attempt;
     ip->verify_round = round;
 }
 
-static void stop_verification_trace(struct ipu_isys_pipeline *ip)
+static void clear_verification_round_state(struct ipu_isys_pipeline *ip)
 {
     ip->verify_attempt = ip->verify_round = 0;
 }

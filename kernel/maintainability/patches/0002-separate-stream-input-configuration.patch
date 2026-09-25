@@ -1,0 +1,125 @@
+From 8f1ec7b6e5b47897b6402f8562672bcb95b7856d Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:34:59 +0800
+Subject: [PATCH] media: ipu4: separate input config filling from firmware
+ ownership
+
+---
+ drivers/media/pci/intel/ipu-isys-queue.c |  2 +-
+ drivers/media/pci/intel/ipu-isys-video.c | 78 +++++++++++++-----------
+ 2 files changed, 45 insertions(+), 35 deletions(-)
+
+diff --git a/drivers/media/pci/intel/ipu-isys-queue.c b/drivers/media/pci/intel/ipu-isys-queue.c
+index 74295fd..fcbf222 100644
+--- a/drivers/media/pci/intel/ipu-isys-queue.c
++++ b/drivers/media/pci/intel/ipu-isys-queue.c
+@@ -625,7 +625,7 @@ static void begin_verification_round(struct ipu_isys_pipeline *ip,
+ 	atomic_set(&ip->verify_fw_events, 0);
+ }
+ 
+-/* Called after the existing stop/close sequence; preserve atomic write order. */
++/* The caller clears verify_active before resetting this round bookkeeping. */
+ static void clear_verification_round_state(struct ipu_isys_pipeline *ip)
+ {
+ 	atomic_set(&ip->verify_attempt, 0);
+diff --git a/drivers/media/pci/intel/ipu-isys-video.c b/drivers/media/pci/intel/ipu-isys-video.c
+index aedb80b..8caf2ba 100644
+--- a/drivers/media/pci/intel/ipu-isys-video.c
++++ b/drivers/media/pci/intel/ipu-isys-video.c
+@@ -1609,42 +1609,17 @@ static unsigned int get_comp_format(u32 code)
+ static void close_streaming_firmware(struct ipu_isys_video *av);
+ 
+ /* Create stream and start it using the CSS FW ABI. */
+-static int start_stream_firmware(struct ipu_isys_video *av,
+-				 struct ipu_isys_buffer_list *bl)
++/* Fill the input description without acquiring message or stream ownership. */
++static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
++				     struct device *dev,
++				     const struct v4l2_subdev_format *source_fmt,
++				     struct ipu_fw_isys_stream_cfg_data_abi *stream_cfg)
+ {
+-	struct ipu_isys_pipeline *ip =
+-	    to_ipu_isys_pipeline(media_entity_pipeline(&av->vdev.entity));
+-	struct device *dev = &av->isys->adev->dev;
+-	struct v4l2_subdev_selection sel_fmt = {
+-		.which = V4L2_SUBDEV_FORMAT_ACTIVE,
+-		.target = V4L2_SEL_TGT_CROP,
+-		.pad = CSI2_BE_PAD_SOURCE,
+-	};
+-	struct ipu_fw_isys_stream_cfg_data_abi *stream_cfg;
+-	struct isys_fw_msgs *msg = NULL;
+-	struct ipu_fw_isys_frame_buff_set_abi *buf = NULL;
+-	struct ipu_isys_queue *aq;
+-	struct ipu_isys_video *isl_av = NULL;
+-	struct ipu_isys_request *ireq = NULL;
+-	struct v4l2_subdev_format source_fmt = { 0 };
+-	struct v4l2_subdev *be_sd = NULL;
+-	struct media_pad *source_pad = media_pad_remote_pad_first(&av->pad);
+-	int rval, tout;
+-
+-	rval = get_external_facing_format(ip, &source_fmt);
+-	if (rval)
+-		return rval;
+-
+-	msg = ipu_get_fw_msg_buf(ip);
+-	if (!msg)
+-		return -ENOMEM;
+-
+-	stream_cfg = to_stream_cfg_msg_buf(msg);
+-	stream_cfg->compfmt = get_comp_format(source_fmt.format.code);
+-	stream_cfg->input_pins[0].input_res.width = source_fmt.format.width;
+-	stream_cfg->input_pins[0].input_res.height = source_fmt.format.height;
++	stream_cfg->compfmt = get_comp_format(source_fmt->format.code);
++	stream_cfg->input_pins[0].input_res.width = source_fmt->format.width;
++	stream_cfg->input_pins[0].input_res.height = source_fmt->format.height;
+ 	stream_cfg->input_pins[0].dt =
+-	    ipu_isys_mbus_code_to_mipi(source_fmt.format.code);
++	    ipu_isys_mbus_code_to_mipi(source_fmt->format.code);
+ 	stream_cfg->input_pins[0].mapped_dt = N_IPU_FW_ISYS_MIPI_DATA_TYPE;
+ 
+ 	if (ip->csi2 && !v4l2_ctrl_g_ctrl(ip->csi2->store_csi2_header))
+@@ -1675,6 +1650,41 @@ static int start_stream_firmware(struct ipu_isys_video *av,
+ 		stream_cfg->send_resp_eof_discarded);
+ #endif
+ 
++}
++
++static int start_stream_firmware(struct ipu_isys_video *av,
++				 struct ipu_isys_buffer_list *bl)
++{
++	struct ipu_isys_pipeline *ip =
++	    to_ipu_isys_pipeline(media_entity_pipeline(&av->vdev.entity));
++	struct device *dev = &av->isys->adev->dev;
++	struct v4l2_subdev_selection sel_fmt = {
++		.which = V4L2_SUBDEV_FORMAT_ACTIVE,
++		.target = V4L2_SEL_TGT_CROP,
++		.pad = CSI2_BE_PAD_SOURCE,
++	};
++	struct ipu_fw_isys_stream_cfg_data_abi *stream_cfg;
++	struct isys_fw_msgs *msg = NULL;
++	struct ipu_fw_isys_frame_buff_set_abi *buf = NULL;
++	struct ipu_isys_queue *aq;
++	struct ipu_isys_video *isl_av = NULL;
++	struct ipu_isys_request *ireq = NULL;
++	struct v4l2_subdev_format source_fmt = { 0 };
++	struct v4l2_subdev *be_sd = NULL;
++	struct media_pad *source_pad = media_pad_remote_pad_first(&av->pad);
++	int rval, tout;
++
++	rval = get_external_facing_format(ip, &source_fmt);
++	if (rval)
++		return rval;
++
++	msg = ipu_get_fw_msg_buf(ip);
++	if (!msg)
++		return -ENOMEM;
++
++	stream_cfg = to_stream_cfg_msg_buf(msg);
++	fill_stream_input_config(ip, dev, &source_fmt, stream_cfg);
++
+ 	/*
+ 	 * Only CSI2-BE and SOC BE has the capability to do crop,
+ 	 * so get the crop info from csi2-be or csi2-be-soc.
+-- 
+2.50.1 (Apple Git-155)
+

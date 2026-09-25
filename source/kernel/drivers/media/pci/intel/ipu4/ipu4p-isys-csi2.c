@@ -46,11 +46,12 @@ static void ipu4p_csi2_log_rx_state(struct ipu_isys_csi2 *csi2, const char *tag)
 	u32 status = readl(csi2->base + CSI2_REG_CSI_RX_STATUS);
 	u32 hs = readl(csi2->base + CSI2_REG_CSI_RX_STATUS_DLANE_HS);
 	u32 lp = readl(csi2->base + CSI2_REG_CSI_RX_STATUS_DLANE_LP);
+	/* Raw wide-port offsets; narrow-port programming uses an additional +4. */
 	u32 ctermen = readl(csi2->base + CSI2_REG_CSI_RX_DLY_CNT_TERMEN_CLANE);
 	u32 csettle = readl(csi2->base + CSI2_REG_CSI_RX_DLY_CNT_SETTLE_CLANE);
 
 	dev_dbg(&csi2->isys->adev->dev,
-		"csi %u %s: rx enable=0x%x lanes=%u config=0x%x status=0x%x hs=0x%x lp=0x%x ctermen=%u csettle=%u receiver_errors=0x%x\n",
+		"csi %u %s: rx enable=0x%x lanes=%u config=0x%x status=0x%x hs=0x%x lp=0x%x raw_dly_0x2c=%u raw_dly_0x30=%u receiver_errors=0x%x\n",
 		csi2->index, tag, enable, lanes, config, status, hs, lp,
 		ctermen, csettle, csi2->receiver_errors);
 }

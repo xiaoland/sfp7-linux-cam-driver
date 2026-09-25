@@ -48,8 +48,8 @@ static void mutex_lock(int *lock) { assert(*lock == 0); *lock = 1; }
 static void mutex_unlock(int *lock) { assert(*lock == 1); *lock = 0; }
 static bool trace_front_verification(struct ipu_isys_pipeline *ip) { return false; }
 static void trace_front_rx_state(struct ipu_isys_pipeline *ip, const char *stage) {}
-static void start_verification_trace_round(struct ipu_isys_pipeline *ip, int a, int r) {}
-static void stop_verification_trace(struct ipu_isys_pipeline *ip) {}
+static void begin_verification_round(struct ipu_isys_pipeline *ip, int a, int r) {}
+static void clear_verification_round_state(struct ipu_isys_pipeline *ip) {}
 
 static struct isys_fw_msgs *ipu_get_fw_msg_buf(struct ipu_isys_pipeline *ip)
 {

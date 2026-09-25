@@ -72,10 +72,11 @@ struct ipu_isys_pipeline {
 	atomic_t frames_done;
 	/* non-suspension firmware errors in the current verification round */
 	atomic_t verify_errors;
-	/* front-link diagnostic trace identity and per-round event counters */
+	/* Round identity and diagnostics; reads are not a multi-field atomic snapshot. */
 	atomic_t verify_attempt;
 	atomic_t verify_round;
 	atomic_t verify_csi_events;
+	/* Acceptance input populated by the front (CSI index 2) IRQ helper. */
 	atomic_t verify_csi_error_bits;
 	atomic_t verify_fw_events;
 	/*

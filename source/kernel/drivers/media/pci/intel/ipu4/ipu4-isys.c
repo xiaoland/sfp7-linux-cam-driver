@@ -351,9 +351,9 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
 		 * the case where events arrive to the event queue and
 		 * one of them is a SOF event which then could be
 		 * handled before the SOF interrupt. This would pose
-		 * issues in sequence numbering which is based on SOF
-		 * interrupts, always assumed to arrive before FW SOF
-		 * events.
+		 * historically affected CSI-based sequence numbering. Preserve
+		 * this IRQ order; current sequence numbers advance from FW SOF,
+		 * including frames discarded before a capture buffer is available.
 		 */
 		if (status & IPU_ISYS_UNISPART_IRQ_SW && !isys_isr_one(adev))
 			status = IPU_ISYS_UNISPART_IRQ_SW;
@@ -434,9 +434,9 @@ irqreturn_t isys_isr(struct ipu_bus_device *adev)
 		 * the case where events arrive to the event queue and
 		 * one of them is a SOF event which then could be
 		 * handled before the SOF interrupt. This would pose
-		 * issues in sequence numbering which is based on SOF
-		 * interrupts, always assumed to arrive before FW SOF
-		 * events.
+		 * historically affected CSI-based sequence numbering. Preserve
+		 * this IRQ order; current sequence numbers advance from FW SOF,
+		 * including frames discarded before a capture buffer is available.
 		 */
 		if (status & IPU_ISYS_UNISPART_IRQ_SW && !isys_isr_one(adev))
 			status = IPU_ISYS_UNISPART_IRQ_SW;

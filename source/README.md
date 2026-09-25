@@ -1,10 +1,10 @@
-# Browse the tested source
+# Browse the camera source
 
 This directory makes the C, C++, and Rust code behind the patch series directly readable on GitHub. It is a **selected source snapshot**, not a standalone kernel or userspace build tree. Use the [pinned patches and build guide](../docs/BUILDING.md) to reconstruct complete trees.
 
 | Directory | Snapshot identity | What is included |
 | --- | --- | --- |
-| [`kernel/`](kernel/) | Git tree `65c10d4c4f7b651204757b62d608755cc4c21779` | The IPU4/IPU4P core and CSS source, IPU bridge, OV5693/OV8865 sensors, DW9719 lens driver, relevant kernel build files and headers, plus Linux license texts. This is the final tested kernel source result. |
+| [`kernel/`](kernel/) | Original runtime tree `65c10d4c4f7b651204757b62d608755cc4c21779` plus [maintenance patches](../kernel/maintainability/series); current tree in [manifest](kernel.manifest.json) | The IPU4/IPU4P core and CSS source, IPU bridge, OV5693/OV8865 sensors, DW9719 lens driver, relevant kernel build files and headers, plus Linux license texts. This view includes development refactors; P1 hardware acceptance describes the original runtime tree. |
 | [`libcamera-v0.4-runtime-fixes/`](libcamera-v0.4-runtime-fixes/) | libcamera `v0.4.0` source archive SHA-256 `f6c4d6674cc4a83caf3faad6cdf5d77efff9cf4f41671b15343cc578d6da9d10`, after the ordered [18 runtime patches](../userspace/libcamera-v0.4-runtime-fixes/series) and [maintenance layers](../userspace/libcamera-v0.4-maintainability/) | The 21 runtime paths plus files touched by the maintenance/test layers and upstream license notices; the generated manifest records the current set. The [Simple IPA autofocus](libcamera-v0.4-runtime-fixes/src/ipa/simple/algorithms/af.cpp) and [software ISP](libcamera-v0.4-runtime-fixes/src/ipa/simple/soft_simple.cpp) are useful entry points. |
 | [`snapshot-48-runtime-fixes/`](snapshot-48-runtime-fixes/) | Snapshot `48.0.1` source archive SHA-256 `393176859a20b7d235dfc303031ba20c686441106988dc911dd91b7b6d66e1fd`, after its [VP8 patch](../userspace/snapshot-48-runtime-fixes/patches/0001-aperture-let-vp8-select-resolution-aware-bitrate.patch) | The two changed Aperture files and their license notices; see [`viewfinder.rs`](snapshot-48-runtime-fixes/aperture/src/viewfinder.rs). |
 

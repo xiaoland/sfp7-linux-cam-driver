@@ -14,3 +14,6 @@
 - [作者、许可与上游协作](COPYING.md)
 
 项目使用过 AI 编程辅助。正式向 Linux、libcamera、GNOME 上游提交补丁前，需要人工审阅、真实作者署名和符合 DCO 的签署。
+
+源码维护入口见 [重建与快照核验](docs/SOURCE-MAINTENANCE.md) 和 [测试说明](tests/README.md)。
+原始运行时补丁仍保留；可浏览源码包含后续维护候选，不能沿用旧版本的实机验收结论。

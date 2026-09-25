@@ -11,6 +11,13 @@
       "ipu4",
       "surface",
       "sensor",
+      "runtime",
+      "maintenance"
+    ],
+    "p1-runtime": [
+      "ipu4",
+      "surface",
+      "sensor",
       "runtime"
     ]
   },
@@ -100,6 +107,13 @@
       "snapshot": true,
       "sha256": {
         "kernel/runtime-final-net.patch": "f8d9237aa251848e21176e72e602b50bb0f2d82e54ee996a6cf9e04eba260453"
+      }
+    },
+    "maintenance": {
+      "series": "kernel/maintainability/series",
+      "sha256": {
+        "kernel/maintainability/patches/0001-distinguish-verification-control-and-diagnostics.patch": "0c28d623981107eab207fd74542d0d81b4ea3f847030f8d8b57662c57e1b1649",
+        "kernel/maintainability/patches/0002-separate-stream-input-configuration.patch": "5449a8da3fe5c649315815d0755cd9d3188018af11825fa171a90b6b701cac8b"
       }
     }
   },

@@ -7,4 +7,4 @@ if [[ $# -ne 1 ]]; then
   exit 2
 fi
 source_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-exec python3 "$source_dir/scripts/source.py" prepare --component kernel --output "$1"
+exec python3 "$source_dir/scripts/source.py" prepare --component kernel --profile p1-runtime --output "$1"

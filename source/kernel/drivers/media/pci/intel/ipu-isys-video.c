@@ -1609,6 +1609,49 @@ static unsigned int get_comp_format(u32 code)
 static void close_streaming_firmware(struct ipu_isys_video *av);
 
 /* Create stream and start it using the CSS FW ABI. */
+/* Fill the input description without acquiring message or stream ownership. */
+static void fill_stream_input_config(struct ipu_isys_pipeline *ip,
+				     struct device *dev,
+				     const struct v4l2_subdev_format *source_fmt,
+				     struct ipu_fw_isys_stream_cfg_data_abi *stream_cfg)
+{
+	stream_cfg->compfmt = get_comp_format(source_fmt->format.code);
+	stream_cfg->input_pins[0].input_res.width = source_fmt->format.width;
+	stream_cfg->input_pins[0].input_res.height = source_fmt->format.height;
+	stream_cfg->input_pins[0].dt =
+	    ipu_isys_mbus_code_to_mipi(source_fmt->format.code);
+	stream_cfg->input_pins[0].mapped_dt = N_IPU_FW_ISYS_MIPI_DATA_TYPE;
+
+	if (ip->csi2 && !v4l2_ctrl_g_ctrl(ip->csi2->store_csi2_header))
+		stream_cfg->input_pins[0].mipi_store_mode =
+		    IPU_FW_ISYS_MIPI_STORE_MODE_DISCARD_LONG_HEADER;
+	else if (ip->tpg && !v4l2_ctrl_g_ctrl(ip->tpg->store_csi2_header))
+		stream_cfg->input_pins[0].mipi_store_mode =
+		    IPU_FW_ISYS_MIPI_STORE_MODE_DISCARD_LONG_HEADER;
+
+	stream_cfg->src = ip->source;
+	stream_cfg->vc = 0;
+	stream_cfg->isl_use = ip->isl_mode;
+	stream_cfg->nof_input_pins = 1;
+
+#ifdef CONFIG_VIDEO_INTEL_IPU4P
+	/* Include frames discarded for lack of buffers in the SOF sequence. */
+	if (ip->csi2) {
+		stream_cfg->send_irq_sof_discarded = 1;
+		stream_cfg->send_resp_sof_discarded = 1;
+		stream_cfg->send_irq_eof_discarded = 1;
+		stream_cfg->send_resp_eof_discarded = 1;
+	}
+	dev_dbg(dev,
+		"FW discarded sync: sof_irq=%u sof_resp=%u eof_irq=%u eof_resp=%u\n",
+		stream_cfg->send_irq_sof_discarded,
+		stream_cfg->send_resp_sof_discarded,
+		stream_cfg->send_irq_eof_discarded,
+		stream_cfg->send_resp_eof_discarded);
+#endif
+
+}
+
 static int start_stream_firmware(struct ipu_isys_video *av,
 				 struct ipu_isys_buffer_list *bl)
 {
@@ -1640,40 +1683,7 @@ static int start_stream_firmware(struct ipu_isys_video *av,
 		return -ENOMEM;
 
 	stream_cfg = to_stream_cfg_msg_buf(msg);
-	stream_cfg->compfmt = get_comp_format(source_fmt.format.code);
-	stream_cfg->input_pins[0].input_res.width = source_fmt.format.width;
-	stream_cfg->input_pins[0].input_res.height = source_fmt.format.height;
-	stream_cfg->input_pins[0].dt =
-	    ipu_isys_mbus_code_to_mipi(source_fmt.format.code);
-	stream_cfg->input_pins[0].mapped_dt = N_IPU_FW_ISYS_MIPI_DATA_TYPE;
-
-	if (ip->csi2 && !v4l2_ctrl_g_ctrl(ip->csi2->store_csi2_header))
-		stream_cfg->input_pins[0].mipi_store_mode =
-		    IPU_FW_ISYS_MIPI_STORE_MODE_DISCARD_LONG_HEADER;
-	else if (ip->tpg && !v4l2_ctrl_g_ctrl(ip->tpg->store_csi2_header))
-		stream_cfg->input_pins[0].mipi_store_mode =
-		    IPU_FW_ISYS_MIPI_STORE_MODE_DISCARD_LONG_HEADER;
-
-	stream_cfg->src = ip->source;
-	stream_cfg->vc = 0;
-	stream_cfg->isl_use = ip->isl_mode;
-	stream_cfg->nof_input_pins = 1;
-
-#ifdef CONFIG_VIDEO_INTEL_IPU4P
-	/* Include frames discarded for lack of buffers in the SOF sequence. */
-	if (ip->csi2) {
-		stream_cfg->send_irq_sof_discarded = 1;
-		stream_cfg->send_resp_sof_discarded = 1;
-		stream_cfg->send_irq_eof_discarded = 1;
-		stream_cfg->send_resp_eof_discarded = 1;
-	}
-	dev_dbg(dev,
-		"FW discarded sync: sof_irq=%u sof_resp=%u eof_irq=%u eof_resp=%u\n",
-		stream_cfg->send_irq_sof_discarded,
-		stream_cfg->send_resp_sof_discarded,
-		stream_cfg->send_irq_eof_discarded,
-		stream_cfg->send_resp_eof_discarded);
-#endif
+	fill_stream_input_config(ip, dev, &source_fmt, stream_cfg);
 
 	/*
 	 * Only CSI2-BE and SOC BE has the capability to do crop,
@@ -1918,6 +1928,11 @@ static void stop_streaming_firmware(struct ipu_isys_video *av)
 	}
 }
 
+/*
+ * Attempt FW CLOSE, then release software handle/opened ownership even if the
+ * acknowledgement fails. Software cleanup does not prove firmware has closed;
+ * late replies and handle reuse remain part of the existing recovery protocol.
+ */
 static void close_streaming_firmware(struct ipu_isys_video *av)
 {
 	struct ipu_isys_pipeline *ip =
@@ -2218,7 +2233,7 @@ int ipu_isys_video_set_streaming(struct ipu_isys_video *av,
 
 	mutex_unlock(&mdev->graph_mutex);
 
-	/* Oh crap */
+	/* Sensor start failed after firmware streaming began */
 	if (state) {
 		if (ip->csi2)
 			dev_dbg(dev,
