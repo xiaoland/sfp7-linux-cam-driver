@@ -24,6 +24,10 @@ of the generator entrypoint/modules. Generator changes also require regeneration
 plus `.sfp7-source.json`. Failure discards only its newly created temporary tree;
 it does not reset an existing developer checkout. Patch failures name the exact
 layer and file. Fix the input, then retry with a new output directory.
+The complete kernel tree requires a case-sensitive filesystem. On a
+case-insensitive volume, distinct upstream names can collide; `prepare` now
+rejects a checkout whose files differ from the pinned Git tree. Use a Linux
+filesystem for builds or export the verified Git tree with `git archive` to one.
 
 `snapshot` independently replays the pinned inputs, rather than trusting a local
 prepared tree. It refuses to replace local edits in the browsing directory or its

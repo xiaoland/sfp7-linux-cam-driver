@@ -152,6 +152,10 @@ def prepare(tree, output, identity):
     # Cached deletions leave old archive files untracked. This tree is our new
     # disposable replay directory, never an existing developer checkout.
     git(tree, 'clean', '-fdx', '--quiet')
+    # A case-insensitive filesystem can collapse distinct kernel paths during
+    # checkout while the Git index still has the correct tree identity.
+    if git(tree, 'status', '--porcelain', '--untracked-files=all'):
+        raise SourceError('prepared checkout differs from the pinned Git tree; use a case-sensitive filesystem')
     (tree / '.sfp7-source.json').write_text(json.dumps(identity, indent=2) + '\n')
     exclude = tree / '.git/info/exclude'
     with exclude.open('a') as stream:
