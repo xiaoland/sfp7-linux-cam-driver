@@ -27,8 +27,8 @@ public:
 		     ControlList &metadata) override;
 
 private:
-	bool startup_ = true;
-	unsigned int startupComputations_ = 0;
+	bool startupAccelerationEnabled_ = true;
+	unsigned int validStartupCallbacks_ = 0;
 
 	void updateExposure(IPAContext &context, IPAFrameContext &frameContext, double exposureMSV);
 };

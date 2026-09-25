@@ -23,6 +23,8 @@ namespace ipa::soft::algorithms {
  * The number of bins to use for the optimal exposure calculations.
  */
 static constexpr unsigned int kExposureBinsCount = 5;
+/* Only finite, positive statistics consume the startup callback budget. */
+static constexpr unsigned int kMaxStartupCallbacks = 96;
 
 /*
  * The exposure is optimal when the mean sample value of the histogram is
@@ -44,8 +46,8 @@ Agc::Agc()
 int Agc::configure([[maybe_unused]] IPAContext &context,
 		   [[maybe_unused]] const IPAConfigInfo &configInfo)
 {
-	startup_ = true;
-	startupComputations_ = 0;
+	startupAccelerationEnabled_ = true;
+	validStartupCallbacks_ = 0;
 	return 0;
 }
 
@@ -55,16 +57,16 @@ void Agc::updateExposure(IPAContext &context, IPAFrameContext &frameContext, dou
 	if (!std::isfinite(exposureMSV) || exposureMSV <= 0)
 		return;
 
-	bool tryStartup = false;
-	if (startup_) {
-		++startupComputations_;
-		tryStartup = exposureMSV < kExposureOptimal - kExposureSatisfactory;
-		/* This counts valid callbacks, not sensor control generations. */
-		if (!tryStartup || startupComputations_ >= 96)
-			startup_ = false;
+	bool accelerateThisCallback = false;
+	if (startupAccelerationEnabled_) {
+		++validStartupCallbacks_;
+		accelerateThisCallback = exposureMSV < kExposureOptimal - kExposureSatisfactory;
+		/* The final budgeted callback keeps its already computed eligibility. */
+		if (!accelerateThisCallback || validStartupCallbacks_ >= kMaxStartupCallbacks)
+			startupAccelerationEnabled_ = false;
 	}
 
-	if (tryStartup) {
+	if (accelerateThisCallback) {
 		int32_t &exposure = frameContext.sensor.exposure;
 		double &again = frameContext.sensor.gain;
 		bool boosted = false;
@@ -96,17 +98,17 @@ void Agc::updateExposure(IPAContext &context, IPAFrameContext &frameContext, dou
 
 		if (exposure == context.configuration.agc.exposureMax &&
 		    again == context.configuration.agc.againMax)
-			startup_ = false;
+			startupAccelerationEnabled_ = false;
 
 		if (boosted) {
 			LOG(IPASoftExposure, Debug)
 				<< "exposureMSV " << exposureMSV
 				<< " exp " << exposure << " again " << again
 				<< " startupBoost 1 validComputations "
-				<< startupComputations_;
+				<< validStartupCallbacks_;
 			return;
 		}
-		/* Keep the original minimum-step rule if a 20% step is too small. */
+		/* If the deficit-scaled request cannot advance, use the steady-state minimum step. */
 	}
 
 	/*
