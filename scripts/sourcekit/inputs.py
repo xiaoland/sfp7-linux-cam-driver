@@ -17,6 +17,12 @@ def digest(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def generator_identity(root):
+    """Bind provenance to the entrypoint and every replay module, not a label."""
+    paths = [root / 'scripts/source.py', *sorted((root / 'scripts/sourcekit').glob('*.py'))]
+    return {path.relative_to(root).as_posix(): digest(path) for path in paths}
+
+
 def relative_path(value):
     path = PurePosixPath(value)
     if not value or path.is_absolute() or '..' in path.parts or '.git' in path.parts:

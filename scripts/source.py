@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import tempfile
 
-from sourcekit.inputs import SourceError, load_inputs
+from sourcekit.inputs import SourceError, generator_identity, load_inputs
 from sourcekit.snapshots import compare, file_records, publish
 from sourcekit.trees import materialize, prepare, replay, tree_id
 
@@ -44,7 +44,8 @@ def main():
         tree = scratch / 'tree'
         entries = replay(tree, root, data, groups, args.archive, args.cache, args.repository)
         identity = {'schema': 1, 'component': args.component, 'profile': args.profile,
-                    'inputs_sha256': fingerprint, 'tree': tree_id(tree)}
+                    'inputs_sha256': fingerprint, 'generator': generator_identity(root),
+                    'tree': tree_id(tree)}
         if args.action == 'prepare':
             prepare(tree, args.output, identity)
         else:

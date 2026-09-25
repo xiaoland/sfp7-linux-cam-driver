@@ -17,7 +17,8 @@ with the same mandatory digest check. Downloads use the Fedora lookaside archive
 and a content-addressed cache (`--cache DIR`). Inputs and license selection are
 recorded in `sources/libcamera.json`; `series` controls patch order and the digest
 map must contain exactly those entries. The per-component generated manifest
-records the reconstructed Git tree and each selected file's identity.
+records the reconstructed Git tree, each selected file's identity and the hashes
+of the generator entrypoint/modules. Generator changes also require regeneration.
 
 `prepare` requires a nonexistent output directory and leaves a clean Git checkout
 plus `.sfp7-source.json`. Failure discards only its newly created temporary tree;
@@ -35,10 +36,13 @@ are handled by Git tree transitions. Source equality is not a hardware test.
 
 The same commands accept `--component kernel` and `--component snapshot`.
 Kernel replay uses the four original layers and checks all four intermediate tree
-identities. Its explicit `sources/kernel.paths` selection preserves the 793-file
+identities, then adds the maintenance series for `runtime-browse`. The `p1-runtime`
+profile ends at the original tested tree. Its explicit `sources/kernel.paths` selection preserves the 793-file
 browsing scope; a locally changed runtime file omitted from the selector is an
 error. `--repository` can supply an existing local Git mirror to avoid downloading
-the base again. Snapshot uses the pinned GNOME release archive.
+the base again. Snapshot uses the pinned GNOME release archive; its `runtime`
+profile keeps the original patch, while `runtime-browse` adds the maintenance comment.
+The zero-bitrate explanation follows the [GStreamer VP8 encoder contract](https://gstreamer.freedesktop.org/documentation/vpx/GstVPXEnc.html#GstVPXEnc:target-bitrate).
 
 For Linux libcamera development, use `--profile fedora42`. This applies the three
 unaltered Fedora compiler patches before the runtime series. Fedora's third patch

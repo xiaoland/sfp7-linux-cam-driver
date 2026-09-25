@@ -166,6 +166,13 @@
       "sha256": "0ba2cd4fc331ea92c518ad5909b02f196a3ed20ddac1416caa3887393f89a78c"
     }
   },
+  "generator": {
+    "scripts/source.py": "b11f602168b37ac79e2e4ba7653868613c3df48225c24b5cccc2c4edecf7e90a",
+    "scripts/sourcekit/__init__.py": "56b6005d51b02b323f4545d6de642f2d33bf3eb52a2f3ee4f458476cb243e11a",
+    "scripts/sourcekit/inputs.py": "188e2e9c04a16c29c101361c051cd19240f1233c47091b7d0141150489b5aef1",
+    "scripts/sourcekit/snapshots.py": "7727c5a1c6e3f8c700480a45447af74ff5b847286ce20855af0d541e1d4ae187",
+    "scripts/sourcekit/trees.py": "b07c5a16847e6d4e14fe8f9438488fe12a3544254f3d9efe2cabf3acab20dcbb"
+  },
   "inputs_sha256": "6b2bb20bf11dee57c94629e2de9a98572bd37234801f6aedda0d91846e81ace5",
   "profile": "runtime-browse",
   "schema": 1,
