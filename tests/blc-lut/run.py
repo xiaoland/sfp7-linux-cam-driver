@@ -57,7 +57,7 @@ def build_and_run(source: Path, work: Path, name: str, compiler: str,
         command.extend([f"-fsanitize={sanitizers}", "-fno-omit-frame-pointer"])
     command.extend(["-g", str(unit), "-o", str(binary)])
     subprocess.run(command, check=True)
-    result = subprocess.run([str(binary)] + (["--startup-only"] if baseline else []),
+    result = subprocess.run([str(binary)],
                             text=True, capture_output=True, check=False)
     print(result.stdout, end='')
     print(result.stderr, end='')
