@@ -79,13 +79,22 @@ namespace libcamera::ipa::soft {
 
 /**
  * \var IPASessionConfiguration::agc
- * \brief Context for the AGC algorithm
+ * \brief Exposure and gain limits for the AGC algorithm
  *
- * \var IPASessionConfiguration::agc.exposure
- * \brief Current exposure value
+ * \var IPASessionConfiguration::agc.exposureMin
+ * \brief Minimum sensor exposure in lines
  *
- * \var IPASessionConfiguration::agc.again
- * \brief Current analog gain value
+ * \var IPASessionConfiguration::agc.exposureMax
+ * \brief Maximum sensor exposure in lines
+ *
+ * \var IPASessionConfiguration::agc.againMin
+ * \brief Minimum gain in the algorithm's converted gain units
+ *
+ * \var IPASessionConfiguration::agc.againMax
+ * \brief Maximum gain in the algorithm's converted gain units
+ *
+ * \var IPASessionConfiguration::agc.againMinStep
+ * \brief Minimum gain adjustment used by the exposure controller
  */
 
 /**

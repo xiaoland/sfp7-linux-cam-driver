@@ -35,7 +35,7 @@ struct SwIspStats {
 	/**
 	 * \brief Brightness-normalized green-channel contrast in the frame centre
 	 *
-	 * Sum of squared differences between sampled green values two samples
+	 * Mean squared difference between sampled green values two samples
 	 * apart, scaled by 1,000,000 and divided by mean green squared. Sampling
 	 * uses the central half of the configured window on each axis. Zero can
 	 * mean no valid samples, zero mean, or a flat image; it is not a validity

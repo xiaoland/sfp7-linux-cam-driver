@@ -75,7 +75,8 @@
         "userspace/libcamera-v0.4-maintainability/patches/0003-ipa-simple-clarify-startup-exposure-budget.patch": "9021759d7a4cc818c3cc3095ec6f240c459d182d9ec171ac2f5dd580912da0b6",
         "userspace/libcamera-v0.4-maintainability/patches/0004-ipa-simple-separate-focus-monitoring-steps.patch": "59410d9d04a3a50832830ca9803d920dd78e6fda17ef3d88e0e2a5976b7abf89",
         "userspace/libcamera-v0.4-maintainability/patches/0005-ipa-simple-isolate-startup-exposure-boost.patch": "a96a4b8b8e5136078bc4532bc02b53841ec5a4cb8a4a7e6c6c31bed9ba4f0db3",
-        "userspace/libcamera-v0.4-maintainability/patches/0006-camera-clarify-lifecycle-and-data-contracts.patch": "20d57c8132927d06707b080033b4b62d2922ec57738b49e5f84e51faf936eb60"
+        "userspace/libcamera-v0.4-maintainability/patches/0006-camera-clarify-lifecycle-and-data-contracts.patch": "20d57c8132927d06707b080033b4b62d2922ec57738b49e5f84e51faf936eb60",
+        "userspace/libcamera-v0.4-maintainability/patches/0007-docs-correct-agc-and-focus-statistics-fields.patch": "eed336843ca35baa0f05dfa6fcb1f1b899c37284b593516cbeffda76a54f39f5"
       }
     }
   },

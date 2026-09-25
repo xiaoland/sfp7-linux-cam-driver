@@ -1,0 +1,58 @@
+From b5b87c5bcccf1957ef101f629900106df889376c Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:43:34 +0800
+Subject: [PATCH] docs: describe actual AGC limit fields and mean focus energy
+
+---
+ .../internal/software_isp/swisp_stats.h       |  2 +-
+ src/ipa/simple/ipa_context.cpp                | 19 ++++++++++++++-----
+ 2 files changed, 15 insertions(+), 6 deletions(-)
+
+diff --git a/include/libcamera/internal/software_isp/swisp_stats.h b/include/libcamera/internal/software_isp/swisp_stats.h
+index 8defd55..3c645b1 100644
+--- a/include/libcamera/internal/software_isp/swisp_stats.h
++++ b/include/libcamera/internal/software_isp/swisp_stats.h
+@@ -35,7 +35,7 @@ struct SwIspStats {
+ 	/**
+ 	 * \brief Brightness-normalized green-channel contrast in the frame centre
+ 	 *
+-	 * Sum of squared differences between sampled green values two samples
++	 * Mean squared difference between sampled green values two samples
+ 	 * apart, scaled by 1,000,000 and divided by mean green squared. Sampling
+ 	 * uses the central half of the configured window on each axis. Zero can
+ 	 * mean no valid samples, zero mean, or a flat image; it is not a validity
+diff --git a/src/ipa/simple/ipa_context.cpp b/src/ipa/simple/ipa_context.cpp
+index 2945bd9..41a258b 100644
+--- a/src/ipa/simple/ipa_context.cpp
++++ b/src/ipa/simple/ipa_context.cpp
+@@ -79,13 +79,22 @@ namespace libcamera::ipa::soft {
+ 
+ /**
+  * \var IPASessionConfiguration::agc
+- * \brief Context for the AGC algorithm
++ * \brief Exposure and gain limits for the AGC algorithm
+  *
+- * \var IPASessionConfiguration::agc.exposure
+- * \brief Current exposure value
++ * \var IPASessionConfiguration::agc.exposureMin
++ * \brief Minimum sensor exposure in lines
+  *
+- * \var IPASessionConfiguration::agc.again
+- * \brief Current analog gain value
++ * \var IPASessionConfiguration::agc.exposureMax
++ * \brief Maximum sensor exposure in lines
++ *
++ * \var IPASessionConfiguration::agc.againMin
++ * \brief Minimum gain in the algorithm's converted gain units
++ *
++ * \var IPASessionConfiguration::agc.againMax
++ * \brief Maximum gain in the algorithm's converted gain units
++ *
++ * \var IPASessionConfiguration::agc.againMinStep
++ * \brief Minimum gain adjustment used by the exposure controller
+  */
+ 
+ /**
+-- 
+2.50.1 (Apple Git-155)
+

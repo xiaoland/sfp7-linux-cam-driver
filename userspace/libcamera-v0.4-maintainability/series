@@ -3,3 +3,4 @@ patches/0003-ipa-simple-clarify-startup-exposure-budget.patch
 patches/0004-ipa-simple-separate-focus-monitoring-steps.patch
 patches/0005-ipa-simple-isolate-startup-exposure-boost.patch
 patches/0006-camera-clarify-lifecycle-and-data-contracts.patch
+patches/0007-docs-correct-agc-and-focus-statistics-fields.patch
