@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "base": {
+    "kind": "git",
+    "url": "https://github.com/linux-surface/kernel.git",
+    "commit": "57d61aff0b53b089227f5a794363fec829114fc5",
+    "tree": "2ae739c646562a36792549305c19360383e5d82d"
+  },
+  "profiles": {
+    "runtime-browse": [
+      "ipu4",
+      "surface",
+      "sensor",
+      "runtime"
+    ]
+  },
+  "groups": {
+    "ipu4": {
+      "series": "kernel/ipu4-next-v6.19/series",
+      "tree": "f8c29814a956624c891f1889dc0e760779fbe466",
+      "snapshot": false,
+      "sha256": {
+        "kernel/ipu4-next-v6.19/0001-media-intel-Add-IPU4-input-and-processing-system-dri.patch": "cf3462b89dd5451b4c947937ae564ea80e02cf4a310ecc476f7b9c752bea599e",
+        "kernel/ipu4-next-v6.19/0002-media-intel-Add-Kconfig-and-Makefile-for-IPU4-and-IP.patch": "e708d95e965050475b0cf1d97ea68f32d46989eb025f51ad94e119a199007f2c",
+        "kernel/ipu4-next-v6.19/0003-media-intel-ipu4-modify-IPU4-related-headers.patch": "22f47f9f7e2c88f510fe87792e363669c59d19df37e08935ce76ec9c2e0782ae",
+        "kernel/ipu4-next-v6.19/0004-media-intel-ipu4-Remove-legacy-crlmodule-header-depe.patch": "223768e80db7ed366f6e8711de1f663b80a1d841833e4b087ee318f94bbc7d26",
+        "kernel/ipu4-next-v6.19/0005-media-intel-ipu4-Remove-kernel-version-compatibility.patch": "ed40248a49673a6b52719fab54f49e475169422983ece01f2fab1e106d307310",
+        "kernel/ipu4-next-v6.19/0006-media-intel-ipu4-Fix-Bayer-format-propagation-and.patch": "4a2b3d7aa0f5106d5ed1a38974558468e77f88cd5508a76f4fdbcebf7152238f",
+        "kernel/ipu4-next-v6.19/0007-media-intel-ipu4-Track-DMA-allocations-with-internal.patch": "3cd3dd22e5cfafa01d968e2fcd7cde1fcf27727fade28377a72f527f0474f186",
+        "kernel/ipu4-next-v6.19/0008-media-v4l2-Rename-CSI-2-frame-descriptor-fields-to-a.patch": "5d04820608b28a972111754601be05dc21d113267104278ea56ba3702c5cc3c3",
+        "kernel/ipu4-next-v6.19/0009-media-intel-ipu4-Use-generic-DMA-API-instead-of-PCI-.patch": "78c9d082f85f860c05d985dc6814f24f557a724ccbbacf0e2b0a1eeb96814fe0",
+        "kernel/ipu4-next-v6.19/0010-media-intel-ipu4-Update-to-new-media-pad-lookup-API.patch": "284edfa7c5cf0be5218cfe2c7cda26a6badc6ddfee42abf868cb98e03dfb4294",
+        "kernel/ipu4-next-v6.19/0011-media-intel-ipu4-Use-media_entity_pipeline-accessor-.patch": "e79f18aee7a62603cdbb516966ab6b106914f7bd20e5440e5ad4ab1c353e0c6a",
+        "kernel/ipu4-next-v6.19/0012-media-intel-ipu4-Implement-virtual-channel-aware-pip.patch": "458b35a2051fe85163073399143e685aa70bb9b79ee169af19aff3bd39726cd9",
+        "kernel/ipu4-next-v6.19/0013-media-intel-ipu4-Replace-dma_buf_map-with-iosys_map-.patch": "315a7e55e4c503e90aa5ecf174a2bba39d7dbea4ec797e385b6df4ab5225fd7f",
+        "kernel/ipu4-next-v6.19/0014-media-intel-ipu4-Pass-entity-directly-to-media_graph.patch": "32db3035548fe8aaf47c8fc1a737c7e0d08b4ba2ea1cc541e11b12650fbe998f",
+        "kernel/ipu4-next-v6.19/0015-media-intel-ipu4-Integrate-IPU-ISYS-with-ipu-bridge-.patch": "5174031b9d999a569bdddd83fa95843420c9b320017a184908d51c9b465a29cf",
+        "kernel/ipu4-next-v6.19/0016-media-intel-ipu4-Advertise-media-controller-capabili.patch": "d79be1c89a111f63e474a7ee089ad2140fd904afd60ffc6aa3e7b100d7b2b091",
+        "kernel/ipu4-next-v6.19/0017-media-v4l2-Add-descriptions-for-vector-Bayer-pixel-f.patch": "a5eb7460c4e478b8c9cdd5cb2a6ab191a4675909d7482229ee82205097e5dccd",
+        "kernel/ipu4-next-v6.19/0018-media-intel-ipu4-Use-multiplanar-buffer-type-for-for.patch": "93ca9acb0c00e5ab509225f5d66b656093a9bc9751f69bbdbb8c433c9d9f7cfe",
+        "kernel/ipu4-next-v6.19/0019-media-intel-ipu4-Implement-frame-size-enumeration-VI.patch": "76ad195a212f2fd525c5cad483e960adcbd8bf0a15e8f340cf0265c14783fb30",
+        "kernel/ipu4-next-v6.19/0020-media-intel-ipu4-Simplify-DMA-buffer-allocation-with.patch": "3c187ecbd3d9713635a822527b501e05f0650ff6cc034f639a8f595a8f2eb609",
+        "kernel/ipu4-next-v6.19/0021-media-intel-ipu4-Simplify-DMA-buffer-deallocation-wi.patch": "6ffc14c8e5a74bc9b771294d516e633b4a48b7958a115c47d5d42a779df58125",
+        "kernel/ipu4-next-v6.19/0022-media-intel-ipu4-Use-dma_map_sgtable-helpers-for-sca.patch": "04457a636592c85c46f1d0b3440dbf94a03623643b3c54d9eff17d96b6b13b8b",
+        "kernel/ipu4-next-v6.19/0023-media-intel-ipu4-Use-v4l2_get_link_freq-helper-for-C.patch": "817af9f7660286ec52770bd81f8fa3b3574168a82297957873b2a5cf37f35e7a",
+        "kernel/ipu4-next-v6.19/0024-media-intel-ipu4-Replace-strlcpy-with-safer-strscpy-.patch": "062cb338a83a9035ac3e81980d9782e8c6e60d02903801981eb90073ab694c90",
+        "kernel/ipu4-next-v6.19/0025-media-intel-ipu4-Use-noop_llseek-instead-of-deprecat.patch": "5c897d653ac662a9ef878f6ab61fb9334d05a912da28910a4801af23d485a870",
+        "kernel/ipu4-next-v6.19/0026-media-intel-ipu4-Update-from_timer-to-timer_containe.patch": "3eb927306181c467bd370bb056c4bcaf2c2c73ae4d7a0a63b5ef1c37ddee7183",
+        "kernel/ipu4-next-v6.19/0027-media-intel-ipu4-Update-try_to_del_timer_sync-to-tim.patch": "9184ed14c945573805313a9ed15a20edc579a0f5ee81f1902732192a68d6654f",
+        "kernel/ipu4-next-v6.19/0028-media-intel-ipu4-Update-get_user_pages-call-to-match.patch": "7ad62cfd812104ae2b4828efc827a27773530fb32b37595b92bc44c045e70b7b",
+        "kernel/ipu4-next-v6.19/0029-media-intel-ipu4-Convert-MODULE_IMPORT_NS-to-string-.patch": "67fb27bfd83c5f04ba43ed302aa89c187bb9fcd687ead54d940fc7f305115272",
+        "kernel/ipu4-next-v6.19/0030-media-intel-ipu4-Update-set_routing-callback-to-matc.patch": "b04437a51d2ee2f32096e8963d46c7a12ef7b530acb7106768c1ccaecaeba913",
+        "kernel/ipu4-next-v6.19/0031-media-intel-ipu4-Modernize-user-page-pinning-with-pi.patch": "4332acc603860c53f55217a709cf9f79f95f323c59b8f83ff694dc3f5e6a1cca",
+        "kernel/ipu4-next-v6.19/0032-media-intel-ipu4-Adapt-to-v4l2_get_link_freq-API-sig.patch": "832be0053b00b4a4cc2c761b34aa56b79246cbdf0d0e5e077e1aa3798e229c07",
+        "kernel/ipu4-next-v6.19/0033-media-intel-ipu4-Use-v4l2_async_connection-for-async.patch": "840c2e1d61fdfb262550976f7a0628b1fc0f73e0294ddeddfe946e7eca734763",
+        "kernel/ipu4-next-v6.19/0034-media-intel-ipu4-Update-ipu_bus_match-signature-for-.patch": "52cad03001e3fd68a807f1149ef5a355118eb1995534583ffe8b341434242cc9",
+        "kernel/ipu4-next-v6.19/0035-media-intel-ipu4-Update-v4l2_async_nf_init-call-with.patch": "8a3ba6130c468acbb2b98798199ce694cc86587940288d74f515d8dbb11c02a0",
+        "kernel/ipu4-next-v6.19/0036-media-intel-ipu4-Adapt-to-v4l2_async_nf_register-API.patch": "d94ed2dc1c91128637155bd73efb711f5db1baf1bf0014b054add4a6ae7f4e52",
+        "kernel/ipu4-next-v6.19/0037-media-intel-ipu4-Update-to-new-v4l2_subdev_state-pad.patch": "ce1e5550254baca6360e9c27a924414217f4d8b2a75b688d083c4ae299e6f1d9",
+        "kernel/ipu4-next-v6.19/0038-media-v4l2-subdev-Fix-invalid-array-indexing-on-rout.patch": "0052e4b656c920d0667b0754ab720284fe5960c7d7322a611e744a0d55d2f507",
+        "kernel/ipu4-next-v6.19/0039-media-intel-ipu4-Guard-cleanup-against-uninitialized.patch": "ec5118148d11eab238c9749911d5d72d711f0ed49a63ced2e60fb80a44c14125",
+        "kernel/ipu4-next-v6.19/0040-media-intel-ipu4-Handle-uninitialized-format-state-p.patch": "a40c1817304e9826b9697e45fb01be263da4dcc054de876c9cd4b9ec36331b8a",
+        "kernel/ipu4-next-v6.19/0041-media-intel-ipu4-Safely-handle-stream-aware-subdevic.patch": "c2617ccbabb0c1dc3962ccb6cfd8a917ac3580074d27b6ac0a9f725c7417edcd",
+        "kernel/ipu4-next-v6.19/0042-media-intel-ipu4-Initialize-pad-directions-before-me.patch": "1dae790bd2ab7c9fa169b49050044f8cf6e359c8139038cb5760e4f7d4786a32",
+        "kernel/ipu4-next-v6.19/0043-media-intel-ipu4-Add-guards-for-uninitialized-array-.patch": "1edaa8d708b087996a2149169f62f896d41eccccfa276825c79b18e30644ed0f",
+        "kernel/ipu4-next-v6.19/0044-media-intel-ipu4-Add-link-validation-infrastructure.patch": "bbe074b7361ec916319a150d7ac7ca4eebca640d2fbfd013cbe6f1f04395928e",
+        "kernel/ipu4-next-v6.19/0045-media-intel-ipu4-Fix-format-enumeration-and-add-mult.patch": "13657d48ce2b5c1ae3d39969e2854edb79d5ed174c0e6d4bc254629c92a0a1e0",
+        "kernel/ipu4-next-v6.19/0046-media-intel-ipu4-Implement-format-based-link-validat.patch": "a1907037ec1bd0fcf9c0cbba8e2241ff3149953b89bc9b0ddc84232991a88336",
+        "kernel/ipu4-next-v6.19/0047-media-intel-ipu4-Fix-format-table-lookup-priority-in.patch": "3e700c5dfdaba54cd6a5fd87bbff4b57fe1b3c459c43a870e2726160bf2dcaa1",
+        "kernel/ipu4-next-v6.19/0048-media-intel-ipu4-Count-video-devices-for-nr_queues-i.patch": "c48d9d0538971cd074f835b1db3ae379ca209ddac7c87197e3bf5c573941aca3",
+        "kernel/ipu4-next-v6.19/0049-media-intel-ipu4-Fix-IPU4P-firmware-port-to-array-in.patch": "3e905ed329d3d7d778d68742dd6c25f44e584b1803ef8429e6d4dbb576608c60",
+        "kernel/ipu4-next-v6.19/0050-media-intel-ipu4-Expand-CSI-2-ports-to-support-Surfa.patch": "d3fddabba302dbc93f99dd2e7b148f18ff3d9f8e2a8c15fa1ce95b19323ecf09",
+        "kernel/ipu4-next-v6.19/0051-media-intel-ipu4-Use-fwnode_graph_for_each_endpoint-.patch": "3a6322caf6049762fa44d4195f97a769707889734f51b12b309ae917da03fde9",
+        "kernel/ipu4-next-v6.19/0052-media-intel-ipu4-Replace-polling-loops-with-readl_po.patch": "e83044ade21a2373e1d2d2d6f2912c2657a0e4ee437196e546d0f8dc77ee9b26",
+        "kernel/ipu4-next-v6.19/0053-media-intel-ipu4-Retry-buttress-authentication-on-dr.patch": "6780ae77ce8aedd87e7b3addf8aaf8aed6ae77fdf1c3b78429dc4e7a2743f6ea",
+        "kernel/ipu4-next-v6.19/0054-media-intel-ipu4-Rename-symbols-to-avoid-IPU7-namesp.patch": "fae58c6f6028dd64ef3916313511afb2d251c72ca2281e3205c500e89838f1da",
+        "kernel/ipu4-next-v6.19/0055-media-intel-ipu4-Workaround-to-enable-libcamera-simp.patch": "a594ca45dc0d2a5578cf97b271157ee79e204b80447f3378d0fe1cd9f97deb2c",
+        "kernel/ipu4-next-v6.19/0056-media-intel-ipu4-Add-OV5693-debug-instrumentation.patch": "c25ad5080c77ac9bf21fe067ad8370c10b77ddfb090d3bc778971ea15700e784"
+      }
+    },
+    "surface": {
+      "series": "kernel/thisiscamk/series",
+      "tree": "99184946d2625b8674faabab7a21d98525df5258",
+      "snapshot": false,
+      "sha256": {
+        "kernel/thisiscamk/0001-thisiscamk-sp7-snapshot-overlay.patch": "277a950bad28ab2a2f02fad2cd1f649c12a29fc6bff866c293194e64a93ba8d7"
+      }
+    },
+    "sensor": {
+      "series": "kernel/thisiscamk-surface-ov5693-no-binning/series",
+      "tree": "7fe4572a7046b7915fad6927cb957cbf947e7f44",
+      "snapshot": false,
+      "sha256": {
+        "kernel/thisiscamk-surface-ov5693-no-binning/0001-ov5693-disable-binned-modes.patch": "579458428d8152f3e01893d4e5ea0b4f1afd59fcd1d224fde65c3e63b50a0716"
+      }
+    },
+    "runtime": {
+      "series": "kernel/runtime.series",
+      "tree": "65c10d4c4f7b651204757b62d608755cc4c21779",
+      "snapshot": true,
+      "sha256": {
+        "kernel/runtime-final-net.patch": "f8d9237aa251848e21176e72e602b50bb0f2d82e54ee996a6cf9e04eba260453"
+      }
+    }
+  },
+  "selection": "sources/kernel.paths",
+  "licenses": [],
+  "snapshot_profile": "runtime-browse",
+  "snapshot_directory": "source/kernel",
+  "auxiliary_sha256": {
+    "sources/kernel.paths": "3ef6dadb470d67b21e9325202941822f5e7b0744264794ec6e21d409181eaab1",
+    "kernel/p1-fedora42.config": "2001c9ef43d83f1ba54c02574c5a6257a71affe227fd869b9cb2f66b3c209491",
+    "kernel/packaging/kernel.spec": "06b6848b109ba34f440975fcaa7fe273096bfe5441a3f5f800f8c65b5cc6debb"
+  }
+}

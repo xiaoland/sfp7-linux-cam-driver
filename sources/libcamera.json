@@ -9,6 +9,10 @@
   "profiles": {
     "runtime-browse": [
       "runtime"
+    ],
+    "fedora42": [
+      "fedora-base",
+      "runtime"
     ]
   },
   "groups": {
@@ -34,6 +38,16 @@
         "userspace/libcamera-v0.4-runtime-fixes/patches/0017-ipa-simple-stabilize-continuous-contrast-focus.patch": "101c8ac9433d2ffdbfb5447e5394a8c800ff28af074da57b90ce13cad701756f",
         "userspace/libcamera-v0.4-runtime-fixes/patches/0018-ipa-simple-converge-startup-exposure-by-measured-deficit.patch": "0ce5e07ca94775279b012e6c64ab6aef4ca24c796c78b82ae2172f35b6f972b3"
       }
+    },
+    "fedora-base": {
+      "series": "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/base-patches/series",
+      "snapshot": false,
+      "sha256": {
+        "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/base-patches/0001-libcamera-missing-include.patch": "7dc525ee03e93b5b46057cc1fee3321d2ccab1a4bd1c5b0e7259efc30ea5dcf1",
+        "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/base-patches/0002-libcamera-gcc15-templates.patch": "27400d0bc1ddea088494deeaa6c334150251c871b9efd84c939eea83e27d1a60",
+        "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/base-patches/0003-libcamera-gcc15-gtest-workaround.patch": "a9720ac8bdd9593403123c4dbb83ce0adfd28018265b59014709ee350337deb4"
+      },
+      "ignore_empty_git_headers": true
     }
   },
   "licenses": [
@@ -53,5 +67,20 @@
     "LICENSES/MIT.txt"
   ],
   "snapshot_profile": "runtime-browse",
-  "snapshot_directory": "source/libcamera-v0.4-runtime-fixes"
+  "snapshot_directory": "source/libcamera-v0.4-runtime-fixes",
+  "spec_patch_series": [
+    {
+      "spec_overlay": "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/libcamera.spec.patch",
+      "group": "runtime"
+    }
+  ],
+  "auxiliary_sha256": {
+    "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/installed-set.spec.patch": "a42165e264fb4ffdba6995b823238154c27ab020cc39a02ed57d6b0c800f42a1",
+    "userspace/libcamera-v0.4-runtime-fixes/fedora-f42/libcamera.spec.patch": "531e1214e6db1b210afcad0913899b04abb7db0fa39c16bee16a938b2a47a417"
+  },
+  "fedora_origin": {
+    "dist_git_commit": "de1751bc1c588674ecb17ef254735cf07cf4a47c",
+    "base_spec_sha256": "acb27b4ce557a135ee4d51bd0762a80b214ab2187c02673fb0ff756e57daabc9",
+    "note": "The source profile includes Fedora compiler patches; spec overlays describe historical packaging and do not yet package the maintenance layer."
+  }
 }

@@ -16,7 +16,7 @@ from sourcekit.trees import materialize, prepare, replay, tree_id
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['prepare', 'snapshot', 'check'])
-    parser.add_argument('--component', required=True, choices=['libcamera'])
+    parser.add_argument('--component', required=True, choices=['libcamera', 'kernel', 'snapshot'])
     parser.add_argument('--profile', default='runtime-browse')
     parser.add_argument('--archive', type=Path, help='verified local upstream archive')
     parser.add_argument('--repository', type=Path, help='local Git repository containing the pinned base')

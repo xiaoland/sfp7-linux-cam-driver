@@ -75,6 +75,16 @@ class SourceReplayTest(unittest.TestCase):
         self.assertEqual(os.readlink(output / 'link'), 'keep')
         self.assertEqual((output / 'keep').read_text(), 'original\n')
 
+    def test_fedora_orphan_headers_are_normalized_only_when_declared(self):
+        payload = (b'diff --git a/unused b/unused\nindex abcdef0..fedcba0 100644\n'
+                   b'diff --git a/keep b/keep\n--- a/keep\n+++ b/keep\n'
+                   b'@@ -1 +1 @@\n-original\n+modified\n')
+        patch = self.patch('fedora.patch', payload)
+        tree, selected = self.run_replay([
+            ('fedora', {'ignore_empty_git_headers': True}, [patch])])
+        self.assertEqual(set(selected), {'keep'})
+        self.assertEqual((self.root / patch).read_bytes(), payload)
+
     def test_missing_extra_content_and_mode_drift_are_detected(self):
         expected = {'a': {'mode': '100644', 'sha256': 'correct'}}
         for actual in [{}, {**expected, 'extra': {}},

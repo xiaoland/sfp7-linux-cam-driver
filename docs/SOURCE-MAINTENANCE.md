@@ -30,3 +30,26 @@ manifest: commit or preserve those edits first. `check` independently rebuilds a
 rejects missing, extra, changed or differently typed/mode files, as well as a stale
 manifest. Traditional patches, renames, deletions and paths changed then restored
 are handled by Git tree transitions. Source equality is not a hardware test.
+
+## Components and build profiles
+
+The same commands accept `--component kernel` and `--component snapshot`.
+Kernel replay uses the four original layers and checks all four intermediate tree
+identities. Its explicit `sources/kernel.paths` selection preserves the 793-file
+browsing scope; a locally changed runtime file omitted from the selector is an
+error. `--repository` can supply an existing local Git mirror to avoid downloading
+the base again. Snapshot uses the pinned GNOME release archive.
+
+For Linux libcamera development, use `--profile fedora42`. This applies the three
+unaltered Fedora compiler patches before the runtime series. Fedora's third patch
+contains an orphan `diff --git`/`index` header pair: replay drops only that empty
+section in memory when the input group explicitly enables this compatibility rule.
+The recorded original patch bytes and hashes remain unchanged. The browsing
+profile omits Fedora compiler patches and must not be described as the complete
+Fedora build tree. Dist-git identity and original spec digest are in the input file.
+
+The historical RPM overlays are digest checked and their added `PatchN` order is
+compared to the runtime series. This checks source declarations; it does not build
+RPMs or claim that future maintenance patches are already integrated into those
+historical package recipes. Candidate builds must use a new identity and be
+validated before installation. No binary or device acceptance is inherited.

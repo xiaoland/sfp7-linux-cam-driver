@@ -1,0 +1,3 @@
+0001-libcamera-missing-include.patch
+0002-libcamera-gcc15-templates.patch
+0003-libcamera-gcc15-gtest-workaround.patch

@@ -1,0 +1,25 @@
+{
+  "component": "snapshot",
+  "files": {
+    "LICENSE": {
+      "mode": "100644",
+      "sha256": "a04132fa75974b3040efa5a676d6426c988fec18bc1fc666bf947b899d909e23"
+    },
+    "aperture/Cargo.toml": {
+      "mode": "100644",
+      "sha256": "82968f1232ad1673c12424bc3056acb9300f1f15bf5fb3326d00c95de57ad035"
+    },
+    "aperture/LICENSE": {
+      "mode": "100644",
+      "sha256": "10ef4389697421d78c56f8322cf98caf461ffab85a21ebfc8862a062781bea85"
+    },
+    "aperture/src/viewfinder.rs": {
+      "mode": "100644",
+      "sha256": "61e0e8787c60ca1e8790a417300ef0e6fc0565d1fe0e7c2a5a1deafb25ad880e"
+    }
+  },
+  "inputs_sha256": "297fcf7a12a6e0d2015a2ad6d68a9bfb772ca1b8e51cf5fd54b5e3c70c6dd3f5",
+  "profile": "runtime-browse",
+  "schema": 1,
+  "tree": "6df2199009697a7462eeefb1271d2321fb0c10aa"
+}

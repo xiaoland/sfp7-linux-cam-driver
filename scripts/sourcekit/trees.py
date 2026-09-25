@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import tarfile
@@ -80,6 +81,18 @@ def inventory(tree):
     return result
 
 
+def patch_payload(path, group):
+    content = path.read_bytes()
+    if group.get('ignore_empty_git_headers', False):
+        # Fedora's pinned GCC 15 gtest patch starts with an orphan diff/index
+        # pair. GNU patch ignores it; Git rejects it. Keep the input unchanged
+        # and remove only sections consisting entirely of those two headers.
+        sections = re.split(rb'(?=^diff --git )', content, flags=re.MULTILINE)
+        content = b''.join(section for section in sections if not re.fullmatch(
+            rb'diff --git [^\n]+\nindex [^\n]+\n', section))
+    return content
+
+
 def replay(tree, root, data, groups, archive, cache, repository):
     import_base(tree, data['base'], archive, cache, repository)
     touched = set()
@@ -87,8 +100,9 @@ def replay(tree, root, data, groups, archive, cache, repository):
         for patch in patches:
             before = tree_id(tree)
             try:
-                git(tree, 'apply', '--cached', '--check', '--binary', str(root / patch))
-                git(tree, 'apply', '--cached', '--binary', str(root / patch))
+                payload = patch_payload(root / patch, group)
+                git(tree, 'apply', '--cached', '--check', '--binary', '-', input=payload)
+                git(tree, 'apply', '--cached', '--binary', '-', input=payload)
             except SourceError as exc:
                 raise SourceError(f'{name}: {patch}: {exc}') from exc
             after = tree_id(tree)

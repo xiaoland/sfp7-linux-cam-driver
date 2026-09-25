@@ -3,6 +3,7 @@
 
 import hashlib
 import json
+import re
 from pathlib import Path, PurePosixPath
 import urllib.request
 
@@ -56,6 +57,13 @@ def load_inputs(root, component, profile):
     for entry, expected in data.get('auxiliary_sha256', {}).items():
         if digest(root / relative_path(entry)) != expected:
             raise SourceError(f'auxiliary input digest mismatch: {entry}')
+    for binding in data.get('spec_patch_series', []):
+        overlay = (root / relative_path(binding['spec_overlay'])).read_text()
+        declared = re.findall(r'^\+Patch[0-9]*:\s*(\S+)', overlay, re.MULTILINE)
+        group = data['groups'][binding['group']]
+        ordered = [Path(path).name for path in read_series(root, group['series'])]
+        if declared != ordered:
+            raise SourceError(f"spec patch order differs from series: {binding['spec_overlay']}")
     return data, groups, fingerprint.hexdigest()
 
 

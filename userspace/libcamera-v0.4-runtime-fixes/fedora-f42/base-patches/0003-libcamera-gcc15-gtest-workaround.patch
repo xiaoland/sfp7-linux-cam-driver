@@ -1,0 +1,15 @@
+diff --git a/include/libcamera/internal/matrix.h b/include/libcamera/internal/matrix.h
+index 7a71028c..6d5df1af 100644
+diff --git a/src/apps/lc-compliance/meson.build b/src/apps/lc-compliance/meson.build
+index b1f605f3..759427fd 100644
+--- a/src/apps/lc-compliance/meson.build
++++ b/src/apps/lc-compliance/meson.build
+@@ -24,7 +24,7 @@ lc_compliance_includes = ([
+ ])
+ 
+ lc_compliance  = executable('lc-compliance', lc_compliance_sources,
+-                            cpp_args : [ '-fexceptions' ],
++                            cpp_args : [ '-fexceptions', '-Wno-error' ],
+                             link_with : apps_lib,
+                             dependencies : [
+                                 libatomic,

@@ -7,15 +7,22 @@ The tested composition is pinned to [linux-surface/kernel](https://github.com/li
 3. The Surface OV5693 no-binning change, yielding `7fe4572a7046b7915fad6927cb957cbf947e7f44`.
 4. `kernel/runtime-final-net.patch`, yielding the exact tested source tree `65c10d4c4f7b651204757b62d608755cc4c21779`.
 
-Use a clean linux-surface checkout at the pinned commit:
+Prepare a new complete checkout on a case-sensitive filesystem (Python 3.12+ and Git):
 
 ```sh
-git clone https://github.com/linux-surface/kernel.git linux-sfp7
-git -C linux-sfp7 checkout --detach 57d61aff0b53b089227f5a794363fec829114fc5
-./scripts/prepare-kernel.sh linux-sfp7
+./scripts/prepare-kernel.sh ../linux-sfp7
 ```
 
-The script checks the Git tree after each layer. It stages patches in the checkout but does not build or install a kernel. Use a case-sensitive filesystem for a checkout of the full Linux tree. The final patch is a flattened net result of 128 experimental runtime entries. It is retained for reproducibility and **must be split into logical, attributable changes before an upstream submission**. Its SHA-256 is `f8d9237aa251848e21176e72e602b50bb0f2d82e54ee996a6cf9e04eba260453`.
+The output directory must not exist. The compatibility script now delegates to
+`source.py`; it no longer stages patches in an existing checkout. For a local
+upstream mirror, use `python3 scripts/source.py prepare --component kernel
+--repository /path/to/mirror.git --output ../linux-sfp7` instead.
+Each original layer is checked against the tree identities above. A failure
+removes only the tool's disposable replay directory. The final runtime patch is a
+flattened net result of 128 experimental entries and still needs logical,
+attributable splitting before an upstream submission. Its SHA-256 remains
+`f8d9237aa251848e21176e72e602b50bb0f2d82e54ee996a6cf9e04eba260453`.
+See [source maintenance](SOURCE-MAINTENANCE.md) for snapshots, profiles and tests.
 
 The tested P1 build used Fedora 42 x86_64, `LOCALVERSION=-sfp7cam.p1.fc42.x86_64`, and the [exact target-derived config](../kernel/p1-fedora42.config) with SHA-256 `2001c9ef43d83f1ba54c02574c5a6257a71affe227fd869b9cb2f66b3c209491`. To compile the same source/config combination without installing it:
 

@@ -1,0 +1,26 @@
+diff --git a/include/libcamera/internal/matrix.h b/include/libcamera/internal/matrix.h
+index 7a71028c..6d5df1af 100644
+--- a/include/libcamera/internal/matrix.h
++++ b/include/libcamera/internal/matrix.h
+@@ -21,7 +21,7 @@ LOG_DECLARE_CATEGORY(Matrix)
+ 
+ #ifndef __DOXYGEN__
+ template<typename T, unsigned int Rows, unsigned int Cols,
+-	 std::enable_if_t<std::is_arithmetic_v<T>> * = nullptr>
++	 std::enable_if_t<std::is_arithmetic_v<T>, bool> = true>
+ #else
+ template<typename T, unsigned int Rows, unsigned int Cols>
+ #endif /* __DOXYGEN__ */
+diff --git a/src/ipa/libipa/vector.h b/src/ipa/libipa/vector.h
+index fe33c9d6..2403c181 100644
+--- a/src/ipa/libipa/vector.h
++++ b/src/ipa/libipa/vector.h
+@@ -28,7 +28,7 @@ namespace ipa {
+ 
+ #ifndef __DOXYGEN__
+ template<typename T, unsigned int Rows,
+-	 std::enable_if_t<std::is_arithmetic_v<T>> * = nullptr>
++	 std::enable_if_t<std::is_arithmetic_v<T>, bool> = true>
+ #else
+ template<typename T, unsigned int Rows>
+ #endif /* __DOXYGEN__ */

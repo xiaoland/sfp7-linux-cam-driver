@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "base": {
+    "kind": "archive",
+    "directory": "snapshot-48.0.1",
+    "url": "https://download.gnome.org/sources/snapshot/48/snapshot-48.0.1.tar.xz",
+    "sha256": "393176859a20b7d235dfc303031ba20c686441106988dc911dd91b7b6d66e1fd"
+  },
+  "profiles": {
+    "runtime-browse": [
+      "runtime"
+    ]
+  },
+  "groups": {
+    "runtime": {
+      "series": "userspace/snapshot-48-runtime-fixes/series",
+      "sha256": {
+        "userspace/snapshot-48-runtime-fixes/patches/0001-aperture-let-vp8-select-resolution-aware-bitrate.patch": "07dc9e3996d476f04756f8257a380e535faf59c7f79d24ea3757d2a79709fbc1"
+      }
+    }
+  },
+  "licenses": [
+    "LICENSE",
+    "aperture/LICENSE"
+  ],
+  "snapshot_profile": "runtime-browse",
+  "snapshot_directory": "source/snapshot-48-runtime-fixes",
+  "spec_patch_series": [
+    {
+      "spec_overlay": "userspace/snapshot-48-runtime-fixes/fedora-f42/snapshot.spec.patch",
+      "group": "runtime"
+    }
+  ],
+  "auxiliary_sha256": {
+    "userspace/snapshot-48-runtime-fixes/fedora-f42/snapshot.spec.patch": "f94fd0771f4ca28effc423d4128a724919f46b8b4bba5a6f2f7ddb1eaf50f026"
+  }
+}

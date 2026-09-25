@@ -1,0 +1,3181 @@
+{
+  "component": "kernel",
+  "files": {
+    "COPYING": {
+      "mode": "100644",
+      "sha256": "fb5a425bd3b3cd6071a3a9aff9909a859e7c1158d54d32e07658398cd67eb6a0"
+    },
+    "LICENSES/deprecated/0BSD": {
+      "mode": "100644",
+      "sha256": "6b50bcee8c2f90c73558dee62e444dde54f3cea86ccfcea84aa8be60005e67b4"
+    },
+    "LICENSES/deprecated/CC0-1.0": {
+      "mode": "100644",
+      "sha256": "c8a97e7369419869e2d60eab21a9f13bf293bfc33aed0de3c459644a8edd0c80"
+    },
+    "LICENSES/deprecated/GFDL-1.1": {
+      "mode": "100644",
+      "sha256": "8f13a0664b7e0f30d7a9001f3ecd87d3dea7964559d08337ca1a4b129d9e0e0d"
+    },
+    "LICENSES/deprecated/GFDL-1.2": {
+      "mode": "100644",
+      "sha256": "e43e6da62a83b8bf96819ff1226151da373cb87f165cd538f405978a0a8c6b7a"
+    },
+    "LICENSES/deprecated/GPL-1.0": {
+      "mode": "100644",
+      "sha256": "e72efc63ce52380f374733ec7a733f5c11efa3c1f2b0cb48a9c355868ee5b09c"
+    },
+    "LICENSES/deprecated/ISC": {
+      "mode": "100644",
+      "sha256": "cbdf535b99a9f4cb208c5495c6dd9a1f84104d83c03f8f0d98ee7a0c43805388"
+    },
+    "LICENSES/deprecated/Linux-OpenIB": {
+      "mode": "100644",
+      "sha256": "8ae20d34c2a74c85ae2760dd0034baf18e44bee3289b9b3a4fe46768b4ea2cd6"
+    },
+    "LICENSES/deprecated/X11": {
+      "mode": "100644",
+      "sha256": "21115f2385035c1ceeda8820b7f050c89a30418457a5e2a5c6091f2545d40e44"
+    },
+    "LICENSES/deprecated/Zlib": {
+      "mode": "100644",
+      "sha256": "3b42160485d3d596ff8a4956958c4360dc55f1e2414c964aef0ad2d3c2a92abb"
+    },
+    "LICENSES/dual/Apache-2.0": {
+      "mode": "100644",
+      "sha256": "7e4d3fba250d15e9e0afa380d4b611828fa2560cc8fdebe95bcf2f01a487de12"
+    },
+    "LICENSES/dual/CC-BY-4.0": {
+      "mode": "100644",
+      "sha256": "84d5ad08940d29065d8a6f062effa4204c2235c9f2487aa53748ed0a0a6cce86"
+    },
+    "LICENSES/dual/CDDL-1.0": {
+      "mode": "100644",
+      "sha256": "490abf7869e4638fbb43df99a20e5683224617a6bf9ffd06971cb02b153e53c1"
+    },
+    "LICENSES/dual/MPL-1.1": {
+      "mode": "100644",
+      "sha256": "ccbda1d2f0cfef821f39e1880aae9213c7933e07713ee638ad1fb02547c0b97b"
+    },
+    "LICENSES/dual/copyleft-next-0.3.1": {
+      "mode": "100644",
+      "sha256": "28386705873e5eacf16b5d34dd06e58737a2c5a3622acda380a0f236c0a6d02a"
+    },
+    "LICENSES/exceptions/GCC-exception-2.0": {
+      "mode": "100644",
+      "sha256": "0dca50b78073055447d02e8f6ae4fa94c1d0e6d7fbb4c874c9db5eb960c8b3d4"
+    },
+    "LICENSES/exceptions/Linux-syscall-note": {
+      "mode": "100644",
+      "sha256": "8e378ab93586eb55135d3bc119cce787f7324f48394777d00c34fa3d0be3303f"
+    },
+    "LICENSES/preferred/BSD-2-Clause": {
+      "mode": "100644",
+      "sha256": "6313108c23efffa36948f8b2cff1560a5935373b527b0e1a837cc77e6ed1bacd"
+    },
+    "LICENSES/preferred/BSD-3-Clause": {
+      "mode": "100644",
+      "sha256": "7a83b1aeb460458db9a4bd521d7f237c45b1650f6e60ea5ffc71e49472454de3"
+    },
+    "LICENSES/preferred/BSD-3-Clause-Clear": {
+      "mode": "100644",
+      "sha256": "3f8a01d020e77c045e364c4681ee78c591041b7a38aa61972f689f4bc4cb5088"
+    },
+    "LICENSES/preferred/GPL-2.0": {
+      "mode": "100644",
+      "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
+    },
+    "LICENSES/preferred/LGPL-2.0": {
+      "mode": "100644",
+      "sha256": "967792c8a6a57bbbc123a69fff6c3020af80b04623916b82ba721b0347e64433"
+    },
+    "LICENSES/preferred/LGPL-2.1": {
+      "mode": "100644",
+      "sha256": "fe482a156acd576ecc147de2b0bee8e97b7adb461afb11efaf4022b9e8e9a229"
+    },
+    "LICENSES/preferred/MIT": {
+      "mode": "100644",
+      "sha256": "323c587d0ccf10e376f8bf9a7f31fb4ca6078105194b42e0b1e0ee2bc9bde71f"
+    },
+    "drivers/media/i2c/dw9719.c": {
+      "mode": "100644",
+      "sha256": "9f083ef93874d31981295c0da7b4b7600dcd1f7805245471fff915340d82495e"
+    },
+    "drivers/media/i2c/ov5693.c": {
+      "mode": "100644",
+      "sha256": "6f90447be48b2c34315e00d04954fec12b4c78b89ec47ca20160bd5d6d21a112"
+    },
+    "drivers/media/i2c/ov8865.c": {
+      "mode": "100644",
+      "sha256": "f008f08cb744ecc59b1f8d1cc9825a0553958a336711a3ca46f8a22ef23fb4f9"
+    },
+    "drivers/media/pci/intel/Kconfig": {
+      "mode": "100644",
+      "sha256": "d0f9e62b3253a2f9ee55d5cb6d3a2094cbc6438753eff1ae1022fbf859ee53d0"
+    },
+    "drivers/media/pci/intel/Makefile": {
+      "mode": "100644",
+      "sha256": "330b8fe7bafcdbd9e70f8f8d2a8e09f06c220cf2d8b980a2d0f99d9b179d403a"
+    },
+    "drivers/media/pci/intel/ipu-bridge.c": {
+      "mode": "100644",
+      "sha256": "4b7397d23d8fb899db602c2be2c8371f966b268f84f52ef7bf4b585b94735921"
+    },
+    "drivers/media/pci/intel/ipu-bus.c": {
+      "mode": "100644",
+      "sha256": "f8120a5589dcbcb827751f341f9ed8548a6eafb27439a25b9edd5c9283d660df"
+    },
+    "drivers/media/pci/intel/ipu-bus.h": {
+      "mode": "100644",
+      "sha256": "66d5b14b324b1dc4fc56cb425194c220041e089f0b0dc62e834076f76abe2900"
+    },
+    "drivers/media/pci/intel/ipu-buttress.c": {
+      "mode": "100644",
+      "sha256": "b4d828c633214de1f2e55c72a1872d12cd9a46db6e8870bf6e09222b7eed5f82"
+    },
+    "drivers/media/pci/intel/ipu-buttress.h": {
+      "mode": "100644",
+      "sha256": "690aac813198df84e3049c2d6f5ae0ba6a876e9f5eac8ac985dbf3fbbadb8fb2"
+    },
+    "drivers/media/pci/intel/ipu-cpd.c": {
+      "mode": "100644",
+      "sha256": "6ea7efc8d2c7a03cfaefa9e6665ea492e051b599e30205a6799b26d325caed67"
+    },
+    "drivers/media/pci/intel/ipu-cpd.h": {
+      "mode": "100644",
+      "sha256": "2fbb20de4b76afda1729f6c2b4ba1628074fbeb71531932747211284a041d831"
+    },
+    "drivers/media/pci/intel/ipu-dma.c": {
+      "mode": "100644",
+      "sha256": "2745e3ffac569d17091abfad5e6732faa805e079e2e7e0dc9931b6d80e2b83aa"
+    },
+    "drivers/media/pci/intel/ipu-dma.h": {
+      "mode": "100644",
+      "sha256": "3f4e23aba4331d1510daebb30bc4b7a7a71f459603d00e5fb8014dfafcf6db0c"
+    },
+    "drivers/media/pci/intel/ipu-fw-com.c": {
+      "mode": "100644",
+      "sha256": "1fffc381cf00ee95c071cb1307dc9a6c89c1b50ec37e069f0c3c095578fb9cc6"
+    },
+    "drivers/media/pci/intel/ipu-fw-com.h": {
+      "mode": "100644",
+      "sha256": "c4011172dfccf0e21c5ba2aff1ec0855063b1e7c39d59fa4f1a7ad909736368d"
+    },
+    "drivers/media/pci/intel/ipu-fw-isys.c": {
+      "mode": "100644",
+      "sha256": "e45be8ff28873eb33e8bc8dbf15109286a75e4f29ebbaccc7030714b9eb54a75"
+    },
+    "drivers/media/pci/intel/ipu-fw-isys.h": {
+      "mode": "100644",
+      "sha256": "5075e005d5642670f36077809d240a0215c4859c101aa870969ff02439d37cad"
+    },
+    "drivers/media/pci/intel/ipu-fw-psys.c": {
+      "mode": "100644",
+      "sha256": "b99c4015bd070d3e05469be2a7dcfe42bb3778f48da691a9c7f18cbde0c70471"
+    },
+    "drivers/media/pci/intel/ipu-fw-psys.h": {
+      "mode": "100644",
+      "sha256": "28fe8a55a01dac64f27f4db754bd7a34b7b353d3901ef4e94a12e2c44538ee4c"
+    },
+    "drivers/media/pci/intel/ipu-isys-csi2-be-soc.c": {
+      "mode": "100644",
+      "sha256": "5ebf23a276cf1d2db2596e074c8a4f79981bd31d20f5c84dc1f460502eb263e3"
+    },
+    "drivers/media/pci/intel/ipu-isys-csi2-be.c": {
+      "mode": "100644",
+      "sha256": "93f7bd7625ea2858a252cd783f2b9a9d123583628cf2b2b50ce12938b7914752"
+    },
+    "drivers/media/pci/intel/ipu-isys-csi2-be.h": {
+      "mode": "100644",
+      "sha256": "80f6c18e7f430f047f525a29dc28bab752ce9492db611b04af8732d39c83b21b"
+    },
+    "drivers/media/pci/intel/ipu-isys-csi2.c": {
+      "mode": "100644",
+      "sha256": "6b4969e7e41a7e8a0210bad5ed0f8ad536aaa235d512068bc8ea97649726d5aa"
+    },
+    "drivers/media/pci/intel/ipu-isys-csi2.h": {
+      "mode": "100644",
+      "sha256": "c135c79b16377e65bed1a95ce79e8a4583a37de7d8fd15fddb5f4330775f1bc1"
+    },
+    "drivers/media/pci/intel/ipu-isys-media.h": {
+      "mode": "100644",
+      "sha256": "648ccaef53040cee30aeb4a86b6e2127f630fed7f20b8b9240424e0864365560"
+    },
+    "drivers/media/pci/intel/ipu-isys-queue.c": {
+      "mode": "100644",
+      "sha256": "3769e6dc6685322e44334e694414d162b8d9adb0a60a976c1a61f78f24b19436"
+    },
+    "drivers/media/pci/intel/ipu-isys-queue.h": {
+      "mode": "100644",
+      "sha256": "0a8eed661ba7833c2e8ee556f59985c64c30682e14e48d8321950a6aaba4ec43"
+    },
+    "drivers/media/pci/intel/ipu-isys-subdev.c": {
+      "mode": "100644",
+      "sha256": "fda46fe153783a54239b1b1fed0c90279d77b75157b22f0e94f08aa76081f579"
+    },
+    "drivers/media/pci/intel/ipu-isys-subdev.h": {
+      "mode": "100644",
+      "sha256": "889d8832c0167f738412cfd7c03bb1a36851ec123b0382a84f2160faded99cd0"
+    },
+    "drivers/media/pci/intel/ipu-isys-tpg.c": {
+      "mode": "100644",
+      "sha256": "81b239671e472a820b37e410299090aa071b2b1b0be7b09f01a4143bb32d0316"
+    },
+    "drivers/media/pci/intel/ipu-isys-tpg.h": {
+      "mode": "100644",
+      "sha256": "c96eea2725fdb997007cb082011ca91462ed1f0bb832e007b662a959860b26bb"
+    },
+    "drivers/media/pci/intel/ipu-isys-video.c": {
+      "mode": "100644",
+      "sha256": "f1b8c0dea57a2c60b0f72122a724e5a0d3885f5d6a4e50805ef8cfedfe353e99"
+    },
+    "drivers/media/pci/intel/ipu-isys-video.h": {
+      "mode": "100644",
+      "sha256": "6115457014b7c23c6a6407fea6f2d0fd03af5d5eb9336a1590b5e611326ef992"
+    },
+    "drivers/media/pci/intel/ipu-isys.c": {
+      "mode": "100644",
+      "sha256": "6d38af25df2e8475a67c3691d3ec2fedc5a3ab65920966227ef0f3ba7660e23f"
+    },
+    "drivers/media/pci/intel/ipu-isys.h": {
+      "mode": "100644",
+      "sha256": "0d67960ee6e79c8022b938d916b0418ccf411dd22fce968bb5907bd5d0753f35"
+    },
+    "drivers/media/pci/intel/ipu-mmu.c": {
+      "mode": "100644",
+      "sha256": "18c1cf00ed99ce7d3abfd504a1d85af655d1ac1944eeacb889f8daa133ba3738"
+    },
+    "drivers/media/pci/intel/ipu-mmu.h": {
+      "mode": "100644",
+      "sha256": "4366943977a76e8df21400dce6ac0e77c85f5eb447e3d0918e287095615a0485"
+    },
+    "drivers/media/pci/intel/ipu-pdata.h": {
+      "mode": "100644",
+      "sha256": "962e840f46829183696f581d2431c52f7573d6e6588ba520d148824ecc15b534"
+    },
+    "drivers/media/pci/intel/ipu-psys-compat32.c": {
+      "mode": "100644",
+      "sha256": "fd688475fa613a3501f6559854d320d3f53108679eb3f86af62b3d7407cac556"
+    },
+    "drivers/media/pci/intel/ipu-psys.c": {
+      "mode": "100644",
+      "sha256": "cd2589bb0389946da3879241746fed1efb061532c5ec2a875ae75f83766503b3"
+    },
+    "drivers/media/pci/intel/ipu-psys.h": {
+      "mode": "100644",
+      "sha256": "e413531192f4e7cd8e2ee56b25d80647a82bd84e1cd88e56ca5cecae57ec02d9"
+    },
+    "drivers/media/pci/intel/ipu-trace-event.h": {
+      "mode": "100644",
+      "sha256": "8f8065db9e9b3809875ed9b2a3421f02e78fe57b1cbe1714b1c7ce502379153e"
+    },
+    "drivers/media/pci/intel/ipu-trace.c": {
+      "mode": "100644",
+      "sha256": "10684e11da9886c69b80e683799aeb0a00c757ca5c5952eeb37baa1486016714"
+    },
+    "drivers/media/pci/intel/ipu-trace.h": {
+      "mode": "100644",
+      "sha256": "1f079ca2a39f56dfd46828af81ec1f552d16925e71367d38f5bb0f966bb660a6"
+    },
+    "drivers/media/pci/intel/ipu-wrapper.c": {
+      "mode": "100644",
+      "sha256": "7bfbd10f11b1bfb9dab35e8e44ec3aaccf2f39ef0c7cd3e8061285597abf03df"
+    },
+    "drivers/media/pci/intel/ipu-wrapper.h": {
+      "mode": "100644",
+      "sha256": "8cdeb88a26d9989633d6f8fe89900a8eb8be0fd87af83f665ca06cbb9c9aa6ea"
+    },
+    "drivers/media/pci/intel/ipu.c": {
+      "mode": "100644",
+      "sha256": "2acbd9fcf70294b6f0e196f0f3bae84ca57a6e8a4dc641a887ac97e0f21484e3"
+    },
+    "drivers/media/pci/intel/ipu.h": {
+      "mode": "100644",
+      "sha256": "5a9646e4f826d71fcebbb14821da4a098be3cd08b566f4fa8cf536b93e5f5a2c"
+    },
+    "drivers/media/pci/intel/ipu4/Makefile": {
+      "mode": "100644",
+      "sha256": "85fa62c764d65e00654b6b6d295e2933bb3b6526e37250e6e713302ec9222427"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-buttress-regs.h": {
+      "mode": "100644",
+      "sha256": "7cd7facb6ed85952e9d47c6430e93ec1308387e9c1d3c0afbbfb2f5c0f01fddf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-isys-csi2-reg.h": {
+      "mode": "100644",
+      "sha256": "4aec89ba0d8b93da632fa8f6416806ffe4f958a875bdc6408d13516eb9e68cf5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-isys.h": {
+      "mode": "100644",
+      "sha256": "b72ba893484a3b0a80aae4418bba337395ce1d51fff40e60a40df6dde87e5f68"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-psys.h": {
+      "mode": "100644",
+      "sha256": "c55e9c2c88225751ea3bcadeccca706117786c66fbfc41a771e8da5b05e95268"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-regs.h": {
+      "mode": "100644",
+      "sha256": "f04a405f5ea90bc9d57c176e36719135ba70b28b3795074b850918ef7715788f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform-resources.h": {
+      "mode": "100644",
+      "sha256": "70c185c01b408917182456d6c473ccad959e142ca4b9b18d179dee7c667f1b26"
+    },
+    "drivers/media/pci/intel/ipu4/ipu-platform.h": {
+      "mode": "100644",
+      "sha256": "2353a1c63ac9249c710470867d0d57105c0e57194f757e9df19d50a8a21744a1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.ipu4isys_inc": {
+      "mode": "100644",
+      "sha256": "d791bc8b8d26a6c6da3c97b30f8d8fc769fc918ef11258385e0cbb61bff5cd08"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.ipu4isys_src": {
+      "mode": "100644",
+      "sha256": "6dd4a7c8ab6925d14d21d9d49af96ac057b41154a82de87315b0ae278eb89838"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.ipu4psys_inc": {
+      "mode": "100644",
+      "sha256": "32f6aca663df50a9bf4c1e47c4cf217a877272c88c37e1f478c7e4dd819b33d7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.ipu4psys_src": {
+      "mode": "100644",
+      "sha256": "9e16f80f42dfc6e82d07cf0e92699be612475e56bffb118f1846e4f93e11a2d5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.isyslib": {
+      "mode": "100644",
+      "sha256": "c0b5018b9926b8ced4cd94b9e84cb569b0034842576adf50a14ba1d18a4f0a0f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/Makefile.psyslib": {
+      "mode": "100644",
+      "sha256": "68534a5a4319529f6aa314c3ffcd244bfda618c799d8d8fe1049d4c9e95631b2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/ipu-wrapper.c": {
+      "mode": "120000",
+      "sha256": "3cf5e315bd6eaa58ecc60fe783a1c4de41e6fa4669f044af2950dc428452bcfe"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/buffer.mk": {
+      "mode": "100644",
+      "sha256": "536c9e9dcf636acd3d71038daf520ebec61555d0d8f8b4a4eaa3954dfd333f68"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/buffer_access.h": {
+      "mode": "100644",
+      "sha256": "7917ab6f910dc0407c1b40543ce7f5c1bcd798d558ae7697a1cb8215ac504a5f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/buffer_type.h": {
+      "mode": "100644",
+      "sha256": "3ee75a985f4a290b9b69f87c37979a3171c28fd10d1c39cc1968101f27c39b81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_buffer_address.h": {
+      "mode": "100644",
+      "sha256": "14ee0cef00f36041feeb5ae8fb5bf5031d04090bc8d76cc81b44eed3d292ac7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_input_buffer.h": {
+      "mode": "100644",
+      "sha256": "bbed268cd48b2bafb0ee5de1af1fc981d707d17206349fc9320874e8a1b4f454"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_input_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "4de7bdc10e050c6449fb357122b33bba1fc1dab367d0eca9041c86367229bff5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_output_buffer.h": {
+      "mode": "100644",
+      "sha256": "5dcfe591cf5b1105649528591947f9ec725edb74b7fc418133bcf9509b1475d4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_output_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "a4a4744f1397b8e120c315c6100571c62562180a5cd8a4182c5f15327f880fa3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_return_token.h": {
+      "mode": "100644",
+      "sha256": "6a13cc54551b70a15692fadabc7cb9ef8e1668e008fb6280a7835b39dec4f85d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_shared_buffer.h": {
+      "mode": "100644",
+      "sha256": "d3151b9f469693b8c7b612376069299500d96012244b6bf9bbd2ed89aea5954f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/interface/ia_css_shared_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "b85257eb9f0902478c199b07a98410669eb375f4a2a67b9b24a61a15bea496b0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/buffer_access.c": {
+      "mode": "100644",
+      "sha256": "56d172e88c3da92af5ad5dfe8966c8862c518c70d375f4b84ca14ff3ea873e17"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/ia_css_buffer.c": {
+      "mode": "100644",
+      "sha256": "725509d666d40ee355cd60d3525963cb851456364e08cc1c09fd4fe496f3455b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/ia_css_buffer.h": {
+      "mode": "100644",
+      "sha256": "1df7fb0853c16b59c4116cfd93879f1fb4ea8b1b61c248a998e7d13f210ed47f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/ia_css_input_buffer.c": {
+      "mode": "100644",
+      "sha256": "2834d86974eff4def41dd24b1ffce2968de2e58587ff1d4f7027b6b541a31f41"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/ia_css_output_buffer.c": {
+      "mode": "100644",
+      "sha256": "136dd17c1790e3ad5766e201847ab6b598d505d8304e69add8e50ff9bbbf4b3e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/buffer/src/cpu/ia_css_shared_buffer.c": {
+      "mode": "100644",
+      "sha256": "8c393fb3c7a8432634192236ba2dfb31c12083e64f0c1ee3c0f5485c09bdf9c6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/cell/cell.mk": {
+      "mode": "100644",
+      "sha256": "99d4ff04d2b89687c655b9937780588371e463cf8003ae6e670b8688e39655ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/cell/interface/ia_css_cell.h": {
+      "mode": "100644",
+      "sha256": "1efddfcde2b04cf04e47e5507e4cceebadc376d62ea28e8b134f98caa1432e2b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/cell/src/ia_css_cell_impl.h": {
+      "mode": "100644",
+      "sha256": "35d502761bca920449aedcf75877455af78b82afb4ee74b2447f1eccca567d47"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/config/isys/subsystem_bxtB0.mk": {
+      "mode": "100644",
+      "sha256": "4f771e37908b6da19f62c69cb7ec86aa2c88c1a5e1a93e88f6aef72be99b7524"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/config/system_bxtB0.mk": {
+      "mode": "100644",
+      "sha256": "3bbc29f37595e20477315178732283e14cb308897bf306d8adb31b6687f6488e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/device_access.mk": {
+      "mode": "100644",
+      "sha256": "6889f7d0b206b6394126877176a3008c7c8d750fded862dfc4f4d9e376d76966"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/interface/ia_css_cmem.h": {
+      "mode": "100644",
+      "sha256": "6b805c97e4fa28d017e5233277dc267c9ad048c9dc5b3e8871d7553ff66c8610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/interface/ia_css_xmem.h": {
+      "mode": "100644",
+      "sha256": "cb95c59aaf0a5bcbf247f4e844bbf7721d2ec4aefd2352c219b04c87f3dac925"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/interface/ia_css_xmem_cmem.h": {
+      "mode": "100644",
+      "sha256": "97aec5854a9b9b7d54a70c0c2dbb651b150d7a2a8f4c505ebcd42e397be91d6f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/src/ia_css_cmem_host.h": {
+      "mode": "100644",
+      "sha256": "1a5e082a8675e92bc2d1df1e931b89928a0b09bd6d8eb25278a71b5712ee730f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/src/ia_css_xmem_cmem_impl.h": {
+      "mode": "100644",
+      "sha256": "96b40e40780830d16e06c8124b6487f9774ee4239c1582b14760d9ad061ed41a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/device_access/src/ia_css_xmem_host.h": {
+      "mode": "100644",
+      "sha256": "c31921258f1635f900a756950690997963a120ec1b1e94ae4ce8caaee63659b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/interface/bxtB0/ipu_device_buttress_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "df2b4a75493170316e69ec9e4f0978d73b0f1434a29f761161dc6b9f722aee51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/interface/ipu_device_cell_properties.h": {
+      "mode": "100644",
+      "sha256": "48bab0c6a6d08021b3d5182f13fee1c213f655fae16d860b97a9d1ad6d2b069c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/interface/ipu_device_cell_properties_func.h": {
+      "mode": "100644",
+      "sha256": "dff4338af2f650dac4bfcc260e93a5bb2e98285eacc80f6ada0d9ff555db7ba0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/interface/ipu_device_cell_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "4c35602c2b9c255e1d95e1f1cdb5da8f26e39c4602828e6aae1f31da8ff7396e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/interface/ipu_device_cell_type_properties.h": {
+      "mode": "100644",
+      "sha256": "ea9a4639ac94f3ed9bd518ae909538ad4331ae2b2245203b8e8aadfa93affcb2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/isys/bxtB0/ipu_device_cell_devices.h": {
+      "mode": "100644",
+      "sha256": "f91ee50fc2b2c9be9aefd8dd80412b18aea64274c065cb83172d7a2de48c6b6e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/isys/bxtB0/ipu_device_cell_properties_defs.h": {
+      "mode": "100644",
+      "sha256": "eb07a0fe4fed632c0165058f36454cac9503778e55cc79ddd07d36a646f72c0c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/isys/bxtB0/ipu_device_cell_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "4a024f9c8617fa9f21b18ccaf694f1de3a91ba5cbb2308db3a318a6b9c882123"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/devices/src/ipu_device_sp2600_control_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "7fbcbdd477d8e935113e09b2b880b9c3c9b658ce3a92bf172602dc8f6e904677"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/fw_abi_common_types/cpu/fw_abi_cpu_types.mk": {
+      "mode": "100644",
+      "sha256": "c9b469050ce74c106cc97a0c15d2f4a5a47638df97c53d9ae8f3676068a5e2e7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/fw_abi_common_types/cpu/ia_css_terminal_base_types.h": {
+      "mode": "100644",
+      "sha256": "198df9288983388f8ab869ad42f3c493b05b5f25feafef3f7cba95212bd46ab8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/fw_abi_common_types/cpu/ia_css_terminal_manifest_base_types.h": {
+      "mode": "100644",
+      "sha256": "c6db605c82e1586e9909d57d342e76e85d8f117dbe11d7ddf840574231516e16"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/fw_abi_common_types/ia_css_base_types.h": {
+      "mode": "100644",
+      "sha256": "7568d7923629d20b6afb0320a0d1891a288a1784112ad14dceadee732d26b25e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/fw_abi_common_types/ia_css_terminal_defs.h": {
+      "mode": "100644",
+      "sha256": "45f7f8b7aff6809e5e89c06d41191746229d9f4cb13456b9411e22cee19dac9e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isys_fw_bridged_types.h": {
+      "mode": "100644",
+      "sha256": "07c483bdc42c509c0e6b885a7cf00e909242c46f7dac3ddf13559aee98fc2abb"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi.h": {
+      "mode": "100644",
+      "sha256": "b9793bece91078b97b6d05eafe2a23e7cf0d4e6a5c0d9968359060611807b81b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi_fw_types.h": {
+      "mode": "100644",
+      "sha256": "81bbafbcb61311d5f6fe3a2356b25224e17ad694c6c01df0a02a4ac0aefb3ed6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi_fw_version.h": {
+      "mode": "100644",
+      "sha256": "221a8cc2b722630105c17ac90ab5fd2f4bbc65a3ca2e6574b3cbde9792f282a3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi_proxy_region_defs.h": {
+      "mode": "100644",
+      "sha256": "c4db289905d2bc46f53fa8621fc32efee010d4e1953df388385366c85f5256c5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi_proxy_region_types.h": {
+      "mode": "100644",
+      "sha256": "6cc1ea7c36f13152b2d9a164e434caa83bf3dfa0424b82a6a0972ba1a73607ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/interface/ia_css_isysapi_types.h": {
+      "mode": "100644",
+      "sha256": "90660d216fae435080e8902ae5e76d52a8c1a32c02495873f25b9a573f001980"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/isysapi.mk": {
+      "mode": "100644",
+      "sha256": "321e510a84d7d5f2c3feabdf0708e24fa51b732e1cadec0bafe1f94d0c4a03ef"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isys_private.c": {
+      "mode": "100644",
+      "sha256": "b4b756ba18eed38679c5840629c8b832f09e2b4f782e77d6d3a104d0fbbadc81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isys_private.h": {
+      "mode": "100644",
+      "sha256": "75186364f1ed9b32878f9d21ad481b166c5c74eed994a960ec6cdc6544c261a5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isys_public.c": {
+      "mode": "100644",
+      "sha256": "c46eb21c998c2e41f59ef6e21b9cfe6920803f0a20538a1dc03d4b8ead1650bb"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isys_public_trace.c": {
+      "mode": "100644",
+      "sha256": "5feaf675db4a6622f2e02c94d01131f7df1c4f1075bc8174ae64481f1535db77"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isys_public_trace.h": {
+      "mode": "100644",
+      "sha256": "8982317fb944882abd4913561f9ceb060d2480e23bba19db0595261a92c1c004"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/isysapi/src/ia_css_isysapi_trace.h": {
+      "mode": "100644",
+      "sha256": "f8d6afd103cabb70c8315dc45559794fe785adacf0c50c838fddc3b1de42aa0d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/interface/ia_css_pkg_dir.h": {
+      "mode": "100644",
+      "sha256": "3f34b902e42a782e1591110d5423728112b27e31470085d03f7ccafdbde8115b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_iunit.h": {
+      "mode": "100644",
+      "sha256": "d97fac9f45b3be4912809b86178f08822044456dd9008812b1c44631ec2361f4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_storage_class.h": {
+      "mode": "100644",
+      "sha256": "c8e2ad5d85003898817fa5acdee78b76344154203de18ccc975eb7ad3a26122d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_types.h": {
+      "mode": "100644",
+      "sha256": "649257adff710594816733169a1a17e67c50d4d4ec5b84d28100070366b97320"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/pkg_dir.mk": {
+      "mode": "100644",
+      "sha256": "b06ed04a5f3fc1ae98570b9d09a5580a8254ec933fe11e70303b1fdc652e9a45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/src/ia_css_pkg_dir.c": {
+      "mode": "100644",
+      "sha256": "c0dd930ca9d9b87fda8d55342647dbe5e586d815bdce521e79eac378cbeed69e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/src/ia_css_pkg_dir_impl.h": {
+      "mode": "100644",
+      "sha256": "cd896da04928eca93468f82022cb7676d03eb9fa013e5977e53dbd634553b0c2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/pkg_dir/src/ia_css_pkg_dir_int.h": {
+      "mode": "100644",
+      "sha256": "e0dc02ee0e51d200348b57cbbda70e69a89575289cf19f94ab04ca45e1dbd2cc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/port_env_struct.h": {
+      "mode": "100644",
+      "sha256": "adcaa20b5b2dc6a53e1c4224d6b8300fd40bb318bcda03aaed34914e6c9e7986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/queue.h": {
+      "mode": "100644",
+      "sha256": "feb4bf5dcc1c3dfa3f851d2c4e94edb1e8ff0d54831438e812e6b880c3ccc438"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/queue_struct.h": {
+      "mode": "100644",
+      "sha256": "dff318d932a2cd02813128db8a5e17a20a9d7b378f1ca37e2a9f4c0e23a5aa85"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/recv_port.h": {
+      "mode": "100644",
+      "sha256": "98f571a1d385fe7999598887d170155fa72812136c251da15f79be56b96c6019"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/recv_port_struct.h": {
+      "mode": "100644",
+      "sha256": "376521fc24c4467d67eaa81d2177d89b1e12b238a10d66bcbee551fc1e7d7c45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/send_port.h": {
+      "mode": "100644",
+      "sha256": "e1370b1a20be15b0c1b9e9eeb864219ebdce07b728ee6afe041bd870873579be"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/interface/send_port_struct.h": {
+      "mode": "100644",
+      "sha256": "04cc488db93c3e045342c78797d550275cdfc72b26c6aa830f113a6be43792af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/port.mk": {
+      "mode": "100644",
+      "sha256": "8fcc10e4e4c15cbba93a0e1acb022f3f32219563e5577495b9207c48a2c1b233"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/src/queue.c": {
+      "mode": "100644",
+      "sha256": "4050024350b48577b68558c9dc415e5da7c87ec980e11ba564167af233fec32b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/src/recv_port.c": {
+      "mode": "100644",
+      "sha256": "71eefd5c5e5a395cf099c0962005cbfcba530aec14a2602d11c1b8bcbb5cbaaf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/port/src/send_port.c": {
+      "mode": "100644",
+      "sha256": "65176fcac131ca39716901dc10216e45869c4c898d2c2796445f50758202892d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/reg_dump/src/isys/bxtB0_gen_reg_dump/ia_css_debug_dump.c": {
+      "mode": "100644",
+      "sha256": "299c72ea1253f37ae9d3c08fdb74a832bbb24e5dcbee0147adf8a266d8e4b1dc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/reg_dump/src/isys/bxtB0_gen_reg_dump/ia_css_debug_dump.h": {
+      "mode": "100644",
+      "sha256": "ddbd6572b5b96f31af0b41f4a39a3e44c4bb7d450e266567f63d69e5c9d6e8ff"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/reg_dump/src/reg_dump_generic_bridge.c": {
+      "mode": "100644",
+      "sha256": "ecd41759a9aaf216bfde3accbfcf26b70a8d766c6b4cbc79830beb03afcc224e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/regmem/interface/regmem_access.h": {
+      "mode": "100644",
+      "sha256": "ddeca58ae1f17ffeefef6437f20670d9aacb3409c771e50fa655a0c1708c7c8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/regmem/regmem.mk": {
+      "mode": "100644",
+      "sha256": "ae62cdb08749faa2a95fae36df6cbd7c74ad174aea7e3062d58596738a3aff56"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/regmem/src/regmem_access_host.h": {
+      "mode": "100644",
+      "sha256": "890151c49c392d7a8ce98d102817dee67f2612a5a829130fd31e1500adb7bb94"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/regmem/src/regmem_const.h": {
+      "mode": "100644",
+      "sha256": "adbaffcc06c65e5ffa804f917b5133b8342920748d7deaf7f63cc2f94f92b816"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/assert_support.h": {
+      "mode": "100644",
+      "sha256": "148521c883e89a95e03f98e1de75da3d83bd4d3d8a0485800b45543f541bd6f1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/cpu_mem_support.h": {
+      "mode": "100644",
+      "sha256": "3cffdcf3bfc88b181fb80939fbdbbe7c0ef138e479e6e74bb189c064a24211fd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/error_support.h": {
+      "mode": "100644",
+      "sha256": "b08eab458dd68a65185d3a0ddb5f379316de65160ca573b16219fb3e3d7c0610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/math_support.h": {
+      "mode": "100644",
+      "sha256": "86e3b0d448e965a6582df8f781e06c90bc65daadfb6edee30cb1201becf3ef3b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/misc_support.h": {
+      "mode": "100644",
+      "sha256": "3ee04224478a018fd613cb66758ebfb1f854828677305225d27636f1f3304bbf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/platform_support.h": {
+      "mode": "100644",
+      "sha256": "427b367565ac9c162d8f0bcbfff1c44cb69a28d27b3fb99cd1a7bfaa9a38d32f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/print_support.h": {
+      "mode": "100644",
+      "sha256": "463d4d4180f82421b377f9693dbd33c14d6b926e2d20dfde7dbe730adbdbdc76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/storage_class.h": {
+      "mode": "100644",
+      "sha256": "ac624cb64eaefd385d8d68c014356203ff95d65e5e38615a4d260e8f6cd62144"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/support/type_support.h": {
+      "mode": "100644",
+      "sha256": "12e6abfc007259ad5869070218e33f403314b1a0e05e50859218c7dc12bd04bc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/interface/ia_css_syscom.h": {
+      "mode": "100644",
+      "sha256": "930b3b856b80668e6c021f895acd324d047de072ca68917d8349941e9db46c43"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/interface/ia_css_syscom_config.h": {
+      "mode": "100644",
+      "sha256": "d422a7e25863bdb9be0b9d5e2823737622c18059e32604b59d19bb2c901a5fe9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/interface/ia_css_syscom_trace.h": {
+      "mode": "100644",
+      "sha256": "c6ed59ec15cee21b5016dc78927a6f49b37655cc7772eeca7b0f088a75f74241"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/src/ia_css_syscom.c": {
+      "mode": "100644",
+      "sha256": "2022ba5da79be53244cab8b31811d7550d6ddd0ac07e8246ff674e04efa374e6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/src/ia_css_syscom_config_fw.h": {
+      "mode": "100644",
+      "sha256": "ac1f0f8fb9938d53a50e58e523f80d27820b49b8cfaf92bc02f71fa0d6ee3dc3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/src/ia_css_syscom_context.h": {
+      "mode": "100644",
+      "sha256": "66248aa43db407da79abd85dc0d4f9f8f21bda13731fc34a48f8c0a5a295c755"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/syscom/syscom.mk": {
+      "mode": "100644",
+      "sha256": "db2ccee2fbadc64bf04484fc7b002560377eee3480baf591eee2eafefe503199"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/trace/interface/ia_css_trace.h": {
+      "mode": "100644",
+      "sha256": "b1ee9fac8eab3d9db1e281242b847dea015d09e779aee3bacd2b5a3f7ad3bd6e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/trace/trace.mk": {
+      "mode": "100644",
+      "sha256": "3f612a42928ebeda60125199fdbd9ce4d86792cd14ecc32c07eb4c3bfa593a42"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/utils/system_defs/system_const.h": {
+      "mode": "100644",
+      "sha256": "42e9ae1fc26f7c7ceea95afaf68dd306f355ce260ecdefd9893ae65dfbbae87a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/shared_memory_access.h": {
+      "mode": "100644",
+      "sha256": "9a931d662731b8a18617057b2d2a8d78b06c10728ac41f2ba8dbf3c7fe1069fa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/shared_memory_map.h": {
+      "mode": "100644",
+      "sha256": "b32030e48f48cd0fa6f1a91e0badee21c83763dab9dbb9f80ffe12d09c4f2b95"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_config.h": {
+      "mode": "100644",
+      "sha256": "6639075c314dc673af66fb1b7c6342057271b27c85d8621762da577158e5a184"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_memory_access_types.h": {
+      "mode": "100644",
+      "sha256": "eb3370c1ed40cf7865cbeaf52658725fd697594f434bac043be00056595b166b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_subsystem_access.h": {
+      "mode": "100644",
+      "sha256": "d1a7796c7ac67ab0a21286b5210bb5ee8d86b38a54bc4fa49ef21f1070a0e15d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_subsystem_access_initialization.h": {
+      "mode": "100644",
+      "sha256": "d88e475cdb5bf3c490a4d29d9b12a51bbe1f2af9c785edbdae1cb7df83d95a0f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_subsystem_access_types.h": {
+      "mode": "100644",
+      "sha256": "3920b96f248d57040d15adf5f7ccfd428536bb38c7ef30d7c4c74aa3e2f9140f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600/vied/vied/vied_types.h": {
+      "mode": "100644",
+      "sha256": "d0c64e60dd26305f65f0e27f66d23d5e22f8518259b4b1348e630f915f6552c1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/Makefile": {
+      "mode": "100644",
+      "sha256": "376bbc3b27e40386ba0afa89c2acb5b7e0b83f0970787cbe0a5b7b90e8710619"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/DSS_V2_program_group/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/buffer.mk": {
+      "mode": "100644",
+      "sha256": "536c9e9dcf636acd3d71038daf520ebec61555d0d8f8b4a4eaa3954dfd333f68"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/buffer_access.h": {
+      "mode": "100644",
+      "sha256": "7917ab6f910dc0407c1b40543ce7f5c1bcd798d558ae7697a1cb8215ac504a5f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/buffer_type.h": {
+      "mode": "100644",
+      "sha256": "3ee75a985f4a290b9b69f87c37979a3171c28fd10d1c39cc1968101f27c39b81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_buffer_address.h": {
+      "mode": "100644",
+      "sha256": "14ee0cef00f36041feeb5ae8fb5bf5031d04090bc8d76cc81b44eed3d292ac7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_input_buffer.h": {
+      "mode": "100644",
+      "sha256": "bbed268cd48b2bafb0ee5de1af1fc981d707d17206349fc9320874e8a1b4f454"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_input_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "4de7bdc10e050c6449fb357122b33bba1fc1dab367d0eca9041c86367229bff5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_output_buffer.h": {
+      "mode": "100644",
+      "sha256": "5dcfe591cf5b1105649528591947f9ec725edb74b7fc418133bcf9509b1475d4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_output_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "a4a4744f1397b8e120c315c6100571c62562180a5cd8a4182c5f15327f880fa3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_shared_buffer.h": {
+      "mode": "100644",
+      "sha256": "d3151b9f469693b8c7b612376069299500d96012244b6bf9bbd2ed89aea5954f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/interface/ia_css_shared_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "b85257eb9f0902478c199b07a98410669eb375f4a2a67b9b24a61a15bea496b0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/buffer_access.c": {
+      "mode": "100644",
+      "sha256": "56d172e88c3da92af5ad5dfe8966c8862c518c70d375f4b84ca14ff3ea873e17"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/ia_css_buffer.c": {
+      "mode": "100644",
+      "sha256": "725509d666d40ee355cd60d3525963cb851456364e08cc1c09fd4fe496f3455b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/ia_css_buffer.h": {
+      "mode": "100644",
+      "sha256": "1df7fb0853c16b59c4116cfd93879f1fb4ea8b1b61c248a998e7d13f210ed47f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/ia_css_input_buffer.c": {
+      "mode": "100644",
+      "sha256": "2834d86974eff4def41dd24b1ffce2968de2e58587ff1d4f7027b6b541a31f41"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/ia_css_output_buffer.c": {
+      "mode": "100644",
+      "sha256": "136dd17c1790e3ad5766e201847ab6b598d505d8304e69add8e50ff9bbbf4b3e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/buffer/src/cpu/ia_css_shared_buffer.c": {
+      "mode": "100644",
+      "sha256": "8c393fb3c7a8432634192236ba2dfb31c12083e64f0c1ee3c0f5485c09bdf9c6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cell/cell.mk": {
+      "mode": "100644",
+      "sha256": "99d4ff04d2b89687c655b9937780588371e463cf8003ae6e670b8688e39655ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cell/interface/ia_css_cell.h": {
+      "mode": "100644",
+      "sha256": "1efddfcde2b04cf04e47e5507e4cceebadc376d62ea28e8b134f98caa1432e2b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cell/src/ia_css_cell_impl.h": {
+      "mode": "100644",
+      "sha256": "35d502761bca920449aedcf75877455af78b82afb4ee74b2447f1eccca567d47"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg.h": {
+      "mode": "100644",
+      "sha256": "844c02db37854df10bef19e82293a93cf36f7bfadbfa9f18dfc4eb2557cfd44d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg_storage_class.h": {
+      "mode": "100644",
+      "sha256": "2aecba4f9b9750324091d5c59395d6eb0562b2b5eaba4de2c8026122ed758cc4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg_types.h": {
+      "mode": "100644",
+      "sha256": "38d8cdc0b5525d1656ad4b843ad7f0c78bd5c6d4d1930eef5e5a0446153ea2af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/client_pkg/src/ia_css_client_pkg.c": {
+      "mode": "100644",
+      "sha256": "63a75e869880f324a297e2bc96c60cbbc85c19eae8f88b68280a2e7fc7a7e877"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/client_pkg/src/ia_css_client_pkg_impl.h": {
+      "mode": "100644",
+      "sha256": "28da0053439b5da004d960a78a6c0ad10db86916407c7c99091faceab21392fe"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/config/psys/subsystem_bxtB0.mk": {
+      "mode": "100644",
+      "sha256": "dc7b6987b1f980ff8466c039b41cd9f2d8b0ec6dfb07780a302577eb4808e1ce"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/config/system_bxtB0.mk": {
+      "mode": "100644",
+      "sha256": "3bbc29f37595e20477315178732283e14cb308897bf306d8adb31b6687f6488e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cpd/cpd_component/cpd_component.mk": {
+      "mode": "100644",
+      "sha256": "4d5dd69f94abda7a22fa7638dada7a12554f092828f614dab0b1b20abd1eb897"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cpd/cpd_component/interface/ia_css_cpd_component_types.h": {
+      "mode": "100644",
+      "sha256": "34134cfa3dd26acb11931724466ad23a1a20253d4751975e6e53103e51e06a08"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cpd/cpd_metadata/cpd_metadata.mk": {
+      "mode": "100644",
+      "sha256": "b4a4e6cc7823b15ae38e4fce1bfcc091df9e6fefe1437c9c62cab8c73e6a3134"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/cpd/cpd_metadata/interface/ia_css_cpd_metadata_types.h": {
+      "mode": "100644",
+      "sha256": "cbc005aa44ad523bbf51dd54894fc03240aaded1b7eb8827d6b0ce3e824fd05a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/device_access.mk": {
+      "mode": "100644",
+      "sha256": "6889f7d0b206b6394126877176a3008c7c8d750fded862dfc4f4d9e376d76966"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/interface/ia_css_cmem.h": {
+      "mode": "100644",
+      "sha256": "6b805c97e4fa28d017e5233277dc267c9ad048c9dc5b3e8871d7553ff66c8610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/interface/ia_css_xmem.h": {
+      "mode": "100644",
+      "sha256": "cb95c59aaf0a5bcbf247f4e844bbf7721d2ec4aefd2352c219b04c87f3dac925"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/interface/ia_css_xmem_cmem.h": {
+      "mode": "100644",
+      "sha256": "97aec5854a9b9b7d54a70c0c2dbb651b150d7a2a8f4c505ebcd42e397be91d6f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/src/ia_css_cmem_host.h": {
+      "mode": "100644",
+      "sha256": "1a5e082a8675e92bc2d1df1e931b89928a0b09bd6d8eb25278a71b5712ee730f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/src/ia_css_xmem_cmem_impl.h": {
+      "mode": "100644",
+      "sha256": "96b40e40780830d16e06c8124b6487f9774ee4239c1582b14760d9ad061ed41a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/device_access/src/ia_css_xmem_host.h": {
+      "mode": "100644",
+      "sha256": "c31921258f1635f900a756950690997963a120ec1b1e94ae4ce8caaee63659b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/bxtB0/ipu_device_buttress_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "df2b4a75493170316e69ec9e4f0978d73b0f1434a29f761161dc6b9f722aee51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties.h": {
+      "mode": "100644",
+      "sha256": "48bab0c6a6d08021b3d5182f13fee1c213f655fae16d860b97a9d1ad6d2b069c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties_func.h": {
+      "mode": "100644",
+      "sha256": "dff4338af2f650dac4bfcc260e93a5bb2e98285eacc80f6ada0d9ff555db7ba0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "4c35602c2b9c255e1d95e1f1cdb5da8f26e39c4602828e6aae1f31da8ff7396e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_cell_type_properties.h": {
+      "mode": "100644",
+      "sha256": "ea9a4639ac94f3ed9bd518ae909538ad4331ae2b2245203b8e8aadfa93affcb2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_gp_properties.h": {
+      "mode": "100644",
+      "sha256": "b6612d3987b5af64868950a723ce15a7e252f88e52b0922ae7c341aeb0b43619"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/interface/ipu_device_gp_properties_types.h": {
+      "mode": "100644",
+      "sha256": "8d64c9082f14d25d9b0414039dae856d6a3d4d04b86b93b4a2ecf9506a1db0ae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_acb_devices.h": {
+      "mode": "100644",
+      "sha256": "ba4f77110fb7236e564ca433b42d7639a7a523f914032ddd8cf722f235375a20"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_cell_devices.h": {
+      "mode": "100644",
+      "sha256": "d1d9420a6e320ca823773722006ee7af872b469be65c726e109a5a1db8ce0b69"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_cell_properties_defs.h": {
+      "mode": "100644",
+      "sha256": "d2e2d8e73f15c20a8148990d7947cf9954d50fc621814455865db8f3150f4287"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_cell_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "bab137b8ef1c9658e0198aa9933e550f048e73cfb1ef328d62199ef84c48f751"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_ff_devices.h": {
+      "mode": "100644",
+      "sha256": "1e1d4195f85130eb6153e7dab486ffc72eaa77c055f8abbe082f098ff34305f7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/psys/bxtB0/ipu_device_gp_devices.h": {
+      "mode": "100644",
+      "sha256": "6d49a7050432d1d2dc888176289ba2416a4b565ea88734370ce88e46a7e42373"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/src/ipu_device_isp2600_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "54a9d417ab265f30cc01ad5108be370e335076662c41d7856a0ed17a289849d6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/src/ipu_device_sp2600_control_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "7fbcbdd477d8e935113e09b2b880b9c3c9b658ce3a92bf172602dc8f6e904677"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/src/ipu_device_sp2600_fp_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "c18a24daf403e0c257c7b7055e50fd428b85c347f1c65c3bd9b25e0979298859"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/devices/src/ipu_device_sp2600_proxy_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "08ef72ede9699f40dbba6c1d66f2872e894d852bfd95eb6810de146848a03071"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/fw_abi_common_types/cpu/fw_abi_cpu_types.mk": {
+      "mode": "100644",
+      "sha256": "c9b469050ce74c106cc97a0c15d2f4a5a47638df97c53d9ae8f3676068a5e2e7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/fw_abi_common_types/cpu/ia_css_terminal_base_types.h": {
+      "mode": "100644",
+      "sha256": "198df9288983388f8ab869ad42f3c493b05b5f25feafef3f7cba95212bd46ab8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/fw_abi_common_types/cpu/ia_css_terminal_manifest_base_types.h": {
+      "mode": "100644",
+      "sha256": "c6db605c82e1586e9909d57d342e76e85d8f117dbe11d7ddf840574231516e16"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/fw_abi_common_types/ia_css_base_types.h": {
+      "mode": "100644",
+      "sha256": "7568d7923629d20b6afb0320a0d1891a288a1784112ad14dceadee732d26b25e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/fw_abi_common_types/ia_css_terminal_defs.h": {
+      "mode": "100644",
+      "sha256": "45f7f8b7aff6809e5e89c06d41191746229d9f4cb13456b9411e22cee19dac9e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir.h": {
+      "mode": "100644",
+      "sha256": "3f34b902e42a782e1591110d5423728112b27e31470085d03f7ccafdbde8115b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_iunit.h": {
+      "mode": "100644",
+      "sha256": "d97fac9f45b3be4912809b86178f08822044456dd9008812b1c44631ec2361f4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_storage_class.h": {
+      "mode": "100644",
+      "sha256": "c8e2ad5d85003898817fa5acdee78b76344154203de18ccc975eb7ad3a26122d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_types.h": {
+      "mode": "100644",
+      "sha256": "649257adff710594816733169a1a17e67c50d4d4ec5b84d28100070366b97320"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/pkg_dir.mk": {
+      "mode": "100644",
+      "sha256": "b06ed04a5f3fc1ae98570b9d09a5580a8254ec933fe11e70303b1fdc652e9a45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir.c": {
+      "mode": "100644",
+      "sha256": "c0dd930ca9d9b87fda8d55342647dbe5e586d815bdce521e79eac378cbeed69e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir_impl.h": {
+      "mode": "100644",
+      "sha256": "cd896da04928eca93468f82022cb7676d03eb9fa013e5977e53dbd634553b0c2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir_int.h": {
+      "mode": "100644",
+      "sha256": "e0dc02ee0e51d200348b57cbbda70e69a89575289cf19f94ab04ca45e1dbd2cc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/port_env_struct.h": {
+      "mode": "100644",
+      "sha256": "adcaa20b5b2dc6a53e1c4224d6b8300fd40bb318bcda03aaed34914e6c9e7986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/queue.h": {
+      "mode": "100644",
+      "sha256": "feb4bf5dcc1c3dfa3f851d2c4e94edb1e8ff0d54831438e812e6b880c3ccc438"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/queue_struct.h": {
+      "mode": "100644",
+      "sha256": "dff318d932a2cd02813128db8a5e17a20a9d7b378f1ca37e2a9f4c0e23a5aa85"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/recv_port.h": {
+      "mode": "100644",
+      "sha256": "98f571a1d385fe7999598887d170155fa72812136c251da15f79be56b96c6019"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/recv_port_struct.h": {
+      "mode": "100644",
+      "sha256": "376521fc24c4467d67eaa81d2177d89b1e12b238a10d66bcbee551fc1e7d7c45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/send_port.h": {
+      "mode": "100644",
+      "sha256": "e1370b1a20be15b0c1b9e9eeb864219ebdce07b728ee6afe041bd870873579be"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/interface/send_port_struct.h": {
+      "mode": "100644",
+      "sha256": "04cc488db93c3e045342c78797d550275cdfc72b26c6aa830f113a6be43792af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/port.mk": {
+      "mode": "100644",
+      "sha256": "8fcc10e4e4c15cbba93a0e1acb022f3f32219563e5577495b9207c48a2c1b233"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/src/queue.c": {
+      "mode": "100644",
+      "sha256": "4050024350b48577b68558c9dc415e5da7c87ec980e11ba564167af233fec32b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/src/recv_port.c": {
+      "mode": "100644",
+      "sha256": "71eefd5c5e5a395cf099c0962005cbfcba530aec14a2602d11c1b8bcbb5cbaaf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/port/src/send_port.c": {
+      "mode": "100644",
+      "sha256": "65176fcac131ca39716901dc10216e45869c4c898d2c2796445f50758202892d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psys_private_pg/interface/ia_css_psys_private_pg_data.h": {
+      "mode": "100644",
+      "sha256": "bc57441266654716e28f00dc9df3179b2ed61e4803df6e025ca71f8e91ba34db"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psys_server/interface/ia_css_bxt_spctrl_trace.h": {
+      "mode": "100644",
+      "sha256": "91ef6b87feafed5826f83e73f7298460d5d23f9a0385d0a7d512391d7a6a11f5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psys_server/psys_server.mk": {
+      "mode": "100644",
+      "sha256": "8fad38596ca8ffa78f542bfe5786bee3bc400206c65f8a0491e98003770f9413"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psys_server/src/bxt_spctrl_process_group_cmd_impl.c": {
+      "mode": "100644",
+      "sha256": "5045e1eb1e1de5f441d51d9b217a3e2edeb74d2e0a4cbeb833934cec507da205"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/interface/ia_css_program_group_data.h": {
+      "mode": "100644",
+      "sha256": "4528b21be6670e82beb659cedb1bab3fe2765ff4b21e434fceab47fe281013ba"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/interface/ia_css_program_group_data_defs.h": {
+      "mode": "100644",
+      "sha256": "73261f03c9b1d07b44c704f79c0d455b110705fff971455b565566a7d3dbfd19"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/interface/ia_css_psys_data_storage_class.h": {
+      "mode": "100644",
+      "sha256": "3aed0e97f1f8d20f2f96359733a3382d977f04e5de0fa3a798aab49da8889642"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/interface/ia_css_psys_data_trace.h": {
+      "mode": "100644",
+      "sha256": "0aa8bc6beb90769c34f921482d2b6b3df5346a9260f82493e8ed417c321f349a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/src/ia_css_program_group_data.c": {
+      "mode": "100644",
+      "sha256": "6c01ddeecc02d67830bb2fc4b1b616da49936864f4c7ff534e9d096343689727"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/data/src/ia_css_program_group_data_impl.h": {
+      "mode": "100644",
+      "sha256": "abb062132b4e137263a55f4b7fe48f6712cea1d8233bc2a04ea70a3e5d98df8a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/interface/bxtB0/ia_css_psys_transport_dep.h": {
+      "mode": "100644",
+      "sha256": "eeaeb8b3d00353494e34e2bab20c25610ada6faf4ed25cae703cb38f59f4e0df"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_device.h": {
+      "mode": "100644",
+      "sha256": "a4c1fee812fea5bd82ff542804414f5282ba31f7727af4e99cbd0ac3f5e94588"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_device_trace.h": {
+      "mode": "100644",
+      "sha256": "1a297be424008dd20f4ea01751cdb7eed92ffd3544a150e93c392a72dba67257"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_init.h": {
+      "mode": "100644",
+      "sha256": "88211f4163645f8d0ed0bc2fe96b41cc7f29d73141c2ee43290610669a3ec6d1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_transport.h": {
+      "mode": "100644",
+      "sha256": "654843549dd68ab70b6a210ec5798e6d09ee6f249e0669ccc6a8da68b1a79125"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/device/src/ia_css_psys_device.c": {
+      "mode": "100644",
+      "sha256": "09b63c4842e4b35ea484a033aeee7e84f8dee4b3e2a6bb67c6c6722368093c1a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_buffer_set.h": {
+      "mode": "100644",
+      "sha256": "c7f7c23e870a2283ba9e45fa69869b38d96bc3e5314094bde08f3e1521b54b76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_dynamic_storage_class.h": {
+      "mode": "100644",
+      "sha256": "780df74df4b6512d8598021243a2c553f4fd5750c4e990c5cda2fec8983c7cb3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_dynamic_trace.h": {
+      "mode": "100644",
+      "sha256": "00c5b8f63d6fe50ae64793e673f0e106fd5accd7ae33af7d8e4886ee01b44858"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.h": {
+      "mode": "100644",
+      "sha256": "15473d0b4c5a0ca10841bf34524738eb997257e8b26b7a27a335dca9e18639a4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "398761f8c9d89be94f380681711149ee0fa2b39f70da1f6c7a62e8502e89a8b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "78f88b502a85ab06e733457135479a93c0671693033d7a6ee9a6352c66e87cd7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.psys.h": {
+      "mode": "100644",
+      "sha256": "d954cafabba11038da37f265374d4710a988fffc5476e2ee80ae2e6a3967b623"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.h": {
+      "mode": "100644",
+      "sha256": "3181627ddb14aa3dea106a060f700bb985e15d2d8214bc53398178fb713bc676"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "2d7166c3a658febb04002dfc888a0c11fd5caad90323bd6f660c09a81ac7dbe3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "8b02af54bbf08bbf7d5b34bfbd1121e2e92ed534049c117cb77aca5f0b266349"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.psys.h": {
+      "mode": "100644",
+      "sha256": "238606f51c535e6039dfd084918b2f26fca78da7b820cede142627beb392e4d2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group_cmd_impl.h": {
+      "mode": "100644",
+      "sha256": "4d9ab1f04057b16d1d3f4d76a0595790d58afbf218188e5a2c10b802e8a031a8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_types.h": {
+      "mode": "100644",
+      "sha256": "33d20b424673052fac635d84cbbee10f91cdcbf96bcbcafa5fd13d8bf0643a4e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_terminal.h": {
+      "mode": "100644",
+      "sha256": "d809d5c99b1f1215e6fea73fe6beebd514c4ad4883e4c0dd0da8d8c380489e1f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_terminal.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "cbe5c418542d440cbe8751683141e3d9952580916aca03f0b2bf75285b0c3986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_buffer_set.c": {
+      "mode": "100644",
+      "sha256": "34ec9e3ad4b45f00b3fa93f08c6ce2fdc68747e29ac0424f8f241318768eef38"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_buffer_set_impl.h": {
+      "mode": "100644",
+      "sha256": "f12152c48a2920c684f81167155859b45a8a4e327c0ee151ab623c3b978511da"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process.c": {
+      "mode": "100644",
+      "sha256": "8ff24b543982c67303678864b7701d98762e7b86393205d6f243691f46c80eae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_group.c": {
+      "mode": "100644",
+      "sha256": "b0f95787b5e2cbfc18215da44bf1b87282c30e6fd2ca19806a511d251b80f6bf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_group_impl.h": {
+      "mode": "100644",
+      "sha256": "0f89609f62a92a13be2bff4cb741a1a98f2ca400a0f34c4daa0434f52208e92c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_impl.h": {
+      "mode": "100644",
+      "sha256": "99c0e8d142bc284f67ef2591f2512353d76429428aa741f58af80be1433e84e3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_private_types.h": {
+      "mode": "100644",
+      "sha256": "f551376042a848f3f465fa0fae47644e451f65691561dc0a2e7c0ef972d8bf7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal.c": {
+      "mode": "100644",
+      "sha256": "dd431f9764f95ef44f77b71f46a949bc1ffe5c223dae167a3b2a40dcc7c785ce"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal_impl.h": {
+      "mode": "100644",
+      "sha256": "82f1d8fe7a71377bd6af15e40fe43598fe6dab4d9eb7ecd1a3f443985ac1a029"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal_private_types.h": {
+      "mode": "100644",
+      "sha256": "7069d0be42dc04d7d74c1ff2404d85682760a326a3627727f9953bb9b9172cab"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi.h": {
+      "mode": "100644",
+      "sha256": "db98a3cc7c8c703178d56df642c94914563f626865ab9a6c07217de8bf3102e4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi_fw_version.h": {
+      "mode": "100644",
+      "sha256": "47f64502ec6f7d8d3b24b23aa808b3b98c993ed5291f7812aa62f4bb7232e79c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi_trace.h": {
+      "mode": "100644",
+      "sha256": "1e8b5b822d51d3fecf22f763c402d7df20b300b5ce306214f9c34389d54999b3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/kernel/interface/ia_css_kernel_bitmap.h": {
+      "mode": "100644",
+      "sha256": "da7dc89af09297e00ea684422c45ed87143df056067ccb50a13567e0efee90f1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/kernel/interface/ia_css_psys_kernel_trace.h": {
+      "mode": "100644",
+      "sha256": "7371b332780a41b1be246233dc44e672cb4357d3828d8bd6237d6bfce43b60aa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/kernel/src/ia_css_kernel_bitmap.c": {
+      "mode": "100644",
+      "sha256": "66f592e61aa592526119f4d07a80371c292b7bb9e3b6eb707685d8b2ba067736"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param.h": {
+      "mode": "100644",
+      "sha256": "7dca73dd54f2518786c9906d8e2a35b78a4ea6579133b6d030c0eecf4e90bd78"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param.sim.h": {
+      "mode": "100644",
+      "sha256": "b19ecb874112eb4f08c24ab875d3ed9aab9f733f8e590705983681e08b65d545"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param_types.h": {
+      "mode": "100644",
+      "sha256": "0ce63e4c788b30aee914c8d07485b40846ee16ef6ab2e0f589c8109c9377401f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/interface/ia_css_psys_param_trace.h": {
+      "mode": "100644",
+      "sha256": "f39ed217fcc999a0e4c150d609819bf87ec1c9f2cd43622497a8154939f2c513"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/src/ia_css_program_group_param.c": {
+      "mode": "100644",
+      "sha256": "684caaa901d1c1071abec3d1f7e6be643e2b570e72d098be2ab28608f77af99a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/param/src/ia_css_program_group_param_private.h": {
+      "mode": "100644",
+      "sha256": "28825872e7dd5dccd5f64b127e45b592111cd09118f94485c1ba327274e44868"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/psys_server_manifest/bxtB0/ia_css_psys_server_manifest.c": {
+      "mode": "100644",
+      "sha256": "485aeabd3e8750d290526023d4b44b95fe2257ce6de6c5e6574f15f8b618f36f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/psys_server_manifest/bxtB0/ia_css_psys_server_manifest.h": {
+      "mode": "100644",
+      "sha256": "e0c68ca33857b4c457966f3a6cf52e08f6f22f5139a528ba4a84eeeac35a81d2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/psysapi.mk": {
+      "mode": "100644",
+      "sha256": "8720e59f9951f056617f1c9d2ef992c7baad06668991bc230c5f70d0a7b54aae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/resource_model/bxtB0/vied_nci_psys_resource_model.c": {
+      "mode": "100644",
+      "sha256": "0dada5e8a5b9528b6672c1ba92f184700443fa81d840d48a1b699fb776395117"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/resource_model/bxtB0/vied_nci_psys_resource_model.h": {
+      "mode": "100644",
+      "sha256": "6d05bf4e28770d9d4d2ac1d9a1627da65a721de8ab9ec9430950dbeb4310dbe0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_data.h": {
+      "mode": "100644",
+      "sha256": "a46a377155c43aee67550af2a92e9369f84bd4ee1451978f30ac64be3587de51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_storage_class.h": {
+      "mode": "100644",
+      "sha256": "1ec2186bdb81a7597d06403c6391f374695e6ef7178aa337d29a295d67ee73c9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_trace.h": {
+      "mode": "100644",
+      "sha256": "99c8c621cf672ea76c4c911e59af2b029050ad31d6c0ac808a8600c12a226f7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/interface/vied_nci_psys_system_global.h": {
+      "mode": "100644",
+      "sha256": "a6df7f9f11d9f078b2e1a1745374bbfe0acf860e9de75b48ed0e099bdb89316e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/src/ia_css_psys_sim_data.c": {
+      "mode": "100644",
+      "sha256": "94a42f19ff5b8a1683ca4b41c9f62e7366c207cfe4efc95bde3e5483ed0fb549"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/src/psys_system_global_impl.h": {
+      "mode": "100644",
+      "sha256": "b319a634a2893645f02ac01aeca2b9cb5301be570747ca8574bb189d05eab073"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/sim/src/vied_nci_psys_system.c": {
+      "mode": "100644",
+      "sha256": "5c0fc8152801d0cc16c77cfd886a2cb30b720dffbfff85d630c22eaeb6a33738"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "bc0fbe6b1201c5b35d72a0e530cfdbce22e1440f242bbad2a96534638f14f3a7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.h": {
+      "mode": "100644",
+      "sha256": "67a35fa99e09b4527922f46ea9f7f2be74103f9e80928c5f1959972d8a078a27"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "931868b541a6df586b190e5b8047580a2e6e1daf971aef504eae4d010674a801"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "6e92151ad4c1f78bb23dfb9cce7da2578ad67650a81a3b9fe930a4880080a86f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.h": {
+      "mode": "100644",
+      "sha256": "b8a36ec9d8be0e4d6d9e2aacd160fbccbc2637e3776f5fa50afacff95e92f10e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "7fac917c00fe314b94300ff9add14ba00c4ad624a01adf70700191aa238fd125"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "24f35d9457895b4d075913b0893c30502772f8ad0ad7ccaade7dfd63c1199ddf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "82cf98507f72f550f4431390ee95852b02b9e48a0201b234c26853578cea631b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_static_storage_class.h": {
+      "mode": "100644",
+      "sha256": "b169f1e62e2a36817e7cbf29169c5a37719a9be3799c3d432ebf02bc61f7bc7d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_static_trace.h": {
+      "mode": "100644",
+      "sha256": "c8eed87b55ec0f1adc60ea5ad289263c6570f5ef76313394443fd8b9c2a27414"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.h": {
+      "mode": "100644",
+      "sha256": "9a4cfd2ae58f3f8de41c404e02f4609e427653a79780b6c40f174f29302133d1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "fded91dd374d55ffa265a7a480075ed552facd6bf16e91f1c99fe431bedd19b1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "ea9d863a725569128d3a74fbdb476f89b8e154acd6c7bd26fb656165fd744257"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_manifest.c": {
+      "mode": "100644",
+      "sha256": "cc108e41a28819b4d0b7c421644c6a9aa747fa78847ae99542dabf6d4979de8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "dce1beeff52cc67af14be6903a490ed36d2eb67361bd8479725ef0b1c235ec31"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_private.h": {
+      "mode": "100644",
+      "sha256": "fc1fb04dbc9ca38e39a12f178849ebb6c54bddca1fc9b31e61f633ba0480742c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_manifest.c": {
+      "mode": "100644",
+      "sha256": "c7bec8b5b025f9e0268c380f74a6723217bc243cc8467fdf41094a655c50b867"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_terminal_manifest.c": {
+      "mode": "100644",
+      "sha256": "299f44dd4829f2faa698ce074c8fcb8a940da214769ed70e7bee891d930e4946"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/reg_dump/src/psys/bxtB0_gen_reg_dump/ia_css_debug_dump.c": {
+      "mode": "100644",
+      "sha256": "299c72ea1253f37ae9d3c08fdb74a832bbb24e5dcbee0147adf8a266d8e4b1dc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/reg_dump/src/psys/bxtB0_gen_reg_dump/ia_css_debug_dump.h": {
+      "mode": "100644",
+      "sha256": "ddbd6572b5b96f31af0b41f4a39a3e44c4bb7d450e266567f63d69e5c9d6e8ff"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/reg_dump/src/reg_dump_generic_bridge.c": {
+      "mode": "100644",
+      "sha256": "ecd41759a9aaf216bfde3accbfcf26b70a8d766c6b4cbc79830beb03afcc224e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/regmem/interface/regmem_access.h": {
+      "mode": "100644",
+      "sha256": "ddeca58ae1f17ffeefef6437f20670d9aacb3409c771e50fa655a0c1708c7c8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/regmem/regmem.mk": {
+      "mode": "100644",
+      "sha256": "ae62cdb08749faa2a95fae36df6cbd7c74ad174aea7e3062d58596738a3aff56"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/regmem/src/regmem_access_host.h": {
+      "mode": "100644",
+      "sha256": "890151c49c392d7a8ce98d102817dee67f2612a5a829130fd31e1500adb7bb94"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/regmem/src/regmem_const.h": {
+      "mode": "100644",
+      "sha256": "adbaffcc06c65e5ffa804f917b5133b8342920748d7deaf7f63cc2f94f92b816"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm.h": {
+      "mode": "100644",
+      "sha256": "8e910c6827fa7483cb368b7ecc6962e807ebec090c7345d4d18a9f7347456acc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_manifest.h": {
+      "mode": "100644",
+      "sha256": "544330b3c1ef7f47f85b106035861ece628564f8bb500b6405cfcd710907c556"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "b0cac111bf8110c2f4e2fcfc6a19e9023efb2a9fcca37550cf45d76e87d678bd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_storage_class.h": {
+      "mode": "100644",
+      "sha256": "6333eed3e629cdf77088ce63f0c6981cc50fa4a549de67d2b7b35fbc69a6faf1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_trace.h": {
+      "mode": "100644",
+      "sha256": "47db9500336a326e1ab53587db2652cbc6a33ac63030b64d8992256fc03b4ab7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/routing_bitmap.mk": {
+      "mode": "100644",
+      "sha256": "3ef41d01fc7fb2d5fe90574e74189d6e35af5bbf3f3aa7c5181161e11d42fca1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm.c": {
+      "mode": "100644",
+      "sha256": "0a811b85127176e161bc641fa9e308f7951fd8817526e847d938a2e8c58c3f37"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_impl.h": {
+      "mode": "100644",
+      "sha256": "03030a4001e3fcfbbd48bccdb5ef4062eae675608c73c478c790660d043c7804"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_manifest.c": {
+      "mode": "100644",
+      "sha256": "68b9db6b08627d9bf9ec1237b96ec51077d92171f4ebb98880863dd7201f8b79"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "353d4ae095d8016e9126dc4c0c915bbb265e06fa771b78402a2f43ac950f6172"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/assert_support.h": {
+      "mode": "100644",
+      "sha256": "148521c883e89a95e03f98e1de75da3d83bd4d3d8a0485800b45543f541bd6f1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/cpu_mem_support.h": {
+      "mode": "100644",
+      "sha256": "3cffdcf3bfc88b181fb80939fbdbbe7c0ef138e479e6e74bb189c064a24211fd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/error_support.h": {
+      "mode": "100644",
+      "sha256": "b08eab458dd68a65185d3a0ddb5f379316de65160ca573b16219fb3e3d7c0610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/math_support.h": {
+      "mode": "100644",
+      "sha256": "6b83ad5ebb9d4d37b3c252d2100e40d7d230effeaa44403db653ec6a0a1886de"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/misc_support.h": {
+      "mode": "100644",
+      "sha256": "3ee04224478a018fd613cb66758ebfb1f854828677305225d27636f1f3304bbf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/platform_support.h": {
+      "mode": "100644",
+      "sha256": "427b367565ac9c162d8f0bcbfff1c44cb69a28d27b3fb99cd1a7bfaa9a38d32f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/print_support.h": {
+      "mode": "100644",
+      "sha256": "463d4d4180f82421b377f9693dbd33c14d6b926e2d20dfde7dbe730adbdbdc76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/storage_class.h": {
+      "mode": "100644",
+      "sha256": "ac624cb64eaefd385d8d68c014356203ff95d65e5e38615a4d260e8f6cd62144"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/support/type_support.h": {
+      "mode": "100644",
+      "sha256": "12e6abfc007259ad5869070218e33f403314b1a0e05e50859218c7dc12bd04bc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/interface/ia_css_syscom.h": {
+      "mode": "100644",
+      "sha256": "930b3b856b80668e6c021f895acd324d047de072ca68917d8349941e9db46c43"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/interface/ia_css_syscom_config.h": {
+      "mode": "100644",
+      "sha256": "d422a7e25863bdb9be0b9d5e2823737622c18059e32604b59d19bb2c901a5fe9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/interface/ia_css_syscom_trace.h": {
+      "mode": "100644",
+      "sha256": "c6ed59ec15cee21b5016dc78927a6f49b37655cc7772eeca7b0f088a75f74241"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/src/ia_css_syscom.c": {
+      "mode": "100644",
+      "sha256": "06646eaa0fc678d10494a702077fce4c793b69471bf09ace73e27958989eeb00"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/src/ia_css_syscom_config_fw.h": {
+      "mode": "100644",
+      "sha256": "ac1f0f8fb9938d53a50e58e523f80d27820b49b8cfaf92bc02f71fa0d6ee3dc3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/src/ia_css_syscom_context.h": {
+      "mode": "100644",
+      "sha256": "66248aa43db407da79abd85dc0d4f9f8f21bda13731fc34a48f8c0a5a295c755"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/syscom/syscom.mk": {
+      "mode": "100644",
+      "sha256": "db2ccee2fbadc64bf04484fc7b002560377eee3480baf591eee2eafefe503199"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/trace/interface/ia_css_trace.h": {
+      "mode": "100644",
+      "sha256": "b1ee9fac8eab3d9db1e281242b847dea015d09e779aee3bacd2b5a3f7ad3bd6e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/trace/trace.mk": {
+      "mode": "100644",
+      "sha256": "3f612a42928ebeda60125199fdbd9ce4d86792cd14ecc32c07eb4c3bfa593a42"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/shared_memory_access.h": {
+      "mode": "100644",
+      "sha256": "9a931d662731b8a18617057b2d2a8d78b06c10728ac41f2ba8dbf3c7fe1069fa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/shared_memory_map.h": {
+      "mode": "100644",
+      "sha256": "b32030e48f48cd0fa6f1a91e0badee21c83763dab9dbb9f80ffe12d09c4f2b95"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_config.h": {
+      "mode": "100644",
+      "sha256": "6639075c314dc673af66fb1b7c6342057271b27c85d8621762da577158e5a184"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_memory_access_types.h": {
+      "mode": "100644",
+      "sha256": "eb3370c1ed40cf7865cbeaf52658725fd697594f434bac043be00056595b166b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_subsystem_access.h": {
+      "mode": "100644",
+      "sha256": "d1a7796c7ac67ab0a21286b5210bb5ee8d86b38a54bc4fa49ef21f1070a0e15d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_subsystem_access_initialization.h": {
+      "mode": "100644",
+      "sha256": "d88e475cdb5bf3c490a4d29d9b12a51bbe1f2af9c785edbdae1cb7df83d95a0f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_subsystem_access_types.h": {
+      "mode": "100644",
+      "sha256": "3920b96f248d57040d15adf5f7ccfd428536bb38c7ef30d7c4c74aa3e2f9140f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied/vied/vied_types.h": {
+      "mode": "100644",
+      "sha256": "d0c64e60dd26305f65f0e27f66d23d5e22f8518259b4b1348e630f915f6552c1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_nci_acb/interface/vied_nci_acb_route_type.h": {
+      "mode": "100644",
+      "sha256": "1965faaf992bdaaac8498174ebfeb3b7509fda8094e8a294609bb81db107c519"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/interface/ia_css_param_storage_class.h": {
+      "mode": "100644",
+      "sha256": "940d1049ba93c2b920748777c179eb5c91e62c05f78e75e27e13eda283084e44"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal.h": {
+      "mode": "100644",
+      "sha256": "e16fd75e55c80c223b68ad527ff94a1a0d0e0456055061f0af98a5d6acc9d5d7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_manifest.h": {
+      "mode": "100644",
+      "sha256": "6ac925437d5f3f06029fba910d902125fa8bf654f7404d7f4debe23ea49e6b63"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "f012177189f75d84c4bbf1fc03eace4fb282677699bdcfb7856d10a513fe40bf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_types.h": {
+      "mode": "100644",
+      "sha256": "77a696a38fba71f1198cbb5fbe81e1f64e97a7bf76ff998ad16c899a648b8b64"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal.c": {
+      "mode": "100644",
+      "sha256": "8c7bbdc91f165a005f0f73e1aa6e9b8663c11f18f73bdc170611944e9632297b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_impl.h": {
+      "mode": "100644",
+      "sha256": "143dc9e455be18e9e05ddd95b4c24e6cd12813217594809eeadce5c88544a6dd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_manifest.c": {
+      "mode": "100644",
+      "sha256": "ab1c3eda44e911df6af6baa551b897213d68f6f0b3f2e164c4c94e5e4f2307db"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "42203914838fd7297c45f3d66325c9b7a17a95761362243b24f5665a267609c0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/lib/vied_parameters/vied_parameters.mk": {
+      "mode": "100644",
+      "sha256": "f2401e4d38fb5a878fb04b13c38f88ccab2387b3eab8d9167702bb3c6bcedfe0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/libcsspsys2600.c": {
+      "mode": "100644",
+      "sha256": "563bd0cb9379081ee818d7240664487bc2896f6f5027247d2c1894fde50dcfaa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/lib2600psys/libcsspsys2600.h": {
+      "mode": "100644",
+      "sha256": "f53bb37e8044402e9dbff0c2945003e227d8572cb9a8b8c0902d9a98b446b95a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-css/libintel-ipu4.c": {
+      "mode": "100644",
+      "sha256": "3cc28bf0dfff88d286b24de6c9677a1abc14bedc5d251686fd643f936736ece5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-fw-resources.c": {
+      "mode": "100644",
+      "sha256": "c499010c125aa539915912e72602a5d7a4e517eca717f1e9d7d55e7a73136660"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-isys-csi2.c": {
+      "mode": "100644",
+      "sha256": "8d1ec3da1022c81d8461d76dd24d0b79b6b320c550eabf84edd0ed08c713b953"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-isys-isa.c": {
+      "mode": "100644",
+      "sha256": "b245e7a008483747260b90a6a317004313c24f30dc6a66ff09feca2e5b417679"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-isys-isa.h": {
+      "mode": "100644",
+      "sha256": "d8196865a96d2a4b8ab20ef15a5a9c8b5f0be272c83b2112cee9c00f6e9a16b7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-isys.c": {
+      "mode": "100644",
+      "sha256": "13a7331bc4753fdfec17bb9418993db12a5bb0a6cd17dd8dd870c1e9c7d5042e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-psys.c": {
+      "mode": "100644",
+      "sha256": "65402fac9f9ca36efd4284d61cc4ea186c473bef4f4a8ee2c9cfbdaf5021fd8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4-resources.c": {
+      "mode": "100644",
+      "sha256": "a08d5c7037c92b588247ab028a025cadc61078e364f98b91ffa4f40f28460a4f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4.c": {
+      "mode": "100644",
+      "sha256": "6cb04b0be3b64bd97e5c1067f55f5d1c94a1c30e2562714b3c0ca504a96499b2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.ipu4pisys_inc": {
+      "mode": "100644",
+      "sha256": "1cd53632088fe639043c482da4ec354b0811868dc08f690047627dbeb68bd3e7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.ipu4pisys_src": {
+      "mode": "100644",
+      "sha256": "6dd4a7c8ab6925d14d21d9d49af96ac057b41154a82de87315b0ae278eb89838"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.ipu4ppsys_inc": {
+      "mode": "100644",
+      "sha256": "f58f93e6482170ca3b92a70f0d33f5ff373a31c84470778d5b7f9c7a210d2ed2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.ipu4ppsys_src": {
+      "mode": "100644",
+      "sha256": "3b044cec12e477130a7ca912def0e8e11c095e8c0ffd5302e0dace1dc27ac8e6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.isyslib": {
+      "mode": "100644",
+      "sha256": "3e34405536cc4d2fc376db9ac3f2d8c9fbbbfa5cd0f1cfd030f2cc8a40b183f3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/Makefile.psyslib": {
+      "mode": "100644",
+      "sha256": "44b3ca57345107402fa47febd761d02e4f1b6ea93f77c257c8117458b22d8ef3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/ipu-wrapper.c": {
+      "mode": "120000",
+      "sha256": "3cf5e315bd6eaa58ecc60fe783a1c4de41e6fa4669f044af2950dc428452bcfe"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/buffer.mk": {
+      "mode": "100644",
+      "sha256": "536c9e9dcf636acd3d71038daf520ebec61555d0d8f8b4a4eaa3954dfd333f68"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/buffer_access.h": {
+      "mode": "100644",
+      "sha256": "7917ab6f910dc0407c1b40543ce7f5c1bcd798d558ae7697a1cb8215ac504a5f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/buffer_type.h": {
+      "mode": "100644",
+      "sha256": "3ee75a985f4a290b9b69f87c37979a3171c28fd10d1c39cc1968101f27c39b81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_buffer_address.h": {
+      "mode": "100644",
+      "sha256": "14ee0cef00f36041feeb5ae8fb5bf5031d04090bc8d76cc81b44eed3d292ac7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_input_buffer.h": {
+      "mode": "100644",
+      "sha256": "bbed268cd48b2bafb0ee5de1af1fc981d707d17206349fc9320874e8a1b4f454"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_input_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "4de7bdc10e050c6449fb357122b33bba1fc1dab367d0eca9041c86367229bff5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_output_buffer.h": {
+      "mode": "100644",
+      "sha256": "5dcfe591cf5b1105649528591947f9ec725edb74b7fc418133bcf9509b1475d4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_output_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "a4a4744f1397b8e120c315c6100571c62562180a5cd8a4182c5f15327f880fa3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_return_token.h": {
+      "mode": "100644",
+      "sha256": "6a13cc54551b70a15692fadabc7cb9ef8e1668e008fb6280a7835b39dec4f85d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_shared_buffer.h": {
+      "mode": "100644",
+      "sha256": "d3151b9f469693b8c7b612376069299500d96012244b6bf9bbd2ed89aea5954f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/interface/ia_css_shared_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "b85257eb9f0902478c199b07a98410669eb375f4a2a67b9b24a61a15bea496b0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/buffer_access.c": {
+      "mode": "100644",
+      "sha256": "56d172e88c3da92af5ad5dfe8966c8862c518c70d375f4b84ca14ff3ea873e17"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/ia_css_buffer.c": {
+      "mode": "100644",
+      "sha256": "725509d666d40ee355cd60d3525963cb851456364e08cc1c09fd4fe496f3455b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/ia_css_buffer.h": {
+      "mode": "100644",
+      "sha256": "1df7fb0853c16b59c4116cfd93879f1fb4ea8b1b61c248a998e7d13f210ed47f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/ia_css_input_buffer.c": {
+      "mode": "100644",
+      "sha256": "2834d86974eff4def41dd24b1ffce2968de2e58587ff1d4f7027b6b541a31f41"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/ia_css_output_buffer.c": {
+      "mode": "100644",
+      "sha256": "136dd17c1790e3ad5766e201847ab6b598d505d8304e69add8e50ff9bbbf4b3e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/buffer/src/cpu/ia_css_shared_buffer.c": {
+      "mode": "100644",
+      "sha256": "8c393fb3c7a8432634192236ba2dfb31c12083e64f0c1ee3c0f5485c09bdf9c6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/cell/cell.mk": {
+      "mode": "100644",
+      "sha256": "99d4ff04d2b89687c655b9937780588371e463cf8003ae6e670b8688e39655ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/cell/interface/ia_css_cell.h": {
+      "mode": "100644",
+      "sha256": "1efddfcde2b04cf04e47e5507e4cceebadc376d62ea28e8b134f98caa1432e2b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/cell/src/ia_css_cell_impl.h": {
+      "mode": "100644",
+      "sha256": "35d502761bca920449aedcf75877455af78b82afb4ee74b2447f1eccca567d47"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/config/isys/subsystem_cnlB0.mk": {
+      "mode": "100644",
+      "sha256": "0701ca57914c4d8791c25d8ec5c8eb815508d05d918992802dbff93f0a7071dc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/config/system_cnlB0.mk": {
+      "mode": "100644",
+      "sha256": "51fb58c705b9c724333d2eea2496084b37b92ab825a7ef64042f5b5536252fc6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/cpd_binary/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/device_access.mk": {
+      "mode": "100644",
+      "sha256": "6889f7d0b206b6394126877176a3008c7c8d750fded862dfc4f4d9e376d76966"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/interface/ia_css_cmem.h": {
+      "mode": "100644",
+      "sha256": "6b805c97e4fa28d017e5233277dc267c9ad048c9dc5b3e8871d7553ff66c8610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/interface/ia_css_xmem.h": {
+      "mode": "100644",
+      "sha256": "cb95c59aaf0a5bcbf247f4e844bbf7721d2ec4aefd2352c219b04c87f3dac925"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/interface/ia_css_xmem_cmem.h": {
+      "mode": "100644",
+      "sha256": "97aec5854a9b9b7d54a70c0c2dbb651b150d7a2a8f4c505ebcd42e397be91d6f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/src/ia_css_cmem_host.h": {
+      "mode": "100644",
+      "sha256": "1a5e082a8675e92bc2d1df1e931b89928a0b09bd6d8eb25278a71b5712ee730f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/src/ia_css_xmem_cmem_impl.h": {
+      "mode": "100644",
+      "sha256": "96b40e40780830d16e06c8124b6487f9774ee4239c1582b14760d9ad061ed41a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/device_access/src/ia_css_xmem_host.h": {
+      "mode": "100644",
+      "sha256": "c31921258f1635f900a756950690997963a120ec1b1e94ae4ce8caaee63659b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/interface/cnlB0/ipu_device_buttress_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "df2b4a75493170316e69ec9e4f0978d73b0f1434a29f761161dc6b9f722aee51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/interface/ipu_device_cell_properties.h": {
+      "mode": "100644",
+      "sha256": "48bab0c6a6d08021b3d5182f13fee1c213f655fae16d860b97a9d1ad6d2b069c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/interface/ipu_device_cell_properties_func.h": {
+      "mode": "100644",
+      "sha256": "dff4338af2f650dac4bfcc260e93a5bb2e98285eacc80f6ada0d9ff555db7ba0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/interface/ipu_device_cell_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "4c35602c2b9c255e1d95e1f1cdb5da8f26e39c4602828e6aae1f31da8ff7396e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/interface/ipu_device_cell_type_properties.h": {
+      "mode": "100644",
+      "sha256": "ea9a4639ac94f3ed9bd518ae909538ad4331ae2b2245203b8e8aadfa93affcb2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/isys/cnlB0/ipu_device_cell_devices.h": {
+      "mode": "100644",
+      "sha256": "1cf27b46b0e007e5566c7851c2600b2426b283a789f1fc50f49f770e4dbcf2ec"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/isys/cnlB0/ipu_device_cell_properties_defs.h": {
+      "mode": "100644",
+      "sha256": "6202f57da8795eb311ecde9bde988c6d7a659e974cb3f4bedd508e57b8df78c6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/isys/cnlB0/ipu_device_cell_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "bde82b8a4caa5e6b17eab68ddf98ff63ec00c40e99c92b170a7424556e32cbf6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/devices/src/ipu_device_sp2600_control_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "7fbcbdd477d8e935113e09b2b880b9c3c9b658ce3a92bf172602dc8f6e904677"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/fw_abi_common_types/cpu/fw_abi_cpu_types.mk": {
+      "mode": "100644",
+      "sha256": "c9b469050ce74c106cc97a0c15d2f4a5a47638df97c53d9ae8f3676068a5e2e7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/fw_abi_common_types/cpu/ia_css_terminal_base_types.h": {
+      "mode": "100644",
+      "sha256": "198df9288983388f8ab869ad42f3c493b05b5f25feafef3f7cba95212bd46ab8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/fw_abi_common_types/cpu/ia_css_terminal_manifest_base_types.h": {
+      "mode": "100644",
+      "sha256": "c6db605c82e1586e9909d57d342e76e85d8f117dbe11d7ddf840574231516e16"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/fw_abi_common_types/ia_css_base_types.h": {
+      "mode": "100644",
+      "sha256": "7568d7923629d20b6afb0320a0d1891a288a1784112ad14dceadee732d26b25e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/fw_abi_common_types/ia_css_terminal_defs.h": {
+      "mode": "100644",
+      "sha256": "45f7f8b7aff6809e5e89c06d41191746229d9f4cb13456b9411e22cee19dac9e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isys_fw_bridged_types.h": {
+      "mode": "100644",
+      "sha256": "841ad9fcff5cd6953e988470a6ba4060a356a3d69449b226b9ab41f4b863d465"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi.h": {
+      "mode": "100644",
+      "sha256": "b9793bece91078b97b6d05eafe2a23e7cf0d4e6a5c0d9968359060611807b81b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi_fw_types.h": {
+      "mode": "100644",
+      "sha256": "81bbafbcb61311d5f6fe3a2356b25224e17ad694c6c01df0a02a4ac0aefb3ed6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi_fw_version.h": {
+      "mode": "100644",
+      "sha256": "221a8cc2b722630105c17ac90ab5fd2f4bbc65a3ca2e6574b3cbde9792f282a3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi_proxy_region_defs.h": {
+      "mode": "100644",
+      "sha256": "c4db289905d2bc46f53fa8621fc32efee010d4e1953df388385366c85f5256c5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi_proxy_region_types.h": {
+      "mode": "100644",
+      "sha256": "6cc1ea7c36f13152b2d9a164e434caa83bf3dfa0424b82a6a0972ba1a73607ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/interface/ia_css_isysapi_types.h": {
+      "mode": "100644",
+      "sha256": "90660d216fae435080e8902ae5e76d52a8c1a32c02495873f25b9a573f001980"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/isysapi.mk": {
+      "mode": "100644",
+      "sha256": "321e510a84d7d5f2c3feabdf0708e24fa51b732e1cadec0bafe1f94d0c4a03ef"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isys_private.c": {
+      "mode": "100644",
+      "sha256": "b4b756ba18eed38679c5840629c8b832f09e2b4f782e77d6d3a104d0fbbadc81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isys_private.h": {
+      "mode": "100644",
+      "sha256": "75186364f1ed9b32878f9d21ad481b166c5c74eed994a960ec6cdc6544c261a5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isys_public.c": {
+      "mode": "100644",
+      "sha256": "c46eb21c998c2e41f59ef6e21b9cfe6920803f0a20538a1dc03d4b8ead1650bb"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isys_public_trace.c": {
+      "mode": "100644",
+      "sha256": "5feaf675db4a6622f2e02c94d01131f7df1c4f1075bc8174ae64481f1535db77"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isys_public_trace.h": {
+      "mode": "100644",
+      "sha256": "8982317fb944882abd4913561f9ceb060d2480e23bba19db0595261a92c1c004"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/isysapi/src/ia_css_isysapi_trace.h": {
+      "mode": "100644",
+      "sha256": "f8d6afd103cabb70c8315dc45559794fe785adacf0c50c838fddc3b1de42aa0d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/interface/ia_css_pkg_dir.h": {
+      "mode": "100644",
+      "sha256": "3f34b902e42a782e1591110d5423728112b27e31470085d03f7ccafdbde8115b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_iunit.h": {
+      "mode": "100644",
+      "sha256": "d97fac9f45b3be4912809b86178f08822044456dd9008812b1c44631ec2361f4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_storage_class.h": {
+      "mode": "100644",
+      "sha256": "c8e2ad5d85003898817fa5acdee78b76344154203de18ccc975eb7ad3a26122d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/interface/ia_css_pkg_dir_types.h": {
+      "mode": "100644",
+      "sha256": "649257adff710594816733169a1a17e67c50d4d4ec5b84d28100070366b97320"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/pkg_dir.mk": {
+      "mode": "100644",
+      "sha256": "b06ed04a5f3fc1ae98570b9d09a5580a8254ec933fe11e70303b1fdc652e9a45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/src/ia_css_pkg_dir.c": {
+      "mode": "100644",
+      "sha256": "c0dd930ca9d9b87fda8d55342647dbe5e586d815bdce521e79eac378cbeed69e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/src/ia_css_pkg_dir_impl.h": {
+      "mode": "100644",
+      "sha256": "cd896da04928eca93468f82022cb7676d03eb9fa013e5977e53dbd634553b0c2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/pkg_dir/src/ia_css_pkg_dir_int.h": {
+      "mode": "100644",
+      "sha256": "e0dc02ee0e51d200348b57cbbda70e69a89575289cf19f94ab04ca45e1dbd2cc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/port_env_struct.h": {
+      "mode": "100644",
+      "sha256": "adcaa20b5b2dc6a53e1c4224d6b8300fd40bb318bcda03aaed34914e6c9e7986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/queue.h": {
+      "mode": "100644",
+      "sha256": "feb4bf5dcc1c3dfa3f851d2c4e94edb1e8ff0d54831438e812e6b880c3ccc438"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/queue_struct.h": {
+      "mode": "100644",
+      "sha256": "dff318d932a2cd02813128db8a5e17a20a9d7b378f1ca37e2a9f4c0e23a5aa85"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/recv_port.h": {
+      "mode": "100644",
+      "sha256": "98f571a1d385fe7999598887d170155fa72812136c251da15f79be56b96c6019"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/recv_port_struct.h": {
+      "mode": "100644",
+      "sha256": "376521fc24c4467d67eaa81d2177d89b1e12b238a10d66bcbee551fc1e7d7c45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/send_port.h": {
+      "mode": "100644",
+      "sha256": "e1370b1a20be15b0c1b9e9eeb864219ebdce07b728ee6afe041bd870873579be"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/interface/send_port_struct.h": {
+      "mode": "100644",
+      "sha256": "04cc488db93c3e045342c78797d550275cdfc72b26c6aa830f113a6be43792af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/port.mk": {
+      "mode": "100644",
+      "sha256": "8fcc10e4e4c15cbba93a0e1acb022f3f32219563e5577495b9207c48a2c1b233"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/src/queue.c": {
+      "mode": "100644",
+      "sha256": "4050024350b48577b68558c9dc415e5da7c87ec980e11ba564167af233fec32b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/src/recv_port.c": {
+      "mode": "100644",
+      "sha256": "7eea114146c420dc596681e0bf0fb108058bb196506b8e2626728d57519a02c0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/port/src/send_port.c": {
+      "mode": "100644",
+      "sha256": "a49b0188427a3b56f1e09d7d4384190c79b07db0d404faa27444861ef36462e2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/reg_dump/src/isys/cnlB0_gen_reg_dump/ia_css_debug_dump.c": {
+      "mode": "100644",
+      "sha256": "299c72ea1253f37ae9d3c08fdb74a832bbb24e5dcbee0147adf8a266d8e4b1dc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/reg_dump/src/isys/cnlB0_gen_reg_dump/ia_css_debug_dump.h": {
+      "mode": "100644",
+      "sha256": "ddbd6572b5b96f31af0b41f4a39a3e44c4bb7d450e266567f63d69e5c9d6e8ff"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/reg_dump/src/reg_dump_generic_bridge.c": {
+      "mode": "100644",
+      "sha256": "ecd41759a9aaf216bfde3accbfcf26b70a8d766c6b4cbc79830beb03afcc224e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/regmem/interface/regmem_access.h": {
+      "mode": "100644",
+      "sha256": "ddeca58ae1f17ffeefef6437f20670d9aacb3409c771e50fa655a0c1708c7c8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/regmem/regmem.mk": {
+      "mode": "100644",
+      "sha256": "ae62cdb08749faa2a95fae36df6cbd7c74ad174aea7e3062d58596738a3aff56"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/regmem/src/regmem_access_host.h": {
+      "mode": "100644",
+      "sha256": "890151c49c392d7a8ce98d102817dee67f2612a5a829130fd31e1500adb7bb94"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/regmem/src/regmem_const.h": {
+      "mode": "100644",
+      "sha256": "adbaffcc06c65e5ffa804f917b5133b8342920748d7deaf7f63cc2f94f92b816"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/assert_support.h": {
+      "mode": "100644",
+      "sha256": "148521c883e89a95e03f98e1de75da3d83bd4d3d8a0485800b45543f541bd6f1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/cpu_mem_support.h": {
+      "mode": "100644",
+      "sha256": "3cffdcf3bfc88b181fb80939fbdbbe7c0ef138e479e6e74bb189c064a24211fd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/error_support.h": {
+      "mode": "100644",
+      "sha256": "b08eab458dd68a65185d3a0ddb5f379316de65160ca573b16219fb3e3d7c0610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/math_support.h": {
+      "mode": "100644",
+      "sha256": "f583f0888f162dd6ebcde3ac72b2335f0cee24647edabed9260042c055ca6cd0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/misc_support.h": {
+      "mode": "100644",
+      "sha256": "3ee04224478a018fd613cb66758ebfb1f854828677305225d27636f1f3304bbf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/platform_support.h": {
+      "mode": "100644",
+      "sha256": "427b367565ac9c162d8f0bcbfff1c44cb69a28d27b3fb99cd1a7bfaa9a38d32f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/print_support.h": {
+      "mode": "100644",
+      "sha256": "463d4d4180f82421b377f9693dbd33c14d6b926e2d20dfde7dbe730adbdbdc76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/storage_class.h": {
+      "mode": "100644",
+      "sha256": "ac624cb64eaefd385d8d68c014356203ff95d65e5e38615a4d260e8f6cd62144"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/support/type_support.h": {
+      "mode": "100644",
+      "sha256": "12e6abfc007259ad5869070218e33f403314b1a0e05e50859218c7dc12bd04bc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/interface/ia_css_syscom.h": {
+      "mode": "100644",
+      "sha256": "930b3b856b80668e6c021f895acd324d047de072ca68917d8349941e9db46c43"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/interface/ia_css_syscom_config.h": {
+      "mode": "100644",
+      "sha256": "d422a7e25863bdb9be0b9d5e2823737622c18059e32604b59d19bb2c901a5fe9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/interface/ia_css_syscom_trace.h": {
+      "mode": "100644",
+      "sha256": "c6ed59ec15cee21b5016dc78927a6f49b37655cc7772eeca7b0f088a75f74241"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/src/ia_css_syscom.c": {
+      "mode": "100644",
+      "sha256": "06646eaa0fc678d10494a702077fce4c793b69471bf09ace73e27958989eeb00"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/src/ia_css_syscom_config_fw.h": {
+      "mode": "100644",
+      "sha256": "ac1f0f8fb9938d53a50e58e523f80d27820b49b8cfaf92bc02f71fa0d6ee3dc3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/src/ia_css_syscom_context.h": {
+      "mode": "100644",
+      "sha256": "66248aa43db407da79abd85dc0d4f9f8f21bda13731fc34a48f8c0a5a295c755"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/syscom/syscom.mk": {
+      "mode": "100644",
+      "sha256": "db2ccee2fbadc64bf04484fc7b002560377eee3480baf591eee2eafefe503199"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/trace/interface/ia_css_trace.h": {
+      "mode": "100644",
+      "sha256": "b1ee9fac8eab3d9db1e281242b847dea015d09e779aee3bacd2b5a3f7ad3bd6e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/trace/trace.mk": {
+      "mode": "100644",
+      "sha256": "3f612a42928ebeda60125199fdbd9ce4d86792cd14ecc32c07eb4c3bfa593a42"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/utils/system_defs/system_const.h": {
+      "mode": "100644",
+      "sha256": "42e9ae1fc26f7c7ceea95afaf68dd306f355ce260ecdefd9893ae65dfbbae87a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/shared_memory_access.h": {
+      "mode": "100644",
+      "sha256": "9a931d662731b8a18617057b2d2a8d78b06c10728ac41f2ba8dbf3c7fe1069fa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/shared_memory_map.h": {
+      "mode": "100644",
+      "sha256": "b32030e48f48cd0fa6f1a91e0badee21c83763dab9dbb9f80ffe12d09c4f2b95"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_config.h": {
+      "mode": "100644",
+      "sha256": "6639075c314dc673af66fb1b7c6342057271b27c85d8621762da577158e5a184"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_memory_access_types.h": {
+      "mode": "100644",
+      "sha256": "eb3370c1ed40cf7865cbeaf52658725fd697594f434bac043be00056595b166b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_subsystem_access.h": {
+      "mode": "100644",
+      "sha256": "d1a7796c7ac67ab0a21286b5210bb5ee8d86b38a54bc4fa49ef21f1070a0e15d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_subsystem_access_initialization.h": {
+      "mode": "100644",
+      "sha256": "d88e475cdb5bf3c490a4d29d9b12a51bbe1f2af9c785edbdae1cb7df83d95a0f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_subsystem_access_types.h": {
+      "mode": "100644",
+      "sha256": "3920b96f248d57040d15adf5f7ccfd428536bb38c7ef30d7c4c74aa3e2f9140f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600/vied/vied/vied_types.h": {
+      "mode": "100644",
+      "sha256": "d0c64e60dd26305f65f0e27f66d23d5e22f8518259b4b1348e630f915f6552c1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/Makefile": {
+      "mode": "100644",
+      "sha256": "b60a2e07386dc7c12485d7b7de2d731c84ed7660ff80718774665ca6f60ac473"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/CNL_program_group/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/ICL_program_group/ia_css_fw_pkg_release.h": {
+      "mode": "100644",
+      "sha256": "3386a1253abd27c060c79f9e207c485e7ee8d8ea5a4a03d1b505d37bcd5799e8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/buffer.mk": {
+      "mode": "100644",
+      "sha256": "536c9e9dcf636acd3d71038daf520ebec61555d0d8f8b4a4eaa3954dfd333f68"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/buffer_access.h": {
+      "mode": "100644",
+      "sha256": "7917ab6f910dc0407c1b40543ce7f5c1bcd798d558ae7697a1cb8215ac504a5f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/buffer_type.h": {
+      "mode": "100644",
+      "sha256": "3ee75a985f4a290b9b69f87c37979a3171c28fd10d1c39cc1968101f27c39b81"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_buffer_address.h": {
+      "mode": "100644",
+      "sha256": "14ee0cef00f36041feeb5ae8fb5bf5031d04090bc8d76cc81b44eed3d292ac7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_input_buffer.h": {
+      "mode": "100644",
+      "sha256": "bbed268cd48b2bafb0ee5de1af1fc981d707d17206349fc9320874e8a1b4f454"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_input_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "4de7bdc10e050c6449fb357122b33bba1fc1dab367d0eca9041c86367229bff5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_output_buffer.h": {
+      "mode": "100644",
+      "sha256": "5dcfe591cf5b1105649528591947f9ec725edb74b7fc418133bcf9509b1475d4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_output_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "a4a4744f1397b8e120c315c6100571c62562180a5cd8a4182c5f15327f880fa3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_shared_buffer.h": {
+      "mode": "100644",
+      "sha256": "d3151b9f469693b8c7b612376069299500d96012244b6bf9bbd2ed89aea5954f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/interface/ia_css_shared_buffer_cpu.h": {
+      "mode": "100644",
+      "sha256": "b85257eb9f0902478c199b07a98410669eb375f4a2a67b9b24a61a15bea496b0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/buffer_access.c": {
+      "mode": "100644",
+      "sha256": "56d172e88c3da92af5ad5dfe8966c8862c518c70d375f4b84ca14ff3ea873e17"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/ia_css_buffer.c": {
+      "mode": "100644",
+      "sha256": "725509d666d40ee355cd60d3525963cb851456364e08cc1c09fd4fe496f3455b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/ia_css_buffer.h": {
+      "mode": "100644",
+      "sha256": "1df7fb0853c16b59c4116cfd93879f1fb4ea8b1b61c248a998e7d13f210ed47f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/ia_css_input_buffer.c": {
+      "mode": "100644",
+      "sha256": "2834d86974eff4def41dd24b1ffce2968de2e58587ff1d4f7027b6b541a31f41"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/ia_css_output_buffer.c": {
+      "mode": "100644",
+      "sha256": "136dd17c1790e3ad5766e201847ab6b598d505d8304e69add8e50ff9bbbf4b3e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/buffer/src/cpu/ia_css_shared_buffer.c": {
+      "mode": "100644",
+      "sha256": "8c393fb3c7a8432634192236ba2dfb31c12083e64f0c1ee3c0f5485c09bdf9c6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell/cell.mk": {
+      "mode": "100644",
+      "sha256": "99d4ff04d2b89687c655b9937780588371e463cf8003ae6e670b8688e39655ac"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell/interface/ia_css_cell.h": {
+      "mode": "100644",
+      "sha256": "1efddfcde2b04cf04e47e5507e4cceebadc376d62ea28e8b134f98caa1432e2b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell/src/ia_css_cell_impl.h": {
+      "mode": "100644",
+      "sha256": "35d502761bca920449aedcf75877455af78b82afb4ee74b2447f1eccca567d47"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/cell_program_load.mk": {
+      "mode": "100644",
+      "sha256": "5dda5aace87d0882dd7d447eeef0766ad1a4c056916b7384fa2d235f9553295d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/interface/ia_css_cell_program_group_load.h": {
+      "mode": "100644",
+      "sha256": "183dcde811b212ca2eec8aa5c02bdb791658f027def6759ac801ea8c9943ac71"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/interface/ia_css_cell_program_load.h": {
+      "mode": "100644",
+      "sha256": "c60b5bebe97a0b7df88a82cc573fadf41dfe0fdaabb5acba95ba7418859932d6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/interface/ia_css_cell_program_load_prog.h": {
+      "mode": "100644",
+      "sha256": "67047abd032437a22e9884988ce7e58b04112702533888a0d182e6102fc72f9f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/interface/ia_css_cell_program_load_storage_class.h": {
+      "mode": "100644",
+      "sha256": "abe8575f79840d4362b67614a77672b367dae906545e0bd45b245143fd7f9b49"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/interface/ia_css_cell_program_struct.h": {
+      "mode": "100644",
+      "sha256": "2f607bba16be467cb58c70ceab70dcc8359b1e0fa0a96958030ed0c5635588ed"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_program_group_load_impl.h": {
+      "mode": "100644",
+      "sha256": "14aa54bf5d50efffdcb175b8a0b6f39200e51bffe5ce63bdd13c99beba73e415"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_program_load.c": {
+      "mode": "100644",
+      "sha256": "59fcc2c012e62985051fc49b0ecd1c703e12944b703e353b178758f8e4ccbd39"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_program_load_bin.h": {
+      "mode": "100644",
+      "sha256": "13bbf6877742e52dffa78df202aeda3f6ea2fee5de0aaa437a532f010e2492c8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_program_load_impl.h": {
+      "mode": "100644",
+      "sha256": "0bee67ef803fad3c9f1ab08beb9973901df02fbcebdf09dafb808899aaa77740"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_program_load_prog_impl.h": {
+      "mode": "100644",
+      "sha256": "7d31b05229091f6b6cff54869585854d5a84887d56a84eb945f4d973d4f402b1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cell_program_load/src/ia_css_cell_regs.h": {
+      "mode": "100644",
+      "sha256": "52249787f6b6fd3874c5dcc2ee9a2a0ff5b333931fbc1102e6a62fafde3d216d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg.h": {
+      "mode": "100644",
+      "sha256": "844c02db37854df10bef19e82293a93cf36f7bfadbfa9f18dfc4eb2557cfd44d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg_storage_class.h": {
+      "mode": "100644",
+      "sha256": "2aecba4f9b9750324091d5c59395d6eb0562b2b5eaba4de2c8026122ed758cc4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/client_pkg/interface/ia_css_client_pkg_types.h": {
+      "mode": "100644",
+      "sha256": "38d8cdc0b5525d1656ad4b843ad7f0c78bd5c6d4d1930eef5e5a0446153ea2af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/client_pkg/src/ia_css_client_pkg.c": {
+      "mode": "100644",
+      "sha256": "63a75e869880f324a297e2bc96c60cbbc85c19eae8f88b68280a2e7fc7a7e877"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/client_pkg/src/ia_css_client_pkg_impl.h": {
+      "mode": "100644",
+      "sha256": "28da0053439b5da004d960a78a6c0ad10db86916407c7c99091faceab21392fe"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/config/psys/subsystem_cnlB0.mk": {
+      "mode": "100644",
+      "sha256": "6f11803af2ca5a6074251a470f83563873a32b7e17a7da0eee6bbee321662dfe"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/config/system_cnlB0.mk": {
+      "mode": "100644",
+      "sha256": "51fb58c705b9c724333d2eea2496084b37b92ab825a7ef64042f5b5536252fc6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cpd/cpd_component/cpd_component.mk": {
+      "mode": "100644",
+      "sha256": "4d5dd69f94abda7a22fa7638dada7a12554f092828f614dab0b1b20abd1eb897"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cpd/cpd_component/interface/ia_css_cpd_component_types.h": {
+      "mode": "100644",
+      "sha256": "34134cfa3dd26acb11931724466ad23a1a20253d4751975e6e53103e51e06a08"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cpd/cpd_metadata/cpd_metadata.mk": {
+      "mode": "100644",
+      "sha256": "b4a4e6cc7823b15ae38e4fce1bfcc091df9e6fefe1437c9c62cab8c73e6a3134"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/cpd/cpd_metadata/interface/ia_css_cpd_metadata_types.h": {
+      "mode": "100644",
+      "sha256": "cbc005aa44ad523bbf51dd54894fc03240aaded1b7eb8827d6b0ce3e824fd05a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/device_access.mk": {
+      "mode": "100644",
+      "sha256": "6889f7d0b206b6394126877176a3008c7c8d750fded862dfc4f4d9e376d76966"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/interface/ia_css_cmem.h": {
+      "mode": "100644",
+      "sha256": "6b805c97e4fa28d017e5233277dc267c9ad048c9dc5b3e8871d7553ff66c8610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/interface/ia_css_xmem.h": {
+      "mode": "100644",
+      "sha256": "cb95c59aaf0a5bcbf247f4e844bbf7721d2ec4aefd2352c219b04c87f3dac925"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/interface/ia_css_xmem_cmem.h": {
+      "mode": "100644",
+      "sha256": "97aec5854a9b9b7d54a70c0c2dbb651b150d7a2a8f4c505ebcd42e397be91d6f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/src/ia_css_cmem_host.h": {
+      "mode": "100644",
+      "sha256": "1a5e082a8675e92bc2d1df1e931b89928a0b09bd6d8eb25278a71b5712ee730f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/src/ia_css_xmem_cmem_impl.h": {
+      "mode": "100644",
+      "sha256": "96b40e40780830d16e06c8124b6487f9774ee4239c1582b14760d9ad061ed41a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/device_access/src/ia_css_xmem_host.h": {
+      "mode": "100644",
+      "sha256": "c31921258f1635f900a756950690997963a120ec1b1e94ae4ce8caaee63659b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/cnlB0/ipu_device_buttress_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "df2b4a75493170316e69ec9e4f0978d73b0f1434a29f761161dc6b9f722aee51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties.h": {
+      "mode": "100644",
+      "sha256": "48bab0c6a6d08021b3d5182f13fee1c213f655fae16d860b97a9d1ad6d2b069c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties_func.h": {
+      "mode": "100644",
+      "sha256": "dff4338af2f650dac4bfcc260e93a5bb2e98285eacc80f6ada0d9ff555db7ba0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_cell_properties_struct.h": {
+      "mode": "100644",
+      "sha256": "4c35602c2b9c255e1d95e1f1cdb5da8f26e39c4602828e6aae1f31da8ff7396e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_cell_type_properties.h": {
+      "mode": "100644",
+      "sha256": "ea9a4639ac94f3ed9bd518ae909538ad4331ae2b2245203b8e8aadfa93affcb2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_gp_properties.h": {
+      "mode": "100644",
+      "sha256": "b6612d3987b5af64868950a723ce15a7e252f88e52b0922ae7c341aeb0b43619"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/interface/ipu_device_gp_properties_types.h": {
+      "mode": "100644",
+      "sha256": "8d64c9082f14d25d9b0414039dae856d6a3d4d04b86b93b4a2ecf9506a1db0ae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_acb_devices.h": {
+      "mode": "100644",
+      "sha256": "9459d933a8155297e67b6ac34179ad600afc36dcd223bc73863cdb49d1ce07b0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_cell_devices.h": {
+      "mode": "100644",
+      "sha256": "c02a4c8ee9f0900ba5aacec6f4e7b87c674e5ed429c5b53b95815f59129e9a14"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_cell_properties_defs.h": {
+      "mode": "100644",
+      "sha256": "d2e2d8e73f15c20a8148990d7947cf9954d50fc621814455865db8f3150f4287"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_cell_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "94b65b6e2acb55014b92a301710a837015ce836c7acac08beda49a4bbc14a9f2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_ff_devices.h": {
+      "mode": "100644",
+      "sha256": "4e2601994728a9d4e8fb64f61d38b20da691afcc7b23513b61c13b7b66f13d87"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/psys/cnlB0/ipu_device_gp_devices.h": {
+      "mode": "100644",
+      "sha256": "f8c7b164480aed2d2e1596288fee8aa7b97ef3d78d22a026e4e1aa40f8c231ca"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/src/ipu_device_isp2600_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "54a9d417ab265f30cc01ad5108be370e335076662c41d7856a0ed17a289849d6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/src/ipu_device_sp2600_control_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "7fbcbdd477d8e935113e09b2b880b9c3c9b658ce3a92bf172602dc8f6e904677"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/src/ipu_device_sp2600_fp_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "c18a24daf403e0c257c7b7055e50fd428b85c347f1c65c3bd9b25e0979298859"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/devices/src/ipu_device_sp2600_proxy_properties_impl.h": {
+      "mode": "100644",
+      "sha256": "08ef72ede9699f40dbba6c1d66f2872e894d852bfd95eb6810de146848a03071"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_abi_common_types/cpu/fw_abi_cpu_types.mk": {
+      "mode": "100644",
+      "sha256": "c9b469050ce74c106cc97a0c15d2f4a5a47638df97c53d9ae8f3676068a5e2e7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_abi_common_types/cpu/ia_css_terminal_base_types.h": {
+      "mode": "100644",
+      "sha256": "198df9288983388f8ab869ad42f3c493b05b5f25feafef3f7cba95212bd46ab8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_abi_common_types/cpu/ia_css_terminal_manifest_base_types.h": {
+      "mode": "100644",
+      "sha256": "c6db605c82e1586e9909d57d342e76e85d8f117dbe11d7ddf840574231516e16"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_abi_common_types/ia_css_base_types.h": {
+      "mode": "100644",
+      "sha256": "7568d7923629d20b6afb0320a0d1891a288a1784112ad14dceadee732d26b25e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_abi_common_types/ia_css_terminal_defs.h": {
+      "mode": "100644",
+      "sha256": "45f7f8b7aff6809e5e89c06d41191746229d9f4cb13456b9411e22cee19dac9e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/fw_load.mk": {
+      "mode": "100644",
+      "sha256": "102062ff74cb278e88ebef839bcc6904d437aa0ab3f8d72c1805073b7a2ac99d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/interface/ia_css_fw_load.h": {
+      "mode": "100644",
+      "sha256": "92e58835c45c1cc76058ff102a9b9690179510f2ff13317ad2790cbad8d1a467"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/interface/ia_css_fw_load_storage_class.h": {
+      "mode": "100644",
+      "sha256": "b62194d1f0ba9a8f1d06b386208dd5587b21d8026f09446338b9f88a576e2a93"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load.c": {
+      "mode": "100644",
+      "sha256": "c9b44dacf1b755d55d926075eb68b46ed348f338eb46208274c8e615fd5ddc36"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load_blocking_impl.h": {
+      "mode": "100644",
+      "sha256": "acf320b28799062afabe7491255f4fd7a21f3bc514ad1320e91985f91ca306ce"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load_impl.h": {
+      "mode": "100644",
+      "sha256": "b5e575eb078dec987f634c78c926c6fd36b1b9f159cd641b74c2668420a09a49"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load_non_blocking_host_state.h": {
+      "mode": "100644",
+      "sha256": "a074453dbf5754f5bf66d2e9212933159907a721c90d1af8a95cfda65475350e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load_non_blocking_impl.h": {
+      "mode": "100644",
+      "sha256": "1b99fbc91d43dd836c027370803b0e83dbf4864899b005ac9c5637bd4a9769b2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/fw_load/src/xmem/ia_css_fw_load_non_blocking_impl_host.h": {
+      "mode": "100644",
+      "sha256": "a9120a0566dce0aedc38e91e6e5a00f7426c786fd748fd6c7e7a8e39c5514b92"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir.h": {
+      "mode": "100644",
+      "sha256": "3f34b902e42a782e1591110d5423728112b27e31470085d03f7ccafdbde8115b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_iunit.h": {
+      "mode": "100644",
+      "sha256": "d97fac9f45b3be4912809b86178f08822044456dd9008812b1c44631ec2361f4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_storage_class.h": {
+      "mode": "100644",
+      "sha256": "c8e2ad5d85003898817fa5acdee78b76344154203de18ccc975eb7ad3a26122d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/interface/ia_css_pkg_dir_types.h": {
+      "mode": "100644",
+      "sha256": "649257adff710594816733169a1a17e67c50d4d4ec5b84d28100070366b97320"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/pkg_dir.mk": {
+      "mode": "100644",
+      "sha256": "b06ed04a5f3fc1ae98570b9d09a5580a8254ec933fe11e70303b1fdc652e9a45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir.c": {
+      "mode": "100644",
+      "sha256": "c0dd930ca9d9b87fda8d55342647dbe5e586d815bdce521e79eac378cbeed69e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir_impl.h": {
+      "mode": "100644",
+      "sha256": "cd896da04928eca93468f82022cb7676d03eb9fa013e5977e53dbd634553b0c2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/pkg_dir/src/ia_css_pkg_dir_int.h": {
+      "mode": "100644",
+      "sha256": "e0dc02ee0e51d200348b57cbbda70e69a89575289cf19f94ab04ca45e1dbd2cc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/port_env_struct.h": {
+      "mode": "100644",
+      "sha256": "adcaa20b5b2dc6a53e1c4224d6b8300fd40bb318bcda03aaed34914e6c9e7986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/queue.h": {
+      "mode": "100644",
+      "sha256": "feb4bf5dcc1c3dfa3f851d2c4e94edb1e8ff0d54831438e812e6b880c3ccc438"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/queue_struct.h": {
+      "mode": "100644",
+      "sha256": "dff318d932a2cd02813128db8a5e17a20a9d7b378f1ca37e2a9f4c0e23a5aa85"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/recv_port.h": {
+      "mode": "100644",
+      "sha256": "98f571a1d385fe7999598887d170155fa72812136c251da15f79be56b96c6019"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/recv_port_struct.h": {
+      "mode": "100644",
+      "sha256": "376521fc24c4467d67eaa81d2177d89b1e12b238a10d66bcbee551fc1e7d7c45"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/send_port.h": {
+      "mode": "100644",
+      "sha256": "e1370b1a20be15b0c1b9e9eeb864219ebdce07b728ee6afe041bd870873579be"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/interface/send_port_struct.h": {
+      "mode": "100644",
+      "sha256": "04cc488db93c3e045342c78797d550275cdfc72b26c6aa830f113a6be43792af"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/port.mk": {
+      "mode": "100644",
+      "sha256": "8fcc10e4e4c15cbba93a0e1acb022f3f32219563e5577495b9207c48a2c1b233"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/src/queue.c": {
+      "mode": "100644",
+      "sha256": "4050024350b48577b68558c9dc415e5da7c87ec980e11ba564167af233fec32b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/src/recv_port.c": {
+      "mode": "100644",
+      "sha256": "7eea114146c420dc596681e0bf0fb108058bb196506b8e2626728d57519a02c0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/port/src/send_port.c": {
+      "mode": "100644",
+      "sha256": "a49b0188427a3b56f1e09d7d4384190c79b07db0d404faa27444861ef36462e2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_infobits/interface/psys_infobits.h": {
+      "mode": "100644",
+      "sha256": "eca1fa522fdf04c19485ef0c34adbf36da2b1c9f760d83ef705b84e2c9d87015"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_infobits/psys_infobits.mk": {
+      "mode": "100644",
+      "sha256": "106d6b61268401bbecd2a3c15b3fb7a802efd633afe9a01f34fbe1016ed0a977"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_infobits/src/psys_infobits.c": {
+      "mode": "100644",
+      "sha256": "9f59eb6fb35a321f2f1991999397b62f3961f00c0e830461d1f8d9aec6fa3e13"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_private_pg/interface/ia_css_psys_private_pg_data.h": {
+      "mode": "100644",
+      "sha256": "bc57441266654716e28f00dc9df3179b2ed61e4803df6e025ca71f8e91ba34db"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_server/interface/ia_css_bxt_spctrl_trace.h": {
+      "mode": "100644",
+      "sha256": "91ef6b87feafed5826f83e73f7298460d5d23f9a0385d0a7d512391d7a6a11f5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_server/psys_server.mk": {
+      "mode": "100644",
+      "sha256": "8fad38596ca8ffa78f542bfe5786bee3bc400206c65f8a0491e98003770f9413"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psys_server/src/bxt_spctrl_process_group_cmd_impl.c": {
+      "mode": "100644",
+      "sha256": "5045e1eb1e1de5f441d51d9b217a3e2edeb74d2e0a4cbeb833934cec507da205"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/interface/ia_css_program_group_data.h": {
+      "mode": "100644",
+      "sha256": "4528b21be6670e82beb659cedb1bab3fe2765ff4b21e434fceab47fe281013ba"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/interface/ia_css_program_group_data_defs.h": {
+      "mode": "100644",
+      "sha256": "73261f03c9b1d07b44c704f79c0d455b110705fff971455b565566a7d3dbfd19"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/interface/ia_css_psys_data_storage_class.h": {
+      "mode": "100644",
+      "sha256": "3aed0e97f1f8d20f2f96359733a3382d977f04e5de0fa3a798aab49da8889642"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/interface/ia_css_psys_data_trace.h": {
+      "mode": "100644",
+      "sha256": "0aa8bc6beb90769c34f921482d2b6b3df5346a9260f82493e8ed417c321f349a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/src/ia_css_program_group_data.c": {
+      "mode": "100644",
+      "sha256": "6c01ddeecc02d67830bb2fc4b1b616da49936864f4c7ff534e9d096343689727"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/data/src/ia_css_program_group_data_impl.h": {
+      "mode": "100644",
+      "sha256": "abb062132b4e137263a55f4b7fe48f6712cea1d8233bc2a04ea70a3e5d98df8a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/interface/cnlB0/ia_css_psys_transport_dep.h": {
+      "mode": "100644",
+      "sha256": "eeaeb8b3d00353494e34e2bab20c25610ada6faf4ed25cae703cb38f59f4e0df"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_device.h": {
+      "mode": "100644",
+      "sha256": "a4c1fee812fea5bd82ff542804414f5282ba31f7727af4e99cbd0ac3f5e94588"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_device_trace.h": {
+      "mode": "100644",
+      "sha256": "1a297be424008dd20f4ea01751cdb7eed92ffd3544a150e93c392a72dba67257"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_init.h": {
+      "mode": "100644",
+      "sha256": "88211f4163645f8d0ed0bc2fe96b41cc7f29d73141c2ee43290610669a3ec6d1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/interface/ia_css_psys_transport.h": {
+      "mode": "100644",
+      "sha256": "654843549dd68ab70b6a210ec5798e6d09ee6f249e0669ccc6a8da68b1a79125"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/device/src/ia_css_psys_device.c": {
+      "mode": "100644",
+      "sha256": "09b63c4842e4b35ea484a033aeee7e84f8dee4b3e2a6bb67c6c6722368093c1a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_buffer_set.h": {
+      "mode": "100644",
+      "sha256": "c7f7c23e870a2283ba9e45fa69869b38d96bc3e5314094bde08f3e1521b54b76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_dynamic_storage_class.h": {
+      "mode": "100644",
+      "sha256": "780df74df4b6512d8598021243a2c553f4fd5750c4e990c5cda2fec8983c7cb3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_dynamic_trace.h": {
+      "mode": "100644",
+      "sha256": "00c5b8f63d6fe50ae64793e673f0e106fd5accd7ae33af7d8e4886ee01b44858"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.h": {
+      "mode": "100644",
+      "sha256": "15473d0b4c5a0ca10841bf34524738eb997257e8b26b7a27a335dca9e18639a4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "398761f8c9d89be94f380681711149ee0fa2b39f70da1f6c7a62e8502e89a8b6"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "78f88b502a85ab06e733457135479a93c0671693033d7a6ee9a6352c66e87cd7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process.psys.h": {
+      "mode": "100644",
+      "sha256": "d954cafabba11038da37f265374d4710a988fffc5476e2ee80ae2e6a3967b623"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.h": {
+      "mode": "100644",
+      "sha256": "3181627ddb14aa3dea106a060f700bb985e15d2d8214bc53398178fb713bc676"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "2d7166c3a658febb04002dfc888a0c11fd5caad90323bd6f660c09a81ac7dbe3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "8b02af54bbf08bbf7d5b34bfbd1121e2e92ed534049c117cb77aca5f0b266349"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group.psys.h": {
+      "mode": "100644",
+      "sha256": "238606f51c535e6039dfd084918b2f26fca78da7b820cede142627beb392e4d2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_group_cmd_impl.h": {
+      "mode": "100644",
+      "sha256": "4d9ab1f04057b16d1d3f4d76a0595790d58afbf218188e5a2c10b802e8a031a8"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_process_types.h": {
+      "mode": "100644",
+      "sha256": "33d20b424673052fac635d84cbbee10f91cdcbf96bcbcafa5fd13d8bf0643a4e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_terminal.h": {
+      "mode": "100644",
+      "sha256": "d809d5c99b1f1215e6fea73fe6beebd514c4ad4883e4c0dd0da8d8c380489e1f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/interface/ia_css_psys_terminal.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "cbe5c418542d440cbe8751683141e3d9952580916aca03f0b2bf75285b0c3986"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_buffer_set.c": {
+      "mode": "100644",
+      "sha256": "34ec9e3ad4b45f00b3fa93f08c6ce2fdc68747e29ac0424f8f241318768eef38"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_buffer_set_impl.h": {
+      "mode": "100644",
+      "sha256": "f12152c48a2920c684f81167155859b45a8a4e327c0ee151ab623c3b978511da"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process.c": {
+      "mode": "100644",
+      "sha256": "8ff24b543982c67303678864b7701d98762e7b86393205d6f243691f46c80eae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_group.c": {
+      "mode": "100644",
+      "sha256": "b0f95787b5e2cbfc18215da44bf1b87282c30e6fd2ca19806a511d251b80f6bf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_group_impl.h": {
+      "mode": "100644",
+      "sha256": "0f89609f62a92a13be2bff4cb741a1a98f2ca400a0f34c4daa0434f52208e92c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_impl.h": {
+      "mode": "100644",
+      "sha256": "99c0e8d142bc284f67ef2591f2512353d76429428aa741f58af80be1433e84e3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_process_private_types.h": {
+      "mode": "100644",
+      "sha256": "f551376042a848f3f465fa0fae47644e451f65691561dc0a2e7c0ef972d8bf7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal.c": {
+      "mode": "100644",
+      "sha256": "dd431f9764f95ef44f77b71f46a949bc1ffe5c223dae167a3b2a40dcc7c785ce"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal_impl.h": {
+      "mode": "100644",
+      "sha256": "82f1d8fe7a71377bd6af15e40fe43598fe6dab4d9eb7ecd1a3f443985ac1a029"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/dynamic/src/ia_css_psys_terminal_private_types.h": {
+      "mode": "100644",
+      "sha256": "7069d0be42dc04d7d74c1ff2404d85682760a326a3627727f9953bb9b9172cab"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi.h": {
+      "mode": "100644",
+      "sha256": "db98a3cc7c8c703178d56df642c94914563f626865ab9a6c07217de8bf3102e4"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi_fw_version.h": {
+      "mode": "100644",
+      "sha256": "47f64502ec6f7d8d3b24b23aa808b3b98c993ed5291f7812aa62f4bb7232e79c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/interface/ia_css_psysapi_trace.h": {
+      "mode": "100644",
+      "sha256": "1e8b5b822d51d3fecf22f763c402d7df20b300b5ce306214f9c34389d54999b3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/kernel/interface/ia_css_kernel_bitmap.h": {
+      "mode": "100644",
+      "sha256": "da7dc89af09297e00ea684422c45ed87143df056067ccb50a13567e0efee90f1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/kernel/interface/ia_css_psys_kernel_trace.h": {
+      "mode": "100644",
+      "sha256": "7371b332780a41b1be246233dc44e672cb4357d3828d8bd6237d6bfce43b60aa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/kernel/src/ia_css_kernel_bitmap.c": {
+      "mode": "100644",
+      "sha256": "66f592e61aa592526119f4d07a80371c292b7bb9e3b6eb707685d8b2ba067736"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param.h": {
+      "mode": "100644",
+      "sha256": "7dca73dd54f2518786c9906d8e2a35b78a4ea6579133b6d030c0eecf4e90bd78"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param.sim.h": {
+      "mode": "100644",
+      "sha256": "b19ecb874112eb4f08c24ab875d3ed9aab9f733f8e590705983681e08b65d545"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/interface/ia_css_program_group_param_types.h": {
+      "mode": "100644",
+      "sha256": "0ce63e4c788b30aee914c8d07485b40846ee16ef6ab2e0f589c8109c9377401f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/interface/ia_css_psys_param_trace.h": {
+      "mode": "100644",
+      "sha256": "f39ed217fcc999a0e4c150d609819bf87ec1c9f2cd43622497a8154939f2c513"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/src/ia_css_program_group_param.c": {
+      "mode": "100644",
+      "sha256": "684caaa901d1c1071abec3d1f7e6be643e2b570e72d098be2ab28608f77af99a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/param/src/ia_css_program_group_param_private.h": {
+      "mode": "100644",
+      "sha256": "28825872e7dd5dccd5f64b127e45b592111cd09118f94485c1ba327274e44868"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/psys_server_manifest/cnlB0/ia_css_psys_server_manifest.c": {
+      "mode": "100644",
+      "sha256": "624ec79bb89dd844a95274648962a6be279fc73dcb5938ca1389ae46fa430ac0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/psys_server_manifest/cnlB0/ia_css_psys_server_manifest.h": {
+      "mode": "100644",
+      "sha256": "e0c68ca33857b4c457966f3a6cf52e08f6f22f5139a528ba4a84eeeac35a81d2"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/psysapi.mk": {
+      "mode": "100644",
+      "sha256": "8720e59f9951f056617f1c9d2ef992c7baad06668991bc230c5f70d0a7b54aae"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/resource_model/cnlB0/vied_nci_psys_resource_model.c": {
+      "mode": "100644",
+      "sha256": "4c15e03c4269669f1348d89296622f88a21d331fc88b65cc5c23567e7d5a5974"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/resource_model/cnlB0/vied_nci_psys_resource_model.h": {
+      "mode": "100644",
+      "sha256": "dd7e3524b2aaf2d45c40eb85056466e20acf0c7fae52a366dc5d94276ad3a62b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_data.h": {
+      "mode": "100644",
+      "sha256": "a46a377155c43aee67550af2a92e9369f84bd4ee1451978f30ac64be3587de51"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_storage_class.h": {
+      "mode": "100644",
+      "sha256": "1ec2186bdb81a7597d06403c6391f374695e6ef7178aa337d29a295d67ee73c9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/interface/ia_css_psys_sim_trace.h": {
+      "mode": "100644",
+      "sha256": "99c8c621cf672ea76c4c911e59af2b029050ad31d6c0ac808a8600c12a226f7c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/interface/vied_nci_psys_system_global.h": {
+      "mode": "100644",
+      "sha256": "384359fa32581c1be01e7d9ce4fe79a1f7fc9fb5f39cbf1e321201cddaf3761c"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/src/ia_css_psys_sim_data.c": {
+      "mode": "100644",
+      "sha256": "94a42f19ff5b8a1683ca4b41c9f62e7366c207cfe4efc95bde3e5483ed0fb549"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/src/psys_system_global_impl.h": {
+      "mode": "100644",
+      "sha256": "b319a634a2893645f02ac01aeca2b9cb5301be570747ca8574bb189d05eab073"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/sim/src/vied_nci_psys_system.c": {
+      "mode": "100644",
+      "sha256": "5c0fc8152801d0cc16c77cfd886a2cb30b720dffbfff85d630c22eaeb6a33738"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "bc0fbe6b1201c5b35d72a0e530cfdbce22e1440f242bbad2a96534638f14f3a7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.h": {
+      "mode": "100644",
+      "sha256": "67a35fa99e09b4527922f46ea9f7f2be74103f9e80928c5f1959972d8a078a27"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "931868b541a6df586b190e5b8047580a2e6e1daf971aef504eae4d010674a801"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_group_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "6e92151ad4c1f78bb23dfb9cce7da2578ad67650a81a3b9fe930a4880080a86f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.h": {
+      "mode": "100644",
+      "sha256": "b8a36ec9d8be0e4d6d9e2aacd160fbccbc2637e3776f5fa50afacff95e92f10e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.hsys.kernel.h": {
+      "mode": "100644",
+      "sha256": "7fac917c00fe314b94300ff9add14ba00c4ad624a01adf70700191aa238fd125"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "24f35d9457895b4d075913b0893c30502772f8ad0ad7ccaade7dfd63c1199ddf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_program_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "82cf98507f72f550f4431390ee95852b02b9e48a0201b234c26853578cea631b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_static_storage_class.h": {
+      "mode": "100644",
+      "sha256": "b169f1e62e2a36817e7cbf29169c5a37719a9be3799c3d432ebf02bc61f7bc7d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_static_trace.h": {
+      "mode": "100644",
+      "sha256": "c8eed87b55ec0f1adc60ea5ad289263c6570f5ef76313394443fd8b9c2a27414"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.h": {
+      "mode": "100644",
+      "sha256": "9a4cfd2ae58f3f8de41c404e02f4609e427653a79780b6c40f174f29302133d1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.hsys.user.h": {
+      "mode": "100644",
+      "sha256": "fded91dd374d55ffa265a7a480075ed552facd6bf16e91f1c99fe431bedd19b1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/interface/ia_css_psys_terminal_manifest.sim.h": {
+      "mode": "100644",
+      "sha256": "ea9d863a725569128d3a74fbdb476f89b8e154acd6c7bd26fb656165fd744257"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_manifest.c": {
+      "mode": "100644",
+      "sha256": "cc108e41a28819b4d0b7c421644c6a9aa747fa78847ae99542dabf6d4979de8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "dce1beeff52cc67af14be6903a490ed36d2eb67361bd8479725ef0b1c235ec31"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_group_private.h": {
+      "mode": "100644",
+      "sha256": "d1224215289388956b4311a4a7804ec18a75497ecd5571e9a4b6affa5fa32143"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_program_manifest.c": {
+      "mode": "100644",
+      "sha256": "969b5eba34d09ba8a4f07bcdc39c7fa3abb221f7e5ed20b3b6e605b237710ef5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/psysapi/static/src/ia_css_psys_terminal_manifest.c": {
+      "mode": "100644",
+      "sha256": "299f44dd4829f2faa698ce074c8fcb8a940da214769ed70e7bee891d930e4946"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/reg_dump/src/psys/cnlB0_gen_reg_dump/ia_css_debug_dump.c": {
+      "mode": "100644",
+      "sha256": "299c72ea1253f37ae9d3c08fdb74a832bbb24e5dcbee0147adf8a266d8e4b1dc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/reg_dump/src/psys/cnlB0_gen_reg_dump/ia_css_debug_dump.h": {
+      "mode": "100644",
+      "sha256": "ddbd6572b5b96f31af0b41f4a39a3e44c4bb7d450e266567f63d69e5c9d6e8ff"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/reg_dump/src/reg_dump_generic_bridge.c": {
+      "mode": "100644",
+      "sha256": "ecd41759a9aaf216bfde3accbfcf26b70a8d766c6b4cbc79830beb03afcc224e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/regmem/interface/regmem_access.h": {
+      "mode": "100644",
+      "sha256": "ddeca58ae1f17ffeefef6437f20670d9aacb3409c771e50fa655a0c1708c7c8d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/regmem/regmem.mk": {
+      "mode": "100644",
+      "sha256": "ae62cdb08749faa2a95fae36df6cbd7c74ad174aea7e3062d58596738a3aff56"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/regmem/src/regmem_access_host.h": {
+      "mode": "100644",
+      "sha256": "890151c49c392d7a8ce98d102817dee67f2612a5a829130fd31e1500adb7bb94"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/regmem/src/regmem_const.h": {
+      "mode": "100644",
+      "sha256": "adbaffcc06c65e5ffa804f917b5133b8342920748d7deaf7f63cc2f94f92b816"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm.h": {
+      "mode": "100644",
+      "sha256": "8e910c6827fa7483cb368b7ecc6962e807ebec090c7345d4d18a9f7347456acc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_manifest.h": {
+      "mode": "100644",
+      "sha256": "544330b3c1ef7f47f85b106035861ece628564f8bb500b6405cfcd710907c556"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "b0cac111bf8110c2f4e2fcfc6a19e9023efb2a9fcca37550cf45d76e87d678bd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_storage_class.h": {
+      "mode": "100644",
+      "sha256": "6333eed3e629cdf77088ce63f0c6981cc50fa4a549de67d2b7b35fbc69a6faf1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/interface/ia_css_rbm_trace.h": {
+      "mode": "100644",
+      "sha256": "47db9500336a326e1ab53587db2652cbc6a33ac63030b64d8992256fc03b4ab7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/routing_bitmap.mk": {
+      "mode": "100644",
+      "sha256": "3ef41d01fc7fb2d5fe90574e74189d6e35af5bbf3f3aa7c5181161e11d42fca1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm.c": {
+      "mode": "100644",
+      "sha256": "0a811b85127176e161bc641fa9e308f7951fd8817526e847d938a2e8c58c3f37"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_impl.h": {
+      "mode": "100644",
+      "sha256": "7d14fbee5d9f7ff640d312d3d3804b4c60c744e12051873181b5aec8634c3d83"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_manifest.c": {
+      "mode": "100644",
+      "sha256": "6475253c85d9b08c0ed3278e2492e544c8046b877587d2146431da9be20f54a1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/routing_bitmap/src/ia_css_rbm_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "353d4ae095d8016e9126dc4c0c915bbb265e06fa771b78402a2f43ac950f6172"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/assert_support.h": {
+      "mode": "100644",
+      "sha256": "9da3383f66d3062a730880b9bff51b77e94f84362fbc607ff9c497396767ce23"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/cpu_mem_support.h": {
+      "mode": "100644",
+      "sha256": "3cffdcf3bfc88b181fb80939fbdbbe7c0ef138e479e6e74bb189c064a24211fd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/error_support.h": {
+      "mode": "100644",
+      "sha256": "b08eab458dd68a65185d3a0ddb5f379316de65160ca573b16219fb3e3d7c0610"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/math_support.h": {
+      "mode": "100644",
+      "sha256": "99351ba4fedc5cd0c2888ae7586914e96d258badd7f219e2d9400765828734d0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/misc_support.h": {
+      "mode": "100644",
+      "sha256": "3ee04224478a018fd613cb66758ebfb1f854828677305225d27636f1f3304bbf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/platform_support.h": {
+      "mode": "100644",
+      "sha256": "427b367565ac9c162d8f0bcbfff1c44cb69a28d27b3fb99cd1a7bfaa9a38d32f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/print_support.h": {
+      "mode": "100644",
+      "sha256": "463d4d4180f82421b377f9693dbd33c14d6b926e2d20dfde7dbe730adbdbdc76"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/storage_class.h": {
+      "mode": "100644",
+      "sha256": "ac624cb64eaefd385d8d68c014356203ff95d65e5e38615a4d260e8f6cd62144"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/support/type_support.h": {
+      "mode": "100644",
+      "sha256": "12e6abfc007259ad5869070218e33f403314b1a0e05e50859218c7dc12bd04bc"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/interface/ia_css_syscom.h": {
+      "mode": "100644",
+      "sha256": "930b3b856b80668e6c021f895acd324d047de072ca68917d8349941e9db46c43"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/interface/ia_css_syscom_config.h": {
+      "mode": "100644",
+      "sha256": "d422a7e25863bdb9be0b9d5e2823737622c18059e32604b59d19bb2c901a5fe9"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/interface/ia_css_syscom_trace.h": {
+      "mode": "100644",
+      "sha256": "c6ed59ec15cee21b5016dc78927a6f49b37655cc7772eeca7b0f088a75f74241"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/src/ia_css_syscom.c": {
+      "mode": "100644",
+      "sha256": "06646eaa0fc678d10494a702077fce4c793b69471bf09ace73e27958989eeb00"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/src/ia_css_syscom_config_fw.h": {
+      "mode": "100644",
+      "sha256": "ac1f0f8fb9938d53a50e58e523f80d27820b49b8cfaf92bc02f71fa0d6ee3dc3"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/src/ia_css_syscom_context.h": {
+      "mode": "100644",
+      "sha256": "66248aa43db407da79abd85dc0d4f9f8f21bda13731fc34a48f8c0a5a295c755"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/syscom/syscom.mk": {
+      "mode": "100644",
+      "sha256": "db2ccee2fbadc64bf04484fc7b002560377eee3480baf591eee2eafefe503199"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/trace/interface/ia_css_trace.h": {
+      "mode": "100644",
+      "sha256": "b1ee9fac8eab3d9db1e281242b847dea015d09e779aee3bacd2b5a3f7ad3bd6e"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/trace/trace.mk": {
+      "mode": "100644",
+      "sha256": "3f612a42928ebeda60125199fdbd9ce4d86792cd14ecc32c07eb4c3bfa593a42"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/shared_memory_access.h": {
+      "mode": "100644",
+      "sha256": "9a931d662731b8a18617057b2d2a8d78b06c10728ac41f2ba8dbf3c7fe1069fa"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/shared_memory_map.h": {
+      "mode": "100644",
+      "sha256": "b32030e48f48cd0fa6f1a91e0badee21c83763dab9dbb9f80ffe12d09c4f2b95"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_config.h": {
+      "mode": "100644",
+      "sha256": "6639075c314dc673af66fb1b7c6342057271b27c85d8621762da577158e5a184"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_memory_access_types.h": {
+      "mode": "100644",
+      "sha256": "eb3370c1ed40cf7865cbeaf52658725fd697594f434bac043be00056595b166b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_subsystem_access.h": {
+      "mode": "100644",
+      "sha256": "d1a7796c7ac67ab0a21286b5210bb5ee8d86b38a54bc4fa49ef21f1070a0e15d"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_subsystem_access_initialization.h": {
+      "mode": "100644",
+      "sha256": "d88e475cdb5bf3c490a4d29d9b12a51bbe1f2af9c785edbdae1cb7df83d95a0f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_subsystem_access_types.h": {
+      "mode": "100644",
+      "sha256": "3920b96f248d57040d15adf5f7ccfd428536bb38c7ef30d7c4c74aa3e2f9140f"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied/vied/vied_types.h": {
+      "mode": "100644",
+      "sha256": "d0c64e60dd26305f65f0e27f66d23d5e22f8518259b4b1348e630f915f6552c1"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_nci_acb/interface/vied_nci_acb_route_type.h": {
+      "mode": "100644",
+      "sha256": "1965faaf992bdaaac8498174ebfeb3b7509fda8094e8a294609bb81db107c519"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/interface/ia_css_param_storage_class.h": {
+      "mode": "100644",
+      "sha256": "940d1049ba93c2b920748777c179eb5c91e62c05f78e75e27e13eda283084e44"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal.h": {
+      "mode": "100644",
+      "sha256": "e16fd75e55c80c223b68ad527ff94a1a0d0e0456055061f0af98a5d6acc9d5d7"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_manifest.h": {
+      "mode": "100644",
+      "sha256": "6ac925437d5f3f06029fba910d902125fa8bf654f7404d7f4debe23ea49e6b63"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_manifest_types.h": {
+      "mode": "100644",
+      "sha256": "f012177189f75d84c4bbf1fc03eace4fb282677699bdcfb7856d10a513fe40bf"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/interface/ia_css_terminal_types.h": {
+      "mode": "100644",
+      "sha256": "77a696a38fba71f1198cbb5fbe81e1f64e97a7bf76ff998ad16c899a648b8b64"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal.c": {
+      "mode": "100644",
+      "sha256": "8c7bbdc91f165a005f0f73e1aa6e9b8663c11f18f73bdc170611944e9632297b"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_impl.h": {
+      "mode": "100644",
+      "sha256": "143dc9e455be18e9e05ddd95b4c24e6cd12813217594809eeadce5c88544a6dd"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_manifest.c": {
+      "mode": "100644",
+      "sha256": "ab1c3eda44e911df6af6baa551b897213d68f6f0b3f2e164c4c94e5e4f2307db"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/src/ia_css_terminal_manifest_impl.h": {
+      "mode": "100644",
+      "sha256": "42203914838fd7297c45f3d66325c9b7a17a95761362243b24f5665a267609c0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/lib/vied_parameters/vied_parameters.mk": {
+      "mode": "100644",
+      "sha256": "f2401e4d38fb5a878fb04b13c38f88ccab2387b3eab8d9167702bb3c6bcedfe0"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/libcsspsys2600.c": {
+      "mode": "100644",
+      "sha256": "fca9d62233ea392f7ab82b68e5e376f89a1b1c807895ab4090bb317a1e602df5"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/libcsspsys2600.h": {
+      "mode": "100644",
+      "sha256": "f53bb37e8044402e9dbff0c2945003e227d8572cb9a8b8c0902d9a98b446b95a"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-css/libintel-ipu4p.c": {
+      "mode": "100644",
+      "sha256": "b4f0030691aea411704de5171a5ee2383091a9c12513a129fb8d320344934e05"
+    },
+    "drivers/media/pci/intel/ipu4/ipu4p-isys-csi2.c": {
+      "mode": "100644",
+      "sha256": "8dfe0985242173dec9f03e81d1c0f25c47e8cde17dd2d9d0fb63092ab743fd45"
+    },
+    "include/media/ipu-bridge.h": {
+      "mode": "100644",
+      "sha256": "239d01d9420df1eaf942648cc505daabf3511435ad88ba1ead44851fcb26f243"
+    }
+  },
+  "inputs_sha256": "ab8d4bf7637fa8ae44e211a21cceb062418f87cc97cb5e7db1a731b0f7ea2b55",
+  "profile": "runtime-browse",
+  "schema": 1,
+  "tree": "65c10d4c4f7b651204757b62d608755cc4c21779"
+}
