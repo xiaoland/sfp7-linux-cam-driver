@@ -2,7 +2,7 @@
 
 Experimental source and reproducibility material for the **Surface Pro 7 (2019, IPU4P PCI ID `8086:8a19`)** front and rear cameras on Linux. This repository combines a pinned kernel source composition, libcamera Software ISP changes, a GNOME Snapshot video fix, and runtime configuration. It is not a driver for Surface Pro 7+ or other Surface models. Browse the [C/C++/Rust source snapshot](source/) directly, or use the ordered patches to reconstruct complete source trees.
 
-**Status (2026-09-23):** On one Surface Pro 7 running Fedora 42, the package-managed `6.19.8-sfp7cam.p1.fc42.x86_64` kernel booted twice. Both cameras captured RAW and libcamera frames; Snapshot took front/rear/front 1920×1080 photos, recorded decodable video from both cameras, and reopened successfully. The second boot loaded the camera stack automatically. The P1 kernel has **not** been tested after suspend/resume, and the exact P1 video quality has not been subjectively accepted. There is no independently tested second device or complete signed installer. See [validation and limits](docs/STATUS.md).
+**Status (2026-09-25):** On one Surface Pro 7 running Fedora 42, the maintenance candidate `6.19.8-sfp7cam.maint.fc42.x86_64` booted three times and is now the default. Both cameras captured libcamera frames; Snapshot took front/rear/front photos, recorded decodable video from each camera, and reopened successfully. A timed s2idle suspend/resume was followed by working front and rear captures and photos. The original P1 kernel remains a GRUB fallback. Video quality is still limited by low bitrate, and there is no independently tested second device or complete signed installer. See [candidate device validation](docs/MAINTENANCE-DEVICE-VALIDATION.md) and [historical P1 results](docs/STATUS.md).
 
 This is a **source publication**, not an installable release. The tested Fedora 42 RPMs are unsigned and the runtime helper, service, and modprobe policy are not yet owned by an RPM. Please do not replace your boot kernel solely from these source files. A volunteer preview will follow after packaging and recovery instructions are ready.
 
@@ -29,7 +29,9 @@ This work used AI coding assistance. Human review, proper authorship, and valid 
 
 For development, start with [source maintenance](docs/SOURCE-MAINTENANCE.md) and
 [tests](tests/README.md). The original runtime inputs remain available; browsing
-snapshots include maintenance candidates and do not inherit device acceptance.
+snapshots include maintenance candidates; device acceptance is limited to the
+exact source and package identities in the linked validation record.
 
 The [maintenance validation record](docs/MAINTENANCE-VALIDATION.md) documents the
-refactor, independent review and offline test boundaries.
+refactor, independent review and offline test boundaries; the
+[device record](docs/MAINTENANCE-DEVICE-VALIDATION.md) covers the later installation.

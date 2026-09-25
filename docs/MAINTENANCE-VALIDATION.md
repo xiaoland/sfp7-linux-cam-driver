@@ -3,8 +3,10 @@
 The refactor makes the source composition reproducible and separates AF/AGC
 responsibilities while keeping the original runtime patches and P1 identities.
 The reviewed code is `23a920b6d14e5405238041e3c647e84c683960bc`.
-These are offline development results. This candidate has not been installed or
-tested on a camera device; the [P1 device results](STATUS.md) describe another tree.
+This page records the offline development checks. The later
+[single-device validation](MAINTENANCE-DEVICE-VALIDATION.md) records the
+candidate installed on a Surface Pro 7; the [P1 results](STATUS.md) describe
+another tree.
 
 ## Changes and retained boundaries
 
@@ -70,9 +72,9 @@ This review does not replace upstream human review or DCO certification.
 The reviewer ran the 16 source/identity tests and 44 driver cases, and checked all
 profiles plus snapshot/manifests. Linux full builds and native/loader results
 were produced separately by the implementing agent. Neither agent exercised
-camera hardware during this task.
+camera hardware during the offline refactor and review stage.
 
 Outstanding boundaries include OPEN/CLOSE confirmation and late reply/handle
 reuse, request error propagation, real control delays and lens mechanics,
-IRQ/FW/PM behavior, video quality, suspend/resume and another SP7. Candidate
-hardware acceptance and packaging must be tracked separately before distribution.
+IRQ/FW/PM behavior, video quality and another SP7. The subsequent single-device
+hardware acceptance and remaining packaging work are tracked separately.

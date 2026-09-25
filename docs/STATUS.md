@@ -1,10 +1,10 @@
 # Validation status and artifact identities
 
-The maintenance series is a development candidate. The device results and package
-hashes below describe the original runtime release, **not** the refactored source.
-The kernel/runtime patches and installed artifact identities have been preserved;
-new source-level test results are documented separately in the
-[maintenance validation record](MAINTENANCE-VALIDATION.md).
+The maintenance candidate has now passed [single-device validation](MAINTENANCE-DEVICE-VALIDATION.md)
+and is installed as the default on that Surface Pro 7. The results and package
+hashes below describe the earlier P1 release, **not** the refactored source.
+The [maintenance validation record](MAINTENANCE-VALIDATION.md) documents the
+separate source-level checks.
 
 
 Tested on **one** Surface Pro 7 (IPU4P `8086:8a19`) running Fedora 42 x86_64. The P1 kernel `6.19.8-sfp7cam.p1.fc42.x86_64` was installed as a separate package and booted twice. On the first boot, front and rear sensors each yielded three distinct RAW frames; libcamera delivered 120 frames from each camera; Snapshot captured three distinct 1920×1080 photos in front/rear/front order and about 17 seconds of decodable 1920×1080 VP8 video from each camera. On the second boot, the one-shot service loaded the modules without a manual command, rear libcamera captured 300 frames, and Snapshot reopened three times with both cameras available.
@@ -24,4 +24,9 @@ These exact local build artifacts were used or built during the single-device wo
 | `snapshot-48.0.1-1.sfp7.1.fc42.x86_64.rpm` | `e41544c415a8afe63923023b4169d6365779d7858d153903d42285af47d0a9cb` |
 | `snapshot-48.0.1-1.sfp7.1.fc42.src.rpm` | `25092453a1f3d12ab71c7504a4b95ad120bfe43437ed1f474344d31596240f73` |
 
-The remaining volunteer-preview tasks are: package the one-shot loader, service, modprobe and WirePlumber settings; document offline recovery and rollback; decide signing for Secure Boot and RPM distribution; retest P1 suspend/resume and video quality; then seek independent SP7 hardware validation. The existing development machine had GRUB fallback entries but no Live USB. Surface Pro 7+ is outside the test matrix.
+The remaining volunteer-preview tasks are: package the candidate one-shot loader,
+service, modprobe and WirePlumber settings; document offline recovery and rollback;
+decide signing for Secure Boot and RPM distribution; improve or explicitly bound
+video quality; then seek independent SP7 hardware validation. The development
+machine has GRUB fallback entries but no Live USB. Surface Pro 7+ is outside the
+test matrix.

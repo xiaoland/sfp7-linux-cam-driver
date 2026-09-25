@@ -4,7 +4,7 @@
 
 可以直接浏览 [C/C++/Rust 源码快照](source/)；其中内核 IPU4P 驱动、libcamera 自动对焦和 Snapshot 录像代码都来自文档锁定的版本。补丁仍是重建完整源码树的依据，源码快照不是独立可编译的内核。
 
-截至 2026-09-23，Fedora 42 上的 P1 内核已在**一台** Surface Pro 7 上启动两次。前后摄均可采集 RAW 和 libcamera 视频帧；Snapshot 完成前→后→前拍照、两路可解码视频录制与重复打开；第二次开机自动加载驱动。P1 尚未验证休眠唤醒和主观视频质量，也没有第二台设备的独立测试。详见[验证状态](docs/STATUS.md)。
+截至 2026-09-25，Fedora 42 上的维护候选内核 `6.19.8-sfp7cam.maint.fc42.x86_64` 已在**一台** Surface Pro 7 上成功启动三次，现为默认项。前后摄均可持续采集 libcamera 帧；Snapshot 完成前→后→前拍照、两路可完整解码录像及重复打开。一次定时 s2idle 休眠唤醒后，双摄取帧与拍照仍通过。原 P1 内核留作 GRUB 回退。低码率录像画质、第二台设备的独立测试和完整签名安装器仍待解决。详见[候选实机验证](docs/MAINTENANCE-DEVICE-VALIDATION.md)与[历史 P1 结果](docs/STATUS.md)。
 
 目前公开的是**源码仓库，并非可直接安装的发行版**。现有 Fedora 42 RPM 未签名，启动脚本和相关配置尚未打包；在安装与恢复流程完善前，不建议仅凭这些文件替换启动内核。
 
@@ -16,6 +16,6 @@
 项目使用过 AI 编程辅助。正式向 Linux、libcamera、GNOME 上游提交补丁前，需要人工审阅、真实作者署名和符合 DCO 的签署。
 
 源码维护入口见 [重建与快照核验](docs/SOURCE-MAINTENANCE.md) 和 [测试说明](tests/README.md)。
-原始运行时补丁仍保留；可浏览源码包含后续维护候选，不能沿用旧版本的实机验收结论。
+原始运行时补丁仍保留；可浏览源码包含维护候选，实机结论只适用于验证记录中的准确源码和安装包身份。
 
-源码重构、独立复核及离线验证结果见[维护验证记录](docs/MAINTENANCE-VALIDATION.md)；维护候选尚未部署到设备。
+源码重构、独立复核及离线验证结果见[维护验证记录](docs/MAINTENANCE-VALIDATION.md)；后续部署结果见[实机验证](docs/MAINTENANCE-DEVICE-VALIDATION.md)。
