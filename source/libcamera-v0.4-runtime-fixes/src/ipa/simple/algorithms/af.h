@@ -39,13 +39,14 @@ private:
 	};
 
 	void startScan(IPAFrameContext &frameContext);
-	void moveLens(IPAFrameContext &frameContext, int32_t position);
+	void requestLensPosition(IPAFrameContext &frameContext, int32_t position);
 	void finishCandidate(IPAFrameContext &frameContext, uint64_t metric);
 
 	Stage stage_ = Stage::Disabled;
 	int32_t minPosition_ = 0;
 	int32_t maxPosition_ = 0;
-	int32_t currentPosition_ = 0;
+	/* Last requested raw control value; the lens provides no position feedback. */
+	int32_t commandedPosition_ = 0;
 	int32_t bestPosition_ = 0;
 	int32_t scanEnd_ = 0;
 	int32_t scanStep_ = 1;
@@ -54,12 +55,12 @@ private:
 	uint64_t metricSum_ = 0;
 	uint64_t referenceMetric_ = 0;
 	uint64_t filteredMetric_ = 0;
-	unsigned int delayFrames_ = 0;
-	unsigned int settleFrames_ = 0;
-	unsigned int metricSamples_ = 0;
-	unsigned int lossFrames_ = 0;
-	unsigned int recoveryFrames_ = 0;
-	unsigned int focusedFrames_ = 0;
+	unsigned int startupCallbacksRemaining_ = 0;
+	unsigned int settleCallbacksRemaining_ = 0;
+	unsigned int metricSampleCount_ = 0;
+	unsigned int lowContrastCallbacks_ = 0;
+	unsigned int recoveryCallbacks_ = 0;
+	unsigned int focusedCallbacks_ = 0;
 	bool fineScan_ = false;
 	bool rescanArmed_ = true;
 };

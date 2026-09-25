@@ -21,13 +21,14 @@ namespace ipa::soft::algorithms {
 
 namespace {
 
-constexpr unsigned int kStartupDelayFrames = 8;
-constexpr unsigned int kSettleFrames = 1;
-constexpr unsigned int kMeasureFrames = 2;
-constexpr unsigned int kReferenceFrames = 8;
-constexpr unsigned int kRescanCooldownFrames = 300;
-constexpr unsigned int kFocusLossFrames = 30;
-constexpr unsigned int kRescanRecoveryFrames = 150;
+/* Counts process callbacks, not frame numbers or elapsed sensor time. */
+constexpr unsigned int kStartupDelayCallbacks = 8;
+constexpr unsigned int kSettleCallbacks = 1;
+constexpr unsigned int kCandidateSamples = 2;
+constexpr unsigned int kReferenceSamples = 8;
+constexpr unsigned int kRescanCooldownCallbacks = 300;
+constexpr unsigned int kFocusLossCallbacks = 30;
+constexpr unsigned int kRescanRecoveryCallbacks = 150;
 constexpr unsigned int kScanStopRatioNumerator = 3;
 constexpr unsigned int kScanStopRatioDenominator = 4;
 
@@ -52,17 +53,17 @@ int Af::configure([[maybe_unused]] IPAContext &context,
 		return 0;
 	}
 
-	currentPosition_ = info->second.def().get<int32_t>();
-	currentPosition_ = std::clamp(currentPosition_, minPosition_, maxPosition_);
+	commandedPosition_ = info->second.def().get<int32_t>();
+	commandedPosition_ = std::clamp(commandedPosition_, minPosition_, maxPosition_);
 	coarseStep_ = std::max<int32_t>(1, (maxPosition_ - minPosition_ + 3) / 4);
-	bestPosition_ = currentPosition_;
+	bestPosition_ = commandedPosition_;
 	bestMetric_ = 0;
 	referenceMetric_ = 0;
 	filteredMetric_ = 0;
-	delayFrames_ = kStartupDelayFrames;
-	lossFrames_ = 0;
-	recoveryFrames_ = 0;
-	focusedFrames_ = 0;
+	startupCallbacksRemaining_ = kStartupDelayCallbacks;
+	lowContrastCallbacks_ = 0;
+	recoveryCallbacks_ = 0;
+	focusedCallbacks_ = 0;
 	rescanArmed_ = true;
 	stage_ = Stage::Delay;
 
@@ -73,13 +74,14 @@ int Af::configure([[maybe_unused]] IPAContext &context,
 	return 0;
 }
 
-void Af::moveLens(IPAFrameContext &frameContext, int32_t position)
+/* Queue a raw lens control request; settling does not confirm mechanical arrival. */
+void Af::requestLensPosition(IPAFrameContext &frameContext, int32_t position)
 {
-	currentPosition_ = std::clamp(position, minPosition_, maxPosition_);
-	frameContext.lens.focusPosition = currentPosition_;
-	settleFrames_ = kSettleFrames;
+	commandedPosition_ = std::clamp(position, minPosition_, maxPosition_);
+	frameContext.lens.focusPosition = commandedPosition_;
+	settleCallbacksRemaining_ = kSettleCallbacks;
 	metricSum_ = 0;
-	metricSamples_ = 0;
+	metricSampleCount_ = 0;
 	stage_ = Stage::Settle;
 }
 
@@ -93,10 +95,10 @@ void Af::startScan(IPAFrameContext &frameContext)
 	scanEnd_ = maxPosition_;
 	bestPosition_ = minPosition_;
 	bestMetric_ = 0;
-	lossFrames_ = 0;
-	recoveryFrames_ = 0;
-	focusedFrames_ = 0;
-	moveLens(frameContext, minPosition_);
+	lowContrastCallbacks_ = 0;
+	recoveryCallbacks_ = 0;
+	focusedCallbacks_ = 0;
+	requestLensPosition(frameContext, minPosition_);
 
 	LOG(IPASoftAf, Debug) << "Starting autofocus scan";
 }
@@ -105,16 +107,16 @@ void Af::finishCandidate(IPAFrameContext &frameContext, uint64_t metric)
 {
 	if (metric > bestMetric_) {
 		bestMetric_ = metric;
-		bestPosition_ = currentPosition_;
+		bestPosition_ = commandedPosition_;
 	}
 
-	const bool passedPeak = currentPosition_ > bestPosition_ &&
+	const bool passedPeak = commandedPosition_ > bestPosition_ &&
 		metric * kScanStopRatioDenominator <
 			bestMetric_ * kScanStopRatioNumerator;
 
-	if (currentPosition_ < scanEnd_ && !passedPeak) {
-		int32_t next = std::min(scanEnd_, currentPosition_ + scanStep_);
-		moveLens(frameContext, next);
+	if (commandedPosition_ < scanEnd_ && !passedPeak) {
+		int32_t next = std::min(scanEnd_, commandedPosition_ + scanStep_);
+		requestLensPosition(frameContext, next);
 		return;
 	}
 
@@ -123,23 +125,23 @@ void Af::finishCandidate(IPAFrameContext &frameContext, uint64_t metric)
 
 		fineScan_ = true;
 		scanStep_ = std::max<int32_t>(1, coarseStep_ / 4);
-		currentPosition_ = std::max(minPosition_, coarseBest - coarseStep_);
+		commandedPosition_ = std::max(minPosition_, coarseBest - coarseStep_);
 		scanEnd_ = std::min(maxPosition_, coarseBest + coarseStep_);
 		bestMetric_ = 0;
-		bestPosition_ = currentPosition_;
+		bestPosition_ = commandedPosition_;
 
 		LOG(IPASoftAf, Debug)
 			<< "Coarse autofocus best " << coarseBest
-			<< ", refining " << currentPosition_ << "-" << scanEnd_;
-		moveLens(frameContext, currentPosition_);
+			<< ", refining " << commandedPosition_ << "-" << scanEnd_;
+		requestLensPosition(frameContext, commandedPosition_);
 		return;
 	}
 
 	frameContext.lens.focusPosition = bestPosition_;
-	currentPosition_ = bestPosition_;
-	settleFrames_ = kSettleFrames;
+	commandedPosition_ = bestPosition_;
+	settleCallbacksRemaining_ = kSettleCallbacks;
 	metricSum_ = 0;
-	metricSamples_ = 0;
+	metricSampleCount_ = 0;
 	stage_ = Stage::FinalSettle;
 
 	LOG(IPASoftAf, Info)
@@ -161,66 +163,66 @@ void Af::process([[maybe_unused]] IPAContext &context,
 	case Stage::Disabled:
 		break;
 	case Stage::Delay:
-		if (delayFrames_)
-			--delayFrames_;
-		if (!delayFrames_)
+		if (startupCallbacksRemaining_)
+			--startupCallbacksRemaining_;
+		if (!startupCallbacksRemaining_)
 			startScan(frameContext);
 		break;
 	case Stage::Settle:
-		if (settleFrames_)
-			--settleFrames_;
-		if (!settleFrames_)
+		if (settleCallbacksRemaining_)
+			--settleCallbacksRemaining_;
+		if (!settleCallbacksRemaining_)
 			stage_ = Stage::Measure;
 		break;
 	case Stage::Measure:
 		metricSum_ += metric;
-		if (++metricSamples_ == kMeasureFrames)
-			finishCandidate(frameContext, metricSum_ / metricSamples_);
+		if (++metricSampleCount_ == kCandidateSamples)
+			finishCandidate(frameContext, metricSum_ / metricSampleCount_);
 		break;
 	case Stage::FinalSettle:
-		if (settleFrames_)
-			--settleFrames_;
-		if (!settleFrames_) {
+		if (settleCallbacksRemaining_)
+			--settleCallbacksRemaining_;
+		if (!settleCallbacksRemaining_) {
 			metricSum_ = 0;
-			metricSamples_ = 0;
+			metricSampleCount_ = 0;
 			stage_ = Stage::Reference;
 		}
 		break;
 	case Stage::Reference:
 		metricSum_ += metric;
-		if (++metricSamples_ == kReferenceFrames) {
-			referenceMetric_ = metricSum_ / metricSamples_;
+		if (++metricSampleCount_ == kReferenceSamples) {
+			referenceMetric_ = metricSum_ / metricSampleCount_;
 			filteredMetric_ = referenceMetric_;
-			lossFrames_ = 0;
-			recoveryFrames_ = 0;
-			focusedFrames_ = 0;
+			lowContrastCallbacks_ = 0;
+			recoveryCallbacks_ = 0;
+			focusedCallbacks_ = 0;
 			stage_ = Stage::Focused;
 		}
 		break;
 	case Stage::Focused:
-		++focusedFrames_;
+		++focusedCallbacks_;
 		filteredMetric_ = filteredMetric_
 				  ? (filteredMetric_ * 7 + metric) / 8
 				  : metric;
 
 		if (referenceMetric_ &&
 		    filteredMetric_ < referenceMetric_ / 2)
-			++lossFrames_;
+			++lowContrastCallbacks_;
 		else
-			lossFrames_ = 0;
+			lowContrastCallbacks_ = 0;
 
 		if (!rescanArmed_) {
 			if (referenceMetric_ &&
 			    filteredMetric_ >= referenceMetric_ * 3 / 4 &&
 			    filteredMetric_ <= referenceMetric_ * 5 / 4)
-				++recoveryFrames_;
+				++recoveryCallbacks_;
 			else
-				recoveryFrames_ = 0;
+				recoveryCallbacks_ = 0;
 
-			if (focusedFrames_ >= kRescanCooldownFrames &&
-			    recoveryFrames_ >= kRescanRecoveryFrames) {
+			if (focusedCallbacks_ >= kRescanCooldownCallbacks &&
+			    recoveryCallbacks_ >= kRescanRecoveryCallbacks) {
 				rescanArmed_ = true;
-				lossFrames_ = 0;
+				lowContrastCallbacks_ = 0;
 				LOG(IPASoftAf, Debug)
 					<< "Continuous autofocus rearmed at contrast "
 					<< filteredMetric_;
@@ -233,8 +235,8 @@ void Af::process([[maybe_unused]] IPAContext &context,
 			referenceMetric_ = (referenceMetric_ * 255 + metric) / 256;
 
 		if (rescanArmed_ &&
-		    focusedFrames_ >= kRescanCooldownFrames &&
-		    lossFrames_ >= kFocusLossFrames) {
+		    focusedCallbacks_ >= kRescanCooldownCallbacks &&
+		    lowContrastCallbacks_ >= kFocusLossCallbacks) {
 			LOG(IPASoftAf, Info)
 				<< "Focus contrast dropped from " << referenceMetric_
 				<< " to " << filteredMetric_ << ", rescanning";

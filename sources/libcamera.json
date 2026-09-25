@@ -70,7 +70,9 @@
     },
     "maintenance": {
       "series": "userspace/libcamera-v0.4-maintainability/series",
-      "sha256": {}
+      "sha256": {
+        "userspace/libcamera-v0.4-maintainability/patches/0002-ipa-simple-name-autofocus-requests-and-callbacks.patch": "51e975c20869b47f3751fd4695e49048ddd65a29328dff3b7d8b2d0920837191"
+      }
     }
   },
   "licenses": [
