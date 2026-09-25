@@ -51,6 +51,55 @@ int Agc::configure([[maybe_unused]] IPAContext &context,
 	return 0;
 }
 
+/* Return true only when one actuator increased. Saturation may also end startup. */
+bool Agc::applyStartupBoost(IPAContext &context, IPAFrameContext &frameContext,
+			   double exposureMSV)
+{
+	int32_t &exposure = frameContext.sensor.exposure;
+	double &again = frameContext.sensor.gain;
+	bool boosted = false;
+	double factor = std::clamp(kExposureOptimal / exposureMSV,
+				   1.0, 2.0);
+
+	/*
+	 * Correct by the measured deficit while bounding each request to 2x.
+	 * Only one actuator is increased in an accelerated update.
+	 */
+	if (exposure < context.configuration.agc.exposureMax) {
+		int32_t next = std::min<int64_t>(
+			context.configuration.agc.exposureMax,
+			static_cast<int64_t>(exposure * factor));
+		if (next > exposure) {
+			exposure = next;
+			boosted = true;
+		}
+	} else {
+		double next = std::min(context.configuration.agc.againMax,
+				       again * factor);
+		if (next > again &&
+		    (next - again >= context.configuration.agc.againMinStep ||
+		     next == context.configuration.agc.againMax)) {
+			again = next;
+			boosted = true;
+		}
+	}
+
+	if (exposure == context.configuration.agc.exposureMax &&
+	    again == context.configuration.agc.againMax)
+		startupAccelerationEnabled_ = false;
+
+	if (boosted) {
+		LOG(IPASoftExposure, Debug)
+			<< "exposureMSV " << exposureMSV
+			<< " exp " << exposure << " again " << again
+			<< " startupBoost 1 validComputations "
+			<< validStartupCallbacks_;
+		return true;
+	}
+	/* If the deficit-scaled request cannot advance, use the steady-state minimum step. */
+	return false;
+}
+
 void Agc::updateExposure(IPAContext &context, IPAFrameContext &frameContext, double exposureMSV)
 {
 	/* Invalid/empty statistics do not consume the valid-computation budget. */
@@ -66,50 +115,9 @@ void Agc::updateExposure(IPAContext &context, IPAFrameContext &frameContext, dou
 			startupAccelerationEnabled_ = false;
 	}
 
-	if (accelerateThisCallback) {
-		int32_t &exposure = frameContext.sensor.exposure;
-		double &again = frameContext.sensor.gain;
-		bool boosted = false;
-		double factor = std::clamp(kExposureOptimal / exposureMSV,
-					   1.0, 2.0);
-
-		/*
-		 * Correct by the measured deficit while bounding each request to 2x.
-		 * Only one actuator is increased in an accelerated update.
-		 */
-		if (exposure < context.configuration.agc.exposureMax) {
-			int32_t next = std::min<int64_t>(
-				context.configuration.agc.exposureMax,
-				static_cast<int64_t>(exposure * factor));
-			if (next > exposure) {
-				exposure = next;
-				boosted = true;
-			}
-		} else {
-			double next = std::min(context.configuration.agc.againMax,
-					       again * factor);
-			if (next > again &&
-			    (next - again >= context.configuration.agc.againMinStep ||
-			     next == context.configuration.agc.againMax)) {
-				again = next;
-				boosted = true;
-			}
-		}
-
-		if (exposure == context.configuration.agc.exposureMax &&
-		    again == context.configuration.agc.againMax)
-			startupAccelerationEnabled_ = false;
-
-		if (boosted) {
-			LOG(IPASoftExposure, Debug)
-				<< "exposureMSV " << exposureMSV
-				<< " exp " << exposure << " again " << again
-				<< " startupBoost 1 validComputations "
-				<< validStartupCallbacks_;
-			return;
-		}
-		/* If the deficit-scaled request cannot advance, use the steady-state minimum step. */
-	}
+	if (accelerateThisCallback &&
+	    applyStartupBoost(context, frameContext, exposureMSV))
+		return;
 
 	/*
 	 * kExpDenominator of 10 gives ~10% increment/decrement;

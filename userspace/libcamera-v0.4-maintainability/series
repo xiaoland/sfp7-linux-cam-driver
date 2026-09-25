@@ -1,3 +1,4 @@
 patches/0002-ipa-simple-name-autofocus-requests-and-callbacks.patch
 patches/0003-ipa-simple-clarify-startup-exposure-budget.patch
 patches/0004-ipa-simple-separate-focus-monitoring-steps.patch
+patches/0005-ipa-simple-isolate-startup-exposure-boost.patch

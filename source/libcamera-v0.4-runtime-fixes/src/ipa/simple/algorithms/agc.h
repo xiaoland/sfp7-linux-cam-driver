@@ -30,6 +30,8 @@ private:
 	bool startupAccelerationEnabled_ = true;
 	unsigned int validStartupCallbacks_ = 0;
 
+	bool applyStartupBoost(IPAContext &context, IPAFrameContext &frameContext,
+			       double exposureMSV);
 	void updateExposure(IPAContext &context, IPAFrameContext &frameContext, double exposureMSV);
 };
 
