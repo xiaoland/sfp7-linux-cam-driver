@@ -53,3 +53,17 @@ compared to the runtime series. This checks source declarations; it does not bui
 RPMs or claim that future maintenance patches are already integrated into those
 historical package recipes. Candidate builds must use a new identity and be
 validated before installation. No binary or device acceptance is inherited.
+
+## Runtime configuration boundary
+
+The P1 loader keeps each module/path/digest together; tests lock those records to
+the original P1 identities and check the service's matching kernel release. Its
+explicit load sequence retains the MMU pin step before ISYS. These records are
+not regenerated from newly compiled modules and do not authorize a candidate
+kernel installation.
+
+The WirePlumber snippet disables the V4L2 monitor for the entire `main` profile,
+including any unrelated V4L2 devices using that profile. It is not a filter for
+only the internal SP7 cameras. Changing that scope requires separate device tests.
+The service's Documentation path assumes a future installer places the README
+there; the source collection does not currently own those installed files.
