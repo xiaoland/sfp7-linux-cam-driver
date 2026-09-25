@@ -53,8 +53,12 @@ LOG_DEFINE_CATEGORY(SoftwareIsp)
 
 /**
  * \var SoftwareIsp::setSensorControls
- * \brief A signal emitted when the values to write to the sensor controls are
- * ready
+ * \brief Signal carrying sensor and lens requests to the pipeline
+ *
+ * The first list contains sensor exposure/gain control codes. The second list
+ * carries optional raw lens-position requests, not measured lens feedback.
+ * The pipeline applies each list to its own device; an empty lens list means
+ * that no lens update is requested.
  */
 
 /**

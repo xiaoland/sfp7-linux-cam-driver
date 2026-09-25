@@ -59,7 +59,7 @@
     },
     "include/libcamera/internal/software_isp/software_isp.h": {
       "mode": "100644",
-      "sha256": "4967fad6e6aa58ac0b15455a654e25afec69e547e3576825af625f2f9ec41b2e"
+      "sha256": "18add69029ce6b1b928872a6c0eb62ee08cb92f2094a47df999a90450b934c72"
     },
     "include/libcamera/internal/software_isp/swisp_stats.h": {
       "mode": "100644",
@@ -127,7 +127,7 @@
     },
     "src/libcamera/software_isp/software_isp.cpp": {
       "mode": "100644",
-      "sha256": "d55269620f23482c90c41b487602ad3ba9aa8b50fdb1d892d73d9d103b4002e9"
+      "sha256": "9ae5064e507a23b33300ac05218d280dc719d099736b4852dd9b0e71c3983625"
     },
     "src/libcamera/software_isp/swstats_cpu.cpp": {
       "mode": "100644",
@@ -166,8 +166,8 @@
       "sha256": "0ba2cd4fc331ea92c518ad5909b02f196a3ed20ddac1416caa3887393f89a78c"
     }
   },
-  "inputs_sha256": "338fe7c1c405ff971e603adddd252733cc6f940a3b5a9d9d5ce69e4cabd5eeed",
+  "inputs_sha256": "6b2bb20bf11dee57c94629e2de9a98572bd37234801f6aedda0d91846e81ace5",
   "profile": "runtime-browse",
   "schema": 1,
-  "tree": "7b325e89188211dafdfb237cfb1aac4e8efd645a"
+  "tree": "a3d95c82e00b9e0f2dbed285b287a7c992bd9e69"
 }

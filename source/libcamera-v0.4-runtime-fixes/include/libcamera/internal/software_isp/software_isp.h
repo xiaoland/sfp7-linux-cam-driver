@@ -83,6 +83,7 @@ public:
 	Signal<FrameBuffer *> inputBufferReady;
 	Signal<FrameBuffer *> outputBufferReady;
 	Signal<uint32_t, uint32_t> ispStatsReady;
+	/* Sensor requests first, optional raw lens-position requests second. */
 	Signal<const ControlList &, const ControlList &> setSensorControls;
 
 private:

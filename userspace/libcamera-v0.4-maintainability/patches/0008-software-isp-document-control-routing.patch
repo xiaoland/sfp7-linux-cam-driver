@@ -1,0 +1,41 @@
+From 53e03d8b1134d7a7335fc36eb415a7e9940e7dfa Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:51:55 +0800
+Subject: [PATCH] software-isp: document separate sensor and lens request lists
+
+---
+ include/libcamera/internal/software_isp/software_isp.h | 1 +
+ src/libcamera/software_isp/software_isp.cpp            | 8 ++++++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/include/libcamera/internal/software_isp/software_isp.h b/include/libcamera/internal/software_isp/software_isp.h
+index b9753ed..0c3c83f 100644
+--- a/include/libcamera/internal/software_isp/software_isp.h
++++ b/include/libcamera/internal/software_isp/software_isp.h
+@@ -83,6 +83,7 @@ public:
+ 	Signal<FrameBuffer *> inputBufferReady;
+ 	Signal<FrameBuffer *> outputBufferReady;
+ 	Signal<uint32_t, uint32_t> ispStatsReady;
++	/* Sensor requests first, optional raw lens-position requests second. */
+ 	Signal<const ControlList &, const ControlList &> setSensorControls;
+ 
+ private:
+diff --git a/src/libcamera/software_isp/software_isp.cpp b/src/libcamera/software_isp/software_isp.cpp
+index 3880352..8b8fbbf 100644
+--- a/src/libcamera/software_isp/software_isp.cpp
++++ b/src/libcamera/software_isp/software_isp.cpp
+@@ -53,8 +53,12 @@ LOG_DEFINE_CATEGORY(SoftwareIsp)
+ 
+ /**
+  * \var SoftwareIsp::setSensorControls
+- * \brief A signal emitted when the values to write to the sensor controls are
+- * ready
++ * \brief Signal carrying sensor and lens requests to the pipeline
++ *
++ * The first list contains sensor exposure/gain control codes. The second list
++ * carries optional raw lens-position requests, not measured lens feedback.
++ * The pipeline applies each list to its own device; an empty lens list means
++ * that no lens update is requested.
+  */
+ 
+ /**
