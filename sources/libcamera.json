@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "base": {
+    "kind": "archive",
+    "directory": "libcamera-0.4.0",
+    "url": "https://src.fedoraproject.org/repo/pkgs/libcamera/libcamera-0.4.0.tar.xz/sha512/a335ca43d0483f93ea1b5755a8a4acbcf106cc38d38bef959e1667bb2e6ecd43fda4cda65523ebb610fda9fbf372b5143d4ceeaa5df929fe6a31063e6f203e24/libcamera-0.4.0.tar.xz",
+    "sha256": "f6c4d6674cc4a83caf3faad6cdf5d77efff9cf4f41671b15343cc578d6da9d10"
+  },
+  "profiles": {
+    "runtime-browse": [
+      "runtime"
+    ]
+  },
+  "groups": {
+    "runtime": {
+      "series": "userspace/libcamera-v0.4-runtime-fixes/series",
+      "sha256": {
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0001-ipa-simple-blc-use-safe-starting-black-level.patch": "9926d29c72cdf0eb6d4c7e2bbb68e3e5f6b17e71aeda582183544f14d4f2467d",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0002-ipa-simple-blc-prevent-empty-histogram-division.patch": "0ac4d11a8041799e9f70c6327eabb861058a47ce90fdaf59ad982f6c92b405e1",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0003-libcamera-software-isp-pass-correct-y-coordinate-to-stats.patch": "d4f03ecaa5f0b122718f1977de7889e730ecf2076829909cb9db7e692b40ac21",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0004-ipa-simple-awb-avoid-incorrect-arithmetic.patch": "019797721a6938468e018927dca8a16b8682fd4093d28b323ea14c5287b2b020",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0005-ipa-simple-awb-use-correct-type-in-accumulate.patch": "366a06dbb482fe3bfd33a943015da494d053e59b41f0d8846fa3a17050318083",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0006-ipa-software-isp-fix-again-min-initialization.patch": "235155069956c0ec978a2d427cd13a9c1d8bc0f3c37331db86966eb68ed9df8d",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0007-libcamera-v4l2-release-buffer-cache-on-queue-failure.patch": "de0d76698d95972bd2491f08017ca5f8c78658e2074935a71520f49aa626feb4",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0008-libcamera-simple-propagate-initial-buffer-queue-failures.patch": "4d892720ee57a85bb84e356d1d9f809dbc0545ebe16eec5593d59858013c9da1",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0009-ipa-simple-blc-defer-unknown-black-level.patch": "3a5a34a13b2a4cff7121238ed2eb5db2d716bb4dcffa98ab90d6325c667cc2ff",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0010-libcamera-v4l2-preserve-state-safely-across-reopen.patch": "742266a859ca596474d661a748a3574e177819e377072fc26b752c55198ceda8",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0011-libcamera-simple-release-idle-ipu4-video-devices.patch": "e310a74062c8eaa4613550d653bf819546148f548174a13eddd737f1e6233ddd",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0012-libcamera-simple-restore-ipu4-links-after-external-use.patch": "c52ea072098963da5cb820c6eaf1ea2eab78f8f0f708d5d41c86bfd60d972845",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0013-ipa-simple-bound-startup-exposure-acceleration.patch": "9161e4a0d89f4ba57e6e4183bde37fae6390b78dcb68b64d4995468f44e9df97",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0014-libcamera-software-isp-carry-lens-controls.patch": "a6ea87f43498930fbcce990da4c8e7a61f03fcc11c5cdea99378539e3c536ecd",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0015-libcamera-software-isp-measure-central-focus-contrast.patch": "5ad84a000a782effd6392371466c0c5e3e1126d00796b68bb728565e97038b12",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0016-ipa-simple-add-automatic-contrast-focus.patch": "b239943503be8b06c51429e762ec8e001e799a0e86fcb49a9c09b0ea550cb25c",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0017-ipa-simple-stabilize-continuous-contrast-focus.patch": "101c8ac9433d2ffdbfb5447e5394a8c800ff28af074da57b90ce13cad701756f",
+        "userspace/libcamera-v0.4-runtime-fixes/patches/0018-ipa-simple-converge-startup-exposure-by-measured-deficit.patch": "0ce5e07ca94775279b012e6c64ab6aef4ca24c796c78b82ae2172f35b6f972b3"
+      }
+    }
+  },
+  "licenses": [
+    "COPYING.rst",
+    "LICENSES/Apache-2.0.txt",
+    "LICENSES/BSD-2-Clause.txt",
+    "LICENSES/BSD-3-Clause.txt",
+    "LICENSES/CC-BY-4.0.txt",
+    "LICENSES/CC-BY-SA-4.0.txt",
+    "LICENSES/CC0-1.0.txt",
+    "LICENSES/GPL-2.0+.txt",
+    "LICENSES/GPL-2.0-only.txt",
+    "LICENSES/GPL-2.0-or-later.txt",
+    "LICENSES/GPL-2.0.txt",
+    "LICENSES/LGPL-2.1-or-later.txt",
+    "LICENSES/Linux-syscall-note.txt",
+    "LICENSES/MIT.txt"
+  ],
+  "snapshot_profile": "runtime-browse",
+  "snapshot_directory": "source/libcamera-v0.4-runtime-fixes"
+}

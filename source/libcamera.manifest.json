@@ -1,0 +1,149 @@
+{
+  "component": "libcamera",
+  "files": {
+    "COPYING.rst": {
+      "mode": "100644",
+      "sha256": "e1d29c75dddc10752e2f6c2d8e089cb4d5711e7925827268c492290d7b3877b4"
+    },
+    "LICENSES/Apache-2.0.txt": {
+      "mode": "100644",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "LICENSES/BSD-2-Clause.txt": {
+      "mode": "100644",
+      "sha256": "fd38b2c053c0cce46d9c5ef3545a6e34d157a240ba99c9b8dca5d37a8147da6c"
+    },
+    "LICENSES/BSD-3-Clause.txt": {
+      "mode": "100644",
+      "sha256": "e11af671c491efac2f94c1d752bea92f4308ca2450c7d11e582e4b48c40e4de1"
+    },
+    "LICENSES/CC-BY-4.0.txt": {
+      "mode": "100644",
+      "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744"
+    },
+    "LICENSES/CC-BY-SA-4.0.txt": {
+      "mode": "100644",
+      "sha256": "ec3732087acf8c52429a020d6bba362ff578705bdb53365a21744485ec15b0e6"
+    },
+    "LICENSES/CC0-1.0.txt": {
+      "mode": "100644",
+      "sha256": "6a573fb2f9082662978cf21fb153096df0a1981deaea7dbc10a11046fe005d9f"
+    },
+    "LICENSES/GPL-2.0+.txt": {
+      "mode": "120000",
+      "sha256": "7bd50cbfc9edaaf655b4c71de488ec3edc6c65f085389f062d2783df2676c976"
+    },
+    "LICENSES/GPL-2.0-only.txt": {
+      "mode": "100644",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    "LICENSES/GPL-2.0-or-later.txt": {
+      "mode": "100644",
+      "sha256": "606aa26338f69ce178f1cbc648b7574aec4b5bbaeb20f4df36ff49010cb8fbbd"
+    },
+    "LICENSES/GPL-2.0.txt": {
+      "mode": "120000",
+      "sha256": "ad80f2e4afb947abdca7f1c00fc36e5aca71b2bb20f0842581ee101731e4acc7"
+    },
+    "LICENSES/LGPL-2.1-or-later.txt": {
+      "mode": "100644",
+      "sha256": "1ccf09bf2f598308df4bed9cd8e9657dc5cd0973d2800318f2e241486e2edf3f"
+    },
+    "LICENSES/Linux-syscall-note.txt": {
+      "mode": "100644",
+      "sha256": "3f9e477523febab58de8b716ccfbcf02e6ef1c8e7728953905e8558637abe2a9"
+    },
+    "LICENSES/MIT.txt": {
+      "mode": "100644",
+      "sha256": "8f25018489d6fe0dec34a352314c38dc146247b7de65735790f4398a92afa84b"
+    },
+    "include/libcamera/internal/software_isp/software_isp.h": {
+      "mode": "100644",
+      "sha256": "4967fad6e6aa58ac0b15455a654e25afec69e547e3576825af625f2f9ec41b2e"
+    },
+    "include/libcamera/internal/software_isp/swisp_stats.h": {
+      "mode": "100644",
+      "sha256": "843cd48b5e95a9f5294055fe5d4d1c94731f0b16e6fe32620562d0734f2f3962"
+    },
+    "include/libcamera/ipa/soft.mojom": {
+      "mode": "100644",
+      "sha256": "8cba99ad2e816ef42eab827d170daec8e7ea2d4795f8fca40ca9ec86e13e23d8"
+    },
+    "src/ipa/simple/algorithms/af.cpp": {
+      "mode": "100644",
+      "sha256": "317a86f43b92722849e13ca0166280b76e47d1b50c3633cf37aaaf656231e08c"
+    },
+    "src/ipa/simple/algorithms/af.h": {
+      "mode": "100644",
+      "sha256": "65bae9c2cca4695af8c9f5383b9fbbb7bb5d545589a848f219b8cf323ccb0e90"
+    },
+    "src/ipa/simple/algorithms/agc.cpp": {
+      "mode": "100644",
+      "sha256": "aca866817fb1f775e3cb9ebfa84c38e56db96f629746a249f0ab51e5437419b3"
+    },
+    "src/ipa/simple/algorithms/agc.h": {
+      "mode": "100644",
+      "sha256": "6c3c9d75d7a8264fa0b600379be94084e858cdd77bea0c2768fd70b0d6111a26"
+    },
+    "src/ipa/simple/algorithms/awb.cpp": {
+      "mode": "100644",
+      "sha256": "6aad430c6bcd9fb133e91265fc435304ec37089c51f2ddce013af049cc8383c1"
+    },
+    "src/ipa/simple/algorithms/blc.cpp": {
+      "mode": "100644",
+      "sha256": "0cce464c234d6833e80bfc0f614ccc16bd05f623e2c4806693081d07d80dafc6"
+    },
+    "src/ipa/simple/algorithms/blc.h": {
+      "mode": "100644",
+      "sha256": "4b9c30a932e8ff643311ed8e5f10b67da5f027450cf63f1c9804454a2715203a"
+    },
+    "src/ipa/simple/algorithms/meson.build": {
+      "mode": "100644",
+      "sha256": "d0f5f604958bc1471cf875a9c87bffaafebbea426686070d069d63eb031f16e4"
+    },
+    "src/ipa/simple/data/uncalibrated.yaml": {
+      "mode": "100644",
+      "sha256": "d21d4b6a5db8fd9bf2d78ae91622b5b34b327f981d40677284a74b7e17ef296b"
+    },
+    "src/ipa/simple/ipa_context.h": {
+      "mode": "100644",
+      "sha256": "26356b975d4ff6ab67154fb817daf7bb9f28277db9dd5eefff11ecf267fe1bc8"
+    },
+    "src/ipa/simple/soft_simple.cpp": {
+      "mode": "100644",
+      "sha256": "38375ddaaa01a96a120f1597836588ddcf6275b4c05177eec27635ad45a959be"
+    },
+    "src/libcamera/pipeline/simple/simple.cpp": {
+      "mode": "100644",
+      "sha256": "6c0c75debc2910bd3f1ce0e7730a4336d07e7614d621efc60e5845e34a9d4160"
+    },
+    "src/libcamera/software_isp/debayer_cpu.cpp": {
+      "mode": "100644",
+      "sha256": "512d13f64ac8fed9928c350bec5cba3916d491252e006b87934add3b1562bbd5"
+    },
+    "src/libcamera/software_isp/software_isp.cpp": {
+      "mode": "100644",
+      "sha256": "d55269620f23482c90c41b487602ad3ba9aa8b50fdb1d892d73d9d103b4002e9"
+    },
+    "src/libcamera/software_isp/swstats_cpu.cpp": {
+      "mode": "100644",
+      "sha256": "eb6f44b0871bd87487505028061db21dc11bcd2c4aeacbf22c2cc89154ccde68"
+    },
+    "src/libcamera/software_isp/swstats_cpu.h": {
+      "mode": "100644",
+      "sha256": "f79646a9a655ce8ee4a362cc972cb1359a523500e0043a03cb5bdfb43a9a9432"
+    },
+    "src/libcamera/v4l2_device.cpp": {
+      "mode": "100644",
+      "sha256": "3e51548c865b2f5631fa8d8a3bd3fd529342c49a2ed759bd08686fa550264f7a"
+    },
+    "src/libcamera/v4l2_videodevice.cpp": {
+      "mode": "100644",
+      "sha256": "59e3b6b0180361e8de653372a9cdd094deab6968b33e3a2cdbf09b1fbb64be02"
+    }
+  },
+  "inputs_sha256": "26cf5436385ef32ffd9db76e6925de453bbaafc363b6d76f19f5d2585caef07d",
+  "profile": "runtime-browse",
+  "schema": 1,
+  "tree": "5c5d20bd12a5ae41e1f0bb93bc0e1ca7ba6a0513"
+}

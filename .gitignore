@@ -12,3 +12,7 @@
 *.mp4
 build/
 evidence/
+
+__pycache__/
+*.pyc
+source/.sfp7-replay-*/
