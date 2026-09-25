@@ -27,7 +27,7 @@ include the native-test overlay; only the candidate includes production maintena
 patches. `fedora42-runtime` preserves the pre-refactor code without native tests.
 
 A Fedora 42 build environment needs gcc-c++, git, meson, ninja-build,
-python3-jinja2, python3-ply, python3-pyyaml, libyaml-devel, openssl-devel,
+python3-jinja2, python3-ply, python3-pyyaml, libyaml-devel, openssl, openssl-devel,
 systemd-devel, libevent-devel, libdrm-devel, libjpeg-turbo-devel, libyuv-devel,
 libatomic, libasan, libubsan, pkgconf-pkg-config and diffutils. Tests also cause the
 upstream build to enable virtual/vimc components. Downloads of fallback subprojects
