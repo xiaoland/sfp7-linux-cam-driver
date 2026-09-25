@@ -17,3 +17,5 @@
 
 源码维护入口见 [重建与快照核验](docs/SOURCE-MAINTENANCE.md) 和 [测试说明](tests/README.md)。
 原始运行时补丁仍保留；可浏览源码包含后续维护候选，不能沿用旧版本的实机验收结论。
+
+源码重构、独立复核及离线验证结果见[维护验证记录](docs/MAINTENANCE-VALIDATION.md)；维护候选尚未部署到设备。

@@ -30,3 +30,6 @@ This work used AI coding assistance. Human review, proper authorship, and valid 
 For development, start with [source maintenance](docs/SOURCE-MAINTENANCE.md) and
 [tests](tests/README.md). The original runtime inputs remain available; browsing
 snapshots include maintenance candidates and do not inherit device acceptance.
+
+The [maintenance validation record](docs/MAINTENANCE-VALIDATION.md) documents the
+refactor, independent review and offline test boundaries.

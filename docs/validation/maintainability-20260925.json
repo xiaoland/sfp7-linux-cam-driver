@@ -1,0 +1,404 @@
+{
+  "schema": 1,
+  "date": "2026-09-25",
+  "reviewed_code_commit": "23a920b6d14e5405238041e3c647e84c683960bc",
+  "hardware_tested": false,
+  "installed": false,
+  "pushed": false,
+  "snapshots": {
+    "kernel": {
+      "tree": "64eed5318e94ccd883b10456e0606d1a9ce47451",
+      "entries": 793
+    },
+    "libcamera": {
+      "tree": "a3d95c82e00b9e0f2dbed285b287a7c992bd9e69",
+      "entries": 41
+    },
+    "snapshot": {
+      "tree": "43e2c123f4428d644996303d067a3cdb37eab1c3",
+      "entries": 4
+    }
+  },
+  "source_tests": {
+    "passed": true,
+    "tests": 16
+  },
+  "driver_models": {
+    "passed": true,
+    "cases": 44,
+    "sanitizers": false,
+    "source_tree": "64eed5318e94ccd883b10456e0606d1a9ce47451"
+  },
+  "loader": {
+    "passed": true,
+    "tests": 5,
+    "identity_failure_cases": 6,
+    "environment": "isolated Fedora 42 Linux x86_64 root; fake filesystem and commands"
+  },
+  "historical_agc": {
+    "passed": true,
+    "cases": 77,
+    "sanitizers": "address,undefined",
+    "scope": "original 0017 versus 0018; framework substitutes"
+  },
+  "blc_lut": {
+    "passed": true,
+    "cases": 12,
+    "sanitizers": "address,undefined",
+    "scope": "complete classes/data structures; framework substitutes"
+  },
+  "native_boundary_mutations": [
+    {
+      "mutation": "kRescanCooldownFrames = 299",
+      "detected": true,
+      "exit": 1,
+      "trace_sha256": "377da6cd1d44ef14f2556433e15d1638843eda0dac761e74c48b15ad2fd1e110"
+    },
+    {
+      "mutation": "kFocusLossFrames = 29",
+      "detected": true,
+      "exit": 1,
+      "trace_sha256": "dc5618fc146f5f9519ffe3b329fd448bfe895d1b4852b448fa02f82cee0cdddd"
+    },
+    {
+      "mutation": "kRescanRecoveryFrames = 149",
+      "detected": true,
+      "exit": 0,
+      "trace_sha256": "c99d4ca2d8a81dd9d98680d6201237644ba122d104fae9a062750b039f148bf8"
+    },
+    {
+      "mutation": "startupComputations_ >= 95",
+      "detected": true,
+      "exit": 1,
+      "trace_sha256": "139d821ff36759d77e7c44ae16d87a0965a074dd56ccb9eb8a31030a95cde999"
+    }
+  ],
+  "kernel_config": {
+    "input_sha256": "2001c9ef43d83f1ba54c02574c5a6257a71affe227fd869b9cb2f66b3c209491",
+    "build_sha256": "50a5e2672d32849da40aae0c0efba4fa2a7943a34d97e1aac12a93b75f821443",
+    "detected_toolchain_differences": {
+      "CONFIG_PAHOLE_VERSION": {
+        "p1": "0",
+        "build": "130"
+      },
+      "CONFIG_RUSTC_HAS_COERCE_POINTEE": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_HAS_FILE_AS_C_STR": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_HAS_FILE_WITH_NUL": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_HAS_SLICE_AS_FLATTENED": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_HAS_SPAN_FILE": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_HAS_UNNECESSARY_TRANSMUTES": {
+        "p1": "y",
+        "build": null
+      },
+      "CONFIG_RUSTC_LLVM_VERSION": {
+        "p1": "210108",
+        "build": "0"
+      },
+      "CONFIG_RUSTC_VERSION": {
+        "p1": "109301",
+        "build": "0"
+      }
+    }
+  },
+  "independent_review": {
+    "findings": 7,
+    "unresolved": 0,
+    "by_priority": {
+      "P1": 1,
+      "P2": 4,
+      "P3": 2
+    },
+    "scope": "maintainability/readability of new changes and necessary context; not a complete vendor code audit"
+  },
+  "native_ipa": {
+    "schema": 1,
+    "sources": {
+      "baseline": {
+        "tree": "2ccec6fbbf79f8eac4f59d54605e6c7dbdf59887",
+        "tests": {
+          "test/ipa/simple/af.cpp": "dbd8fc37460893c015cc3a203ddb78e0b1d6120e2130fd33543ce0a1ee931b07",
+          "test/ipa/simple/agc.cpp": "d3a0b4068d09501b790492bdab47190f76c729ab8d19e3dc1430b8d420e1bfd7",
+          "test/ipa/simple/test_support.h": "0ba2cd4fc331ea92c518ad5909b02f196a3ed20ddac1416caa3887393f89a78c",
+          "test/ipa/simple/meson.build": "e2ecfd2c261d4ddcb92c657d471765bacc78b3358b2436d14b830b4cb85aa284"
+        }
+      },
+      "candidate": {
+        "tree": "c8e79cb2d3c268d72f2c6e9ea5d574bac720cf5b",
+        "tests": {
+          "test/ipa/simple/af.cpp": "dbd8fc37460893c015cc3a203ddb78e0b1d6120e2130fd33543ce0a1ee931b07",
+          "test/ipa/simple/agc.cpp": "d3a0b4068d09501b790492bdab47190f76c729ab8d19e3dc1430b8d420e1bfd7",
+          "test/ipa/simple/test_support.h": "0ba2cd4fc331ea92c518ad5909b02f196a3ed20ddac1416caa3887393f89a78c",
+          "test/ipa/simple/meson.build": "e2ecfd2c261d4ddcb92c657d471765bacc78b3358b2436d14b830b4cb85aa284"
+        }
+      }
+    },
+    "commands": [
+      [
+        "meson",
+        "setup",
+        "/comparison-final/build-baseline",
+        "/baseline",
+        "--wrap-mode=nofallback",
+        "-Dpipelines=simple",
+        "-Dipas=simple",
+        "-Dtest=true",
+        "-Dcam=disabled",
+        "-Dqcam=disabled",
+        "-Dgstreamer=disabled",
+        "-Dlc-compliance=disabled",
+        "-Dpycamera=disabled",
+        "-Ddocumentation=disabled",
+        "-Dv4l2=false",
+        "-Dtracing=disabled",
+        "-Db_sanitize=address,undefined"
+      ],
+      [
+        "meson",
+        "compile",
+        "-C",
+        "/comparison-final/build-baseline",
+        "-j2"
+      ],
+      [
+        "meson",
+        "test",
+        "-C",
+        "/comparison-final/build-baseline",
+        "simple-af",
+        "simple-agc",
+        "--print-errorlogs"
+      ],
+      [
+        "/comparison-final/build-baseline/test/ipa/simple/simple-af"
+      ],
+      [
+        "/comparison-final/build-baseline/test/ipa/simple/simple-agc"
+      ],
+      [
+        "meson",
+        "setup",
+        "/comparison-final/build-candidate",
+        "/candidate",
+        "--wrap-mode=nofallback",
+        "-Dpipelines=simple",
+        "-Dipas=simple",
+        "-Dtest=true",
+        "-Dcam=disabled",
+        "-Dqcam=disabled",
+        "-Dgstreamer=disabled",
+        "-Dlc-compliance=disabled",
+        "-Dpycamera=disabled",
+        "-Ddocumentation=disabled",
+        "-Dv4l2=false",
+        "-Dtracing=disabled",
+        "-Db_sanitize=address,undefined"
+      ],
+      [
+        "meson",
+        "compile",
+        "-C",
+        "/comparison-final/build-candidate",
+        "-j2"
+      ],
+      [
+        "meson",
+        "test",
+        "-C",
+        "/comparison-final/build-candidate",
+        "simple-af",
+        "simple-agc",
+        "--print-errorlogs"
+      ],
+      [
+        "/comparison-final/build-candidate/test/ipa/simple/simple-af"
+      ],
+      [
+        "/comparison-final/build-candidate/test/ipa/simple/simple-agc"
+      ]
+    ],
+    "passed": true,
+    "hardware_tested": false,
+    "sanitizers": "address,undefined",
+    "traces": {
+      "af": {
+        "sha256": "12ac3bcd9b899a6515e957f726adb8827a79d8d4a6e9c26254235c3e367359ea",
+        "callbacks": 38402
+      },
+      "agc": {
+        "sha256": "fb0f3fbe966601c35519cbc20d25135a6d6fe4f052858f87f9c82d3fcca64501",
+        "callbacks": 2480
+      }
+    }
+  },
+  "environment": {
+    "container_image": "fedora:42@sha256:99e203b80b1c3d8f7e161ec10a68fd02b081ef83a3963553e513c82846b97814",
+    "architecture": "x86_64",
+    "no_camera_devices": true,
+    "no_host_mounts": true,
+    "no_privileged_mode": true,
+    "packages": [
+      "gcc-15.2.1-7.fc42.x86_64",
+      "gcc-c++-15.2.1-7.fc42.x86_64",
+      "make-4.4.1-10.fc42.x86_64",
+      "binutils-2.44-12.fc42.x86_64",
+      "openssl-3.2.6-4.fc42.x86_64",
+      "elfutils-libelf-devel-0.195-1.fc42.x86_64",
+      "dwarves-1.30-1.fc42.x86_64",
+      "bc-1.08.1-2.fc42.x86_64",
+      "bison-3.8.2-11.fc42.x86_64",
+      "flex-2.6.4-19.fc42.x86_64",
+      "perl-5.40.4-520.fc42.x86_64",
+      "python3-3.13.13-1.fc42.x86_64",
+      "ninja-build-1.12.1-4.fc42.x86_64",
+      "meson-1.7.2-1.fc42.noarch"
+    ]
+  },
+  "test_inputs": {
+    "scripts/prepare-kernel.sh": "cd5ce3fa186a55c644aa1960881af1dc33eb87619c3b9e7562cede6bdd665c5a",
+    "scripts/source.py": "b11f602168b37ac79e2e4ba7653868613c3df48225c24b5cccc2c4edecf7e90a",
+    "scripts/sourcekit/__init__.py": "56b6005d51b02b323f4545d6de642f2d33bf3eb52a2f3ee4f458476cb243e11a",
+    "scripts/sourcekit/inputs.py": "188e2e9c04a16c29c101361c051cd19240f1233c47091b7d0141150489b5aef1",
+    "scripts/sourcekit/snapshots.py": "fc44df9574cdd4d1304f5250530b9a74e9a8a8000a3d3df320c6f1da02a8e7ea",
+    "scripts/sourcekit/trees.py": "02d1f8bcff02a1684906693c20c78a3d90c03bec105f165503ab8f08f89f0279",
+    "scripts/test-driver-lifecycle": "d58d6176276ba7f5b45d4dfe2abaefda7b1137d3cbe5ed495e77de34fd25160c",
+    "scripts/test-driver-queue": "d8c10e85c1e791c4866e9cb07c9ca253ca7178a506271e735647d299ec69c5c9",
+    "scripts/test-simple-ipa.py": "be5d562babddb1626c076ac8a6a0510b5e0e6656ad3f8f0f63e9b028115b508d",
+    "tests/Containerfile": "510b4051007907f63c5325c73b98d29ab783c1d5fd104b95e1b2117c327979c9",
+    "tests/README.md": "fa47c28de3da8d21b3f2fda905e2c1c88f7efa91e4e1312b36a87276fdc451df",
+    "tests/blc-lut/README.md": "ecbaa1911ce2fc4c8a20b322117bd874240e6e970c408a303d6a3fbd19afb18f",
+    "tests/blc-lut/algorithm-interface.h": "b031d035baa3a66690bb53541ef220bc914639b2484692254329e6d2a304b41e",
+    "tests/blc-lut/cases.cpp": "c86973238bffc6cbd19c28cc9e1dc997f716c3d79ba24000d320ae81c29de7f5",
+    "tests/blc-lut/framework.h": "b633e4ade3ab03e004382a9fecac9dce034a11541312736e028209b3f50422bf",
+    "tests/blc-lut/run.py": "24d2ed20ab83b5cef86632fdc1e86bec1ef28ac2b34a8ca7439294110a98cefa",
+    "tests/driver/README.md": "95b5693762ef2998383e19217dd92f5534e362e46626191f06ce27ae6b99d113",
+    "tests/driver/firmware-lifecycle.c": "fcc24c560fdc1f05f65718b92a87f13f80407bb76e5a0f7fea124b900907271c",
+    "tests/driver/queue-ownership.c": "1ccfb747fd46eceec363b8504c9782c0ba6f53f6321508f91e35c8d764ee0caa",
+    "tests/driver/stream-start.c": "f40d30e707ad18ea0c3c783ec13c6f099e4d2cae0c20ec2e373c44be483caa12",
+    "tests/driver/verification-handoff.c": "71f83d9634b8687e717cc4573e89458cc35f07515ba34c956d4dd08d8b89a75a",
+    "tests/history/simple-agc/README.md": "860f6f9f0629b3dfda2bcb6b702f360d970e9633a98391ae2801c8635176a4cd",
+    "tests/history/simple-agc/extract.py": "1f504e01f6e43aed442f82c8ac69323ce9cbe086cfa2d7ad677928f4be7ded8d",
+    "tests/history/simple-agc/harness.cpp": "65ed3329115cd0e19e9d781e0c37870b558331b4da36259cc487d7e2fb9fbdff",
+    "tests/history/simple-agc/prelude.h": "9805bc6128b839fcc91791051fe44cfe02ffd9b63b13474a6d7944fc0e994b79",
+    "tests/history/simple-agc/run.py": "4b4716d520aa1ae85b505cd45963d369009bb4eff06c3d7525957ff8abcead4e",
+    "tests/runtime/README.md": "e826f6ce3092bc1491fd8977988ab3b0eae44a877c56080ec9202f524ed3cc24",
+    "tests/runtime/p1-identities.json": "7f5a48d928498aa2d5125cd3b0c9dcbf76ef3288817147a8161ad24dfdc4a2d8",
+    "tests/runtime/test_loader.py": "429ef4d395f96840ccae84e98ad04bdb0d631db3a713cd20de11da4a585b583a",
+    "tests/source/test_native_identity.py": "f7923cea3728842585878a2b77062cc345d12afeaf2d1091326676487a7e4788",
+    "tests/source/test_replay.py": "50ff2e497d64b251390be2333d428ff2024e40d596fcbd2f389b932e1449c8ac"
+  },
+  "kernel_inherited_diagnostics": {
+    "path": "drivers/platform/x86/intel/int3472/discrete.c",
+    "unchanged_from_base": "57d61aff0b53b089227f5a794363fec829114fc5",
+    "warnings": [
+      {
+        "line": 378,
+        "diagnostic": "%x expects unsigned int; argument is unsigned long"
+      },
+      {
+        "line": 384,
+        "diagnostic": "too many arguments for format"
+      }
+    ],
+    "scope": "Existing Surface Pro 9 diagnostic block in pinned base; outside the maintenance delta."
+  },
+  "kernel_build": {
+    "passed": true,
+    "source_tree": "64eed5318e94ccd883b10456e0606d1a9ce47451",
+    "release": "6.19.8-sfp7cam.maint.fc42.x86_64",
+    "config_sha256": "50a5e2672d32849da40aae0c0efba4fa2a7943a34d97e1aac12a93b75f821443",
+    "modules": 4971,
+    "camera_modules": {
+      "dw9719": {
+        "path": "drivers/media/i2c/dw9719.ko",
+        "sha256": "e58891f7214bccb833e548b44988ee4727119dc86618020159f563442fea9c44",
+        "bytes": 25768,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "ipu_bridge": {
+        "path": "drivers/media/pci/intel/ipu-bridge.ko",
+        "sha256": "d4e11ef6f1aea437a9f80b358214213dbd9cf6e83fda0b3def221483aeee6f05",
+        "bytes": 44344,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "intel_ipu4p_isys_csslib": {
+        "path": "drivers/media/pci/intel/ipu4/intel-ipu4p-isys-csslib.ko",
+        "sha256": "58892e0f4a3243c919be3d07da9b266e2d9ca87ec2db2a648ca5587bc7708b5d",
+        "bytes": 186536,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "intel_ipu4p_psys_csslib": {
+        "path": "drivers/media/pci/intel/ipu4/ipu4p-css/lib2600psys/intel-ipu4p-psys-csslib.ko",
+        "sha256": "7ad064192c074c81d66262f53eb29c86ea8e5c8ba607c7e6f28e2757d068f5cc",
+        "bytes": 452288,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "intel_ipu4p": {
+        "path": "drivers/media/pci/intel/ipu4/intel-ipu4p.ko",
+        "sha256": "8c5eaa4f18f2f16164996d6f9533d3d223c6913a61714e7023a61fbba71a73d7",
+        "bytes": 309192,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "intel_ipu4p_psys": {
+        "path": "drivers/media/pci/intel/ipu4/intel-ipu4p-psys.ko",
+        "sha256": "53054c8e4b2b3e123f18dfc5c358bbd26d3474e75b4319d5be32180198e1811c",
+        "bytes": 190504,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      },
+      "intel_ipu4p_isys": {
+        "path": "drivers/media/pci/intel/ipu4/intel-ipu4p-isys.ko",
+        "sha256": "062e82c6e9e150cf7261fc637fcdc783cefa5deb599e7f79b1ef2a4c3c9aaf0d",
+        "bytes": 602072,
+        "vermagic": "6.19.8-sfp7cam.maint.fc42.x86_64 SMP preempt mod_unload"
+      }
+    },
+    "bzImage": {
+      "sha256": "2e9ddee00e434197ee25a322ca040a09431f463add33b46a558317fb77093428",
+      "bytes": 16224768
+    },
+    "log_sha256": "abf6606082afe109b8cf8cb6550c85169532b698278719c02a3e068bbdd9bdde",
+    "compiler_diagnostics": [
+      "drivers/platform/x86/intel/int3472/discrete.c:378:44: warning: format '%x' expects argument of type 'unsigned int', but argument 4 has type 'long unsigned int' [-Wformat=]",
+      "drivers/platform/x86/intel/int3472/discrete.c:384:47: warning: too many arguments for format [-Wformat-extra-args]"
+    ],
+    "commands": [
+      [
+        "make",
+        "-C",
+        "/kernel-work",
+        "O=/build-kernel",
+        "ARCH=x86_64",
+        "LOCALVERSION=-sfp7cam.maint.fc42.x86_64",
+        "olddefconfig"
+      ],
+      [
+        "make",
+        "-C",
+        "/kernel-work",
+        "O=/build-kernel",
+        "ARCH=x86_64",
+        "LOCALVERSION=-sfp7cam.maint.fc42.x86_64",
+        "-j10",
+        "bzImage",
+        "modules"
+      ]
+    ],
+    "method": "Full configured target set, reusing completed objects from the earlier candidate; affected sources rebuilt after final patches. Not a bit-for-bit reproducibility claim.",
+    "installed": false,
+    "hardware_tested": false
+  }
+}
