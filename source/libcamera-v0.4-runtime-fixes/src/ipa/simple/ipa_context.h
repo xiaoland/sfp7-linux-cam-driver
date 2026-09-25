@@ -60,6 +60,7 @@ struct IPAFrameContext : public FrameContext {
 	} sensor;
 
 	struct {
+		/* Raw focus-control request; nullopt means no request, while zero is valid. */
 		std::optional<int32_t> focusPosition;
 	} lens;
 };

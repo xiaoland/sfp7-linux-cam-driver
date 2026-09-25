@@ -202,9 +202,11 @@ namespace {
 /*
  * This legacy IPU4 driver holds its ISYS power reference while a video node
  * is open. The intel-ipu6 driver name is shared with other hardware, so both
- * media-device identifiers are required for the idle-FD lifecycle.
+ * media-device identifiers are required for this lifecycle policy. Closing an
+ * idle capture node requires reopening it, restoring media links and the cached
+ * format, and acquiring shared entities together before capture can resume.
  */
-static bool requiresIdleVideoRelease(const MediaDevice *media)
+static bool requiresCaptureReopen(const MediaDevice *media)
 {
 	return media->driver() == "intel-ipu6" && media->model() == "ipu4p";
 }
@@ -372,7 +374,7 @@ public:
 	V4L2Subdevice *subdev(const MediaEntity *entity);
 	MediaDevice *converter() { return converter_; }
 	bool swIspEnabled() const { return swIspEnabled_; }
-	bool releaseIdleVideo() const { return releaseIdleVideo_; }
+	bool releaseIdleVideo() const { return reopenCaptureOnUse_; }
 
 protected:
 	int queueRequestDevice(Camera *camera, Request *request) override;
@@ -407,7 +409,7 @@ private:
 
 	MediaDevice *converter_;
 	bool swIspEnabled_;
-	bool releaseIdleVideo_ = false;
+	bool reopenCaptureOnUse_ = false;
 };
 
 /* -----------------------------------------------------------------------------
@@ -1280,7 +1282,7 @@ SimplePipelineHandler::generateConfiguration(Camera *camera, Span<const StreamRo
 
 int SimplePipelineHandler::configure(Camera *camera, CameraConfiguration *config)
 {
-	if (!releaseIdleVideo_)
+	if (!reopenCaptureOnUse_)
 		return configureDevice(camera, config);
 
 	SimpleCameraData *data = cameraData(camera);
@@ -1348,7 +1350,7 @@ int SimplePipelineHandler::configureDevice(Camera *camera, CameraConfiguration *
 		return -EINVAL;
 	}
 
-	if (releaseIdleVideo_) {
+	if (reopenCaptureOnUse_) {
 		data->captureFormat_ = captureFormat;
 		data->pipelineFormat_ = {};
 		data->pipelineFormat_.code = pipeConfig->code;
@@ -1415,7 +1417,7 @@ int SimplePipelineHandler::exportFrameBuffers(Camera *camera, Stream *stream,
 			       ? data->converter_->exportBuffers(stream, count, buffers)
 			       : data->swIsp_->exportBuffers(stream, count, buffers);
 
-	if (!releaseIdleVideo_)
+	if (!reopenCaptureOnUse_)
 		return data->video_->exportBuffers(count, buffers);
 
 	if (acquirePipeline(data))
@@ -1444,7 +1446,7 @@ int SimplePipelineHandler::start(Camera *camera, [[maybe_unused]] const ControlL
 		return -EBUSY;
 	}
 
-	if (releaseIdleVideo_) {
+	if (reopenCaptureOnUse_) {
 		ret = openVideo(data);
 		if (!ret)
 			ret = restoreCapture(data);
@@ -1518,7 +1520,7 @@ void SimplePipelineHandler::stopDevice(Camera *camera)
 	}
 
 	int ret = video->streamOff();
-	if (releaseIdleVideo_ && ret < 0) {
+	if (reopenCaptureOnUse_ && ret < 0) {
 		/* Do not reuse a device with unresolved V4L2 queue state. */
 		entities_.at(data->entities_.back().entity).videoFailed = true;
 	}
@@ -1678,7 +1680,7 @@ bool SimplePipelineHandler::match(DeviceEnumerator *enumerator)
 	if (!media)
 		return false;
 
-	releaseIdleVideo_ = requiresIdleVideoRelease(media);
+	reopenCaptureOnUse_ = requiresCaptureReopen(media);
 
 	for (const auto &[name, streams] : info->converters) {
 		DeviceMatch converterMatch(name);
@@ -1831,7 +1833,7 @@ V4L2Subdevice *SimplePipelineHandler::subdev(const MediaEntity *entity)
 
 void SimplePipelineHandler::closeIdleVideos()
 {
-	if (!releaseIdleVideo_)
+	if (!reopenCaptureOnUse_)
 		return;
 
 	for (auto &[entity, data] : entities_) {
@@ -1896,7 +1898,7 @@ const MediaPad *SimplePipelineHandler::acquirePipeline(SimpleCameraData *data)
 		const EntityData &edata = entities_[entity.entity];
 
 		/* setupLinks() changes all links on entities without routing. */
-		if (releaseIdleVideo_ && !entity.supportsRouting) {
+		if (reopenCaptureOnUse_ && !entity.supportsRouting) {
 			for (const auto &[pad, owner] : edata.owners) {
 				if (owner != data)
 					return pad;
@@ -1945,7 +1947,7 @@ void SimplePipelineHandler::releasePipeline(SimpleCameraData *data)
 			edata.owners.erase(iter);
 		}
 
-		if (releaseIdleVideo_ && edata.video && edata.owners.empty())
+		if (reopenCaptureOnUse_ && edata.video && edata.owners.empty())
 			edata.video->close();
 	}
 }

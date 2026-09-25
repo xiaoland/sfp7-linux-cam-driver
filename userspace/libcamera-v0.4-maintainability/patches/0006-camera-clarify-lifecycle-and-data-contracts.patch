@@ -1,0 +1,312 @@
+From eb79f37b0fb0006ac69156d1065c0f2f38361074 Mon Sep 17 00:00:00 2001
+From: xiaoland <37663413+xiaoland@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 12:32:57 +0800
+Subject: [PATCH] camera: clarify capture reopen policy and statistics/control
+ contracts
+
+---
+ .../internal/software_isp/swisp_stats.h       |  6 ++++
+ include/libcamera/ipa/soft.mojom              |  2 ++
+ src/ipa/simple/algorithms/blc.cpp             |  8 +++---
+ src/ipa/simple/algorithms/blc.h               |  2 +-
+ src/ipa/simple/ipa_context.cpp                | 10 +++----
+ src/ipa/simple/ipa_context.h                  |  1 +
+ src/ipa/simple/soft_simple.cpp                |  2 ++
+ src/libcamera/pipeline/simple/simple.cpp      | 28 ++++++++++---------
+ src/libcamera/software_isp/swstats_cpu.cpp    |  7 +++++
+ 9 files changed, 43 insertions(+), 23 deletions(-)
+
+diff --git a/include/libcamera/internal/software_isp/swisp_stats.h b/include/libcamera/internal/software_isp/swisp_stats.h
+index 64cbf5f..8defd55 100644
+--- a/include/libcamera/internal/software_isp/swisp_stats.h
++++ b/include/libcamera/internal/software_isp/swisp_stats.h
+@@ -34,6 +34,12 @@ struct SwIspStats {
+ 	uint64_t sumB_;
+ 	/**
+ 	 * \brief Brightness-normalized green-channel contrast in the frame centre
++	 *
++	 * Sum of squared differences between sampled green values two samples
++	 * apart, scaled by 1,000,000 and divided by mean green squared. Sampling
++	 * uses the central half of the configured window on each axis. Zero can
++	 * mean no valid samples, zero mean, or a flat image; it is not a validity
++	 * flag. Packed input retains its existing high-eight-bit sampling scale.
+ 	 */
+ 	uint64_t focusContrast;
+ 	/**
+diff --git a/include/libcamera/ipa/soft.mojom b/include/libcamera/ipa/soft.mojom
+index 4b2adee..24c8ee1 100644
+--- a/include/libcamera/ipa/soft.mojom
++++ b/include/libcamera/ipa/soft.mojom
+@@ -10,6 +10,7 @@ import "include/libcamera/ipa/core.mojom";
+ 
+ struct IPAConfigInfo {
+ 	libcamera.ControlInfoMap sensorControls;
++	/* Optional raw lens controls, separate from exposure/gain controls. */
+ 	libcamera.ControlInfoMap lensControls;
+ };
+ 
+@@ -32,6 +33,7 @@ interface IPASoftInterface {
+ };
+ 
+ interface IPASoftEventInterface {
++	/* The two lists target different V4L2 devices; an empty lens list is valid. */
+ 	setSensorControls(libcamera.ControlList sensorControls,
+ 	                  libcamera.ControlList lensControls);
+ 	setIspParams();
+diff --git a/src/ipa/simple/algorithms/blc.cpp b/src/ipa/simple/algorithms/blc.cpp
+index d90c2d8..780efe5 100644
+--- a/src/ipa/simple/algorithms/blc.cpp
++++ b/src/ipa/simple/algorithms/blc.cpp
+@@ -19,7 +19,7 @@ namespace ipa::soft::algorithms {
+ LOG_DEFINE_CATEGORY(IPASoftBL)
+ 
+ BlackLevel::BlackLevel()
+-	: exposure_(0), gain_(0.0), estimatedLevel_(16), estimated_(false)
++	: exposure_(0), gain_(0.0), estimatedLevel_(16), hasBlackLevelEstimate_(false)
+ {
+ }
+ 
+@@ -43,7 +43,7 @@ int BlackLevel::configure(IPAContext &context,
+ 	exposure_ = 0;
+ 	gain_ = 0.0;
+ 	estimatedLevel_ = 16;
+-	estimated_ = false;
++	hasBlackLevelEstimate_ = false;
+ 
+ 	if (definedLevel_.has_value())
+ 		context.configuration.black.level = definedLevel_;
+@@ -62,7 +62,7 @@ void BlackLevel::process(IPAContext &context,
+ 	if (context.configuration.black.level.has_value())
+ 		return;
+ 
+-	if (estimated_ && frameContext.sensor.exposure == exposure_ &&
++	if (hasBlackLevelEstimate_ && frameContext.sensor.exposure == exposure_ &&
+ 	    frameContext.sensor.gain == gain_) {
+ 		return;
+ 	}
+@@ -93,7 +93,7 @@ void BlackLevel::process(IPAContext &context,
+ 		seen += histogram[i];
+ 		if (seen >= pixelThreshold) {
+ 			estimatedLevel_ = i * histogramRatio;
+-			estimated_ = true;
++			hasBlackLevelEstimate_ = true;
+ 			context.activeState.blc.level = estimatedLevel_;
+ 			exposure_ = frameContext.sensor.exposure;
+ 			gain_ = frameContext.sensor.gain;
+diff --git a/src/ipa/simple/algorithms/blc.h b/src/ipa/simple/algorithms/blc.h
+index 7f7f6ef..c3fead4 100644
+--- a/src/ipa/simple/algorithms/blc.h
++++ b/src/ipa/simple/algorithms/blc.h
+@@ -33,7 +33,7 @@ private:
+ 	int32_t exposure_;
+ 	double gain_;
+ 	uint8_t estimatedLevel_;
+-	bool estimated_;
++	bool hasBlackLevelEstimate_;
+ 	std::optional<uint8_t> definedLevel_;
+ };
+ 
+diff --git a/src/ipa/simple/ipa_context.cpp b/src/ipa/simple/ipa_context.cpp
+index 3f94bbe..2945bd9 100644
+--- a/src/ipa/simple/ipa_context.cpp
++++ b/src/ipa/simple/ipa_context.cpp
+@@ -56,10 +56,10 @@ namespace libcamera::ipa::soft {
+  */
+ 
+ /**
+- * \var IPAActiveState::black
++ * \var IPAActiveState::blc
+  * \brief Context for the Black Level algorithm
+  *
+- * \var IPAActiveState::black.level
++ * \var IPAActiveState::blc.level
+  * \brief Current determined black level
+  */
+ 
+@@ -78,13 +78,13 @@ namespace libcamera::ipa::soft {
+  */
+ 
+ /**
+- * \var IPAActiveState::agc
++ * \var IPASessionConfiguration::agc
+  * \brief Context for the AGC algorithm
+  *
+- * \var IPAActiveState::agc.exposure
++ * \var IPASessionConfiguration::agc.exposure
+  * \brief Current exposure value
+  *
+- * \var IPAActiveState::agc.again
++ * \var IPASessionConfiguration::agc.again
+  * \brief Current analog gain value
+  */
+ 
+diff --git a/src/ipa/simple/ipa_context.h b/src/ipa/simple/ipa_context.h
+index 65a022e..bbc7fe8 100644
+--- a/src/ipa/simple/ipa_context.h
++++ b/src/ipa/simple/ipa_context.h
+@@ -60,6 +60,7 @@ struct IPAFrameContext : public FrameContext {
+ 	} sensor;
+ 
+ 	struct {
++		/* Raw focus-control request; nullopt means no request, while zero is valid. */
+ 		std::optional<int32_t> focusPosition;
+ 	} lens;
+ };
+diff --git a/src/ipa/simple/soft_simple.cpp b/src/ipa/simple/soft_simple.cpp
+index 3cebb0b..af31075 100644
+--- a/src/ipa/simple/soft_simple.cpp
++++ b/src/ipa/simple/soft_simple.cpp
+@@ -262,6 +262,7 @@ int IPASoftSimple::configure(const IPAConfigInfo &configInfo)
+ 	return 0;
+ }
+ 
++/* Starting/stopping a configured IPA does not reset AF/AGC startup state. */
+ int IPASoftSimple::start()
+ {
+ 	return 0;
+@@ -294,6 +295,7 @@ void IPASoftSimple::processStats(const uint32_t frame,
+ {
+ 	IPAFrameContext &frameContext = context_.frameContexts.get(frame);
+ 
++	/* Effective sensor feedback: exposure in lines, gain converted from its raw code. */
+ 	frameContext.sensor.exposure =
+ 		sensorControls.get(V4L2_CID_EXPOSURE).get<int32_t>();
+ 	int32_t again = sensorControls.get(V4L2_CID_ANALOGUE_GAIN).get<int32_t>();
+diff --git a/src/libcamera/pipeline/simple/simple.cpp b/src/libcamera/pipeline/simple/simple.cpp
+index 69184ef..b621ffe 100644
+--- a/src/libcamera/pipeline/simple/simple.cpp
++++ b/src/libcamera/pipeline/simple/simple.cpp
+@@ -202,9 +202,11 @@ namespace {
+ /*
+  * This legacy IPU4 driver holds its ISYS power reference while a video node
+  * is open. The intel-ipu6 driver name is shared with other hardware, so both
+- * media-device identifiers are required for the idle-FD lifecycle.
++ * media-device identifiers are required for this lifecycle policy. Closing an
++ * idle capture node requires reopening it, restoring media links and the cached
++ * format, and acquiring shared entities together before capture can resume.
+  */
+-static bool requiresIdleVideoRelease(const MediaDevice *media)
++static bool requiresCaptureReopen(const MediaDevice *media)
+ {
+ 	return media->driver() == "intel-ipu6" && media->model() == "ipu4p";
+ }
+@@ -372,7 +374,7 @@ public:
+ 	V4L2Subdevice *subdev(const MediaEntity *entity);
+ 	MediaDevice *converter() { return converter_; }
+ 	bool swIspEnabled() const { return swIspEnabled_; }
+-	bool releaseIdleVideo() const { return releaseIdleVideo_; }
++	bool releaseIdleVideo() const { return reopenCaptureOnUse_; }
+ 
+ protected:
+ 	int queueRequestDevice(Camera *camera, Request *request) override;
+@@ -407,7 +409,7 @@ private:
+ 
+ 	MediaDevice *converter_;
+ 	bool swIspEnabled_;
+-	bool releaseIdleVideo_ = false;
++	bool reopenCaptureOnUse_ = false;
+ };
+ 
+ /* -----------------------------------------------------------------------------
+@@ -1280,7 +1282,7 @@ SimplePipelineHandler::generateConfiguration(Camera *camera, Span<const StreamRo
+ 
+ int SimplePipelineHandler::configure(Camera *camera, CameraConfiguration *config)
+ {
+-	if (!releaseIdleVideo_)
++	if (!reopenCaptureOnUse_)
+ 		return configureDevice(camera, config);
+ 
+ 	SimpleCameraData *data = cameraData(camera);
+@@ -1348,7 +1350,7 @@ int SimplePipelineHandler::configureDevice(Camera *camera, CameraConfiguration *
+ 		return -EINVAL;
+ 	}
+ 
+-	if (releaseIdleVideo_) {
++	if (reopenCaptureOnUse_) {
+ 		data->captureFormat_ = captureFormat;
+ 		data->pipelineFormat_ = {};
+ 		data->pipelineFormat_.code = pipeConfig->code;
+@@ -1415,7 +1417,7 @@ int SimplePipelineHandler::exportFrameBuffers(Camera *camera, Stream *stream,
+ 			       ? data->converter_->exportBuffers(stream, count, buffers)
+ 			       : data->swIsp_->exportBuffers(stream, count, buffers);
+ 
+-	if (!releaseIdleVideo_)
++	if (!reopenCaptureOnUse_)
+ 		return data->video_->exportBuffers(count, buffers);
+ 
+ 	if (acquirePipeline(data))
+@@ -1444,7 +1446,7 @@ int SimplePipelineHandler::start(Camera *camera, [[maybe_unused]] const ControlL
+ 		return -EBUSY;
+ 	}
+ 
+-	if (releaseIdleVideo_) {
++	if (reopenCaptureOnUse_) {
+ 		ret = openVideo(data);
+ 		if (!ret)
+ 			ret = restoreCapture(data);
+@@ -1518,7 +1520,7 @@ void SimplePipelineHandler::stopDevice(Camera *camera)
+ 	}
+ 
+ 	int ret = video->streamOff();
+-	if (releaseIdleVideo_ && ret < 0) {
++	if (reopenCaptureOnUse_ && ret < 0) {
+ 		/* Do not reuse a device with unresolved V4L2 queue state. */
+ 		entities_.at(data->entities_.back().entity).videoFailed = true;
+ 	}
+@@ -1678,7 +1680,7 @@ bool SimplePipelineHandler::match(DeviceEnumerator *enumerator)
+ 	if (!media)
+ 		return false;
+ 
+-	releaseIdleVideo_ = requiresIdleVideoRelease(media);
++	reopenCaptureOnUse_ = requiresCaptureReopen(media);
+ 
+ 	for (const auto &[name, streams] : info->converters) {
+ 		DeviceMatch converterMatch(name);
+@@ -1831,7 +1833,7 @@ V4L2Subdevice *SimplePipelineHandler::subdev(const MediaEntity *entity)
+ 
+ void SimplePipelineHandler::closeIdleVideos()
+ {
+-	if (!releaseIdleVideo_)
++	if (!reopenCaptureOnUse_)
+ 		return;
+ 
+ 	for (auto &[entity, data] : entities_) {
+@@ -1896,7 +1898,7 @@ const MediaPad *SimplePipelineHandler::acquirePipeline(SimpleCameraData *data)
+ 		const EntityData &edata = entities_[entity.entity];
+ 
+ 		/* setupLinks() changes all links on entities without routing. */
+-		if (releaseIdleVideo_ && !entity.supportsRouting) {
++		if (reopenCaptureOnUse_ && !entity.supportsRouting) {
+ 			for (const auto &[pad, owner] : edata.owners) {
+ 				if (owner != data)
+ 					return pad;
+@@ -1945,7 +1947,7 @@ void SimplePipelineHandler::releasePipeline(SimpleCameraData *data)
+ 			edata.owners.erase(iter);
+ 		}
+ 
+-		if (releaseIdleVideo_ && edata.video && edata.owners.empty())
++		if (reopenCaptureOnUse_ && edata.video && edata.owners.empty())
+ 			edata.video->close();
+ 	}
+ }
+diff --git a/src/libcamera/software_isp/swstats_cpu.cpp b/src/libcamera/software_isp/swstats_cpu.cpp
+index 0003dba..a326447 100644
+--- a/src/libcamera/software_isp/swstats_cpu.cpp
++++ b/src/libcamera/software_isp/swstats_cpu.cpp
+@@ -161,6 +161,13 @@ static constexpr unsigned int kBlueYMul = 29; /* 0.114 * 256 */
+ 	yVal += b * kBlueYMul;             \
+ 	stats_.yHistogram[yVal * SwIspStats::kYHistogramSize / (256 * 256 * (div))]++;
+ 
++/*
++ * Used with SWSTATS_START_LINE_STATS: g and focusG0/1/focusHistory are
++ * per-line locals. pixel_x is crop-relative (packed byte offsets use x*4/5),
++ * while y is relative to the processed image and includes window_.y.
++ * Keep the sampling order and stored green precision identical across paths.
++ * Frame accumulators are cleared by startFrame(), not by the line macro.
++ */
+ #define SWSTATS_ACCUMULATE_FOCUS(pixel_x)                             \
+ 	do {                                                           \
+ 		if (y >= window_.y + window_.height / 4 &&              \
+-- 
+2.50.1 (Apple Git-155)
+

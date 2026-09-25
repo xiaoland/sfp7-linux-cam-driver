@@ -19,7 +19,7 @@ namespace ipa::soft::algorithms {
 LOG_DEFINE_CATEGORY(IPASoftBL)
 
 BlackLevel::BlackLevel()
-	: exposure_(0), gain_(0.0), estimatedLevel_(16), estimated_(false)
+	: exposure_(0), gain_(0.0), estimatedLevel_(16), hasBlackLevelEstimate_(false)
 {
 }
 
@@ -43,7 +43,7 @@ int BlackLevel::configure(IPAContext &context,
 	exposure_ = 0;
 	gain_ = 0.0;
 	estimatedLevel_ = 16;
-	estimated_ = false;
+	hasBlackLevelEstimate_ = false;
 
 	if (definedLevel_.has_value())
 		context.configuration.black.level = definedLevel_;
@@ -62,7 +62,7 @@ void BlackLevel::process(IPAContext &context,
 	if (context.configuration.black.level.has_value())
 		return;
 
-	if (estimated_ && frameContext.sensor.exposure == exposure_ &&
+	if (hasBlackLevelEstimate_ && frameContext.sensor.exposure == exposure_ &&
 	    frameContext.sensor.gain == gain_) {
 		return;
 	}
@@ -93,7 +93,7 @@ void BlackLevel::process(IPAContext &context,
 		seen += histogram[i];
 		if (seen >= pixelThreshold) {
 			estimatedLevel_ = i * histogramRatio;
-			estimated_ = true;
+			hasBlackLevelEstimate_ = true;
 			context.activeState.blc.level = estimatedLevel_;
 			exposure_ = frameContext.sensor.exposure;
 			gain_ = frameContext.sensor.gain;

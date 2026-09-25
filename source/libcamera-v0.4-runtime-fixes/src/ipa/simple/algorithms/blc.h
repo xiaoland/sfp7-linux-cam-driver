@@ -33,7 +33,7 @@ private:
 	int32_t exposure_;
 	double gain_;
 	uint8_t estimatedLevel_;
-	bool estimated_;
+	bool hasBlackLevelEstimate_;
 	std::optional<uint8_t> definedLevel_;
 };
 

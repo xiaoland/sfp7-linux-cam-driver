@@ -2,6 +2,8 @@
 
 - `python3 -m unittest discover -s tests/source -v`: real tiny Git/archive fixtures
   test replay, file coverage, type/mode drift, failure isolation and snapshot ownership.
+- [BLC/LUT comparison](blc-lut/README.md): complete class sources, real data structures and framework substitutes.
+- [Loader contracts](runtime/README.md): fake filesystem and command boundaries in an isolated Linux container.
 - [Driver models](driver/README.md): selected actual functions with controlled
   dependencies; no real IRQ/FW/PM behavior.
 - [Historical AGC](history/simple-agc/README.md): original 0017/0018 regression,

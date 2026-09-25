@@ -161,6 +161,13 @@ static constexpr unsigned int kBlueYMul = 29; /* 0.114 * 256 */
 	yVal += b * kBlueYMul;             \
 	stats_.yHistogram[yVal * SwIspStats::kYHistogramSize / (256 * 256 * (div))]++;
 
+/*
+ * Used with SWSTATS_START_LINE_STATS: g and focusG0/1/focusHistory are
+ * per-line locals. pixel_x is crop-relative (packed byte offsets use x*4/5),
+ * while y is relative to the processed image and includes window_.y.
+ * Keep the sampling order and stored green precision identical across paths.
+ * Frame accumulators are cleared by startFrame(), not by the line macro.
+ */
 #define SWSTATS_ACCUMULATE_FOCUS(pixel_x)                             \
 	do {                                                           \
 		if (y >= window_.y + window_.height / 4 &&              \

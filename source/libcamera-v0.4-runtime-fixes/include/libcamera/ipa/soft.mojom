@@ -10,6 +10,7 @@ import "include/libcamera/ipa/core.mojom";
 
 struct IPAConfigInfo {
 	libcamera.ControlInfoMap sensorControls;
+	/* Optional raw lens controls, separate from exposure/gain controls. */
 	libcamera.ControlInfoMap lensControls;
 };
 
@@ -32,6 +33,7 @@ interface IPASoftInterface {
 };
 
 interface IPASoftEventInterface {
+	/* The two lists target different V4L2 devices; an empty lens list is valid. */
 	setSensorControls(libcamera.ControlList sensorControls,
 	                  libcamera.ControlList lensControls);
 	setIspParams();

@@ -262,6 +262,7 @@ int IPASoftSimple::configure(const IPAConfigInfo &configInfo)
 	return 0;
 }
 
+/* Starting/stopping a configured IPA does not reset AF/AGC startup state. */
 int IPASoftSimple::start()
 {
 	return 0;
@@ -294,6 +295,7 @@ void IPASoftSimple::processStats(const uint32_t frame,
 {
 	IPAFrameContext &frameContext = context_.frameContexts.get(frame);
 
+	/* Effective sensor feedback: exposure in lines, gain converted from its raw code. */
 	frameContext.sensor.exposure =
 		sensorControls.get(V4L2_CID_EXPOSURE).get<int32_t>();
 	int32_t again = sensorControls.get(V4L2_CID_ANALOGUE_GAIN).get<int32_t>();
